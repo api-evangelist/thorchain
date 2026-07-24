@@ -1,0 +1,95 @@
+openapi: 3.0.0
+info:
+  title: Thornode Auth Saver API
+  version: 3.19.1
+  contact:
+    email: devs@thorchain.org
+  description: Thornode REST API.
+tags:
+- name: Saver
+paths:
+  /v2/saver/{address}:
+    get:
+      description: 'Returns an array of statistics for all the savers associated with a given
+
+        member address.
+
+        Query can also be multiple addresses should be separated by comma ('','')
+
+        '
+      operationId: GetSaverDetail
+      parameters:
+      - description: 'Address to match the saver. an asset address should be given.
+
+          '
+        example: bnb1jxfh2g85q3v0tdq56fnevx6xcxtcnhtsmcu64m,bc1qcxssye4j6730h7ehgega3gyykkuwgdgmmpu62n
+        in: path
+        name: address
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/SaverDetailsResponse'
+      summary: Saver Details
+      tags:
+      - Saver
+components:
+  schemas:
+    SaverPool:
+      properties:
+        assetAdded:
+          description: Int64(e8), total asset added in the saver pool by member
+          type: string
+        assetAddress:
+          description: saver address used by the member
+          type: string
+        assetDeposit:
+          description: Int64(e8), total asset that is currently deposited by the member
+          type: string
+        assetRedeem:
+          description: Int64(e8), total asset can be redeemed from the saver pool by member
+          type: string
+        assetWithdrawn:
+          description: Int64(e8), total asset withdrawn from the saver pool by member
+          type: string
+        dateFirstAdded:
+          description: Int64, Unix timestamp for the first time member deposited into the saver pool
+          type: string
+        dateLastAdded:
+          description: Int64, Unix timestamp for the last time member deposited into the saver pool
+          type: string
+        pool:
+          description: The Pool rest of the data are referring to (only those pools can show up which have a corresponding saver pool)
+          type: string
+        saverUnits:
+          description: Int64, saver liquidity units that belong the the member
+          type: string
+      required:
+      - pool
+      - assetAddress
+      - saverUnits
+      - assetAdded
+      - assetRedeem
+      - assetDeposit
+      - assetWithdrawn
+      - dateFirstAdded
+      - dateLastAdded
+      type: object
+    SaverDetails:
+      properties:
+        pools:
+          description: List details of all the savers identified with the given address
+          items:
+            $ref: '#/components/schemas/SaverPool'
+          type: array
+      required:
+      - pools
+      type: object
+  responses:
+    SaverDetailsResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SaverDetails'
+      description: object containing saver data for a specific member

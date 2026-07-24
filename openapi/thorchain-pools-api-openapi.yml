@@ -1,0 +1,441 @@
+openapi: 3.0.0
+info:
+  title: Thornode Auth Pools API
+  version: 3.19.1
+  contact:
+    email: devs@thorchain.org
+  description: Thornode REST API.
+tags:
+- name: Pools
+paths:
+  /v2/pools:
+    get:
+      description: Returns an array containing details for a set of pools
+      operationId: GetPools
+      parameters:
+      - description: Filter for only pools with this status
+        in: query
+        name: status
+        schema:
+          enum:
+          - available
+          - staged
+          - suspended
+          type: string
+      - description: 'Specifies the base interval from which annualPercentageRate and poolAPY is extrapolated.
+
+          Default is 14d.
+
+          '
+        example: 100d
+        in: query
+        name: period
+        schema:
+          enum:
+          - 1h
+          - 24h
+          - 7d
+          - 14d
+          - 30d
+          - 90d
+          - 100d
+          - 180d
+          - 365d
+          - all
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/PoolsResponse'
+      summary: Pools List
+      tags:
+      - Pools
+  /thorchain/pool/{asset}:
+    parameters:
+    - $ref: '#/components/parameters/queryHeight'
+    - $ref: '#/components/parameters/asset'
+    get:
+      description: Returns the pool information for the provided asset.
+      operationId: pool
+      tags:
+      - Pools
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PoolResponse'
+  /thorchain/pools:
+    parameters:
+    - $ref: '#/components/parameters/queryHeight'
+    get:
+      description: Returns the pool information for all assets.
+      operationId: pools
+      tags:
+      - Pools
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PoolsResponse'
+  /thorchain/dpool/{asset}:
+    parameters:
+    - $ref: '#/components/parameters/queryHeight'
+    - $ref: '#/components/parameters/asset'
+    get:
+      description: Returns the pool information for the provided derived asset.
+      operationId: dpool
+      tags:
+      - Pools
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DerivedPoolResponse'
+  /thorchain/dpools:
+    parameters:
+    - $ref: '#/components/parameters/queryHeight'
+    get:
+      description: Returns the pool information for all derived assets.
+      operationId: dpools
+      tags:
+      - Pools
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DerivedPoolsResponse'
+components:
+  schemas:
+    PoolDetail:
+      properties:
+        annualPercentageRate:
+          description: 'Float, Annual Percentage Yield of earning to depth (earning/depth) estimated from a period
+
+            (configurable by the period parameter, default is 14) E.g. 0.1 means 10% yearly return.
+
+            '
+          type: string
+        asset:
+          type: string
+        assetDepth:
+          description: Int64(e8), the amount of Asset in the pool.
+          type: string
+        assetPrice:
+          description: Float, price of asset in rune. I.e. rune amount / asset amount.
+          type: string
+        assetPriceUSD:
+          description: Float, the price of asset in USD (based on the deepest USD pool).
+          type: string
+        depthMinus2Percent:
+          description: 'Int64(e8), liquidity depth at -2% price movement calculated using Uniswap V2 constant product
+
+            formula with fee from L1SLIPMINBPS mimir value. Represents the maximum RUNE value that can be traded before the pool
+
+            price decreases by 2%.
+
+            '
+          type: string
+        depthPlus2Percent:
+          description: 'Int64(e8), liquidity depth at +2% price movement calculated using Uniswap V2 constant product
+
+            formula with fee from L1SLIPMINBPS mimir value. Represents the maximum RUNE value that can be traded before the pool
+
+            price increases by 2%.
+
+            '
+          type: string
+        earnings:
+          description: "Int64(e8), The earning that has been recorded from the pool asset's Liquidity Fees\nand Rewards in RUNE. The earnings shown are from the period parameter default being 14 days \n(configurable by the period parameter).\n"
+          type: string
+        earningsAnnualAsPercentOfDepth:
+          description: "Float, The estimation of earnings during the time interval expanded through a year \ncompared to the current pool depth.\nE.g. 0.1 means the pool based on this interval earnings can earn 10% of its pool during a year.\n"
+          type: string
+        liquidityInUSD:
+          description: Float, the price of the liquidity pool in USD
+          type: string
+        liquidityUnits:
+          description: Int64, Liquidity Units in the pool.
+          type: string
+        lpLuvi:
+          description: 'Float, Annual yield estimated (compounding) from a period (default being 14d)
+
+            configurable by the period parameter. Calculated from Liquidity Unit Value Index (LUVI).
+
+            Due to Impermanent Loss and Synths Leverage this might be negative.
+
+            '
+          type: string
+        nativeDecimal:
+          description: Int64, The native decimal number of the pool asset. (If the value is "-1", it means midgard doesn't know the pool native decimal)
+          type: string
+        poolAPY:
+          description: 'Float, Annual Percentage Yield of earning to depth (earning/depth) estimated from a period
+
+            (configurable by the period parameter, default is 14) E.g. 0.1 means 10% yearly return.
+
+            '
+          type: string
+        runeDepth:
+          description: Int64(e8), the amount of Rune in the pool.
+          type: string
+        saversAPR:
+          description: 'Float, Annual Return estimated linearly (not compounded) for savers from
+
+            a period of typically the last 30 or 100 days (configurable by the period parameter,
+
+            default is 14). E.g. 0.1 means 10% yearly return.
+
+            If the savers period has not yet been reached, It will show zero instead.
+
+            '
+          type: string
+        saversDepth:
+          description: Int64, Total synth locked in saver vault.
+          type: string
+        saversUnits:
+          description: Int64, Units tracking savers vault ownership.
+          type: string
+        saversYieldShare:
+          description: "Float, the proportion of overall yield that is given to savers based on its size \n(relative to dual side LPs) and the SynthYieldBasisPoints. E.g. 0.1 means 10% of the yield\ngoes to the savers.\n"
+          type: string
+        status:
+          description: The state of the pool, e.g. Available, Staged.
+          type: string
+        synthSupply:
+          description: Int64, Synth supply in the pool.
+          type: string
+        synthUnits:
+          description: Int64, Synth Units in the pool.
+          type: string
+        totalCollateral:
+          description: Int64, Total collateral of the pool created by the borrowers.
+          type: string
+        totalDebtTor:
+          description: Int64, Total debt of the pool by the borrowers.
+          type: string
+        units:
+          description: Int64, Total Units (synthUnits + liquidityUnits) in the pool.
+          type: string
+        volume24h:
+          description: 'Int64(e8), the total volume of swaps in the last 24h to and from Rune denoted in Rune.
+
+            It includes synth mint or burn.
+
+            '
+          type: string
+      required:
+      - asset
+      - volume24h
+      - assetDepth
+      - runeDepth
+      - assetPrice
+      - assetPriceUSD
+      - liquidityInUSD
+      - annualPercentageRate
+      - poolAPY
+      - earnings
+      - earningsAnnualAsPercentOfDepth
+      - status
+      - liquidityUnits
+      - synthUnits
+      - synthSupply
+      - units
+      - nativeDecimal
+      - saversUnits
+      - saversDepth
+      - saversAPR
+      - totalCollateral
+      - totalDebtTor
+      - lpLuvi
+      type: object
+    PoolDetails:
+      items:
+        $ref: '#/components/schemas/PoolDetail'
+      type: array
+    DerivedPoolsResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/DerivedPool'
+    PoolResponse:
+      $ref: '#/components/schemas/Pool'
+    DerivedPool:
+      type: object
+      required:
+      - asset
+      - status
+      - balance_asset
+      - balance_rune
+      - derived_depth_bps
+      properties:
+        asset:
+          type: string
+          example: BTC.BTC
+        status:
+          type: string
+          example: Available
+        decimals:
+          type: integer
+          format: int64
+          example: 6
+        balance_asset:
+          type: string
+          example: '3197744873'
+        balance_rune:
+          type: string
+          example: '13460619152985'
+        derived_depth_bps:
+          type: string
+          example: '123456'
+          description: the depth of the derived virtual pool relative to L1 pool (in basis points)
+    PoolsResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/Pool'
+    Pool:
+      type: object
+      required:
+      - asset
+      - status
+      - pending_inbound_asset
+      - pending_inbound_rune
+      - balance_asset
+      - balance_rune
+      - asset_tor_price
+      - pool_units
+      - LP_units
+      - synth_units
+      - synth_supply
+      - savers_depth
+      - savers_units
+      - savers_fill_bps
+      - savers_capacity_remaining
+      - synth_mint_paused
+      - synth_supply_remaining
+      - derived_depth_bps
+      properties:
+        asset:
+          type: string
+          example: BTC.BTC
+        short_code:
+          type: string
+          example: b
+        status:
+          type: string
+          example: Available
+        decimals:
+          type: integer
+          format: int64
+          example: 6
+        pending_inbound_asset:
+          type: string
+          example: '101713319'
+        pending_inbound_rune:
+          type: string
+          example: '464993836'
+        balance_asset:
+          type: string
+          example: '3197744873'
+        balance_rune:
+          type: string
+          example: '13460619152985'
+        asset_tor_price:
+          type: string
+          example: '123456'
+          description: the USD (TOR) price of the asset in 1e8
+        pool_units:
+          type: string
+          description: the total pool units, this is the sum of LP and synth units
+          example: '14694928607473'
+        LP_units:
+          type: string
+          description: the total pool liquidity provider units
+          example: '14694928607473'
+        synth_units:
+          type: string
+          description: the total synth units in the pool
+          example: '0'
+        synth_supply:
+          type: string
+          description: the total supply of synths for the asset
+          example: '0'
+        savers_depth:
+          type: string
+          example: '199998'
+          description: the balance of L1 asset deposited into the Savers Vault
+        savers_units:
+          type: string
+          example: '199998'
+          description: the number of units owned by Savers
+        savers_fill_bps:
+          type: string
+          example: '4500'
+          description: the filled savers capacity in basis points, 4500/10000 = 45%
+        savers_capacity_remaining:
+          type: string
+          example: '1000'
+          description: amount of remaining capacity in asset
+        synth_mint_paused:
+          type: boolean
+          example: true
+          description: whether additional synths cannot be minted
+        synth_supply_remaining:
+          type: string
+          example: '123456'
+          description: the amount of synth supply remaining before the current max supply is reached
+        derived_depth_bps:
+          type: string
+          example: '123456'
+          description: the depth of the derived virtual pool relative to L1 pool (in basis points)
+        trading_halted:
+          type: boolean
+          example: false
+          description: indicates if the pool can be used for swaps
+        volume_asset:
+          type: string
+          example: '123456'
+          description: 24h volume in asset
+        volume_rune:
+          type: string
+          example: '123456'
+          description: 24h volume in rune
+        pol_reserve_rune_deposited:
+          type: string
+          example: '10000000000'
+          description: cumulative RUNE deposited by POL Reserve into this pool
+        rolling_pool_liquidity_fee_rune:
+          type: string
+          example: '12345678'
+          description: rolling liquidity fees accumulated (in RUNE) since the last pool cycle reset; used as the numerator of the POL Reserve deployment score
+    DerivedPoolResponse:
+      $ref: '#/components/schemas/DerivedPool'
+  responses:
+    PoolsResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PoolDetails'
+      description: Array of pool details
+  parameters:
+    queryHeight:
+      name: height
+      in: query
+      description: optional block height, defaults to current tip
+      required: false
+      schema:
+        type: integer
+        format: int64
+        minimum: 0
+    asset:
+      name: asset
+      in: path
+      required: true
+      schema:
+        type: string
+        example: BTC.BTC

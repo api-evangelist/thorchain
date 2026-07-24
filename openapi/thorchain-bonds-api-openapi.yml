@@ -1,0 +1,81 @@
+openapi: 3.0.0
+info:
+  title: Thornode Auth Bonds API
+  version: 3.19.1
+  contact:
+    email: devs@thorchain.org
+  description: Thornode REST API.
+tags:
+- name: Bonds
+paths:
+  /v2/bonds/{address}:
+    get:
+      description: 'Returns the bond details of a given address.
+
+        The response contains the bond amount, the bond status, and the bond type.
+
+        This is wrapper from THORNode nodes API.
+
+        '
+      operationId: GetBondersDetails
+      parameters:
+      - description: Address of the bonder
+        example: thor102y0m3uptg0vvudeyh00r2fnz70wq7d8y7mu2g
+        in: path
+        name: address
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/BonderDetailsResponse'
+      summary: Bonder Details
+      tags:
+      - Bonds
+components:
+  responses:
+    BonderDetailsResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BonderDetails'
+      description: object containing bonder data for a specific member
+  schemas:
+    BonderNode:
+      properties:
+        address:
+          description: Bonded node address
+          example: thor1
+          type: string
+        bond:
+          description: Int64(e8), amount of RUNE bonded to the node
+          example: '1000000000'
+          type: string
+        status:
+          description: status of the node
+          example: Active
+          type: string
+      required:
+      - address
+      - bond
+      - status
+      type: object
+    BonderDetails:
+      properties:
+        address:
+          description: Bonder address
+          example: thor1
+          type: string
+        nodes:
+          items:
+            $ref: '#/components/schemas/BonderNode'
+          type: array
+        totalBonded:
+          description: Int64(e8), total amount of RUNE bonded from the bonder
+          example: '1000000000'
+          type: string
+      required:
+      - address
+      - totalBonded
+      - nodes
+      type: object

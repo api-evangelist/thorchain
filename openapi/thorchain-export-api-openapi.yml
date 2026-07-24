@@ -1,0 +1,27 @@
+openapi: 3.0.0
+info:
+  title: Thornode Auth Export API
+  version: 3.19.1
+  contact:
+    email: devs@thorchain.org
+  description: Thornode REST API.
+tags:
+- name: Export
+paths:
+  /thorchain/export:
+    get:
+      description: Returns genesis export
+      operationId: export
+      tags:
+      - Export
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExportResponse'
+components:
+  schemas:
+    ExportResponse:
+      type: object

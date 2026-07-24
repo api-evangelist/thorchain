@@ -1,0 +1,47 @@
+openapi: 3.0.0
+info:
+  title: Thornode Auth Members API
+  version: 3.19.1
+  contact:
+    email: devs@thorchain.org
+  description: Thornode REST API.
+tags:
+- name: Members
+paths:
+  /v2/members:
+    get:
+      description: 'Returns an array containing the addresses for all pool members.
+
+        Addresses are only shown once. If there''s both a RUNE address and an asset address
+
+        for a member, only the RUNE address will be shown.
+
+        '
+      operationId: GetMembersAdresses
+      parameters:
+      - description: Return only members present in the pool.
+        in: query
+        name: pool
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/MembersResponse'
+      summary: Members List
+      tags:
+      - Members
+components:
+  responses:
+    MembersResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Members'
+      description: array of all the members
+  schemas:
+    Members:
+      items:
+        description: Member address
+        example: tbnb1fj2lqj8dvr5pumfchc7ntlfqd2v6zdxqwjewf5
+        type: string
+      type: array

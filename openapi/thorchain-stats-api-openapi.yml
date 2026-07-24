@@ -1,0 +1,111 @@
+openapi: 3.0.0
+info:
+  title: Thornode Auth Stats API
+  version: 3.19.1
+  contact:
+    email: devs@thorchain.org
+  description: Thornode REST API.
+tags:
+- name: Stats
+paths:
+  /v2/stats:
+    get:
+      description: Returns an object containing global stats for all pools and all transactions
+      operationId: GetStats
+      responses:
+        '200':
+          $ref: '#/components/responses/StatsResponse'
+      summary: Global Stats
+      tags:
+      - Stats
+components:
+  responses:
+    StatsResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StatsData'
+      description: object containing global THORChain data
+  schemas:
+    StatsData:
+      properties:
+        addLiquidityCount:
+          description: Int64, number of deposits since beginning.
+          type: string
+        addLiquidityVolume:
+          description: 'Int64(e8), total of deposits since beginning.
+
+            '
+          type: string
+        dailyActiveUsers:
+          description: Deprecated, it's always 0.
+          type: string
+        monthlyActiveUsers:
+          description: Deprecated, it's always 0.
+          type: string
+        runeDepth:
+          description: Int64(e8), current total Rune in the pools.
+          type: string
+        runePriceUSD:
+          description: Float, the price of Rune based on the deepest USD pool.
+          type: string
+        swapCount:
+          description: Int64, number of swaps (including synths) since beginning.
+          type: string
+        swapCount24h:
+          description: Int64(e8), number of swaps (including synths) in the last 24h.
+          type: string
+        swapCount30d:
+          description: Int64, number of swaps (including synths) in the last 30d.
+          type: string
+        swapVolume:
+          description: 'Int64(e8), total volume of swaps (including synths) denoted in Rune since beginning.
+
+            '
+          type: string
+        switchedRune:
+          description: Int64(e8), amount of native rune switched from erc20 or bep2 rune.
+          type: string
+        synthBurnCount:
+          description: Int64, number of swaps from Synth to Rune since beginning.
+          type: string
+        synthMintCount:
+          description: Int64, number of swaps from Rune to Synth since beginning.
+          type: string
+        toAssetCount:
+          description: Int64, number of swaps from Rune to Asset since beginning.
+          type: string
+        toRuneCount:
+          description: Int64, number of swaps from Asset to Rune since beginning.
+          type: string
+        uniqueSwapperCount:
+          description: Deprecated, it's always 0.
+          type: string
+        withdrawCount:
+          description: Int64, number of withdraws since beginning.
+          type: string
+        withdrawVolume:
+          description: 'Int64(e8), total of withdraws since beginning.
+
+            '
+          type: string
+      required:
+      - runeDepth
+      - switchedRune
+      - runePriceUSD
+      - swapVolume
+      - swapCount24h
+      - swapCount30d
+      - swapCount
+      - toAssetCount
+      - toRuneCount
+      - synthMintCount
+      - synthBurnCount
+      - dailyActiveUsers
+      - monthlyActiveUsers
+      - uniqueSwapperCount
+      - addLiquidityVolume
+      - withdrawVolume
+      - addLiquidityCount
+      - withdrawCount
+      type: object

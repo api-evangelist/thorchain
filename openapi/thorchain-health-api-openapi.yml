@@ -1,0 +1,119 @@
+openapi: 3.0.0
+info:
+  title: Thornode Auth Health API
+  version: 3.19.1
+  contact:
+    email: devs@thorchain.org
+  description: Thornode REST API.
+tags:
+- name: Health
+paths:
+  /thorchain/ping:
+    get:
+      operationId: ping
+      tags:
+      - Health
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                title: Ping
+                properties:
+                  ping:
+                    type: string
+                    example: pong
+  /v2/health:
+    get:
+      description: 'Returns an object containing the health response of the API.
+
+        Meaning of heights:
+
+
+        lastThorNode - Latest block as reported by ThorNode.
+
+
+        lastFetched - Latest block fetched from ThorNode.
+
+
+        lastCommitted - Latest block committed to the DB but not fully processed yet.
+
+
+        lastAggregated - Latest block fully processed and aggregated.
+
+
+        genesisInfo - The genesis height Midgard bootstrapped with.
+
+        '
+      operationId: GetHealth
+      responses:
+        '200':
+          $ref: '#/components/responses/HealthResponse'
+      summary: Health Info
+      tags:
+      - Health
+components:
+  schemas:
+    HeightTS:
+      properties:
+        height:
+          description: Block height
+          type: integer
+        timestamp:
+          description: Block timestamp (seconds since epoch)
+          type: integer
+      required:
+      - height
+      - timestamp
+      type: object
+    Health:
+      properties:
+        database:
+          description: True means healthy, connected to database
+          type: boolean
+        genesisInfo:
+          $ref: '#/components/schemas/GenesisInf'
+        inSync:
+          description: True means healthy. False means Midgard is still catching up to the chain
+          type: boolean
+        lastAggregated:
+          $ref: '#/components/schemas/HeightTS'
+        lastCommitted:
+          $ref: '#/components/schemas/HeightTS'
+        lastFetched:
+          $ref: '#/components/schemas/HeightTS'
+        lastThorNode:
+          $ref: '#/components/schemas/HeightTS'
+        scannerHeight:
+          description: Int64, the current block count
+          type: string
+      required:
+      - database
+      - scannerHeight
+      - inSync
+      - lastThorNode
+      - lastFetched
+      - lastCommitted
+      - lastAggregated
+      type: object
+    GenesisInf:
+      properties:
+        hash:
+          description: Genesis Block hash
+          type: string
+        height:
+          description: Genesis Block height
+          type: integer
+      required:
+      - height
+      - hash
+      type: object
+  responses:
+    HealthResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Health'
+      description: Returns health status for Midgard

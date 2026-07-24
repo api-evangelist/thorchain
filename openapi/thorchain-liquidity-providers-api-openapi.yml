@@ -1,0 +1,180 @@
+openapi: 3.0.0
+info:
+  title: Thornode Auth Liquidity Providers API
+  version: 3.19.1
+  contact:
+    email: devs@thorchain.org
+  description: Thornode REST API.
+tags:
+- name: Liquidity Providers
+paths:
+  /thorchain/pool/{asset}/liquidity_provider/{address}:
+    parameters:
+    - $ref: '#/components/parameters/queryHeight'
+    - $ref: '#/components/parameters/asset'
+    - $ref: '#/components/parameters/address'
+    get:
+      description: Returns the liquidity provider information for an address and asset.
+      operationId: liquidityProvider
+      tags:
+      - Liquidity Providers
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LiquidityProviderResponse'
+  /thorchain/pool/{asset}/liquidity_providers:
+    parameters:
+    - $ref: '#/components/parameters/queryHeight'
+    - $ref: '#/components/parameters/asset'
+    get:
+      description: Returns all liquidity provider information for an asset.
+      operationId: liquidityProviders
+      tags:
+      - Liquidity Providers
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LiquidityProvidersResponse'
+components:
+  schemas:
+    LiquidityProvidersResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/LiquidityProviderSummary'
+    LiquidityProvider:
+      type: object
+      required:
+      - asset
+      - units
+      - pending_rune
+      - pending_asset
+      - rune_deposit_value
+      - asset_deposit_value
+      properties:
+        asset:
+          type: string
+          example: BTC.BTC
+        rune_address:
+          type: string
+          example: thor1xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+        asset_address:
+          type: string
+          example: bc1qn9esxuw8ca7ts8l6w66kdh800s09msvutydc46
+        last_add_height:
+          type: integer
+          format: int64
+          example: 82745
+        last_withdraw_height:
+          type: integer
+          format: int64
+          example: 82745
+        units:
+          type: string
+          example: '0'
+        pending_rune:
+          type: string
+          example: '0'
+        pending_asset:
+          type: string
+          example: '242000000'
+        pending_tx_id:
+          type: string
+          example: C4C876802xxxxxxxxxxBC408829878446A37011EBBA0C5CAA3DD64A548879CB228
+        rune_deposit_value:
+          type: string
+          example: '0'
+        asset_deposit_value:
+          type: string
+          example: '0'
+        rune_redeem_value:
+          type: string
+          example: '0'
+        asset_redeem_value:
+          type: string
+          example: '0'
+        luvi_deposit_value:
+          type: string
+          example: '0'
+        luvi_redeem_value:
+          type: string
+          example: '0'
+        luvi_growth_pct:
+          type: string
+          example: '0'
+    LiquidityProviderSummary:
+      type: object
+      required:
+      - asset
+      - units
+      - pending_rune
+      - pending_asset
+      - rune_deposit_value
+      - asset_deposit_value
+      properties:
+        asset:
+          type: string
+          example: BTC.BTC
+        rune_address:
+          type: string
+          example: thor1xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+        asset_address:
+          type: string
+          example: bc1qn9esxuw8ca7ts8l6w66kdh800s09msvutydc46
+        last_add_height:
+          type: integer
+          format: int64
+          example: 82745
+        last_withdraw_height:
+          type: integer
+          format: int64
+          example: 82745
+        units:
+          type: string
+          example: '0'
+        pending_rune:
+          type: string
+          example: '0'
+        pending_asset:
+          type: string
+          example: '242000000'
+        pending_tx_id:
+          type: string
+          example: C4C876802xxxxxxxxxxBC408829878446A37011EBBA0C5CAA3DD64A548879CB228
+        rune_deposit_value:
+          type: string
+          example: '0'
+        asset_deposit_value:
+          type: string
+          example: '0'
+    LiquidityProviderResponse:
+      $ref: '#/components/schemas/LiquidityProvider'
+  parameters:
+    address:
+      name: address
+      in: path
+      required: true
+      schema:
+        type: string
+        example: thor1zupk5lmc84r2dh738a9g3zscavannjy3nzplwt
+    queryHeight:
+      name: height
+      in: query
+      description: optional block height, defaults to current tip
+      required: false
+      schema:
+        type: integer
+        format: int64
+        minimum: 0
+    asset:
+      name: asset
+      in: path
+      required: true
+      schema:
+        type: string
+        example: BTC.BTC

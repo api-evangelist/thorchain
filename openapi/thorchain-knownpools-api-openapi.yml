@@ -1,0 +1,35 @@
+openapi: 3.0.0
+info:
+  title: Thornode Auth Knownpools API
+  version: 3.19.1
+  contact:
+    email: devs@thorchain.org
+  description: Thornode REST API.
+tags:
+- name: Knownpools
+paths:
+  /v2/knownpools:
+    get:
+      description: Returns an object with known pools and their statuses
+      operationId: GetKnownPools
+      responses:
+        '200':
+          $ref: '#/components/responses/KnownPoolsResponse'
+      summary: Known Pools List
+      tags:
+      - Knownpools
+components:
+  responses:
+    KnownPoolsResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/KnownPools'
+      description: Object containing known pools to status mapping
+  schemas:
+    KnownPools:
+      additionalProperties:
+        type: string
+      example:
+        BTC.BTC: available
+      type: object

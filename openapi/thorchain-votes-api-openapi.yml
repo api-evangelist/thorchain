@@ -1,0 +1,88 @@
+openapi: 3.0.0
+info:
+  title: Thornode Auth Votes API
+  version: 3.19.1
+  contact:
+    email: devs@thorchain.org
+  description: Thornode REST API.
+tags:
+- name: Votes
+paths:
+  /v2/votes:
+    get:
+      description: Returns timestamp, key, value for each active node member.
+      operationId: GetVotes
+      parameters:
+      - description: 'Specifies the base interval from which votes will be shown.
+
+          Default is 90d.
+
+          '
+        example: 90d
+        in: query
+        name: period
+        schema:
+          enum:
+          - 1h
+          - 24h
+          - 7d
+          - 14d
+          - 30d
+          - 90d
+          - 100d
+          - 180d
+          - 365d
+          - all
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/VotesResponse'
+      summary: Current Protocol Voting
+      tags:
+      - Votes
+components:
+  responses:
+    VotesResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Votes'
+      description: Array containing the current protocol voting situation
+  schemas:
+    VoteItem:
+      properties:
+        address:
+          description: node address that voted in the protocol
+          example: thor1
+          type: string
+        date:
+          description: full timestamp (nanoseconds since 1970) of the block at which the churn occurred
+          example: '946684801000000000'
+          type: string
+        key:
+          description: key amount of the vote
+          example: '1'
+          type: string
+      required:
+      - address
+      - key
+      - date
+      type: object
+    Votes:
+      items:
+        $ref: '#/components/schemas/VoteValue'
+      type: array
+    VoteValue:
+      properties:
+        value:
+          description: value of the vote
+          example: prop6
+          type: string
+        votes:
+          items:
+            $ref: '#/components/schemas/VoteItem'
+          type: array
+      required:
+      - value
+      - votes
+      type: object

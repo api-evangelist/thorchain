@@ -1,0 +1,58 @@
+openapi: 3.0.0
+info:
+  title: Thornode Auth SecuredAssets API
+  version: 3.19.1
+  contact:
+    email: devs@thorchain.org
+  description: Thornode REST API.
+tags:
+- name: SecuredAssets
+paths:
+  /thorchain/securedassets:
+    parameters:
+    - $ref: '#/components/parameters/queryHeight'
+    get:
+      description: Returns the total size and ratio of all secured asset
+      operationId: secured_assets
+      tags:
+      - SecuredAssets
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecuredAssetsResponse'
+components:
+  schemas:
+    SecuredAssetsResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/SecuredAssetResponse'
+    SecuredAssetResponse:
+      type: object
+      required:
+      - asset
+      - supply
+      - depth
+      properties:
+        asset:
+          type: string
+          example: BTC-BTC
+          description: secured account asset with "-" separator
+        supply:
+          type: string
+          description: total share tokens issued for the asset
+        depth:
+          type: string
+          description: total deposits of the asset
+  parameters:
+    queryHeight:
+      name: height
+      in: query
+      description: optional block height, defaults to current tip
+      required: false
+      schema:
+        type: integer
+        format: int64
+        minimum: 0

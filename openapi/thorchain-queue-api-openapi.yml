@@ -1,0 +1,576 @@
+openapi: 3.0.0
+info:
+  title: Thornode Auth Queue API
+  version: 3.19.1
+  contact:
+    email: devs@thorchain.org
+  description: Thornode REST API.
+tags:
+- name: Queue
+paths:
+  /thorchain/queue:
+    parameters:
+    - $ref: '#/components/parameters/queryHeight'
+    get:
+      description: Returns queue statistics.
+      operationId: queue
+      tags:
+      - Queue
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueueResponse'
+  /thorchain/queue/swap:
+    parameters:
+    - $ref: '#/components/parameters/queryHeight'
+    get:
+      description: Returns the swap queue.
+      operationId: queueSwap
+      tags:
+      - Queue
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SwapQueueResponse'
+  /thorchain/queue/swap/paginated:
+    parameters:
+    - $ref: '#/components/parameters/queryHeight'
+    - name: offset
+      in: query
+      schema:
+        type: integer
+        format: int64
+        minimum: 0
+        default: 0
+      description: Number of items to skip
+    - name: limit
+      in: query
+      schema:
+        type: integer
+        format: int64
+        minimum: 0
+        default: 100
+        maximum: 1000
+      description: Number of items to return
+    get:
+      description: Returns the swap queue with pagination.
+      operationId: queueSwapPaginated
+      tags:
+      - Queue
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SwapQueuePaginatedResponse'
+  /thorchain/queue/limit_swaps:
+    parameters:
+    - $ref: '#/components/parameters/queryHeight'
+    - name: offset
+      in: query
+      schema:
+        type: integer
+        default: 0
+      description: Number of items to skip
+    - name: limit
+      in: query
+      schema:
+        type: integer
+        default: 100
+        maximum: 1000
+      description: Number of items to return
+    - name: source_asset
+      in: query
+      schema:
+        type: string
+      description: Filter by source asset (e.g., "BTC.BTC")
+    - name: target_asset
+      in: query
+      schema:
+        type: string
+      description: Filter by target asset (e.g., "ETH.ETH")
+    - name: sender
+      in: query
+      schema:
+        type: string
+      description: Filter by sender address
+    - name: sort_by
+      in: query
+      schema:
+        type: string
+        default: ratio
+        enum:
+        - ratio
+        - age
+        - amount
+        - created_height
+      description: Sort by field
+    - name: sort_order
+      in: query
+      schema:
+        type: string
+        default: asc
+        enum:
+        - asc
+        - desc
+      description: Sort order
+    get:
+      description: Returns limit swaps with pagination and filtering.
+      operationId: limitSwaps
+      tags:
+      - Queue
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitSwapsResponse'
+  /thorchain/queue/limit_swaps/summary:
+    parameters:
+    - $ref: '#/components/parameters/queryHeight'
+    - name: source_asset
+      in: query
+      schema:
+        type: string
+      description: Filter by source asset (e.g., "BTC.BTC")
+    - name: target_asset
+      in: query
+      schema:
+        type: string
+      description: Filter by target asset (e.g., "ETH.ETH")
+    get:
+      description: Returns limit swaps summary statistics.
+      operationId: limitSwapsSummary
+      tags:
+      - Queue
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitSwapsSummaryResponse'
+  /thorchain/queue/scheduled:
+    parameters:
+    - $ref: '#/components/parameters/queryHeight'
+    get:
+      description: Returns the scheduled queue.
+      operationId: queueScheduled
+      tags:
+      - Queue
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScheduledResponse'
+  /thorchain/queue/outbound:
+    parameters:
+    - $ref: '#/components/parameters/queryHeight'
+    get:
+      description: Returns the outbound queue including estimated RUNE values.
+      operationId: queueOutbound
+      tags:
+      - Queue
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OutboundResponse'
+components:
+  schemas:
+    SwapState:
+      type: object
+      description: State tracking for swap execution
+      properties:
+        interval:
+          type: integer
+          format: int64
+          description: the interval for streaming swaps
+        quantity:
+          type: integer
+          format: int64
+          description: the number of swaps to execute
+        ttl:
+          type: integer
+          format: int64
+          description: time to live
+        count:
+          type: integer
+          format: int64
+          description: number of swaps executed
+        last_height:
+          type: integer
+          format: int64
+          description: last height when a swap was executed
+        deposit:
+          type: string
+          description: total deposit amount
+        withdrawn:
+          type: string
+          description: amount withdrawn
+        in:
+          type: string
+          description: total amount swapped in
+        out:
+          type: string
+          description: total amount swapped out
+        failed_swaps:
+          type: array
+          items:
+            type: integer
+            format: int64
+          description: list of failed swap indices
+        failed_swap_reasons:
+          type: array
+          items:
+            type: string
+          description: reasons for failed swaps
+    AssetPairSummary:
+      type: object
+      properties:
+        source_asset:
+          type: string
+          description: Source asset identifier
+          example: BTC.BTC
+        target_asset:
+          type: string
+          description: Target asset identifier
+          example: ETH.ETH
+        count:
+          type: integer
+          format: int64
+          description: Number of limit swaps for this asset pair
+          example: 456
+        total_value_usd:
+          type: string
+          description: Total USD value of limit swaps for this asset pair
+          example: '4500000.00'
+    TxOutItem:
+      type: object
+      required:
+      - chain
+      - to_address
+      - coin
+      - max_gas
+      properties:
+        height:
+          type: integer
+          format: int64
+          example: 1234
+        in_hash:
+          type: string
+          example: 208BF0ACD78C89A0534B0457BA0867B101961A2319C1E49DD28676526904BBEA
+        out_hash:
+          type: string
+          example: 0D0B2FDB6DAD6E5FD3C5E46D39128F9DA15E96F0B2CC054CE059EA3532B150FB
+        chain:
+          type: string
+          example: ETH
+        to_address:
+          type: string
+          example: '0x66fb1cd65b97fa40457b90b7d1ca6b92cb64b32b'
+        vault_pub_key:
+          type: string
+          example: thorpub1addwnpepqt45wmsxj29xpgdrdsvg2h3dx68qeapgykw3hlyj6vuds2r0pnkwx5gt9m4
+        vault_pub_key_eddsa:
+          type: string
+          example: thorpub1addwnpepqt45wmsxj29xpgdrdsvg2h3dx68qeapgykw3hlyj6vuds2r0pnkwx5gt9m4
+        coin:
+          $ref: '#/components/schemas/Coin'
+        max_gas:
+          type: array
+          items:
+            $ref: '#/components/schemas/Coin'
+        gas_rate:
+          type: integer
+          format: int64
+        memo:
+          type: string
+          example: OUT:208BF0ACD78C89A0534B0457BA0867B101961A2319C1E49DD28676526904BBEA
+        original_memo:
+          type: string
+          example: =:BTC.BTC:bc1q0lwf0ycw4gkh8v6y8g9yqwxvqnvm24kvdezgpg
+        aggregator:
+          type: string
+          description: whitelisted DEX Aggregator contract address
+          example: '0xe4ddca21881bac219af7f217703db0475d2a9f02'
+        aggregator_target_asset:
+          type: string
+          description: target asset for the aggregator contract to attempt a swap to
+          example: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48'
+        aggregator_target_limit:
+          type: string
+          description: the minimum number of tokens the swapper wants to receive of the output asset
+          example: '100'
+        clout_spent:
+          type: string
+          description: clout spent in RUNE for the outbound
+          example: '1234'
+    LimitSwapsResponse:
+      type: object
+      properties:
+        limit_swaps:
+          type: array
+          items:
+            $ref: '#/components/schemas/LimitSwapWithDetails'
+          description: Array of limit swaps with details
+        pagination:
+          $ref: '#/components/schemas/PaginationMeta'
+    SwapQueueResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/MsgSwap'
+    LimitSwapWithDetails:
+      type: object
+      properties:
+        swap:
+          $ref: '#/components/schemas/MsgSwap'
+        ratio:
+          type: string
+          description: The ratio threshold for this limit swap
+          example: '1234567890123456789'
+        blocks_since_created:
+          type: integer
+          format: int64
+          description: Number of blocks since the swap was created
+          example: 150
+        time_to_expiry_blocks:
+          type: integer
+          format: int64
+          description: Number of blocks until the swap expires
+          example: 14850
+        created_timestamp:
+          type: integer
+          format: int64
+          description: Unix timestamp when the swap was created
+          example: 1699123456
+    QueueResponse:
+      type: object
+      required:
+      - swap
+      - outbound
+      - internal
+      - scheduled_outbound_value
+      - scheduled_outbound_clout
+      properties:
+        swap:
+          type: integer
+          format: int64
+          example: 0
+        outbound:
+          type: integer
+          format: int64
+          example: 10
+          description: number of signed outbound tx in the queue
+        internal:
+          type: integer
+          format: int64
+          example: 0
+        scheduled_outbound_value:
+          type: string
+          description: scheduled outbound value in RUNE
+        scheduled_outbound_clout:
+          type: string
+          description: scheduled outbound clout in RUNE
+    Tx:
+      type: object
+      required:
+      - coins
+      - gas
+      properties:
+        id:
+          type: string
+          example: CF524818D42B63D25BBA0CCC4909F127CAA645C0F9CD07324F2824CC151A64C7
+        chain:
+          type: string
+          example: BTC
+        from_address:
+          type: string
+          example: bcrt1q0s4mg25tu6termrk8egltfyme4q7sg3h8kkydt
+        to_address:
+          type: string
+          example: bcrt1qf3s7q037eancht7sg0aj995dht25rwrnqsf45e
+        coins:
+          type: array
+          items:
+            $ref: '#/components/schemas/Coin'
+        gas:
+          type: array
+          items:
+            $ref: '#/components/schemas/Coin'
+        memo:
+          type: string
+          example: ADD:BTC.BTC:thor1zupk5lmc84r2dh738a9g3zscavannjy3nzplwt
+    OutboundResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/TxOutItem'
+    PaginationMeta:
+      type: object
+      properties:
+        offset:
+          type: integer
+          format: int64
+          description: Number of items skipped
+          example: 0
+        limit:
+          type: integer
+          format: int64
+          description: Number of items returned
+          example: 100
+        total:
+          type: integer
+          format: int64
+          description: Total number of items available
+          example: 1247
+        has_next:
+          type: boolean
+          description: Whether there are more items after this page
+          example: true
+        has_prev:
+          type: boolean
+          description: Whether there are items before this page
+          example: false
+    SwapQueuePaginatedResponse:
+      type: object
+      properties:
+        swap_queue:
+          type: array
+          items:
+            $ref: '#/components/schemas/MsgSwap'
+          description: Array of queued swaps
+        pagination:
+          $ref: '#/components/schemas/PaginationMeta'
+    MsgSwap:
+      type: object
+      required:
+      - tx
+      - target_asset
+      - trade_target
+      - affiliate_basis_points
+      properties:
+        tx:
+          $ref: '#/components/schemas/Tx'
+        target_asset:
+          type: string
+          example: ETH.ETH
+          description: the asset to be swapped to
+        destination:
+          type: string
+          example: '0x66fb1cd65b97fa40457b90b7d1ca6b92cb64b32b'
+          description: the destination address to receive the swap output
+        trade_target:
+          type: string
+          description: the minimum amount of output asset to receive (else cancelling and refunding the swap)
+        affiliate_address:
+          type: string
+          example: thor1f3s7q037eancht7sg0aj995dht25rwrnu4ats5
+          description: the affiliate address which will receive any affiliate fee
+        affiliate_basis_points:
+          type: string
+          description: the affiliate fee in basis points
+        signer:
+          type: string
+          description: the signer (sender) of the transaction
+        aggregator:
+          type: string
+          description: the contract address if an aggregator is specified for a non-THORChain SwapOut
+        aggregator_target_address:
+          type: string
+          description: the desired output asset of the aggregator SwapOut
+        aggregator_target_limit:
+          type: string
+          description: the minimum amount of SwapOut asset to receive (else cancelling the SwapOut and receiving THORChain's output)
+        swap_type:
+          type: string
+          description: market if immediately completed or refunded, limit if held until fulfillable
+        stream_quantity:
+          type: integer
+          format: int64
+          description: number of swaps to execute in a streaming swap
+        stream_interval:
+          type: integer
+          format: int64
+          description: the interval (in blocks) to execute the streaming swap
+        initial_block_height:
+          type: integer
+          format: int64
+          description: the initial block height when the streaming swap was first queued
+        state:
+          $ref: '#/components/schemas/SwapState'
+        version:
+          type: string
+          description: the version of the swap (v1 or v2)
+        index:
+          type: integer
+          format: int32
+          description: the index of the swap in the batch
+    Coin:
+      type: object
+      required:
+      - asset
+      - amount
+      properties:
+        asset:
+          type: string
+          example: BTC.BTC
+        amount:
+          type: string
+          example: '100000'
+        decimals:
+          type: integer
+          format: int64
+          example: 6
+    LimitSwapsSummaryResponse:
+      type: object
+      properties:
+        total_limit_swaps:
+          type: integer
+          format: int64
+          description: Total number of limit swaps
+          example: 1247
+        total_value_usd:
+          type: string
+          description: Total USD value of all limit swaps
+          example: '12450000.50'
+        asset_pairs:
+          type: array
+          items:
+            $ref: '#/components/schemas/AssetPairSummary'
+          description: Summary statistics by asset pair
+        oldest_swap_blocks:
+          type: integer
+          format: int64
+          description: Age in blocks of the oldest limit swap
+          example: 14999
+        average_age_blocks:
+          type: integer
+          format: int64
+          description: Average age in blocks of all limit swaps
+          example: 7500
+    ScheduledResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/TxOutItem'
+  parameters:
+    queryHeight:
+      name: height
+      in: query
+      description: optional block height, defaults to current tip
+      required: false
+      schema:
+        type: integer
+        format: int64
+        minimum: 0

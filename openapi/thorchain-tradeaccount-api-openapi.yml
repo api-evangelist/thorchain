@@ -1,0 +1,70 @@
+openapi: 3.0.0
+info:
+  title: Thornode Auth TradeAccount API
+  version: 3.19.1
+  contact:
+    email: devs@thorchain.org
+  description: Thornode REST API.
+tags:
+- name: TradeAccount
+paths:
+  /thorchain/trade/account/{address}:
+    parameters:
+    - $ref: '#/components/parameters/queryHeight'
+    - $ref: '#/components/parameters/address'
+    get:
+      description: Returns the units and depth of a trade account
+      operationId: trade_account
+      tags:
+      - TradeAccount
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TradeAccountResponse'
+components:
+  schemas:
+    TradeAccountResponse:
+      type: object
+      required:
+      - asset
+      - units
+      - owner
+      properties:
+        asset:
+          type: string
+          example: BTC~BTC
+          description: trade account asset with "~" separator
+        units:
+          type: string
+          description: units of trade asset belonging to this owner
+        owner:
+          type: string
+          description: thor address of trade account owner
+        last_add_height:
+          type: integer
+          format: int64
+          description: last thorchain height trade assets were added to trade account
+        last_withdraw_height:
+          type: integer
+          format: int64
+          description: last thorchain height trade assets were withdrawn from trade account
+  parameters:
+    address:
+      name: address
+      in: path
+      required: true
+      schema:
+        type: string
+        example: thor1zupk5lmc84r2dh738a9g3zscavannjy3nzplwt
+    queryHeight:
+      name: height
+      in: query
+      description: optional block height, defaults to current tip
+      required: false
+      schema:
+        type: integer
+        format: int64
+        minimum: 0

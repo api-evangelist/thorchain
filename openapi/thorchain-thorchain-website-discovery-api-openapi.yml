@@ -1,0 +1,19 @@
+openapi: 3.0.0
+info:
+  title: Thornode Auth THORChain Website Discovery API
+  version: 3.19.1
+  contact:
+    email: devs@thorchain.org
+  description: Thornode REST API.
+tags:
+- name: THORChain Website Discovery
+paths:
+  /:
+    get:
+      operationId: getHomepage
+      summary: Get the THORChain homepage
+      responses:
+        '200':
+          description: 'HTML homepage or markdown homepage when requested with Accept: text/markdown'
+      tags:
+      - THORChain Website Discovery

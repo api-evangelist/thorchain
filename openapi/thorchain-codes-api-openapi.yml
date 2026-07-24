@@ -1,0 +1,58 @@
+openapi: 3.0.0
+info:
+  title: Thornode Auth Codes API
+  version: 3.19.1
+  contact:
+    email: devs@thorchain.org
+  description: Thornode REST API.
+tags:
+- name: Codes
+paths:
+  /thorchain/codes:
+    parameters:
+    - $ref: '#/components/parameters/queryHeight'
+    get:
+      description: Returns all whitelisted contract codes
+      operationId: codes
+      tags:
+      - Codes
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CodesResponse'
+components:
+  schemas:
+    Code:
+      type: object
+      properties:
+        code:
+          type: string
+          example: a70d5005130246ff44470494ed5cb63d7c9ddffebda8e556e56d11c2057b0820
+        deployers:
+          type: array
+          items:
+            type: string
+            example: thor1e0lmk5juawc46jwjwd0xfz587njej7ay5fh6cd
+        origin:
+          type: string
+          example: https://gitlab.com/thorchain/rujira/-/tree/main/contracts/rujira-merge
+    CodesResponse:
+      type: object
+      properties:
+        codes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Code'
+  parameters:
+    queryHeight:
+      name: height
+      in: query
+      description: optional block height, defaults to current tip
+      required: false
+      schema:
+        type: integer
+        format: int64
+        minimum: 0

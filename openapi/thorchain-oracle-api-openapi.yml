@@ -1,0 +1,83 @@
+openapi: 3.0.0
+info:
+  title: Thornode Auth Oracle API
+  version: 3.19.1
+  contact:
+    email: devs@thorchain.org
+  description: Thornode REST API.
+tags:
+- name: Oracle
+paths:
+  /thorchain/oracle/price/{symbol}:
+    parameters:
+    - $ref: '#/components/parameters/queryHeight'
+    - $ref: '#/components/parameters/symbol'
+    get:
+      description: Returns oracle price for a symbol.
+      operationId: oraclePrice
+      tags:
+      - Oracle
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OraclePriceResponse'
+  /thorchain/oracle/prices:
+    parameters:
+    - $ref: '#/components/parameters/queryHeight'
+    get:
+      description: Returns all available oracle prices.
+      operationId: oraclePrices
+      tags:
+      - Oracle
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OraclePricesResponse'
+components:
+  schemas:
+    OraclePrice:
+      type: object
+      properties:
+        symbol:
+          type: string
+          example: BTC
+        amount:
+          type: string
+          example: '105126.5321'
+    OraclePriceResponse:
+      type: object
+      properties:
+        price:
+          type: object
+          items:
+            $ref: '#/components/schemas/OraclePrice'
+    OraclePricesResponse:
+      type: object
+      properties:
+        prices:
+          type: array
+          items:
+            $ref: '#/components/schemas/OraclePrice'
+  parameters:
+    queryHeight:
+      name: height
+      in: query
+      description: optional block height, defaults to current tip
+      required: false
+      schema:
+        type: integer
+        format: int64
+        minimum: 0
+    symbol:
+      name: symbol
+      in: path
+      required: true
+      schema:
+        type: string
+        example: BTC

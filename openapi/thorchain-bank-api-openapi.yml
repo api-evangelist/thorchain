@@ -1,0 +1,61 @@
+openapi: 3.0.0
+info:
+  title: Thornode Auth Bank API
+  version: 3.19.1
+  contact:
+    email: devs@thorchain.org
+  description: Thornode REST API.
+tags:
+- name: Bank
+paths:
+  /bank/balances/{address}:
+    parameters:
+    - $ref: '#/components/parameters/queryHeight'
+    - $ref: '#/components/parameters/address'
+    get:
+      description: Returns balances for the provided address.
+      operationId: balances
+      tags:
+      - Bank
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BalancesResponse'
+components:
+  parameters:
+    address:
+      name: address
+      in: path
+      required: true
+      schema:
+        type: string
+        example: thor1zupk5lmc84r2dh738a9g3zscavannjy3nzplwt
+    queryHeight:
+      name: height
+      in: query
+      description: optional block height, defaults to current tip
+      required: false
+      schema:
+        type: integer
+        format: int64
+        minimum: 0
+  schemas:
+    BalancesResponse:
+      properties:
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/Amount'
+    Amount:
+      type: object
+      required:
+      - denom
+      - amount
+      properties:
+        denom:
+          type: string
+        amount:
+          type: string

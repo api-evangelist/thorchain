@@ -1,0 +1,120 @@
+openapi: 3.0.0
+info:
+  title: Thornode Auth Thorname API
+  version: 3.19.1
+  contact:
+    email: devs@thorchain.org
+  description: Thornode REST API.
+tags:
+- name: Thorname
+paths:
+  /v2/thorname/lookup/{name}:
+    get:
+      description: Returns an array of chains and their addresses associated with the given THORName
+      operationId: GetTHORNameDetail
+      parameters:
+      - description: a THORName
+        example: thorchain
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/THORNameDetailsResponse'
+      summary: THORName Details
+      tags:
+      - Thorname
+  /v2/thorname/owner/{address}:
+    get:
+      description: 'Returns an array of THORNames owned by the address. The address is not necessarily an
+
+        associated address for those thornames.
+
+        '
+      operationId: GetTHORNamesOwnerByAddress
+      parameters:
+      - description: Address which owns a THORName.
+        example: thor102y0m3uptg0vvudeyh00r2fnz70wq7d8y7mu2g
+        in: path
+        name: address
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ReverseTHORNameResponse'
+      summary: THORName owner
+      tags:
+      - Thorname
+  /v2/thorname/rlookup/{address}:
+    get:
+      description: Returns an array of THORNames associated with the given address
+      operationId: GetTHORNamesByAddress
+      parameters:
+      - description: Address to match THORNames against.
+        example: bnb1jxfh2g85q3v0tdq56fnevx6xcxtcnhtsmcu64m
+        in: path
+        name: address
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ReverseTHORNameResponse'
+      summary: Gives a list of THORNames by reverse lookup
+      tags:
+      - Thorname
+components:
+  schemas:
+    ReverseTHORNames:
+      items:
+        description: THORName name
+        example: myname
+        type: string
+      type: array
+    THORNameEntry:
+      properties:
+        address:
+          description: address on blockchain
+          type: string
+        chain:
+          description: blockchain
+          type: string
+      required:
+      - chain
+      - address
+      type: object
+    THORNameDetails:
+      properties:
+        entries:
+          description: List details of all chains and their addresses for a given THORName
+          items:
+            $ref: '#/components/schemas/THORNameEntry'
+          type: array
+        expire:
+          description: Int64, THORChain block height in which THORName expires
+          type: string
+        owner:
+          description: owner's THOR address
+          example: thor102y0m3uptg0vvudeyh00r2fnz70wq7d8y7mu2g
+          type: string
+      required:
+      - owner
+      - expire
+      - entries
+      type: object
+  responses:
+    THORNameDetailsResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/THORNameDetails'
+      description: object containing THORName data for a specific name
+    ReverseTHORNameResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ReverseTHORNames'
+      description: object containing a list of THORName names for a specific address

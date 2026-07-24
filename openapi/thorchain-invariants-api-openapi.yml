@@ -1,0 +1,90 @@
+openapi: 3.0.0
+info:
+  title: Thornode Auth Invariants API
+  version: 3.19.1
+  contact:
+    email: devs@thorchain.org
+  description: Thornode REST API.
+tags:
+- name: Invariants
+paths:
+  /thorchain/invariant/{invariant}:
+    parameters:
+    - $ref: '#/components/parameters/queryHeight'
+    - $ref: '#/components/parameters/invariant'
+    get:
+      description: Returns result of running the given invariant.
+      operationId: invariant
+      tags:
+      - Invariants
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvariantResponse'
+  /thorchain/invariants:
+    parameters:
+    - $ref: '#/components/parameters/queryHeight'
+    get:
+      description: Returns a list of available invariants.
+      operationId: invariants
+      tags:
+      - Invariants
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvariantsResponse'
+components:
+  parameters:
+    invariant:
+      name: invariant
+      in: path
+      required: true
+      schema:
+        type: string
+        example: asgard
+    queryHeight:
+      name: height
+      in: query
+      description: optional block height, defaults to current tip
+      required: false
+      schema:
+        type: integer
+        format: int64
+        minimum: 0
+  schemas:
+    InvariantResponse:
+      type: object
+      required:
+      - invariant
+      - broken
+      - msg
+      properties:
+        invariant:
+          type: string
+          example: asgard
+          description: The name of the invariant.
+        broken:
+          type: boolean
+          example: false
+          description: Returns true if the invariant is broken.
+        msg:
+          type: array
+          items:
+            type: string
+          example:
+          - 'insolvent: 200000rune'
+          - 'oversolvent: 1btc/btc'
+          description: Informative message about the invariant result.
+    InvariantsResponse:
+      type: object
+      properties:
+        invariants:
+          type: array
+          items:
+            type: string

@@ -1,0 +1,19 @@
+openapi: 3.0.0
+info:
+  title: Thornode Auth Robots.txt API
+  version: 3.19.1
+  contact:
+    email: devs@thorchain.org
+  description: Thornode REST API.
+tags:
+- name: Robots.txt
+paths:
+  /robots.txt:
+    get:
+      operationId: getRobotsTxt
+      summary: Get crawler and content-signal policy
+      responses:
+        '200':
+          description: Plain-text robots policy
+      tags:
+      - Robots.txt

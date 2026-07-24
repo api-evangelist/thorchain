@@ -1,0 +1,94 @@
+openapi: 3.0.0
+info:
+  title: Thornode Auth Balance API
+  version: 3.19.1
+  contact:
+    email: devs@thorchain.org
+  description: Thornode REST API.
+tags:
+- name: Balance
+paths:
+  /v2/balance/{address}:
+    get:
+      description: 'Returns all coin amounts of the given address at the specified timestamp or
+
+        height, or at the latest process block if neither is provided. (Only one of
+
+        timestamp or height can be specified, not both.)
+
+
+        This endpoint is enabled only if the midgard startup config allows it.
+
+        '
+      operationId: GetBalance
+      parameters:
+      - description: Rune address.
+        example: thor102y0m3uptg0vvudeyh00r2fnz70wq7d8y7mu2g
+        in: path
+        name: address
+        required: true
+        schema:
+          type: string
+      - description: Unix timestamp as seconds since 1970 (if provided, height must not be provided)
+        example: 1606780800
+        in: query
+        name: timestamp
+        schema:
+          format: int64
+          type: integer
+      - description: Block height (if provided, timestamp must not be provided)
+        example: 2000000
+        in: query
+        name: height
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          $ref: '#/components/responses/BalanceResponse'
+      summary: Current balance for an address
+      tags:
+      - Balance
+components:
+  responses:
+    BalanceResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Balance'
+      description: object containing balance details for a given address
+  schemas:
+    Coin:
+      description: Represents a digital currency amount
+      properties:
+        amount:
+          description: Int64(e8), asset Amount.
+          type: string
+        asset:
+          description: Asset in CHAIN.SYMBOL format
+          type: string
+      required:
+      - asset
+      - amount
+      type: object
+    Balance:
+      properties:
+        coins:
+          $ref: '#/components/schemas/Coins'
+        date:
+          description: full timestamp (nanoseconds since 1970) of the block at which the returned balance snapshot was valid
+          example: '946684801000000000'
+          type: string
+        height:
+          description: height of the block at which the returned balance snapshot was valid
+          example: '2000000'
+          type: string
+      required:
+      - height
+      - date
+      - coins
+      type: object
+    Coins:
+      items:
+        $ref: '#/components/schemas/Coin'
+      type: array

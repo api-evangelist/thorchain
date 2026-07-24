@@ -1,0 +1,37 @@
+openapi: 3.0.0
+info:
+  title: Thornode Auth .well Known API
+  version: 3.19.1
+  contact:
+    email: devs@thorchain.org
+  description: Thornode REST API.
+tags:
+- name: .well Known
+paths:
+  /.well-known/agent-rules:
+    get:
+      operationId: getAgentRules
+      summary: Get well-known public agent rules
+      responses:
+        '200':
+          description: Markdown agent rules
+      tags:
+      - .well Known
+  /.well-known/mcp-server-card.json:
+    get:
+      operationId: getMcpServerCard
+      summary: Get the MCP server card
+      responses:
+        '200':
+          description: JSON MCP server card
+      tags:
+      - .well Known
+  /.well-known/ai-plugin.json:
+    get:
+      operationId: getAiPluginManifest
+      summary: Get the AI plugin manifest
+      responses:
+        '200':
+          description: JSON AI plugin manifest
+      tags:
+      - .well Known

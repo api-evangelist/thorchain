@@ -1,0 +1,71 @@
+openapi: 3.0.0
+info:
+  title: Thornode Auth Clout API
+  version: 3.19.1
+  contact:
+    email: devs@thorchain.org
+  description: Thornode REST API.
+tags:
+- name: Clout
+paths:
+  /thorchain/clout/swap/{address}:
+    parameters:
+    - $ref: '#/components/parameters/queryHeight'
+    - $ref: '#/components/parameters/address'
+    get:
+      description: Returns the clout score of an address
+      operationId: swapper_clout
+      tags:
+      - Clout
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SwapperCloutResponse'
+components:
+  schemas:
+    SwapperCloutResponse:
+      type: object
+      required:
+      - address
+      properties:
+        address:
+          type: string
+          example: bc1....
+          description: address associated with this clout account
+        score:
+          type: string
+          description: clout score, which is the amount of rune spent on swap fees
+        reclaimed:
+          type: string
+          description: amount of clout that has been reclaimed in total over time (observed clout spent)
+        spent:
+          type: string
+          description: amount of clout that has been spent in total over time
+        last_spent_height:
+          type: integer
+          format: int64
+          description: last block height that clout was spent
+        last_reclaim_height:
+          type: integer
+          format: int64
+          description: last block height that clout was reclaimed
+  parameters:
+    address:
+      name: address
+      in: path
+      required: true
+      schema:
+        type: string
+        example: thor1zupk5lmc84r2dh738a9g3zscavannjy3nzplwt
+    queryHeight:
+      name: height
+      in: query
+      description: optional block height, defaults to current tip
+      required: false
+      schema:
+        type: integer
+        format: int64
+        minimum: 0

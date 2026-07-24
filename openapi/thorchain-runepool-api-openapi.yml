@@ -1,0 +1,82 @@
+openapi: 3.0.0
+info:
+  title: Thornode Auth Runepool API
+  version: 3.19.1
+  contact:
+    email: devs@thorchain.org
+  description: Thornode REST API.
+tags:
+- name: Runepool
+paths:
+  /v2/runepool/{address}:
+    get:
+      description: 'Returns an array of statistics for all the RUNEPool associated with given
+
+        member addresses.
+
+        Query can also be multiple addresses should be separated by comma ('','')
+
+        '
+      operationId: GetRUNEPoolDetail
+      parameters:
+      - description: 'Address to match the RUNEPool. multiple rune addresses can be given.
+
+          '
+        example: thor1jxfh2g85q3v0tdq56fnevx6xcxtcnhtsmcu64m,thor2qcxssye4j6730h7ehgega3gyykkuwgdgmmpu62n
+        in: path
+        name: address
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/RUNEPoolDetailsResponse'
+      summary: RUNEPool Details
+      tags:
+      - Runepool
+components:
+  schemas:
+    RUNEPoolDetails:
+      description: List details of all the RUNEPools identified with the given addresses
+      items:
+        $ref: '#/components/schemas/RUNEPoolProvider'
+      type: array
+    RUNEPoolProvider:
+      properties:
+        dateFirstAdded:
+          description: Int64, Unix timestamp for the first time member deposited into the RUNEPool
+          type: string
+        dateLastAdded:
+          description: Int64, Unix timestamp for the last time member deposited into the RUNEPool
+          type: string
+        runeAdded:
+          description: Int64(e8), total asset added in the RUNEPool by member
+          type: string
+        runeAddress:
+          description: address used by the member
+          type: string
+        runeDeposit:
+          description: Int64(e8), total asset that is currently deposited by the member
+          type: string
+        runeWithdrawn:
+          description: Int64(e8), total asset withdrawn from the RUNEPool by the member
+          type: string
+        units:
+          description: Int64, units that belong the the member
+          type: string
+      required:
+      - runeAddress
+      - units
+      - runeAdded
+      - runeWithdrawn
+      - runeDeposit
+      - dateFirstAdded
+      - dateLastAdded
+      type: object
+  responses:
+    RUNEPoolDetailsResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RUNEPoolDetails'
+      description: object containing RUNEPool data for a specific members

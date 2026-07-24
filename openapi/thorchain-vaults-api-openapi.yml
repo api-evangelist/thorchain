@@ -1,0 +1,417 @@
+openapi: 3.0.0
+info:
+  title: Thornode Auth Vaults API
+  version: 3.19.1
+  contact:
+    email: devs@thorchain.org
+  description: Thornode REST API.
+tags:
+- name: Vaults
+paths:
+  /thorchain/vaults/asgard:
+    parameters:
+    - $ref: '#/components/parameters/queryHeight'
+    get:
+      description: Returns current asgard vaults.
+      operationId: asgard
+      tags:
+      - Vaults
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VaultsResponse'
+  /thorchain/vaults/yggdrasil:
+    parameters:
+    - $ref: '#/components/parameters/queryHeight'
+    get:
+      description: Returns current yggdrasil vaults.
+      operationId: yggdrasil
+      tags:
+      - Vaults
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YggdrasilVaultsResponse'
+  /thorchain/vault/{pubkey}:
+    parameters:
+    - $ref: '#/components/parameters/queryHeight'
+    - $ref: '#/components/parameters/pubkey'
+    get:
+      description: Returns the vault for the provided pubkey.
+      operationId: vault
+      tags:
+      - Vaults
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VaultResponse'
+  /thorchain/vault/{pubkey}/keysign_party:
+    parameters:
+    - $ref: '#/components/parameters/querySigningHeight'
+    - $ref: '#/components/parameters/pubkey'
+    get:
+      description: Returns the keysign-eligible signer set for the provided vault pubkey. The optional signing_height is the signing height used for jail-release evaluation against current vault and node-account state; it is not a historical state query.
+      operationId: vaultKeysignParty
+      tags:
+      - Vaults
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KeysignPartyResponse'
+  /thorchain/vaults/pubkeys:
+    parameters:
+    - $ref: '#/components/parameters/queryHeight'
+    get:
+      description: Returns all pubkeys for current vaults.
+      operationId: vaultPubkeys
+      tags:
+      - Vaults
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VaultPubkeysResponse'
+  /thorchain/vaults/solvency:
+    parameters:
+    - $ref: '#/components/parameters/queryHeight'
+    get:
+      description: Returns aggregate vault solvency showing over-solvent or under-solvent amounts per asset.
+      operationId: vaultSolvency
+      tags:
+      - Vaults
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VaultSolvencyResponse'
+components:
+  parameters:
+    querySigningHeight:
+      name: signing_height
+      in: query
+      description: optional signing height, defaults to current tip
+      required: false
+      schema:
+        type: integer
+        format: int64
+        minimum: 0
+    queryHeight:
+      name: height
+      in: query
+      description: optional block height, defaults to current tip
+      required: false
+      schema:
+        type: integer
+        format: int64
+        minimum: 0
+    pubkey:
+      name: pubkey
+      in: path
+      required: true
+      schema:
+        type: string
+        example: thorpub1addwnpepq068dr0x7ue973drmq4eqmzhcq3650n7nx5fhgn9gl207luxp6vaklu52tc
+  schemas:
+    VaultsResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/Vault'
+    VaultRouter:
+      type: object
+      properties:
+        chain:
+          type: string
+          example: ETH
+        router:
+          type: string
+          example: '0x3624525075b88B24ecc29CE226b0CEc1fFcB6976'
+    VaultSolvencyAsset:
+      type: object
+      required:
+      - asset
+      - amount
+      properties:
+        asset:
+          type: string
+          example: BTC.BTC
+          description: Asset identifier
+        amount:
+          type: string
+          example: '1000000000'
+          description: Solvency amount for the asset. Positive values indicate over-solvency, negative values indicate under-solvency.
+    KeysignPartyResponse:
+      type: object
+      required:
+      - pub_key
+      - signers
+      - height
+      - threshold
+      - required_signers
+      - never_signers
+      - jailed_fallback_signers
+      - active_signer_count
+      properties:
+        pub_key:
+          type: string
+          example: thorpub1addwnpep...
+        signers:
+          type: array
+          items:
+            type: string
+            example: thorpub1addwnpep...
+        height:
+          type: integer
+          format: int64
+        threshold:
+          type: integer
+          format: int64
+        required_signers:
+          type: integer
+          format: int64
+        never_signers:
+          type: array
+          items:
+            type: string
+            example: thorpub1addwnpep...
+        jailed_fallback_signers:
+          type: array
+          items:
+            type: string
+            example: thorpub1addwnpep...
+        active_signer_count:
+          type: integer
+          format: int64
+    VaultPubkeysResponse:
+      type: object
+      required:
+      - asgard
+      - yggdrasil
+      - inactive
+      properties:
+        asgard:
+          type: array
+          items:
+            $ref: '#/components/schemas/VaultInfo'
+        yggdrasil:
+          type: array
+          items:
+            $ref: '#/components/schemas/VaultInfo'
+        inactive:
+          type: array
+          items:
+            $ref: '#/components/schemas/VaultInfo'
+    Coin:
+      type: object
+      required:
+      - asset
+      - amount
+      properties:
+        asset:
+          type: string
+          example: BTC.BTC
+        amount:
+          type: string
+          example: '100000'
+        decimals:
+          type: integer
+          format: int64
+          example: 6
+    YggdrasilVault:
+      type: object
+      required:
+      - coins
+      - routers
+      - status
+      - bond
+      - total_value
+      - addresses
+      properties:
+        block_height:
+          type: integer
+          format: int64
+        pub_key:
+          type: string
+        coins:
+          type: array
+          items:
+            $ref: '#/components/schemas/Coin'
+        type:
+          type: string
+          enum:
+          - AsgardVault
+          - YggdrasilVault
+        status_since:
+          type: integer
+          format: int64
+        membership:
+          type: array
+          description: the list of node public keys which are members of the vault
+          items:
+            type: string
+        chains:
+          type: array
+          items:
+            type: string
+        inbound_tx_count:
+          type: integer
+          format: int64
+        outbound_tx_count:
+          type: integer
+          format: int64
+        pending_tx_block_heights:
+          type: array
+          items:
+            type: integer
+            format: int64
+        routers:
+          type: array
+          items:
+            $ref: '#/components/schemas/VaultRouter'
+        status:
+          type: string
+        bond:
+          type: string
+          description: current node bond
+          example: '123456789'
+        total_value:
+          type: string
+          description: value in rune of the vault's assets
+          example: '83456789'
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/VaultAddress'
+    VaultSolvencyResponse:
+      type: object
+      required:
+      - assets
+      properties:
+        assets:
+          type: array
+          items:
+            $ref: '#/components/schemas/VaultSolvencyAsset'
+    VaultResponse:
+      $ref: '#/components/schemas/Vault'
+    Vault:
+      type: object
+      required:
+      - coins
+      - status
+      - routers
+      - addresses
+      properties:
+        block_height:
+          type: integer
+          format: int64
+        pub_key:
+          type: string
+        pub_key_eddsa:
+          type: string
+        pub_key_frost:
+          type: string
+        coins:
+          type: array
+          items:
+            $ref: '#/components/schemas/Coin'
+        deficit:
+          type: array
+          items:
+            $ref: '#/components/schemas/Coin'
+        type:
+          type: string
+          enum:
+          - AsgardVault
+          - YggdrasilVault
+        status:
+          type: string
+        status_since:
+          type: integer
+          format: int64
+        membership:
+          type: array
+          description: the list of node public keys which are members of the vault
+          items:
+            type: string
+        chains:
+          type: array
+          items:
+            type: string
+        inbound_tx_count:
+          type: integer
+          format: int64
+        outbound_tx_count:
+          type: integer
+          format: int64
+        pending_tx_block_heights:
+          type: array
+          items:
+            type: integer
+            format: int64
+        routers:
+          type: array
+          items:
+            $ref: '#/components/schemas/VaultRouter'
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/VaultAddress'
+        frozen:
+          type: array
+          items:
+            type: string
+    YggdrasilVaultsResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/YggdrasilVault'
+    VaultInfo:
+      type: object
+      required:
+      - pub_key
+      - routers
+      properties:
+        pub_key:
+          type: string
+          example: thorpub1addwnpepq068dr0x7ue973drmq4eqmzhcq3650n7nx5fhgn9gl207luxp6vaklu52tc
+        pub_key_eddsa:
+          type: string
+          example: thorpub1addwnpepq068dr0x7ue973drmq4eqmzhcq3650n7nx5fhgn9gl207luxp6vaklu52tc
+        pub_key_frost:
+          type: string
+          example: thorpub1zcjduepq068dr0x7ue973drmq4eqmzhcq3650n7nx5fhgn9gl207luxp6vaklu52tc
+        routers:
+          type: array
+          items:
+            $ref: '#/components/schemas/VaultRouter'
+        membership:
+          type: array
+          description: the list of node public keys which are members of the vault
+          items:
+            type: string
+    VaultAddress:
+      type: object
+      required:
+      - chain
+      - address
+      properties:
+        chain:
+          type: string
+          example: BTC
+        address:
+          type: string
+          example: bc1qd45uzetakjvdy5ynjjyp4nlnj89am88e4e5jeq

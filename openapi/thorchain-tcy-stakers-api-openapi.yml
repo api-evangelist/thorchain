@@ -1,0 +1,85 @@
+openapi: 3.0.0
+info:
+  title: Thornode Auth TCY Stakers API
+  version: 3.19.1
+  contact:
+    email: devs@thorchain.org
+  description: Thornode REST API.
+tags:
+- name: TCY Stakers
+paths:
+  /thorchain/tcy_staker/{address}:
+    parameters:
+    - $ref: '#/components/parameters/queryHeight'
+    - $ref: '#/components/parameters/address'
+    get:
+      description: Returns the tcy staker information for an address.
+      operationId: tcyStaker
+      tags:
+      - TCY Stakers
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TCYStakerResponse'
+  /thorchain/tcy_stakers:
+    parameters:
+    - $ref: '#/components/parameters/queryHeight'
+    get:
+      description: Returns all tcy stakers information.
+      operationId: tcyStakers
+      tags:
+      - TCY Stakers
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TCYStakersResponse'
+components:
+  schemas:
+    TCYStaker:
+      type: object
+      required:
+      - amount
+      properties:
+        address:
+          type: string
+          example: thor1xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+        amount:
+          type: string
+          example: '0'
+    TCYStakersResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/TCYStakerSummary'
+    TCYStakerResponse:
+      $ref: '#/components/schemas/TCYStaker'
+    TCYStakerSummary:
+      type: object
+      required:
+      - amount
+      properties:
+        amount:
+          type: string
+          example: '0'
+  parameters:
+    queryHeight:
+      name: height
+      in: query
+      description: optional block height, defaults to current tip
+      required: false
+      schema:
+        type: integer
+        format: int64
+        minimum: 0
+    address:
+      name: address
+      in: path
+      required: true
+      schema:
+        type: string
+        example: thor1zupk5lmc84r2dh738a9g3zscavannjy3nzplwt

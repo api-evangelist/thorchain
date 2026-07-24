@@ -1,0 +1,219 @@
+openapi: 3.0.0
+info:
+  title: Thornode Auth RUNE Pool API
+  version: 3.19.1
+  contact:
+    email: devs@thorchain.org
+  description: Thornode REST API.
+tags:
+- name: RUNE Pool
+paths:
+  /thorchain/runepool:
+    parameters:
+    - $ref: '#/components/parameters/queryHeight'
+    get:
+      description: Returns the pool information for the RUNE pool.
+      operationId: runePool
+      tags:
+      - RUNE Pool
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RUNEPoolResponse'
+  /thorchain/rune_provider/{address}:
+    parameters:
+    - $ref: '#/components/parameters/queryHeight'
+    - $ref: '#/components/parameters/address'
+    get:
+      description: Returns the RUNE Provider information for an address.
+      operationId: runeProvider
+      tags:
+      - RUNE Pool
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RUNEProviderResponse'
+  /thorchain/rune_providers:
+    parameters:
+    - $ref: '#/components/parameters/queryHeight'
+    get:
+      description: Returns all RUNE Providers.
+      operationId: runeProviders
+      tags:
+      - RUNE Pool
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RUNEProvidersResponse'
+components:
+  schemas:
+    POL:
+      type: object
+      required:
+      - rune_deposited
+      - rune_withdrawn
+      - value
+      - pnl
+      - current_deposit
+      properties:
+        rune_deposited:
+          type: string
+          example: '857134475040'
+          description: total amount of RUNE deposited into the pools
+        rune_withdrawn:
+          type: string
+          example: '0'
+          description: total amount of RUNE withdrawn from the pools
+        value:
+          type: string
+          example: '21999180112172346'
+          description: total value of protocol's LP position in RUNE value
+        pnl:
+          type: string
+          example: '21999180112172346'
+          description: profit and loss of protocol owned liquidity
+        current_deposit:
+          type: string
+          example: '21999180112172346'
+          description: current amount of rune deposited
+    RUNEProvidersResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/RUNEProvider'
+    RUNEProvider:
+      type: object
+      required:
+      - rune_address
+      - units
+      - value
+      - pnl
+      - deposit_amount
+      - withdraw_amount
+      - last_deposit_height
+      - last_withdraw_height
+      properties:
+        rune_address:
+          type: string
+          example: THOR.RUNE
+        units:
+          type: string
+          example: '1234'
+        value:
+          type: string
+          example: '123456'
+        pnl:
+          type: string
+          example: '123456'
+        deposit_amount:
+          type: string
+          example: '6677'
+        withdraw_amount:
+          type: string
+          example: '5443'
+        last_deposit_height:
+          type: integer
+          format: int64
+          example: 82745
+        last_withdraw_height:
+          type: integer
+          format: int64
+          example: 82745
+    RUNEProviderResponse:
+      $ref: '#/components/schemas/RUNEProvider'
+    RUNEPoolResponse:
+      type: object
+      required:
+      - pol
+      - providers
+      - reserve
+      properties:
+        pol:
+          $ref: '#/components/schemas/POL'
+        providers:
+          type: object
+          required:
+          - units
+          - pending_units
+          - pending_rune
+          - value
+          - pnl
+          - rune_deposited
+          - rune_withdrawn
+          - current_deposit
+          properties:
+            units:
+              type: string
+              example: '123456'
+              description: the units of RUNEPool owned by providers (including pending)
+            pending_units:
+              type: string
+              example: '123456'
+              description: the units of RUNEPool owned by providers that remain pending
+            pending_rune:
+              type: string
+              example: '123456'
+              description: the amount of RUNE pending
+            value:
+              type: string
+              example: '123456'
+              description: the value of the provider share of the RUNEPool (includes pending RUNE)
+            pnl:
+              type: string
+              example: '123456'
+              description: the profit and loss of the provider share of the RUNEPool
+            current_deposit:
+              type: string
+              example: '123456'
+              description: the current RUNE deposited by providers
+        reserve:
+          type: object
+          required:
+          - units
+          - value
+          - pnl
+          - rune_deposited
+          - rune_withdrawn
+          - current_deposit
+          properties:
+            units:
+              type: string
+              example: '123456'
+              description: the units of RUNEPool owned by the reserve
+            value:
+              type: string
+              example: '123456'
+              description: the value of the reserve share of the RUNEPool
+            pnl:
+              type: string
+              example: '123456'
+              description: the profit and loss of the reserve share of the RUNEPool
+            current_deposit:
+              type: string
+              example: '123456'
+              description: the current RUNE deposited by the reserve
+  parameters:
+    queryHeight:
+      name: height
+      in: query
+      description: optional block height, defaults to current tip
+      required: false
+      schema:
+        type: integer
+        format: int64
+        minimum: 0
+    address:
+      name: address
+      in: path
+      required: true
+      schema:
+        type: string
+        example: thor1zupk5lmc84r2dh738a9g3zscavannjy3nzplwt

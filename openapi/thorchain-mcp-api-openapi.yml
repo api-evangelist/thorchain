@@ -1,0 +1,29 @@
+openapi: 3.0.0
+info:
+  title: Thornode Auth Mcp API
+  version: 3.19.1
+  contact:
+    email: devs@thorchain.org
+  description: Thornode REST API.
+tags:
+- name: Mcp
+paths:
+  /mcp:
+    get:
+      operationId: getMcpCard
+      summary: Get read-only MCP endpoint metadata
+      responses:
+        '200':
+          description: JSON MCP server card
+      tags:
+      - Mcp
+    post:
+      operationId: postMcpJsonRpc
+      summary: Call the read-only MCP JSON-RPC endpoint
+      responses:
+        '200':
+          description: JSON-RPC MCP response
+        '204':
+          description: Notification accepted without response
+      tags:
+      - Mcp

@@ -1,0 +1,45 @@
+openapi: 3.0.0
+info:
+  title: Thornode Auth Borrowers API
+  version: 3.19.1
+  contact:
+    email: devs@thorchain.org
+  description: Thornode REST API.
+tags:
+- name: Borrowers
+paths:
+  /v2/borrowers:
+    get:
+      description: 'Returns an array containing the addresses for all borrowers.
+
+        Addresses are only shown once.
+
+        '
+      operationId: GetBorrowersAddresses
+      parameters:
+      - description: Return only borrowers getting loan against this asset as collateral.
+        in: query
+        name: asset
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/BorrowersResponse'
+      summary: Borrowers List
+      tags:
+      - Borrowers
+components:
+  responses:
+    BorrowersResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Borrowers'
+      description: array of all the borrowers
+  schemas:
+    Borrowers:
+      items:
+        description: Borrower address
+        example: tbnb1fj2lqj8dvr5pumfchc7ntlfqd2v6zdxqwjewf5
+        type: string
+      type: array

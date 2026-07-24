@@ -1,0 +1,19 @@
+openapi: 3.0.0
+info:
+  title: Thornode Auth Llms Full.txt API
+  version: 3.19.1
+  contact:
+    email: devs@thorchain.org
+  description: Thornode REST API.
+tags:
+- name: Llms Full.txt
+paths:
+  /llms-full.txt:
+    get:
+      operationId: getLlmsFullTxt
+      summary: Get the expanded AI-agent resource map
+      responses:
+        '200':
+          description: Plain-text LLM resource map
+      tags:
+      - Llms Full.txt

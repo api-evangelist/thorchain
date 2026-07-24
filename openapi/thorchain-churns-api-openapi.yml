@@ -1,0 +1,47 @@
+openapi: 3.0.0
+info:
+  title: Thornode Auth Churns API
+  version: 3.19.1
+  contact:
+    email: devs@thorchain.org
+  description: Thornode REST API.
+tags:
+- name: Churns
+paths:
+  /v2/churns:
+    get:
+      description: Returns block height and timestamp for each churn.
+      operationId: GetChurns
+      responses:
+        '200':
+          $ref: '#/components/responses/ChurnsResponse'
+      summary: Churns List
+      tags:
+      - Churns
+components:
+  schemas:
+    Churns:
+      items:
+        $ref: '#/components/schemas/ChurnItem'
+      type: array
+    ChurnItem:
+      properties:
+        date:
+          description: full timestamp (nanoseconds since 1970) of the block at which the churn occurred
+          example: '946684801000000000'
+          type: string
+        height:
+          description: height of the block at which the churn occurred
+          example: '2000000'
+          type: string
+      required:
+      - height
+      - date
+      type: object
+  responses:
+    ChurnsResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Churns'
+      description: Array containing the last occurred churns in block height and timestamp

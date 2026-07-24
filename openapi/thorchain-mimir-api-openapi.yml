@@ -1,0 +1,135 @@
+openapi: 3.0.0
+info:
+  title: Thornode Auth Mimir API
+  version: 3.19.1
+  contact:
+    email: devs@thorchain.org
+  description: Thornode REST API.
+tags:
+- name: Mimir
+paths:
+  /thorchain/mimir:
+    parameters:
+    - $ref: '#/components/parameters/queryHeight'
+    get:
+      description: Returns current active mimir configuration.
+      operationId: mimir
+      tags:
+      - Mimir
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MimirResponse'
+  /thorchain/mimir/key/{key}:
+    parameters:
+    - $ref: '#/components/parameters/queryHeight'
+    - name: key
+      in: path
+      description: the mimir key to lookup
+      required: true
+      schema:
+        type: string
+    get:
+      description: Returns current active mimir configuration for the provided key.
+      operationId: mimirKey
+      tags:
+      - Mimir
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int64
+  /thorchain/mimir/admin:
+    parameters:
+    - $ref: '#/components/parameters/queryHeight'
+    get:
+      description: Returns current admin mimir configuration.
+      operationId: mimirAdmin
+      tags:
+      - Mimir
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MimirResponse'
+  /thorchain/mimir/nodes_all:
+    parameters:
+    - $ref: '#/components/parameters/queryHeight'
+    get:
+      description: Returns current node mimir votes.
+      operationId: mimirNodes
+      tags:
+      - Mimir
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MimirNodesResponse'
+  /thorchain/mimir/node/{address}:
+    parameters:
+    - $ref: '#/components/parameters/queryHeight'
+    - $ref: '#/components/parameters/address'
+    get:
+      description: Returns current node mimir configuration for the provided node address.
+      operationId: mimirNode
+      tags:
+      - Mimir
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MimirResponse'
+components:
+  parameters:
+    address:
+      name: address
+      in: path
+      required: true
+      schema:
+        type: string
+        example: thor1zupk5lmc84r2dh738a9g3zscavannjy3nzplwt
+    queryHeight:
+      name: height
+      in: query
+      description: optional block height, defaults to current tip
+      required: false
+      schema:
+        type: integer
+        format: int64
+        minimum: 0
+  schemas:
+    MimirResponse:
+      type: object
+      additionalProperties:
+        type: string
+      example:
+        NODEOPERATORFEE: 2000
+        NUMBEROFNEWNODESPERCHURN: 2
+    MimirNodesResponse:
+      type: object
+      properties:
+        mimirs:
+          type: array
+          items:
+            type: object
+            title: MimirVote
+            properties:
+              key:
+                type: string
+              value:
+                type: integer
+                format: int64
+              signer:
+                type: string

@@ -1,0 +1,291 @@
+openapi: 3.0.0
+info:
+  title: Thornode Auth TSS API
+  version: 3.19.1
+  contact:
+    email: devs@thorchain.org
+  description: Thornode REST API.
+tags:
+- name: TSS
+paths:
+  /thorchain/keysign/{height}:
+    parameters:
+    - $ref: '#/components/parameters/pathHeight'
+    get:
+      description: Returns keysign information for the provided height - the height being the first block a tx out item appears in the signed-but-unobserved outbound queue.
+      operationId: keysign
+      tags:
+      - TSS
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KeysignResponse'
+  /thorchain/keysign/{height}/{pubkey}:
+    parameters:
+    - $ref: '#/components/parameters/pathHeight'
+    - $ref: '#/components/parameters/pubkey'
+    get:
+      description: Returns keysign information for the provided height and pubkey - the height being the block at which a tx out item is scheduled to be signed and moved from the scheduled outbound queue to the outbound queue.
+      operationId: keysignPubkey
+      tags:
+      - TSS
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KeysignResponse'
+  /thorchain/keygen/{height}/{pubkey}:
+    parameters:
+    - $ref: '#/components/parameters/pathHeight'
+    - $ref: '#/components/parameters/pubkey'
+    get:
+      description: Returns keygen information for the provided height and pubkey - the pubkey being of one of the members of a keygen block for that height
+      operationId: keygenPubkey
+      tags:
+      - TSS
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KeygenResponse'
+  /thorchain/metrics:
+    parameters:
+    - $ref: '#/components/parameters/queryHeight'
+    get:
+      description: Returns keygen and keysign metrics for current vaults.
+      operationId: metrics
+      tags:
+      - TSS
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricsResponse'
+  /thorchain/metric/keygen/{pubkey}:
+    parameters:
+    - $ref: '#/components/parameters/queryHeight'
+    - $ref: '#/components/parameters/pubkey'
+    get:
+      description: Returns keygen metrics for the provided vault pubkey.
+      operationId: metricsKeygen
+      tags:
+      - TSS
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KeygenMetricsResponse'
+components:
+  schemas:
+    TxOutItem:
+      type: object
+      required:
+      - chain
+      - to_address
+      - coin
+      - max_gas
+      properties:
+        height:
+          type: integer
+          format: int64
+          example: 1234
+        in_hash:
+          type: string
+          example: 208BF0ACD78C89A0534B0457BA0867B101961A2319C1E49DD28676526904BBEA
+        out_hash:
+          type: string
+          example: 0D0B2FDB6DAD6E5FD3C5E46D39128F9DA15E96F0B2CC054CE059EA3532B150FB
+        chain:
+          type: string
+          example: ETH
+        to_address:
+          type: string
+          example: '0x66fb1cd65b97fa40457b90b7d1ca6b92cb64b32b'
+        vault_pub_key:
+          type: string
+          example: thorpub1addwnpepqt45wmsxj29xpgdrdsvg2h3dx68qeapgykw3hlyj6vuds2r0pnkwx5gt9m4
+        vault_pub_key_eddsa:
+          type: string
+          example: thorpub1addwnpepqt45wmsxj29xpgdrdsvg2h3dx68qeapgykw3hlyj6vuds2r0pnkwx5gt9m4
+        coin:
+          $ref: '#/components/schemas/Coin'
+        max_gas:
+          type: array
+          items:
+            $ref: '#/components/schemas/Coin'
+        gas_rate:
+          type: integer
+          format: int64
+        memo:
+          type: string
+          example: OUT:208BF0ACD78C89A0534B0457BA0867B101961A2319C1E49DD28676526904BBEA
+        original_memo:
+          type: string
+          example: =:BTC.BTC:bc1q0lwf0ycw4gkh8v6y8g9yqwxvqnvm24kvdezgpg
+        aggregator:
+          type: string
+          description: whitelisted DEX Aggregator contract address
+          example: '0xe4ddca21881bac219af7f217703db0475d2a9f02'
+        aggregator_target_asset:
+          type: string
+          description: target asset for the aggregator contract to attempt a swap to
+          example: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48'
+        aggregator_target_limit:
+          type: string
+          description: the minimum number of tokens the swapper wants to receive of the output asset
+          example: '100'
+        clout_spent:
+          type: string
+          description: clout spent in RUNE for the outbound
+          example: '1234'
+    KeygenResponse:
+      type: object
+      required:
+      - keygen_block
+      - signature
+      properties:
+        keygen_block:
+          type: object
+          title: KeygenBlock
+          required:
+          - keygens
+          properties:
+            height:
+              type: integer
+              format: int64
+              description: the height of the keygen block
+            keygens:
+              type: array
+              items:
+                type: object
+                title: keygen
+                properties:
+                  id:
+                    type: string
+                  type:
+                    type: string
+                  members:
+                    type: array
+                    items:
+                      type: string
+                      description: pubkeys of the keygen block member nodes
+        signature:
+          type: string
+    KeygenMetricsResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/KeygenMetric'
+    KeygenMetric:
+      type: object
+      required:
+      - node_tss_times
+      properties:
+        pub_key:
+          type: string
+        node_tss_times:
+          type: array
+          items:
+            type: object
+            title: NodeKeygenMetric
+            properties:
+              address:
+                type: string
+              tss_time:
+                type: string
+    KeysignResponse:
+      type: object
+      required:
+      - keysign
+      - signature
+      properties:
+        keysign:
+          type: object
+          title: KeysignInfo
+          required:
+          - tx_array
+          properties:
+            height:
+              type: integer
+              format: int64
+              description: the block(s) in which a tx out item is scheduled to be signed and moved from the scheduled outbound queue to the outbound queue
+            tx_array:
+              type: array
+              items:
+                $ref: '#/components/schemas/TxOutItem'
+        signature:
+          type: string
+    Coin:
+      type: object
+      required:
+      - asset
+      - amount
+      properties:
+        asset:
+          type: string
+          example: BTC.BTC
+        amount:
+          type: string
+          example: '100000'
+        decimals:
+          type: integer
+          format: int64
+          example: 6
+    TssMetric:
+      type: object
+      properties:
+        address:
+          type: string
+        tss_time:
+          type: integer
+          format: int64
+    MetricsResponse:
+      type: object
+      properties:
+        keygen:
+          $ref: '#/components/schemas/KeygenMetricsResponse'
+        keysign:
+          type: object
+          title: KeysignMetrics
+          properties:
+            tx_id:
+              type: string
+            node_tss_times:
+              type: array
+              items:
+                $ref: '#/components/schemas/TssMetric'
+  parameters:
+    queryHeight:
+      name: height
+      in: query
+      description: optional block height, defaults to current tip
+      required: false
+      schema:
+        type: integer
+        format: int64
+        minimum: 0
+    pubkey:
+      name: pubkey
+      in: path
+      required: true
+      schema:
+        type: string
+        example: thorpub1addwnpepq068dr0x7ue973drmq4eqmzhcq3650n7nx5fhgn9gl207luxp6vaklu52tc
+    pathHeight:
+      name: height
+      in: path
+      required: true
+      schema:
+        type: integer
+        format: int64
+        minimum: 0

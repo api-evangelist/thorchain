@@ -1,0 +1,82 @@
+openapi: 3.0.0
+info:
+  title: Thornode Auth Holders API
+  version: 3.19.1
+  contact:
+    email: devs@thorchain.org
+  description: Thornode REST API.
+tags:
+- name: Holders
+paths:
+  /v2/holders:
+    get:
+      description: 'Returns all coin amounts of the given asset ordered by their amounts in descending order.
+
+
+        This endpoint is enabled only if the midgard startup config allows it.
+
+        '
+      operationId: GetHolders
+      parameters:
+      - description: Asset to get the top holders for.
+        example: THOR.RUNE
+        in: query
+        name: asset
+        schema:
+          format: string
+          type: string
+      - description: Number of top holders to return, default is 100, maximum is 1000.
+        example: 150
+        in: query
+        name: limit
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          $ref: '#/components/responses/HolderResponse'
+      summary: Current top holders for an asset
+      tags:
+      - Holders
+components:
+  schemas:
+    Coins:
+      items:
+        $ref: '#/components/schemas/Coin'
+      type: array
+    Holders:
+      items:
+        $ref: '#/components/schemas/Holder'
+      type: array
+    Coin:
+      description: Represents a digital currency amount
+      properties:
+        amount:
+          description: Int64(e8), asset Amount.
+          type: string
+        asset:
+          description: Asset in CHAIN.SYMBOL format
+          type: string
+      required:
+      - asset
+      - amount
+      type: object
+    Holder:
+      properties:
+        address:
+          description: address of the holder
+          example: thor102y0m3uptg0vvudeyh00r2fnz70wq7d8y7mu2g
+          type: string
+        coins:
+          $ref: '#/components/schemas/Coins'
+      required:
+      - address
+      - coins
+      type: object
+  responses:
+    HolderResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Holders'
+      description: object containing balance details for a given address

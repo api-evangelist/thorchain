@@ -1,0 +1,285 @@
+openapi: 3.0.0
+info:
+  title: Thornode Auth Nodes API
+  version: 3.19.1
+  contact:
+    email: devs@thorchain.org
+  description: Thornode REST API.
+tags:
+- name: Nodes
+paths:
+  /v2/nodes:
+    get:
+      description: Returns a list of Node public keys and adresses.
+      operationId: GetNodes
+      responses:
+        '200':
+          $ref: '#/components/responses/NodesResponse'
+      summary: Nodes List
+      tags:
+      - Nodes
+  /thorchain/node/{address}:
+    parameters:
+    - $ref: '#/components/parameters/queryHeight'
+    - $ref: '#/components/parameters/address'
+    get:
+      description: Returns node information for the provided node address.
+      operationId: node
+      tags:
+      - Nodes
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NodeResponse'
+  /thorchain/nodes:
+    parameters:
+    - $ref: '#/components/parameters/queryHeight'
+    get:
+      description: Returns node information for all registered validators.
+      operationId: nodes
+      tags:
+      - Nodes
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NodesResponse'
+components:
+  schemas:
+    Node:
+      properties:
+        ed25519:
+          description: ed25519 public key
+          example: thorpub1addwnpepqgxwdf3ure0pg5fwnpeux3ym9n06267lkres54zwjh4c8048ezhj5024qyr
+          type: string
+        nodeAddress:
+          description: node thorchain address
+          example: thor102y0m3uptg0vvudeyh00r2fnz70wq7d8y7mu2g
+          type: string
+        secp256k1:
+          description: secp256k1 public key
+          example: thorpub1addwnpepqgxwdf3ure0pg5fwnpeux3ym9n06267lkres54zwjh4c8048ezhj5024qyr
+          type: string
+      required:
+      - nodeAddress
+      - secp256k1
+      - ed25519
+      type: object
+    Nodes:
+      items:
+        $ref: '#/components/schemas/Node'
+      type: array
+    NodeResponse:
+      $ref: '#/components/schemas/Node_2'
+    NodesResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/Node_2'
+    Node_2:
+      type: object
+      required:
+      - node_address
+      - status
+      - pub_key_set
+      - validator_cons_pub_key
+      - peer_id
+      - active_block_height
+      - status_since
+      - node_operator_address
+      - total_bond
+      - bond_providers
+      - signer_membership
+      - requested_to_leave
+      - forced_to_leave
+      - leave_height
+      - ip_address
+      - version
+      - slash_points
+      - jail
+      - current_award
+      - observe_chains
+      - maintenance
+      - missing_blocks
+      - preflight_status
+      properties:
+        node_address:
+          type: string
+          example: thor1f3s7q037eancht7sg0aj995dht25rwrnu4ats5
+        status:
+          type: string
+          enum:
+          - Active
+          - Whitelisted
+          - Standby
+          - Disabled
+          example: Active
+        pub_key_set:
+          type: object
+          title: NodePubKeySet
+          properties:
+            secp256k1:
+              type: string
+              example: thorpub1addwnpepq27ck6u44zl8qqdnmzjjc8rg72amrxrsp42p9vd7kt6marhy6ww76z8shwe
+            ed25519:
+              type: string
+              example: thorpub1addwnpepq27ck6u44zl8qqdnmzjjc8rg72amrxrsp42p9vd7kt6marhy6ww76z8shwe
+        validator_cons_pub_key:
+          type: string
+          description: the consensus pub key for the node
+          example: thor104gsqwta048e80j909g6y9kkqdjrw0lff866ew
+        peer_id:
+          type: string
+          description: the P2PID (:6040/p2pid endpoint) of the node
+          example: 16Uiu2HAmRgsiryer3pWCPJz18PQZDFFs1GBqCPGGJczrQXdoTBMk
+        active_block_height:
+          type: integer
+          format: int64
+          description: the block height at which the node became active
+          example: 123456
+        status_since:
+          type: integer
+          format: int64
+          description: the block height of the current provided information for the node
+          example: 100000
+        node_operator_address:
+          type: string
+          example: thor1f3s7q037eancht7sg0aj995dht25rwrnu4ats5
+        total_bond:
+          type: string
+          description: current node bond
+          example: '123456789'
+        bond_providers:
+          type: object
+          title: NodeBondProviders
+          required:
+          - node_operator_fee
+          - providers
+          properties:
+            node_operator_fee:
+              type: string
+              description: node operator fee in basis points
+            providers:
+              type: array
+              description: all the bond providers for the node
+              items:
+                type: object
+                title: NodeBondProvider
+                properties:
+                  bond_address:
+                    type: string
+                  bond:
+                    type: string
+        signer_membership:
+          type: array
+          description: the set of vault public keys of which the node is a member
+          items:
+            type: string
+            example: thorpub1addwnpepq2jqhv5rdqlkusfxy05stfzcgslhhz5qh8pxetw5ry2aa6awgdh3shq8s82
+        requested_to_leave:
+          type: boolean
+        forced_to_leave:
+          type: boolean
+          description: indicates whether the node has been forced to leave by the network, typically via ban
+        leave_height:
+          type: integer
+          format: int64
+          example: 0
+        ip_address:
+          type: string
+          example: 10.20.30.40
+        version:
+          type: string
+          description: the currently set version of the node
+          example: 0.35.0
+        slash_points:
+          type: integer
+          format: int64
+          description: the accumulated slash points, reset at churn but excessive slash points may carry over
+          example: 42
+        jail:
+          type: object
+          title: NodeJail
+          properties:
+            release_height:
+              type: integer
+              format: int64
+              example: 1234
+            reason:
+              type: string
+        current_award:
+          type: string
+          example: '123456'
+        observe_chains:
+          type: array
+          description: the last observed heights for all chain by the node
+          items:
+            type: object
+            title: ChainHeight
+            required:
+            - chain
+            - height
+            properties:
+              chain:
+                type: string
+                example: BTC
+              height:
+                type: integer
+                format: int64
+                example: 2000000
+        maintenance:
+          type: boolean
+          description: indicates whether the node is in maintenance mode
+          example: false
+        missing_blocks:
+          type: integer
+          format: int64
+          description: the number of recent blocks the node has missed signing
+        preflight_status:
+          type: object
+          title: NodePreflightStatus
+          required:
+          - status
+          - reason
+          - code
+          properties:
+            status:
+              type: string
+              description: the next status of the node
+              example: Ready
+            reason:
+              type: string
+              description: the reason for the transition to the next status
+              example: OK
+            code:
+              type: integer
+              format: int64
+              example: 0
+  responses:
+    NodesResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Nodes'
+      description: Returns an object containing Node public key data
+  parameters:
+    address:
+      name: address
+      in: path
+      required: true
+      schema:
+        type: string
+        example: thor1zupk5lmc84r2dh738a9g3zscavannjy3nzplwt
+    queryHeight:
+      name: height
+      in: query
+      description: optional block height, defaults to current tip
+      required: false
+      schema:
+        type: integer
+        format: int64
+        minimum: 0

@@ -1,0 +1,58 @@
+openapi: 3.0.0
+info:
+  title: Thornode Auth TradeUnits API
+  version: 3.19.1
+  contact:
+    email: devs@thorchain.org
+  description: Thornode REST API.
+tags:
+- name: TradeUnits
+paths:
+  /thorchain/trade/units:
+    parameters:
+    - $ref: '#/components/parameters/queryHeight'
+    get:
+      description: Returns the total units and depth for each trade asset
+      operationId: trade_units
+      tags:
+      - TradeUnits
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TradeUnitsResponse'
+components:
+  parameters:
+    queryHeight:
+      name: height
+      in: query
+      description: optional block height, defaults to current tip
+      required: false
+      schema:
+        type: integer
+        format: int64
+        minimum: 0
+  schemas:
+    TradeUnitsResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/TradeUnitResponse'
+    TradeUnitResponse:
+      type: object
+      required:
+      - asset
+      - units
+      - depth
+      properties:
+        asset:
+          type: string
+          example: BTC~BTC
+          description: trade account asset with "~" separator
+        units:
+          type: string
+          description: total units of trade asset
+        depth:
+          type: string
+          description: total depth of trade asset

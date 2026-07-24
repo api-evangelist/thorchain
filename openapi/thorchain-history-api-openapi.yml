@@ -1,0 +1,1931 @@
+openapi: 3.0.0
+info:
+  title: Thornode Auth History API
+  version: 3.19.1
+  contact:
+    email: devs@thorchain.org
+  description: Thornode REST API.
+tags:
+- name: History
+paths:
+  /v2/history/affiliate:
+    get:
+      description: "Returns affiliate count, earnings in USD in specified interval.\nIf thorname is not specified returns all thornames\n\nHistory endpoint has two modes:\n* With Interval parameter it returns a series of time buckets. From and To dates will\n  be rounded to the Interval boundaries.\n* Without Interval parameter a single From..To search is performed with exact timestamps.\n\n\n* Interval: possible values: 5min, hour, day, week, month, quarter, year.\n* count: [1..400]. Defines number of intervals. Don't provide if Interval is missing.\n* from/to: optional int, unix second.\n\nPossible usages with interval.\n* last 10 days: `?interval=day&count=10`\n* last 10 days before to: `?interval=day&count=10&to=1608825600`\n* next 10 days after from: `?interval=day&count=10&from=1606780800`\n* Days between from and to. From defaults to start of chain, to defaults to now.\n  Only the first 400 intervals are returned:\n  `interval=day&from=1606780800&to=1608825600`\n\nPagination is possible with from&count and then using the returned meta.endTime as the\nFrom parameter of the next query.\n\nPossible configurations without interval:\n* exact search for one time frame: `?from=1606780899&to=1608825600`\n* one time frame until now: `?from=1606780899`\n* from chain start until now: no query parameters\n"
+      operationId: GetAffiliateHistory
+      parameters:
+      - description: Return history given thorname. Returns sum of all thornames if missing.
+        in: query
+        name: thorname
+        schema:
+          type: string
+      - description: Interval of calculations
+        example: day
+        in: query
+        name: interval
+        schema:
+          enum:
+          - 5min
+          - hour
+          - day
+          - week
+          - month
+          - quarter
+          - year
+          type: string
+      - description: Number of intervals to return. Should be between [1..400].
+        example: 30
+        in: query
+        name: count
+        schema:
+          type: integer
+      - description: 'End time of the query as unix timestamp. If only count is given, defaults to now.
+
+          '
+        example: 1608825600
+        in: query
+        name: to
+        schema:
+          format: int64
+          type: integer
+      - description: Start time of the query as unix timestamp
+        example: 1606780800
+        in: query
+        name: from
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          $ref: '#/components/responses/AffiliateHistoryResponse'
+      summary: Affiliate earnings History
+      tags:
+      - History
+  /v2/history/affiliate/earnings:
+    get:
+      description: "Returns affiliate earnings (liquidity fees) in USD and RUNE in specified interval.\nIf thorname is not specified returns all affiliates.\n\nHistory endpoint has two modes:\n* With Interval parameter it returns a series of time buckets. From and To dates will\n  be rounded to the Interval boundaries.\n* Without Interval parameter a single From..To search is performed with exact timestamps.\n\n\n* Interval: possible values: 5min, hour, day, week, month, quarter, year.\n* count: [1..400]. Defines number of intervals. Don't provide if Interval is missing.\n* from/to: optional int, unix second.\n\nPossible usages with interval.\n* last 10 days: `?interval=day&count=10`\n* last 10 days before to: `?interval=day&count=10&to=1608825600`\n* next 10 days after from: `?interval=day&count=10&from=1606780800`\n* Days between from and to. From defaults to start of chain, to defaults to now.\n  Only the first 400 intervals are returned:\n  `interval=day&from=1606780800&to=1608825600`\n\nPagination is possible with from&count and then using the returned endTime as the\nFrom parameter of the next query.\n\nPossible configurations without interval:\n* exact search for one time frame: `?from=1606780899&to=1608825600`\n* one time frame until now: `?from=1606780899`\n* from chain start until now: no query parameters\n"
+      operationId: GetAffiliateEarning
+      parameters:
+      - description: Return earnings for given thorname. Returns all affiliates if missing.
+        in: query
+        name: thorname
+        schema:
+          type: string
+      - description: Interval of calculations
+        example: day
+        in: query
+        name: interval
+        schema:
+          enum:
+          - 5min
+          - hour
+          - day
+          - week
+          - month
+          - quarter
+          - year
+          type: string
+      - description: Number of intervals to return. Should be between [1..400].
+        example: 30
+        in: query
+        name: count
+        schema:
+          type: integer
+      - description: 'End time of the query as unix timestamp. If only count is given, defaults to now.
+
+          '
+        example: 1608825600
+        in: query
+        name: to
+        schema:
+          format: int64
+          type: integer
+      - description: Start time of the query as unix timestamp
+        example: 1606780800
+        in: query
+        name: from
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          $ref: '#/components/responses/AffiliateEarningResponse'
+      summary: Affiliate Liquidity Fee Earnings History
+      tags:
+      - History
+  /v2/history/affiliate/stats:
+    get:
+      description: "Returns affiliate count, swap volume in USD in specified interval.\nIf thorname is not specified returns all thornames\n\nHistory endpoint has two modes:\n* With Interval parameter it returns a series of time buckets. From and To dates will\n  be rounded to the Interval boundaries.\n* Without Interval parameter a single From..To search is performed with exact timestamps.\n\n\n* Interval: possible values: 5min, hour, day, week, month, quarter, year.\n* count: [1..400]. Defines number of intervals. Don't provide if Interval is missing.\n* from/to: optional int, unix second.\n\nPossible usages with interval.\n* last 10 days: `?interval=day&count=10`\n* last 10 days before to: `?interval=day&count=10&to=1608825600`\n* next 10 days after from: `?interval=day&count=10&from=1606780800`\n* Days between from and to. From defaults to start of chain, to defaults to now.\n  Only the first 400 intervals are returned:\n  `interval=day&from=1606780800&to=1608825600`\n\nPagination is possible with from&count and then using the returned meta.endTime as the\nFrom parameter of the next query.\n\nPossible configurations without interval:\n* exact search for one time frame: `?from=1606780899&to=1608825600`\n* one time frame until now: `?from=1606780899`\n* from chain start until now: no query parameters\n"
+      operationId: GetAffiliateStats
+      parameters:
+      - description: Return history given thorname. Returns sum of all thornames if missing.
+        in: query
+        name: thorname
+        schema:
+          type: string
+      - description: Interval of calculations
+        example: day
+        in: query
+        name: interval
+        schema:
+          enum:
+          - 5min
+          - hour
+          - day
+          - week
+          - month
+          - quarter
+          - year
+          type: string
+      - description: Number of intervals to return. Should be between [1..400].
+        example: 30
+        in: query
+        name: count
+        schema:
+          type: integer
+      - description: 'End time of the query as unix timestamp. If only count is given, defaults to now.
+
+          '
+        example: 1608825600
+        in: query
+        name: to
+        schema:
+          format: int64
+          type: integer
+      - description: Start time of the query as unix timestamp
+        example: 1606780800
+        in: query
+        name: from
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          $ref: '#/components/responses/AffiliateStatsResponse'
+      summary: Affiliate Volume Stats
+      tags:
+      - History
+  /v2/history/depths/{pool}:
+    get:
+      description: "Returns the asset and rune depths and price.\nThe values report the state at the end of each interval.\n\nHistory endpoint has two modes:\n* With Interval parameter it returns a series of time buckets. From and To dates will\n  be rounded to the Interval boundaries.\n* Without Interval parameter a single From..To search is performed with exact timestamps.\n\n\n* Interval: possible values: 5min, hour, day, week, month, quarter, year.\n* count: [1..400]. Defines number of intervals. Don't provide if Interval is missing.\n* from/to: optional int, unix second.\n\nPossible usages with interval.\n* last 10 days: `?interval=day&count=10`\n* last 10 days before to: `?interval=day&count=10&to=1608825600`\n* next 10 days after from: `?interval=day&count=10&from=1606780800`\n* Days between from and to. From defaults to start of chain, to defaults to now.\n  Only the first 400 intervals are returned:\n  `interval=day&from=1606780800&to=1608825600`\n\nPagination is possible with from&count and then using the returned meta.endTime as the\nFrom parameter of the next query.\n\nPossible configurations without interval:\n* exact search for one time frame: `?from=1606780899&to=1608825600`\n* one time frame until now: `?from=1606780899`\n* from chain start until now: no query parameters\n"
+      operationId: GetDepthHistory
+      parameters:
+      - description: Return stats for this single pool.
+        in: path
+        name: pool
+        required: true
+        schema:
+          type: string
+      - description: Interval of calculations
+        example: day
+        in: query
+        name: interval
+        schema:
+          enum:
+          - 5min
+          - hour
+          - day
+          - week
+          - month
+          - quarter
+          - year
+          type: string
+      - description: Number of intervals to return. Should be between [1..400].
+        example: 30
+        in: query
+        name: count
+        schema:
+          type: integer
+      - description: 'End time of the query as unix timestamp. If only count is given, defaults to now.
+
+          '
+        example: 1608825600
+        in: query
+        name: to
+        schema:
+          format: int64
+          type: integer
+      - description: Start time of the query as unix timestamp
+        example: 1606780800
+        in: query
+        name: from
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          $ref: '#/components/responses/DepthHistoryResponse'
+      summary: Depth and Price History
+      tags:
+      - History
+  /v2/history/earnings:
+    get:
+      description: "Returns earnings data for the specified interval.\n\nHistory endpoint has two modes:\n* With Interval parameter it returns a series of time buckets. From and To dates will\n  be rounded to the Interval boundaries.\n* Without Interval parameter a single From..To search is performed with exact timestamps.\n\n\n* Interval: possible values: 5min, hour, day, week, month, quarter, year.\n* count: [1..400]. Defines number of intervals. Don't provide if Interval is missing.\n* from/to: optional int, unix second.\n\nPossible usages with interval.\n* last 10 days: `?interval=day&count=10`\n* last 10 days before to: `?interval=day&count=10&to=1608825600`\n* next 10 days after from: `?interval=day&count=10&from=1606780800`\n* Days between from and to. From defaults to start of chain, to defaults to now.\n  Only the first 400 intervals are returned:\n  `interval=day&from=1606780800&to=1608825600`\n\nPagination is possible with from&count and then using the returned meta.endTime as the\nFrom parameter of the next query.\n\nPossible configurations without interval:\n* exact search for one time frame: `?from=1606780899&to=1608825600`\n* one time frame until now: `?from=1606780899`\n* from chain start until now: no query parameters\n"
+      operationId: GetEarningsHistory
+      parameters:
+      - description: Interval of calculations
+        example: day
+        in: query
+        name: interval
+        schema:
+          enum:
+          - 5min
+          - hour
+          - day
+          - week
+          - month
+          - quarter
+          - year
+          type: string
+      - description: Number of intervals to return. Should be between [1..400].
+        example: 30
+        in: query
+        name: count
+        schema:
+          type: integer
+      - description: 'End time of the query as unix timestamp. If only count is given, defaults to now.
+
+          '
+        example: 1608825600
+        in: query
+        name: to
+        schema:
+          format: int64
+          type: integer
+      - description: Start time of the query as unix timestamp
+        example: 1606780800
+        in: query
+        name: from
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          $ref: '#/components/responses/EarningsHistoryResponse'
+      summary: Earnings History
+      tags:
+      - History
+  /v2/history/liquidity_changes:
+    get:
+      description: "Returns withdrawals and deposits for given time interval.\nIf pool is not specified returns for all pools\n\nHistory endpoint has two modes:\n* With Interval parameter it returns a series of time buckets. From and To dates will\n  be rounded to the Interval boundaries.\n* Without Interval parameter a single From..To search is performed with exact timestamps.\n\n\n* Interval: possible values: 5min, hour, day, week, month, quarter, year.\n* count: [1..400]. Defines number of intervals. Don't provide if Interval is missing.\n* from/to: optional int, unix second.\n\nPossible usages with interval.\n* last 10 days: `?interval=day&count=10`\n* last 10 days before to: `?interval=day&count=10&to=1608825600`\n* next 10 days after from: `?interval=day&count=10&from=1606780800`\n* Days between from and to. From defaults to start of chain, to defaults to now.\n  Only the first 400 intervals are returned:\n  `interval=day&from=1606780800&to=1608825600`\n\nPagination is possible with from&count and then using the returned meta.endTime as the\nFrom parameter of the next query.\n\nPossible configurations without interval:\n* exact search for one time frame: `?from=1606780899&to=1608825600`\n* one time frame until now: `?from=1606780899`\n* from chain start until now: no query parameters\n"
+      operationId: GetLiquidityHistory
+      parameters:
+      - description: Return stats for given pool. Returns sum of all pools if missing
+        in: query
+        name: pool
+        schema:
+          type: string
+      - description: Interval of calculations
+        example: day
+        in: query
+        name: interval
+        schema:
+          enum:
+          - 5min
+          - hour
+          - day
+          - week
+          - month
+          - quarter
+          - year
+          type: string
+      - description: Number of intervals to return. Should be between [1..400]
+        example: 30
+        in: query
+        name: count
+        schema:
+          type: integer
+      - description: 'End time of the query as unix timestamp. If only count is given, defaults to now
+
+          '
+        example: 1608825600
+        in: query
+        name: to
+        schema:
+          format: int64
+          type: integer
+      - description: Start time of the query as unix timestamp
+        example: 1606780800
+        in: query
+        name: from
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          $ref: '#/components/responses/LiquidityHistoryResponse'
+      summary: Liquidity Changes History
+      tags:
+      - History
+  /v2/history/reserve:
+    get:
+      description: 'Returns reserve module network fee, outbound fee, and gas reimbursement flow in
+
+        bucketed history
+
+        '
+      operationId: GetReserveHistory
+      parameters:
+      - description: Interval of calculations
+        example: day
+        in: query
+        name: interval
+        schema:
+          enum:
+          - 5min
+          - hour
+          - day
+          - week
+          - month
+          - quarter
+          - year
+          type: string
+      - description: Number of intervals to return. Should be between [1..400].
+        example: 30
+        in: query
+        name: count
+        schema:
+          type: integer
+      - description: 'End time of the query as unix timestamp. If only count is given, defaults to now.
+
+          '
+        example: 1608825600
+        in: query
+        name: to
+        schema:
+          format: int64
+          type: integer
+      - description: Start time of the query as unix timestamp
+        example: 1606780800
+        in: query
+        name: from
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          $ref: '#/components/responses/ReserveHistoryResponse'
+      summary: Reserve income and expenses over bucketed history
+      tags:
+      - History
+  /v2/history/rune:
+    get:
+      description: 'Returns rune price history in USD based on the time bucket given
+
+        '
+      operationId: GetRunePriceHistory
+      parameters:
+      - description: Interval of calculations
+        example: day
+        in: query
+        name: interval
+        schema:
+          enum:
+          - 5min
+          - hour
+          - day
+          - week
+          - month
+          - quarter
+          - year
+          type: string
+      - description: Number of intervals to return. Should be between [1..400].
+        example: 30
+        in: query
+        name: count
+        schema:
+          type: integer
+      - description: 'End time of the query as unix timestamp. If only count is given, defaults to now.
+
+          '
+        example: 1608825600
+        in: query
+        name: to
+        schema:
+          format: int64
+          type: integer
+      - description: Start time of the query as unix timestamp
+        example: 1606780800
+        in: query
+        name: from
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          $ref: '#/components/responses/RunePriceHistoryResponse'
+      summary: Rune price history in USD
+      tags:
+      - History
+  /v2/history/runepool:
+    get:
+      description: "Returns RUNEPool members and units.\nThe values report the state at the end of each interval.\n\nHistory endpoint has two modes:\n* With Interval parameter it returns a series of time buckets. From and To dates will\n  be rounded to the Interval boundaries.\n* Without Interval parameter a single From..To search is performed with exact timestamps.\n\n\n* Interval: possible values: 5min, hour, day, week, month, quarter, year.\n* count: [1..400]. Defines number of intervals. Don't provide if Interval is missing.\n* from/to: optional int, unix second.\n\nPossible usages with interval.\n* last 10 days: `?interval=day&count=10`\n* last 10 days before to: `?interval=day&count=10&to=1608825600`\n* next 10 days after from: `?interval=day&count=10&from=1606780800`\n* Days between from and to. From defaults to start of chain, to defaults to now.\n  Only the first 400 intervals are returned:\n  `interval=day&from=1606780800&to=1608825600`\n\nPagination is possible with from&count and then using the returned meta.endTime as the\nFrom parameter of the next query.\n\nPossible configurations without interval:\n* exact search for one time frame: `?from=1606780899&to=1608825600`\n* one time frame until now: `?from=1606780899`\n* from chain start until now: no query parameters\n"
+      operationId: GetRUNEPoolHistory
+      parameters:
+      - description: Interval of calculations
+        example: day
+        in: query
+        name: interval
+        schema:
+          enum:
+          - 5min
+          - hour
+          - day
+          - week
+          - month
+          - quarter
+          - year
+          type: string
+      - description: Number of intervals to return. Should be between [1..400].
+        example: 30
+        in: query
+        name: count
+        schema:
+          type: integer
+      - description: 'End time of the query as unix timestamp. If only count is given, defaults to now.
+
+          '
+        example: 1608825600
+        in: query
+        name: to
+        schema:
+          format: int64
+          type: integer
+      - description: Start time of the query as unix timestamp
+        example: 1606780800
+        in: query
+        name: from
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          $ref: '#/components/responses/RUNEPoolHistoryResponse'
+      summary: RUNEPool total members and units History
+      tags:
+      - History
+  /v2/history/savers/{pool}:
+    get:
+      description: "Returns savers depths and units.\nThe values report the state at the end of each interval.\n\nHistory endpoint has two modes:\n* With Interval parameter it returns a series of time buckets. From and To dates will\n  be rounded to the Interval boundaries.\n* Without Interval parameter a single From..To search is performed with exact timestamps.\n\n\n* Interval: possible values: 5min, hour, day, week, month, quarter, year.\n* count: [1..400]. Defines number of intervals. Don't provide if Interval is missing.\n* from/to: optional int, unix second.\n\nPossible usages with interval.\n* last 10 days: `?interval=day&count=10`\n* last 10 days before to: `?interval=day&count=10&to=1608825600`\n* next 10 days after from: `?interval=day&count=10&from=1606780800`\n* Days between from and to. From defaults to start of chain, to defaults to now.\n  Only the first 400 intervals are returned:\n  `interval=day&from=1606780800&to=1608825600`\n\nPagination is possible with from&count and then using the returned meta.endTime as the\nFrom parameter of the next query.\n\nPossible configurations without interval:\n* exact search for one time frame: `?from=1606780899&to=1608825600`\n* one time frame until now: `?from=1606780899`\n* from chain start until now: no query parameters\n"
+      operationId: GetSaversHistory
+      parameters:
+      - description: Return stats for this single pool.
+        in: path
+        name: pool
+        required: true
+        schema:
+          type: string
+      - description: Interval of calculations
+        example: day
+        in: query
+        name: interval
+        schema:
+          enum:
+          - 5min
+          - hour
+          - day
+          - week
+          - month
+          - quarter
+          - year
+          type: string
+      - description: Number of intervals to return. Should be between [1..400].
+        example: 30
+        in: query
+        name: count
+        schema:
+          type: integer
+      - description: 'End time of the query as unix timestamp. If only count is given, defaults to now.
+
+          '
+        example: 1608825600
+        in: query
+        name: to
+        schema:
+          format: int64
+          type: integer
+      - description: Start time of the query as unix timestamp
+        example: 1606780800
+        in: query
+        name: from
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          $ref: '#/components/responses/SaversHistoryResponse'
+      summary: Savers Units and Depth History
+      tags:
+      - History
+  /v2/history/swaps:
+    get:
+      description: "Returns swap count, volume, fees, slip in specified interval.\nIf pool is not specified returns for all pools\n\nHistory endpoint has two modes:\n* With Interval parameter it returns a series of time buckets. From and To dates will\n  be rounded to the Interval boundaries.\n* Without Interval parameter a single From..To search is performed with exact timestamps.\n\n\n* Interval: possible values: 5min, hour, day, week, month, quarter, year.\n* count: [1..400]. Defines number of intervals. Don't provide if Interval is missing.\n* from/to: optional int, unix second.\n\nPossible usages with interval.\n* last 10 days: `?interval=day&count=10`\n* last 10 days before to: `?interval=day&count=10&to=1608825600`\n* next 10 days after from: `?interval=day&count=10&from=1606780800`\n* Days between from and to. From defaults to start of chain, to defaults to now.\n  Only the first 400 intervals are returned:\n  `interval=day&from=1606780800&to=1608825600`\n\nPagination is possible with from&count and then using the returned meta.endTime as the\nFrom parameter of the next query.\n\nPossible configurations without interval:\n* exact search for one time frame: `?from=1606780899&to=1608825600`\n* one time frame until now: `?from=1606780899`\n* from chain start until now: no query parameters\n"
+      operationId: GetSwapHistory
+      parameters:
+      - description: Return history given pool. Returns sum of all pools if missing.
+        in: query
+        name: pool
+        schema:
+          type: string
+      - description: Interval of calculations
+        example: day
+        in: query
+        name: interval
+        schema:
+          enum:
+          - 5min
+          - hour
+          - day
+          - week
+          - month
+          - quarter
+          - year
+          type: string
+      - description: Number of intervals to return. Should be between [1..400].
+        example: 30
+        in: query
+        name: count
+        schema:
+          type: integer
+      - description: 'End time of the query as unix timestamp. If only count is given, defaults to now.
+
+          '
+        example: 1608825600
+        in: query
+        name: to
+        schema:
+          format: int64
+          type: integer
+      - description: Start time of the query as unix timestamp
+        example: 1606780800
+        in: query
+        name: from
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          $ref: '#/components/responses/SwapHistoryResponse'
+      summary: Swaps History
+      tags:
+      - History
+  /v2/history/tvl:
+    get:
+      description: "Returns total pool depths, total bonds, and total value locked in specified interval.\n\nTotal Value Locked = Total Bonds + 2 * Total Pool Depths\n\nHistory endpoint has two modes:\n* With Interval parameter it returns a series of time buckets. From and To dates will\n  be rounded to the Interval boundaries.\n* Without Interval parameter a single From..To search is performed with exact timestamps.\n\n* Interval: possible values: 5min, hour, day, week, month, quarter, year.\n* count: [1..400]. Defines number of intervals. Don't provide if Interval is missing.\n* from/to: optional int, unix second.\n\nPossible usages with interval.\n* last 10 days: `?interval=day&count=10`\n* last 10 days before to: `?interval=day&count=10&to=1608825600`\n* next 10 days after from: `?interval=day&count=10&from=1606780800`\n* Days between from and to. From defaults to start of chain, to defaults to now.\n  Only the first 400 intervals are returned:\n  `interval=day&from=1606780800&to=1608825600`\n\nPagination is possible with from&count and then using the returned meta.endTime as the\nFrom parameter of the next query.\n\nPossible configurations without interval:\n* exact search for one time frame: `?from=1606780899&to=1608825600`\n* one time frame until now: `?from=1606780899`\n* from chain start until now: no query parameters\n"
+      operationId: GetTVLHistory
+      parameters:
+      - description: Interval of calculations
+        example: day
+        in: query
+        name: interval
+        schema:
+          enum:
+          - 5min
+          - hour
+          - day
+          - week
+          - month
+          - quarter
+          - year
+          type: string
+      - description: Number of intervals to return. Should be between [1..400].
+        example: 30
+        in: query
+        name: count
+        schema:
+          type: integer
+      - description: 'End time of the query as unix timestamp. If only count is given, defaults to now.
+
+          '
+        example: 1608825600
+        in: query
+        name: to
+        schema:
+          format: int64
+          type: integer
+      - description: Start time of the query as unix timestamp
+        example: 1606780800
+        in: query
+        name: from
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          $ref: '#/components/responses/TVLHistoryResponse'
+      summary: Total Value Locked History
+      tags:
+      - History
+components:
+  schemas:
+    ItemThorname:
+      properties:
+        count:
+          description: 'Int64, The count of affiliates with the same thorname during the time interval
+
+            '
+          type: string
+        thorname:
+          description: thorname of the affiliate
+          type: string
+        volume:
+          description: 'Int64(e8), The volume of affiliates with the same thorname detonated in RUNE
+
+            '
+          type: string
+        volumeUSD:
+          description: 'Int64(e2), The volume of affiliates with the same thorname
+
+            denoted in USD price of the rune in each swap
+
+            '
+          type: string
+      required:
+      - thorname
+      - count
+      - volume
+      - volumeUSD
+      type: object
+    EarningsHistoryItem:
+      properties:
+        avgNodeCount:
+          description: float64, Average amount of active nodes during the time interval
+          type: string
+        blockRewards:
+          description: Int64(e8), Total block rewards emitted during the time interval
+          type: string
+        bondingEarnings:
+          description: Int64(e8), Share of earnings sent to nodes during the time interval
+          type: string
+        earnings:
+          description: 'Int64(e8), System income generated during the time interval. It is the sum of
+
+            liquidity fees and block rewards
+
+            '
+          type: string
+        endTime:
+          description: Int64, The end time of interval in unix timestamp
+          type: string
+        liquidityEarnings:
+          description: Int64(e8), Share of earnings sent to pools during the time interval
+          type: string
+        liquidityFees:
+          description: 'Int64(e8), Total liquidity fees, converted to RUNE, collected during the time interval
+
+            '
+          type: string
+        pools:
+          description: Earnings data for each pool for the time interval
+          items:
+            $ref: '#/components/schemas/EarningsHistoryItemPool'
+          type: array
+        runePriceUSD:
+          description: 'Float, the price of Rune based on the deepest USD pool at the end of the interval.
+
+            '
+          type: string
+        startTime:
+          description: Int64, The beginning time of interval in unix timestamp
+          type: string
+      required:
+      - startTime
+      - endTime
+      - liquidityFees
+      - blockRewards
+      - earnings
+      - bondingEarnings
+      - liquidityEarnings
+      - avgNodeCount
+      - runePriceUSD
+      - pools
+      type: object
+    TVLHistoryItem:
+      properties:
+        endTime:
+          description: Int64, The end time of bucket in unix timestamp
+          type: string
+        poolsDepth:
+          items:
+            $ref: '#/components/schemas/DepthHistoryItemPool'
+          type: array
+        runePriceUSD:
+          description: 'Float, the price of Rune based on the deepest USD pool at the end of the interval.
+
+            '
+          type: string
+        startTime:
+          description: Int64, The beginning time of bucket in unix timestamp
+          type: string
+        totalValueBonded:
+          description: 'Int64(e8), the total amount of bonds (both active and standby) at the end of
+
+            the interval
+
+            '
+          type: string
+        totalValueLocked:
+          description: 'Int64(e8), total value locked in the chain (in rune)
+
+            This equals `totalPooledValue + totalBondedValue`, as it combines the liquidity
+
+            pools and bonds of the nodes.
+
+            '
+          type: string
+        totalValuePooled:
+          description: 'Int64(e8) in rune, the total pooled value (both assets and rune) in all of the pools at
+
+            the end of the interval.
+
+            Note: this is twice the aggregate Rune depth of all pools.
+
+            '
+          type: string
+      required:
+      - startTime
+      - endTime
+      - totalValuePooled
+      - runePriceUSD
+      - poolsDepth
+      type: object
+    RUNEPoolHistoryIntervals:
+      items:
+        $ref: '#/components/schemas/RUNEPoolHistoryItem'
+      type: array
+    SaversHistoryMeta:
+      properties:
+        endSaversCount:
+          description: Int64, Number of savers member in the savers vault at the end of the interval at time endTime
+          type: string
+        endSaversDepth:
+          description: 'Int64(e8), The depth in the savers vault at the end of the interval at time
+
+            endTime
+
+            '
+          type: string
+        endTime:
+          description: Int64, The end time of bucket in unix timestamp
+          type: string
+        endUnits:
+          description: Int64, Savers Units in the savers vault at the end of the interval at time endTime
+          type: string
+        startSaversCount:
+          description: 'Int64, Number of savers member in the savers vault at the start of the interval at time startTime
+
+            '
+          type: string
+        startSaversDepth:
+          description: 'Int64(e8), The depth in savers vault at the start of the interval at time
+
+            startTime
+
+            '
+          type: string
+        startTime:
+          description: Int64, The beginning time of bucket in unix timestamp
+          type: string
+        startUnits:
+          description: 'Int64, Savers Units in the savers vault at the start of the interval at time startTime
+
+            '
+          type: string
+      required:
+      - startTime
+      - endTime
+      - startSaversDepth
+      - startUnits
+      - startSaversCount
+      - endSaversDepth
+      - endUnits
+      - endSaversCount
+      type: object
+    ReserveMeta:
+      properties:
+        endTime:
+          description: Int64, The end time of bucket in unix timestamp
+          type: string
+        gasFeeOutbound:
+          description: 'Int64(e8), fee made from outbound
+
+            '
+          type: string
+        gasReimbursement:
+          description: 'Int64(e8), RUNE paid to the pool for compensating the gas fees
+
+            '
+          type: string
+        networkFee:
+          description: 'Int64(e8), RUNE paid to the system on deposit, send messages
+
+            '
+          type: string
+        startTime:
+          description: Int64, The beginning time of bucket in unix timestamp
+          type: string
+      required:
+      - startTime
+      - endTime
+      - gasFeeOutbound
+      - gasReimbursement
+      - networkFee
+      type: object
+    LiquidityHistory:
+      properties:
+        intervals:
+          $ref: '#/components/schemas/LiquidityHistoryIntervals'
+        meta:
+          $ref: '#/components/schemas/LiquidityHistoryItem'
+      required:
+      - meta
+      - intervals
+      type: object
+    DepthHistory:
+      properties:
+        intervals:
+          $ref: '#/components/schemas/DepthHistoryIntervals'
+        meta:
+          $ref: '#/components/schemas/DepthHistoryMeta'
+      required:
+      - meta
+      - intervals
+      type: object
+    LiquidityHistoryItem:
+      properties:
+        addAssetLiquidityVolume:
+          description: 'Int64(e8), total assets deposited during the time interval.
+
+            Denoted in Rune using the price at deposit time.
+
+            '
+          type: string
+        addLiquidityCount:
+          description: 'Int64, number of deposits during the time interval.
+
+            '
+          type: string
+        addLiquidityVolume:
+          description: 'Int64(e8), total of rune and asset deposits.
+
+            Denoted in Rune (using the price at deposit time).
+
+            '
+          type: string
+        addRuneLiquidityVolume:
+          description: 'Int64(e8), total Rune deposited during the time interval.
+
+            '
+          type: string
+        endTime:
+          description: Int64, The end time of bucket in unix timestamp
+          type: string
+        net:
+          description: 'Int64(e8), net liquidity changes (withdrawals - deposits) during the time interval
+
+            '
+          type: string
+        runePriceUSD:
+          description: 'Float, the price of Rune based on the deepest USD pool at the end of the interval.
+
+            '
+          type: string
+        startTime:
+          description: Int64, The beginning time of bucket in unix timestamp
+          type: string
+        withdrawAssetVolume:
+          description: 'Int64(e8), total assets withdrawn during the time interval.
+
+            Denoted in Rune using the price at withdraw time.
+
+            '
+          type: string
+        withdrawCount:
+          description: 'Int64, number of withdraw during the time interval.
+
+            '
+          type: string
+        withdrawRuneVolume:
+          description: 'Int64(e8), total Rune withdrawn during the time interval.
+
+            '
+          type: string
+        withdrawVolume:
+          description: 'Int64(e8), total of rune and asset withdrawals.
+
+            Denoted in Rune (using the price at withdraw time).
+
+            '
+          type: string
+      required:
+      - startTime
+      - endTime
+      - addAssetLiquidityVolume
+      - addRuneLiquidityVolume
+      - addLiquidityVolume
+      - addLiquidityCount
+      - withdrawAssetVolume
+      - withdrawRuneVolume
+      - withdrawVolume
+      - withdrawCount
+      - net
+      - runePriceUSD
+      type: object
+    AffiliateEarningItem:
+      properties:
+        affiliate:
+          description: Affiliate address or THORName
+          type: string
+        count:
+          description: 'Int64, The count of transactions for this affiliate during the time interval
+
+            '
+          type: string
+        earningsRUNE:
+          description: 'Int64(e8), The earnings (liquidity fees) for this affiliate in RUNE during the time interval
+
+            '
+          type: string
+        earningsUSD:
+          description: 'Int64(e2), The earnings (liquidity fees) for this affiliate in USD during the time interval
+
+            '
+          type: string
+      required:
+      - affiliate
+      - earningsUSD
+      - earningsRUNE
+      - count
+      type: object
+    AffiliateEarningInterval:
+      properties:
+        affiliates:
+          description: List of affiliate earnings for the time interval
+          items:
+            $ref: '#/components/schemas/AffiliateEarningItem'
+          type: array
+        count:
+          description: 'Int64, The total count of affiliate transactions during the time interval
+
+            '
+          type: string
+        endTime:
+          description: Int64, The end time of bucket in unix timestamp
+          type: string
+        startTime:
+          description: Int64, The beginning time of bucket in unix timestamp
+          type: string
+        totalEarningsRune:
+          description: 'Int64(e8), The total earnings (liquidity fees) of all affiliates in RUNE during the time interval
+
+            '
+          type: string
+        totalEarningsUSD:
+          description: 'Int64(e2), The total earnings (liquidity fees) of all affiliates in USD during the time interval
+
+            '
+          type: string
+      required:
+      - startTime
+      - endTime
+      - totalEarningsRune
+      - totalEarningsUSD
+      - count
+      - affiliates
+      type: object
+    SaversHistoryIntervals:
+      items:
+        $ref: '#/components/schemas/SaversHistoryItem'
+      type: array
+    DepthHistoryMeta:
+      properties:
+        endAssetDepth:
+          description: 'Int64(e8), the amount of Asset in the pool at the end of the interval at time endTime
+
+            '
+          type: string
+        endLPUnits:
+          description: Int64, Liquidity Units in the pool at the end of the interval at time endTime
+          type: string
+        endMemberCount:
+          description: Int64, Number of liquidity members in the pool at the end of the interval at time endTime
+          type: string
+        endRuneDepth:
+          description: 'Int64(e8), the amount of Rune in the pool at the end of the interval at time endTime
+
+            '
+          type: string
+        endSynthUnits:
+          description: Int64, Synth Units in the pool at the end of the interval at time endTime
+          type: string
+        endTime:
+          description: Int64, The end time of bucket in unix timestamp
+          type: string
+        luviIncrease:
+          description: 'Float, The liquidity unit value index increase between startTime and endTime
+
+            '
+          type: string
+        priceShiftLoss:
+          description: Float, The impermanent loss between the first and last depth item
+          type: string
+        startAssetDepth:
+          description: 'Int64(e8), the amount of Asset in the pool at the start of the interval at time
+
+            startTime
+
+            '
+          type: string
+        startLPUnits:
+          description: 'Int64, Liquidity Units in the pool at the start of the interval at time startTime
+
+            '
+          type: string
+        startMemberCount:
+          description: 'Int64, Number of liquidity member in the pool at the start of the interval at time startTime
+
+            '
+          type: string
+        startRuneDepth:
+          description: 'Int64(e8), the amount of Rune in the pool at the start of the interval at time startTime
+
+            '
+          type: string
+        startSynthUnits:
+          description: 'Int64, Synth Units in the pool at the start of the interval at time startTime
+
+            '
+          type: string
+        startTime:
+          description: Int64, The beginning time of bucket in unix timestamp
+          type: string
+      required:
+      - startTime
+      - endTime
+      - priceShiftLoss
+      - luviIncrease
+      - startAssetDepth
+      - startRuneDepth
+      - startLPUnits
+      - startMemberCount
+      - startSynthUnits
+      - endAssetDepth
+      - endRuneDepth
+      - endLPUnits
+      - endMemberCount
+      - endSynthUnits
+      type: object
+    AffiliateStatsItem:
+      properties:
+        affiliates:
+          items:
+            $ref: '#/components/schemas/AffiliateStatItem'
+          type: array
+        count:
+          description: 'Int64, The count of unique swaps during the stats interval
+
+            '
+          type: string
+        endTime:
+          description: Int64, The end time of the stats interval in unix timestamp
+          type: string
+        startTime:
+          description: Int64, The beginning time of the stats interval in unix timestamp
+          type: string
+        totalVolumeUSD:
+          description: 'Int64(e2), The total volume of the affiliates
+
+            denoted in USD price
+
+            '
+          type: string
+      required:
+      - startTime
+      - endTime
+      - totalVolumeUSD
+      - count
+      - affiliates
+      type: object
+    RunePriceMeta:
+      properties:
+        endRunePriceUSD:
+          description: 'Int64(e8), The price of Rune based on the USD pools at the end of the interval
+
+            '
+          type: string
+        endTime:
+          description: Int64, The end time of bucket in unix timestamp
+          type: string
+        startRunePriceUSD:
+          description: 'Int64(e8), The price of Rune based on the USD pools at the start of the interval
+
+            '
+          type: string
+        startTime:
+          description: Int64, The beginning time of bucket in unix timestamp
+          type: string
+      required:
+      - startTime
+      - endTime
+      - startRunePriceUSD
+      - endRunePriceUSD
+      type: object
+    AffiliateHistoryItem:
+      properties:
+        count:
+          description: 'Int64, The count of affiliates during the time interval
+
+            '
+          type: string
+        endTime:
+          description: Int64, The end time of bucket in unix timestamp
+          type: string
+        startTime:
+          description: Int64, The beginning time of bucket in unix timestamp
+          type: string
+        thornames:
+          items:
+            $ref: '#/components/schemas/ItemThorname'
+          type: array
+        volume:
+          description: 'Int64(e8), The total earnings of the affiliates detonated in RUNE
+
+            '
+          type: string
+        volumeUSD:
+          description: 'Int64(e2), The total earnings of the affiliates
+
+            denoted in USD price
+
+            '
+          type: string
+      required:
+      - startTime
+      - endTime
+      - count
+      - thornames
+      - volume
+      - volumeUSD
+      type: object
+    AffiliateHistoryIntervals:
+      items:
+        $ref: '#/components/schemas/AffiliateHistoryItem'
+      type: array
+    DepthHistoryItem:
+      properties:
+        assetDepth:
+          description: Int64(e8), the amount of Asset in the pool at the end of the interval
+          type: string
+        assetPrice:
+          description: Float, price of asset in rune. I.e. rune amount / asset amount
+          type: string
+        assetPriceUSD:
+          description: Float, the price of asset in USD (based on the deepest USD pool).
+          type: string
+        closePriceUSD:
+          description: Float, the closing price of asset in USD at the end of the interval.
+          type: string
+        endTime:
+          description: Int64, The end time of bucket in unix timestamp
+          type: string
+        highPriceUSD:
+          description: Float, the highest price of asset in USD during the interval.
+          type: string
+        liquidityUnits:
+          description: Int64, Liquidity Units in the pool at the end of the interval
+          type: string
+        lowPriceUSD:
+          description: Float, the lowest price of asset in USD during the interval.
+          type: string
+        luvi:
+          description: 'Float, The liquidity unit value index. Sqrt(assetDepth * runeDepth)/liquidity units
+
+            '
+          type: string
+        membersCount:
+          description: Int64, Number of liquidity members in the pool at the end of the interval
+          type: string
+        openPriceUSD:
+          description: Float, the opening price of asset in USD at the beginning of the interval.
+          type: string
+        runeDepth:
+          description: Int64(e8), the amount of Rune in the pool at the end of the interval
+          type: string
+        startTime:
+          description: Int64, The beginning time of bucket in unix timestamp
+          type: string
+        synthSupply:
+          description: Int64, Synth supply in the pool at the end of the interval
+          type: string
+        synthUnits:
+          description: Int64, Synth Units in the pool at the end of the interval
+          type: string
+        units:
+          description: 'Int64, Total Units (synthUnits + liquidityUnits) in the pool at the end of the interval
+
+            '
+          type: string
+      required:
+      - startTime
+      - endTime
+      - assetDepth
+      - runeDepth
+      - assetPrice
+      - assetPriceUSD
+      - liquidityUnits
+      - membersCount
+      - synthUnits
+      - synthSupply
+      - units
+      - luvi
+      type: object
+    EarningsHistoryIntervals:
+      items:
+        $ref: '#/components/schemas/EarningsHistoryItem'
+      type: array
+    RUNEPoolHistoryItem:
+      properties:
+        count:
+          description: Int64, Number of RUNEPool members in the pool at the end of the interval
+          type: string
+        depth:
+          description: Int64(e8), The depth in the RUNEPool vault at the end of the interval
+          type: string
+        endTime:
+          description: Int64, The end time of bucket in unix timestamp
+          type: string
+        startTime:
+          description: Int64, The beginning time of bucket in unix timestamp
+          type: string
+        units:
+          description: 'Int64, Units in the RUNEPool vault at the end of the interval
+
+            '
+          type: string
+      required:
+      - startTime
+      - endTime
+      - count
+      - units
+      type: object
+    ReserveIntervals:
+      items:
+        $ref: '#/components/schemas/ReserveItem'
+      type: array
+    SaversHistoryItem:
+      properties:
+        endTime:
+          description: Int64, The end time of bucket in unix timestamp
+          type: string
+        saversCount:
+          description: Int64, Number of saver members in the pool at the end of the interval
+          type: string
+        saversDepth:
+          description: Int64(e8), The depth in the savers vault at the end of the interval
+          type: string
+        saversUnits:
+          description: 'Int64, Savers Units in the saver vault at the end of the interval
+
+            '
+          type: string
+        startTime:
+          description: Int64, The beginning time of bucket in unix timestamp
+          type: string
+      required:
+      - startTime
+      - endTime
+      - saversDepth
+      - saversCount
+      - saversUnits
+      type: object
+    EarningsHistoryItemPool:
+      description: pool earnings data during the time interval
+      properties:
+        assetLiquidityFees:
+          description: Int64(e8), liquidity fees collected in the pool's asset
+          type: string
+        earnings:
+          description: Int64(e8), total earnings in RUNE (totalLiquidityFees + rewards)
+          type: string
+        pool:
+          description: asset for the given pool
+          type: string
+        rewards:
+          description: 'Int64(e8), RUNE amount sent to (positive) or taken from (negative) the pool as
+
+            a result of balancing it''s share of system income each block
+
+            '
+          type: string
+        runeLiquidityFees:
+          description: Int64(e8), liquidity fees collected in RUNE
+          type: string
+        saverEarning:
+          description: 'Int64(e8), total saver reward collected by the pool, shown in pool''s ASSET
+
+            '
+          type: string
+        totalLiquidityFeesRune:
+          description: 'Int64(e8), total liquidity fees (assetFees + runeFees) collected, shown in RUNE
+
+            '
+          type: string
+      required:
+      - pool
+      - assetLiquidityFees
+      - runeLiquidityFees
+      - totalLiquidityFeesRune
+      - saverEarning
+      - rewards
+      - earnings
+      type: object
+    AffiliateHistory:
+      properties:
+        intervals:
+          $ref: '#/components/schemas/AffiliateHistoryIntervals'
+        meta:
+          $ref: '#/components/schemas/AffiliateHistoryMeta'
+      required:
+      - meta
+      - intervals
+      type: object
+    DepthHistoryIntervals:
+      items:
+        $ref: '#/components/schemas/DepthHistoryItem'
+      type: array
+    SwapHistoryItem:
+      properties:
+        averageSlip:
+          description: 'Float64 (Basis points, 0-10000, where 10000=100%), the weighted average (by count)
+
+            of toAssetAverageSlip, toRuneAverageSlip, synthMintAverageSlip, synthRedeemAverageSlip.
+
+            Big swaps have the same weight as small swaps.
+
+            '
+          type: string
+        endTime:
+          description: Int64, The end time of bucket in unix timestamp
+          type: string
+        fromSecuredAverageSlip:
+          description: 'Float64 (Basis points, 0-10000, where 10000=100%), the average slip for swaps
+
+            from asset to secured asset.
+
+            Big swaps have the same weight as small swaps
+
+            '
+          type: string
+        fromSecuredCount:
+          description: Int64, count of swaps from secured asset to rune
+          type: string
+        fromSecuredFees:
+          description: Int64(e8), the fees collected from swaps from rune to secured asset (in rune)
+          type: string
+        fromSecuredVolume:
+          description: Int64(e8), volume of swaps from rune to secured asset denoted in rune
+          type: string
+        fromSecuredVolumeUSD:
+          description: Int64(e2), volume of swaps from secured asset to rune denoted in USD price of the rune in each swap
+          type: string
+        fromTradeAverageSlip:
+          description: 'Float64 (Basis points, 0-10000, where 10000=100%), the average slip for swaps
+
+            from asset to trade asset.
+
+            Big swaps have the same weight as small swaps
+
+            '
+          type: string
+        fromTradeCount:
+          description: Int64, count of swaps from trade asset to rune
+          type: string
+        fromTradeFees:
+          description: Int64(e8), the fees collected from swaps from rune to trade asset (in rune)
+          type: string
+        fromTradeVolume:
+          description: Int64(e8), volume of swaps from rune to trade asset denoted in rune
+          type: string
+        fromTradeVolumeUSD:
+          description: Int64(e2), volume of swaps from trade asset to rune denoted in USD price of the rune in each swap
+          type: string
+        runePriceUSD:
+          description: 'Float, the price of Rune based on the deepest USD pool at the end of the interval.
+
+            '
+          type: string
+        startTime:
+          description: Int64, The beginning time of bucket in unix timestamp
+          type: string
+        synthMintAverageSlip:
+          description: 'Float64 (Basis points, 0-10000, where 10000=100%), the average slip for swaps
+
+            from rune to synthetic asset.
+
+            Big swaps have the same weight as small swaps
+
+            '
+          type: string
+        synthMintCount:
+          description: Int64, count of rune to synthetic asset swaps
+          type: string
+        synthMintFees:
+          description: 'Int64(e8), the fees collected from swaps from rune to synthetic asset (in rune)
+
+            '
+          type: string
+        synthMintVolume:
+          description: Int64(e8), volume of swaps from rune to synthetic asset denoted in rune
+          type: string
+        synthMintVolumeUSD:
+          description: Int64(e2), volume of swaps from rune to synthetic asset denoted in USD price of the rune in each swap
+          type: string
+        synthRedeemAverageSlip:
+          description: 'Float64 (Basis points, 0-10000, where 10000=100%), the average slip for swaps
+
+            from synthetic asset to rune.
+
+            Big swaps have the same weight as small swaps
+
+            '
+          type: string
+        synthRedeemCount:
+          description: Int64, count of synthetic asset to rune swaps
+          type: string
+        synthRedeemFees:
+          description: 'Int64(e8), the fees collected from swaps from synthetic asset to rune (in rune)
+
+            '
+          type: string
+        synthRedeemVolume:
+          description: Int64(e8), volume of swaps from synthetic asset to rune denoted in rune
+          type: string
+        synthRedeemVolumeUSD:
+          description: Int64(e2), volume of swaps from synthetic asset to rune denoted in USD price of the rune in each swap
+          type: string
+        toAssetAverageSlip:
+          description: 'Float64 (Basis points, 0-10000, where 10000=100%), the average slip for swaps
+
+            from rune to asset.
+
+            Big swaps have the same weight as small swaps
+
+            '
+          type: string
+        toAssetCount:
+          description: Int64, count of swaps from rune to asset
+          type: string
+        toAssetFees:
+          description: Int64(e8), the fees collected from swaps from rune to asset (in rune)
+          type: string
+        toAssetVolume:
+          description: Int64(e8), volume of swaps from rune to asset denoted in rune
+          type: string
+        toAssetVolumeUSD:
+          description: Int64(e2), volume of swaps from rune to asset denoted in USD price of the rune in each swap
+          type: string
+        toRuneAverageSlip:
+          description: 'Float64 (Basis points, 0-10000, where 10000=100%), the average slip for swaps
+
+            from asset to rune.
+
+            Big swaps have the same weight as small swaps
+
+            '
+          type: string
+        toRuneCount:
+          description: Int64, count of swaps from asset to rune
+          type: string
+        toRuneFees:
+          description: Int64(e8), the fees collected from swaps from asset to rune (in rune)
+          type: string
+        toRuneVolume:
+          description: Int64(e8), volume of swaps from asset to rune denoted in rune
+          type: string
+        toRuneVolumeUSD:
+          description: Int64(e2), volume of swaps from asset to rune denoted in USD price of the rune in each swap
+          type: string
+        toSecuredAverageSlip:
+          description: 'Float64 (Basis points, 0-10000, where 10000=100%), the average slip for swaps
+
+            from rune to secured asset.
+
+            Big swaps have the same weight as small swaps
+
+            '
+          type: string
+        toSecuredCount:
+          description: Int64, count of swaps from rune to secured asset
+          type: string
+        toSecuredFees:
+          description: Int64(e8), the fees collected from swaps from rune to secured asset (in rune)
+          type: string
+        toSecuredVolume:
+          description: Int64(e8), volume of swaps from secured asset to rune denoted in rune
+          type: string
+        toSecuredVolumeUSD:
+          description: Int64(e2), volume of swaps from rune to secured asset denoted in USD price of the rune in each swap
+          type: string
+        toTradeAverageSlip:
+          description: 'Float64 (Basis points, 0-10000, where 10000=100%), the average slip for swaps
+
+            from rune to trade asset.
+
+            Big swaps have the same weight as small swaps
+
+            '
+          type: string
+        toTradeCount:
+          description: Int64, count of swaps from rune to trade asset
+          type: string
+        toTradeFees:
+          description: Int64(e8), the fees collected from swaps from rune to trade asset (in rune)
+          type: string
+        toTradeVolume:
+          description: Int64(e8), volume of swaps from trade asset to rune denoted in rune
+          type: string
+        toTradeVolumeUSD:
+          description: Int64(e2), volume of swaps from rune to trade asset denoted in USD price of the rune in each swap
+          type: string
+        totalCount:
+          description: Int64, toAssetCount + toRuneCount + synthMintCount + synthRedeemCount
+          type: string
+        totalFees:
+          description: Int64(e8), toAssetFees + toRuneFees + synthMintFees + synthRedeemFees
+          type: string
+        totalVolume:
+          description: 'Int64(e8),
+
+            toAssetVolume + toRuneVolume + synthMintVolume + synthRedeemVolume (denoted in rune)
+
+            '
+          type: string
+        totalVolumeUSD:
+          description: 'Int64(e2),
+
+            toAssetVolume + toRuneVolume + synthMintVolume + synthRedeemVolume (denoted in USD price of the rune in each swap)
+
+            '
+          type: string
+      required:
+      - startTime
+      - endTime
+      - toAssetCount
+      - toRuneCount
+      - toTradeCount
+      - fromTradeCount
+      - toSecuredCount
+      - fromSecuredCount
+      - synthMintCount
+      - synthRedeemCount
+      - totalCount
+      - toAssetVolume
+      - toRuneVolume
+      - toTradeVolume
+      - fromTradeVolume
+      - toSecuredVolume
+      - fromSecuredVolume
+      - synthMintVolume
+      - synthRedeemVolume
+      - totalVolume
+      - toAssetVolumeUSD
+      - toRuneVolumeUSD
+      - toTradeVolumeUSD
+      - fromTradeVolumeUSD
+      - toSecuredVolumeUSD
+      - fromSecuredVolumeUSD
+      - synthMintVolumeUSD
+      - synthRedeemVolumeUSD
+      - totalVolumeUSD
+      - toAssetFees
+      - toRuneFees
+      - toTradeFees
+      - fromTradeFees
+      - toSecuredFees
+      - fromSecuredFees
+      - synthMintFees
+      - synthRedeemFees
+      - totalFees
+      - toAssetAverageSlip
+      - toRuneAverageSlip
+      - synthMintAverageSlip
+      - toTradeAverageSlip
+      - fromTradeAverageSlip
+      - toSecuredAverageSlip
+      - fromSecuredAverageSlip
+      - synthRedeemAverageSlip
+      - averageSlip
+      - runePriceUSD
+      type: object
+    SaversHistory:
+      properties:
+        intervals:
+          $ref: '#/components/schemas/SaversHistoryIntervals'
+        meta:
+          $ref: '#/components/schemas/SaversHistoryMeta'
+      required:
+      - meta
+      - intervals
+      type: object
+    AffiliateEarning:
+      items:
+        $ref: '#/components/schemas/AffiliateEarningInterval'
+      type: array
+    SwapHistory:
+      properties:
+        intervals:
+          $ref: '#/components/schemas/SwapHistoryIntervals'
+        meta:
+          $ref: '#/components/schemas/SwapHistoryItem'
+      required:
+      - meta
+      - intervals
+      type: object
+    SwapHistoryIntervals:
+      items:
+        $ref: '#/components/schemas/SwapHistoryItem'
+      type: array
+    RUNEPoolHistoryMeta:
+      properties:
+        endCount:
+          description: Int64, Number of RUNEPool member in the RUNEPool vault at the end of the interval at time endTime
+          type: string
+        endTime:
+          description: Int64, The end time of bucket in unix timestamp
+          type: string
+        endUnits:
+          description: Int64,  Units in the RUNEPool vault at the end of the interval at time endTime
+          type: string
+        startCount:
+          description: 'Int64, Number of RUNEPool member in the RUNEPool vault at the start of the interval at time startTime
+
+            '
+          type: string
+        startTime:
+          description: Int64, The beginning time of bucket in unix timestamp
+          type: string
+        startUnits:
+          description: 'Int64,  Units in the RUNEPool vault at the start of the interval at time startTime
+
+            '
+          type: string
+      required:
+      - startTime
+      - endTime
+      - startUnits
+      - startCount
+      - endUnits
+      - endCount
+      type: object
+    TVLHistoryIntervals:
+      items:
+        $ref: '#/components/schemas/TVLHistoryItem'
+      type: array
+    DepthHistoryItemPool:
+      properties:
+        pool:
+          description: asset for the given pool
+          type: string
+        totalDepth:
+          description: 'Int64(e8) in rune, the total value in the pool (both assets and rune) at the end of the interval.
+
+            Note: this is twice of the pool''s Rune depth. (as pools are symmetrically balance)
+
+            '
+          type: string
+      required:
+      - pool
+      - totalDepth
+      type: object
+    RUNEPoolHistory:
+      properties:
+        intervals:
+          $ref: '#/components/schemas/RUNEPoolHistoryIntervals'
+        meta:
+          $ref: '#/components/schemas/RUNEPoolHistoryMeta'
+      required:
+      - meta
+      - intervals
+      type: object
+    ReserveHistory:
+      properties:
+        intervals:
+          $ref: '#/components/schemas/ReserveIntervals'
+        meta:
+          $ref: '#/components/schemas/ReserveMeta'
+      required:
+      - meta
+      - intervals
+      type: object
+    AffiliateStatItem:
+      properties:
+        affiliate:
+          description: affiliate address
+          type: string
+        count:
+          description: 'Int64, The count of swaps for the affiliate during the stats interval
+
+            '
+          type: string
+        volumeUSD:
+          description: 'Int64(e2), The volume of swaps for the affiliate
+
+            denoted in USD price of the rune in each swap
+
+            '
+          type: string
+      required:
+      - affiliate
+      - count
+      - volumeUSD
+      type: object
+    ReserveItem:
+      properties:
+        endTime:
+          description: Int64, The end time of bucket in unix timestamp
+          type: string
+        gasFeeOutbound:
+          description: Int64(e8), fee made from outbound
+          type: string
+        gasReimbursement:
+          description: Int64(e8), RUNE paid to the pool for compensating the gas fees
+          type: string
+        networkFee:
+          description: 'Int64(e8), RUNE paid to the system on deposit, send messages
+
+            '
+          type: string
+        startTime:
+          description: Int64, The beginning time of bucket in unix timestamp
+          type: string
+      required:
+      - startTime
+      - endTime
+      - gasFeeOutbound
+      - gasReimbursement
+      - networkFee
+      type: object
+    AffiliateHistoryMeta:
+      properties:
+        count:
+          description: 'Int64, The count of affiliates during the time interval
+
+            '
+          type: string
+        endTime:
+          description: Int64, The end time of bucket in unix timestamp
+          type: string
+        startTime:
+          description: Int64, The beginning time of bucket in unix timestamp
+          type: string
+        volume:
+          description: 'Int64(e8), The total earnings of the affiliates detonated in RUNE
+
+            '
+          type: string
+        volumeUSD:
+          description: 'Int64(e2), The total earnings of the affiliates
+
+            denoted in USD price
+
+            '
+          type: string
+      required:
+      - startTime
+      - endTime
+      - count
+      - volume
+      - volumeUSD
+      type: object
+    AffiliateStats:
+      items:
+        $ref: '#/components/schemas/AffiliateStatsItem'
+      type: array
+    TVLHistory:
+      properties:
+        intervals:
+          $ref: '#/components/schemas/TVLHistoryIntervals'
+        meta:
+          $ref: '#/components/schemas/TVLHistoryItem'
+      required:
+      - meta
+      - intervals
+      type: object
+    EarningsHistory:
+      properties:
+        intervals:
+          $ref: '#/components/schemas/EarningsHistoryIntervals'
+        meta:
+          $ref: '#/components/schemas/EarningsHistoryItem'
+      required:
+      - meta
+      - intervals
+      type: object
+    RunePriceIntervals:
+      items:
+        $ref: '#/components/schemas/RunePriceItem'
+      type: array
+    RunePriceItem:
+      properties:
+        endTime:
+          description: Int64, The end time of bucket in unix timestamp
+          type: string
+        runePriceUSD:
+          description: 'Int64(e8), The price of Rune based on the USD pools at the the interval
+
+            '
+          type: string
+        startTime:
+          description: Int64, The beginning time of bucket in unix timestamp
+          type: string
+      required:
+      - startTime
+      - endTime
+      - runePriceUSD
+      type: object
+    LiquidityHistoryIntervals:
+      items:
+        $ref: '#/components/schemas/LiquidityHistoryItem'
+      type: array
+    RunePriceHistory:
+      properties:
+        intervals:
+          $ref: '#/components/schemas/RunePriceIntervals'
+        meta:
+          $ref: '#/components/schemas/RunePriceMeta'
+      required:
+      - meta
+      - intervals
+      type: object
+  responses:
+    SaversHistoryResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SaversHistory'
+      description: Depth and Units history of savers
+    DepthHistoryResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DepthHistory'
+      description: Depth and price history
+    AffiliateHistoryResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AffiliateHistory'
+      description: Affiliate fee count and earnings history
+    EarningsHistoryResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EarningsHistory'
+      description: earnings history
+    SwapHistoryResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SwapHistory'
+      description: Swap count, volume, fee and slip history
+    LiquidityHistoryResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/LiquidityHistory'
+      description: Withdrawals and deposits history
+    AffiliateStatsResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AffiliateStats'
+      description: Affiliate count and volume stats history
+    AffiliateEarningResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AffiliateEarning'
+      description: Affiliate earnings (liquidity fees) history
+    ReserveHistoryResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ReserveHistory'
+      description: Reserve
+    RunePriceHistoryResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RunePriceHistory'
+      description: Returns rune price history in USD based on the time bucket given
+    TVLHistoryResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TVLHistory'
+      description: Total pool depths, total bonds, and total value locked history
+    RUNEPoolHistoryResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RUNEPoolHistory'
+      description: Members and Units history of RUNEPool

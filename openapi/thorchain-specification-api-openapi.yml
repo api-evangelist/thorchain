@@ -1,0 +1,30 @@
+openapi: 3.0.0
+info:
+  title: Thornode Auth Specification API
+  version: 3.19.1
+  contact:
+    email: devs@thorchain.org
+  description: Thornode REST API.
+tags:
+- name: Specification
+paths:
+  /v2/doc:
+    get:
+      description: Swagger/OpenAPI 3.0 specification generated documents.
+      operationId: GetDocs
+      responses:
+        '200':
+          description: swagger/OpenAPI 3.0 spec generated docs
+      summary: Documentation
+      tags:
+      - Specification
+  /v2/swagger.json:
+    get:
+      description: Returns human and machine readable swagger/openapi specification
+      operationId: GetSwagger
+      responses:
+        '200':
+          description: human and machine readable swagger/openapi specification
+      summary: Swagger File
+      tags:
+      - Specification

@@ -1,0 +1,128 @@
+openapi: 3.0.0
+info:
+  title: Thornode Auth Member API
+  version: 3.19.1
+  contact:
+    email: devs@thorchain.org
+  description: Thornode REST API.
+tags:
+- name: Member
+paths:
+  /v2/member/{address}:
+    get:
+      description: 'Returns an array of statistics for all the liquidity providers associated with a given
+
+        member address.
+
+        '
+      operationId: GetMemberDetail
+      parameters:
+      - description: 'Address to match liquidity providers. Either a rune or an asset address may be given.
+
+          Query can also be multiple addresses should be separated by comma ('','')
+
+          '
+        example: bnb1jxfh2g85q3v0tdq56fnevx6xcxtcnhtsmcu64m,bc1qcxssye4j6730h7ehgega3gyykkuwgdgmmpu62n
+        in: path
+        name: address
+        required: true
+        schema:
+          type: string
+      - description: 'A flag to show saver vault membership details, the default is false.
+
+          '
+        example: true
+        in: query
+        name: showSavers
+        schema:
+          default: false
+          type: boolean
+      responses:
+        '200':
+          $ref: '#/components/responses/MemberDetailsResponse'
+      summary: Member Details
+      tags:
+      - Member
+components:
+  schemas:
+    MemberDetails:
+      properties:
+        pools:
+          description: List details of all the liquidity providers identified with the given address
+          items:
+            $ref: '#/components/schemas/MemberPool'
+          type: array
+      required:
+      - pools
+      type: object
+    MemberPool:
+      properties:
+        assetAdded:
+          description: Int64(e8), total asset added to the pool by member
+          type: string
+        assetAddress:
+          description: asset address used by the member
+          type: string
+        assetDeposit:
+          description: "Int64(e8), total asset that is currently deposited to the pool by member.\nThis field is same as the `asset_deposit_value` field in thornode. Mainly can be used \nfor tracking, mainly Growth Percentage\n"
+          type: string
+        assetPending:
+          description: 'Int64(e8), asset sent but not added yet, it will be added when the rune pair arrives
+
+            '
+          type: string
+        assetWithdrawn:
+          description: Int64(e8), total asset withdrawn from the pool by member
+          type: string
+        dateFirstAdded:
+          description: Int64, Unix timestamp for the first time member deposited into the pool
+          type: string
+        dateLastAdded:
+          description: Int64, Unix timestamp for the last time member deposited into the pool
+          type: string
+        liquidityUnits:
+          description: Int64, pool liquidity units that belong the the member
+          type: string
+        pool:
+          description: Pool rest of the data refers to
+          type: string
+        runeAdded:
+          description: Int64(e8), total Rune added to the pool by member
+          type: string
+        runeAddress:
+          description: Rune address used by the member
+          type: string
+        runeDeposit:
+          description: "Int64(e8), total Rune that is currently deposited to the pool by member.\nThis field is same as the `rune_deposit_value` field in thornode. Mainly can be used \nfor tracking, mainly Growth Percentage\n"
+          type: string
+        runePending:
+          description: 'Int64(e8), Rune sent but not added yet, it will be added when the asset pair arrives
+
+            '
+          type: string
+        runeWithdrawn:
+          description: Int64(e8), total Rune withdrawn from the pool by member
+          type: string
+      required:
+      - pool
+      - runeAddress
+      - assetAddress
+      - liquidityUnits
+      - runeDeposit
+      - assetDeposit
+      - runeAdded
+      - assetAdded
+      - runePending
+      - assetPending
+      - runeWithdrawn
+      - assetWithdrawn
+      - dateFirstAdded
+      - dateLastAdded
+      type: object
+  responses:
+    MemberDetailsResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/MemberDetails'
+      description: object containing liquidity provider data for a specific member

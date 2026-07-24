@@ -1,0 +1,111 @@
+openapi: 3.0.0
+info:
+  title: Thornode Auth Savers API
+  version: 3.19.1
+  contact:
+    email: devs@thorchain.org
+  description: Thornode REST API.
+tags:
+- name: Savers
+paths:
+  /thorchain/pool/{asset}/saver/{address}:
+    parameters:
+    - $ref: '#/components/parameters/queryHeight'
+    - $ref: '#/components/parameters/asset'
+    - $ref: '#/components/parameters/address'
+    get:
+      description: Returns the saver position given then savers pool and address.
+      operationId: saver
+      tags:
+      - Savers
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SaverResponse'
+  /thorchain/pool/{asset}/savers:
+    parameters:
+    - $ref: '#/components/parameters/queryHeight'
+    - $ref: '#/components/parameters/asset'
+    get:
+      description: Returns all savers for the savers pool.
+      operationId: savers
+      tags:
+      - Savers
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SaversResponse'
+components:
+  parameters:
+    queryHeight:
+      name: height
+      in: query
+      description: optional block height, defaults to current tip
+      required: false
+      schema:
+        type: integer
+        format: int64
+        minimum: 0
+    address:
+      name: address
+      in: path
+      required: true
+      schema:
+        type: string
+        example: thor1zupk5lmc84r2dh738a9g3zscavannjy3nzplwt
+    asset:
+      name: asset
+      in: path
+      required: true
+      schema:
+        type: string
+        example: BTC.BTC
+  schemas:
+    Saver:
+      type: object
+      required:
+      - asset
+      - asset_address
+      - units
+      - asset_deposit_value
+      - asset_redeem_value
+      - growth_pct
+      properties:
+        asset:
+          type: string
+          example: BTC.BTC
+        asset_address:
+          type: string
+          example: bc1qn9esxuw8ca7ts8l6w66kdh800s09msvutydc46
+        last_add_height:
+          type: integer
+          format: int64
+          example: 82745
+        last_withdraw_height:
+          type: integer
+          format: int64
+          example: 82745
+        units:
+          type: string
+          example: '0'
+        asset_deposit_value:
+          type: string
+          example: '0'
+        asset_redeem_value:
+          type: string
+          example: '0'
+        growth_pct:
+          type: string
+          example: '0.02'
+    SaversResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/Saver'
+    SaverResponse:
+      $ref: '#/components/schemas/Saver'

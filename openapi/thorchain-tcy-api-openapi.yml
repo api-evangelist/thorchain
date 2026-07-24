@@ -1,0 +1,98 @@
+openapi: 3.0.0
+info:
+  title: Thornode Auth Tcy API
+  version: 3.19.1
+  contact:
+    email: devs@thorchain.org
+  description: Thornode REST API.
+tags:
+- name: Tcy
+paths:
+  /v2/tcy/distribution/{address}:
+    get:
+      description: 'Returns an array of TCY distribution for the given address.
+
+        '
+      operationId: GetTcyDistribution
+      parameters:
+      - description: Address which is assigned to TCY Holder.
+        example: thor102y0m3uptg0vvudeyh00r2fnz70wq7d8y7mu2g
+        in: path
+        name: address
+        required: true
+        schema:
+          type: string
+      - description: 'Specifies the base interval from which APR will be calculated.
+
+          Default is 30d.
+
+          '
+        example: 90d
+        in: query
+        name: period
+        schema:
+          enum:
+          - 1h
+          - 24h
+          - 7d
+          - 14d
+          - 30d
+          - 90d
+          - 100d
+          - 180d
+          - 365d
+          - all
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/TCYDistributionResponse'
+      summary: Tcy Distribution
+      tags:
+      - Tcy
+components:
+  schemas:
+    TCYDistribution:
+      properties:
+        address:
+          description: TCY holder address.
+          type: string
+        apr:
+          description: Float, annual percentage rate of the TCY distribution.
+          type: string
+        distributions:
+          description: List details of all the TCY distributions.
+          items:
+            $ref: '#/components/schemas/TCYDistributionItem'
+          type: array
+        total:
+          description: Int64(e8), total amount of RUNE distributed to the TCY holder.
+          type: string
+      required:
+      - apr
+      - total
+      - address
+      - distributions
+      type: object
+    TCYDistributionItem:
+      properties:
+        amount:
+          description: Int64(e8), amount of RUNE distributed to the TCY holder.
+          type: string
+        date:
+          description: Int64, Unix timestamp for the TCY distribution.
+          type: string
+        price:
+          description: Int64(e8), RUNE price at the time of distribution.
+          type: string
+      required:
+      - amount
+      - price
+      - date
+      type: object
+  responses:
+    TCYDistributionResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TCYDistribution'
+      description: object containing TCY distribution data for a specific address
