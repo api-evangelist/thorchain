@@ -1,0 +1,146 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "THORChain Website Discovery",
+    "summary": "Machine-readable discovery entry points for THORChain public resources.",
+    "description": "This OpenAPI file describes stable discovery resources hosted on thorchain.org and points agents to the official THORChain developer API documentation. Protocol API behavior is documented in the linked Midgard and THORNode Swagger references.",
+    "version": "1.0.0",
+    "license": {
+      "name": "Public documentation"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://thorchain.org",
+      "description": "THORChain public website"
+    }
+  ],
+  "externalDocs": {
+    "description": "THORChain developer API documentation",
+    "url": "https://dev.thorchain.org/concepts/connecting-to-thorchain.html"
+  },
+  "paths": {
+    "/": {
+      "get": {
+        "operationId": "getHomepage",
+        "summary": "Get the THORChain homepage",
+        "responses": {
+          "200": {
+            "description": "HTML homepage or markdown homepage when requested with Accept: text/markdown"
+          }
+        }
+      }
+    },
+    "/AGENTS.md": {
+      "get": {
+        "operationId": "getAgentsMd",
+        "summary": "Get public agent rules",
+        "responses": {
+          "200": {
+            "description": "Markdown agent rules"
+          }
+        }
+      }
+    },
+    "/.well-known/agent-rules": {
+      "get": {
+        "operationId": "getAgentRules",
+        "summary": "Get well-known public agent rules",
+        "responses": {
+          "200": {
+            "description": "Markdown agent rules"
+          }
+        }
+      }
+    },
+    "/.well-known/mcp-server-card.json": {
+      "get": {
+        "operationId": "getMcpServerCard",
+        "summary": "Get the MCP server card",
+        "responses": {
+          "200": {
+            "description": "JSON MCP server card"
+          }
+        }
+      }
+    },
+    "/.well-known/ai-plugin.json": {
+      "get": {
+        "operationId": "getAiPluginManifest",
+        "summary": "Get the AI plugin manifest",
+        "responses": {
+          "200": {
+            "description": "JSON AI plugin manifest"
+          }
+        }
+      }
+    },
+    "/mcp": {
+      "get": {
+        "operationId": "getMcpCard",
+        "summary": "Get read-only MCP endpoint metadata",
+        "responses": {
+          "200": {
+            "description": "JSON MCP server card"
+          }
+        }
+      },
+      "post": {
+        "operationId": "postMcpJsonRpc",
+        "summary": "Call the read-only MCP JSON-RPC endpoint",
+        "responses": {
+          "200": {
+            "description": "JSON-RPC MCP response"
+          },
+          "204": {
+            "description": "Notification accepted without response"
+          }
+        }
+      }
+    },
+    "/robots.txt": {
+      "get": {
+        "operationId": "getRobotsTxt",
+        "summary": "Get crawler and content-signal policy",
+        "responses": {
+          "200": {
+            "description": "Plain-text robots policy"
+          }
+        }
+      }
+    },
+    "/llms.txt": {
+      "get": {
+        "operationId": "getLlmsTxt",
+        "summary": "Get the short AI-agent resource summary",
+        "responses": {
+          "200": {
+            "description": "Plain-text LLM resource summary"
+          }
+        }
+      }
+    },
+    "/llms-full.txt": {
+      "get": {
+        "operationId": "getLlmsFullTxt",
+        "summary": "Get the expanded AI-agent resource map",
+        "responses": {
+          "200": {
+            "description": "Plain-text LLM resource map"
+          }
+        }
+      }
+    },
+    "/sitemap.xml": {
+      "get": {
+        "operationId": "getSitemap",
+        "summary": "Get the XML sitemap",
+        "responses": {
+          "200": {
+            "description": "XML sitemap"
+          }
+        }
+      }
+    }
+  }
+}

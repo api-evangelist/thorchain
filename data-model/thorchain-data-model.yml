@@ -1,0 +1,98 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/thorchain-thornode-openapi.yaml (136 schemas), openapi/thorchain-midgard-openapi.json
+notes: >-
+  Entity-relationship model derived from the THORNode + Midgard endpoint
+  surface and response resources. THORChain has no user/account primitives in
+  the Web2 sense; the domain entities are on-chain protocol objects keyed by
+  address, asset, pool, or transaction hash. Amounts throughout are 1e8
+  fixed-point integers (tor/e8). Assets use CHAIN.TICKER-ID notation.
+entities:
+  - name: Pool
+    key: asset
+    description: A continuous liquidity pool pairing an external L1 asset against RUNE.
+    endpoints: [pools, pool, GetPools, GetPool, GetPoolStats]
+  - name: Asset
+    key: 'CHAIN.TICKER-ID'
+    description: An external L1 asset (BTC.BTC, ETH.ETH, ETH.USDC-0X..., plus trade/secured/synth variants).
+  - name: LiquidityProvider
+    key: [asset, address]
+    description: An address providing liquidity to a pool.
+    endpoints: [liquidityProvider, liquidityProviders, GetMemberDetail]
+  - name: Saver
+    key: [asset, address]
+    description: An address holding a single-sided savings position in a pool's savers vault.
+    endpoints: [saver, savers, GetSaverDetail, GetSaversHistory]
+  - name: Node
+    key: address
+    description: A validator (THORNode) bonding RUNE to secure the network.
+    endpoints: [node, nodes, GetNodes]
+  - name: Vault
+    key: pubkey
+    description: An Asgard (or legacy Yggdrasil) TSS vault custodying pooled external assets.
+    endpoints: [asgard, yggdrasil, vault, vaultPubkeys, vaultSolvency]
+  - name: Transaction
+    key: hash
+    description: An observed inbound/outbound transaction and its swap/action stages.
+    endpoints: [tx, txSigners, txStages, txStatus, GetActions]
+  - name: SwapQuote
+    key: '(ephemeral)'
+    description: A computed swap estimate with fees, slippage, inbound address and memo.
+    endpoints: [quoteswap, quotelimit]
+  - name: THORName
+    key: name
+    description: A THORChain Name Service (TNS) record mapping a name to chain addresses + owner.
+    endpoints: [thorname, GetTHORNameDetail, GetTHORNamesByAddress]
+  - name: TradeAccount
+    key: address
+    description: A trade-asset account holding capital-efficient trade assets.
+    endpoints: [trade_account, trade_accounts, trade_unit]
+  - name: RUNEPoolProvider
+    key: address
+    description: A participant in RUNEPool.
+    endpoints: [runeProvider, runeProviders, runePool]
+  - name: Network
+    key: '(singleton)'
+    description: Network-wide economic state (bond, reserve, incentive pendulum).
+    endpoints: [network, constants, mimir, GetNetworkData]
+relationships:
+  - from: Pool
+    to: Asset
+    type: belongs_to
+    via: asset
+  - from: Pool
+    to: RUNE
+    type: has_one
+    via: rune_depth
+  - from: LiquidityProvider
+    to: Pool
+    type: belongs_to
+    via: asset
+  - from: Saver
+    to: Pool
+    type: belongs_to
+    via: asset
+  - from: Vault
+    to: Asset
+    type: has_many
+    via: coins
+  - from: Node
+    to: Vault
+    type: has_many
+    via: membership
+  - from: Transaction
+    to: Pool
+    type: belongs_to
+    via: asset
+  - from: SwapQuote
+    to: Pool
+    type: references
+    via: from_asset/to_asset
+  - from: THORName
+    to: Asset
+    type: has_many
+    via: aliases[].chain
+  - from: TradeAccount
+    to: Asset
+    type: has_many
+    via: asset

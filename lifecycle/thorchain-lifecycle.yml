@@ -1,0 +1,37 @@
+generated: '2026-07-21'
+method: searched
+source: https://dev.thorchain.org/, https://thorchain.net/dashboard, openapi/
+versioning:
+  midgard:
+    scheme: uri-path
+    current: v2
+    spec_version: 2.34.2
+  thornode:
+    scheme: semantic
+    spec_version: 3.19.1
+    docs: https://dev.thorchain.org/
+  note: >-
+    THORNode application-layer changes ship with THORChain network upgrades
+    (governed on-chain via Mimir + node consensus), not via a REST versioning
+    policy. Live protocol version is queryable at /thorchain/version and live
+    parameters at /thorchain/constants and /thorchain/mimir.
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: >-
+    No formal API deprecation policy or RFC 8594 Sunset/Deprecation header
+    support was found. The THORNode spec retains legacy variants (e.g.
+    /thorchain/tx/{hash}/signers alongside /thorchain/tx/details/{hash}) but
+    none are flagged deprecated in the OpenAPI.
+sla:
+  url: null
+  note: >-
+    THORChain is a permissionless, decentralized network with no SLA. Public
+    API availability depends on the gateway/node operator. Liveness is
+    verifiable via Midgard /v2/health and THORNode /thorchain/ping.
+status_page: https://thorchain.net/dashboard
+status_note: >-
+  THORChain publishes no classic status page; network and node health are
+  surfaced on the community network dashboard (thorchain.net/dashboard) and
+  live via Midgard /v2/health and THORNode /thorchain/lastblock + /thorchain/ping.
+deprecated_operations: []

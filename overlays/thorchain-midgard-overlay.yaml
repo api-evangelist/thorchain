@@ -1,0 +1,21 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for THORChain Midgard API
+  version: 1.0.0
+extends: openapi/thorchain-midgard-openapi.json
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: thorchain
+      x-apievangelist-artifact-tier: enriched
+      x-access: open-read-only-no-auth
+      x-role: indexer
+      x-description: >-
+        Midgard is THORChain's public indexer/analytics API — time-series
+        history, actions, pool stats and member details built on top of the
+        THORNode application state.
+  - target: $.info
+    update:
+      x-apievangelist-conventions: conventions/thorchain-conventions.yml
+      x-apievangelist-errors: errors/thorchain-problem-types.yml
+      x-apievangelist-pagination: limit/offset + nextPageToken; interval-bucketed time series

@@ -1,0 +1,62 @@
+generated: '2026-07-21'
+method: searched
+status: published
+source: https://thorchain.org/.well-known/mcp-server-card.json
+notes: >-
+  THORChain publishes an official, read-only MCP server for website/agent
+  discovery, advertised via /.well-known/mcp-server-card.json,
+  /.well-known/ai-plugin.json and /.well-known/api-catalog, and documented in
+  https://thorchain.org/AGENTS.md. It is a DISCOVERY server (site summary,
+  agent rules, public API references) — it does NOT transact, sign, or expose
+  the swap/pool operations directly. The tools[] below are the server's own
+  advertised tools (verbatim from the server card). The candidate_protocol_tools[]
+  section additionally lists agent tools DERIVED from THORChain's two public
+  read-only OpenAPI specs (THORNode + Midgard) for teams building a data MCP.
+server:
+  name: thorchain-public-discovery
+  version: 1.0.0
+  transport: http
+  url: https://thorchain.org/mcp
+  homepage: https://thorchain.org/
+  protocol_version: '2025-06-18'
+  authentication:
+    required: false
+  capabilities:
+    tools: true
+    resources: true
+    prompts: false
+tools:
+  - name: get_site_summary
+    description: Return the public THORChain website and agent-discovery summary.
+  - name: get_agent_rules
+    description: Return the public THORChain AGENTS.md rules for AI clients.
+  - name: list_public_api_references
+    description: List official public THORChain API documentation references.
+resources:
+  - uri: https://thorchain.org/llms.txt
+    name: THORChain LLM summary
+    mimeType: text/plain
+discovery:
+  mcp_server_card: https://thorchain.org/.well-known/mcp-server-card.json
+  ai_plugin: https://thorchain.org/.well-known/ai-plugin.json
+  api_catalog: https://thorchain.org/.well-known/api-catalog
+  agents_md: https://thorchain.org/AGENTS.md
+  website_openapi: https://thorchain.org/openapi.json
+candidate_protocol_tools:
+  method: derived
+  source: openapi/thorchain-thornode-openapi.yaml, openapi/thorchain-midgard-openapi.json
+  tools:
+    - name: quote_swap
+      source_operation: openapi/thorchain-thornode-openapi.yaml#quoteswap
+    - name: get_pools
+      source_operation: openapi/thorchain-thornode-openapi.yaml#pools
+    - name: get_inbound_addresses
+      source_operation: openapi/thorchain-thornode-openapi.yaml#inboundAddresses
+    - name: get_tx_status
+      source_operation: openapi/thorchain-thornode-openapi.yaml#txStatus
+    - name: resolve_thorname
+      source_operation: openapi/thorchain-thornode-openapi.yaml#thorname
+    - name: midgard_actions
+      source_operation: openapi/thorchain-midgard-openapi.json#GetActions
+    - name: midgard_swap_history
+      source_operation: openapi/thorchain-midgard-openapi.json#GetSwapHistory

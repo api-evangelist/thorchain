@@ -1,0 +1,42 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/thorchain-thornode-openapi.yaml, openapi/thorchain-midgard-openapi.json
+notes: >-
+  Derived from the two published OpenAPI 3.0 specs plus THORChain's public
+  developer docs. THORChain is a Cosmos-SDK / CometBFT based L1; the THORNode
+  API is the custom application REST layer, and the underlying node also exposes
+  standard CometBFT RPC and Cosmos SDK gRPC-gateway REST.
+standards:
+  - id: openapi-3.0
+    conforms: true
+    evidence: Both Midgard (3.0.0) and THORNode (3.0.0) publish OpenAPI 3.0 documents.
+  - id: rest
+    conforms: true
+    evidence: Resource-oriented HTTPS GET endpoints returning JSON.
+  - id: json
+    conforms: true
+    evidence: All responses are application/json.
+  - id: oauth2
+    conforms: false
+    evidence: No oauth2 securityScheme; APIs are open and unauthenticated.
+  - id: oidc
+    conforms: false
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: Errors are plain JSON; no application/problem+json responses declared.
+  - id: cosmos-sdk-rest
+    conforms: true
+    evidence: >-
+      Node exposes Cosmos SDK gRPC-gateway REST (/cosmos/*) and auth/bank
+      legacy endpoints (/auth/accounts, /bank/balances) alongside the custom
+      /thorchain/* application API.
+  - id: cometbft-rpc
+    conforms: true
+    evidence: >-
+      Underlying CometBFT (Tendermint) RPC is available per dev.thorchain.org
+      (docs.cometbft.com/v0.38/rpc referenced).
+  - id: pagination
+    conforms: partial
+    evidence: >-
+      Midgard history/actions endpoints paginate via limit/offset and
+      nextPageToken; THORNode queue/swap offers a paginated variant.

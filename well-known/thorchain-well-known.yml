@@ -1,0 +1,48 @@
+generated: '2026-07-21'
+method: searched
+notes: >-
+  THORChain's marketing/discovery host (thorchain.org) publishes a rich
+  agent-native discovery surface under /.well-known/ and at the site root: an
+  RFC 9727 api-catalog linkset, an ai-plugin manifest, an MCP server card, an
+  AGENTS.md agent contract, an llms.txt, and a "website discovery" OpenAPI. No
+  OIDC/OAuth discovery documents (the APIs are unauthenticated). The docs host
+  (docs.thorchain.org, GitBook) exposes no /.well-known documents.
+hosts:
+  - host: https://thorchain.org
+    documents:
+      - path: /.well-known/api-catalog
+        status: 200
+        file: thorchain-api-catalog.json
+        standard: RFC 9727 (linkset)
+      - path: /.well-known/ai-plugin.json
+        status: 200
+        file: thorchain-ai-plugin.json
+      - path: /.well-known/mcp-server-card.json
+        status: 200
+        file: thorchain-mcp-server-card.json
+      - path: /openapi.json
+        status: 200
+        file: thorchain-website-openapi.json
+        note: >-
+          THORChain Website Discovery OpenAPI 3.1.0 (10 paths); discovery
+          meta-API, not the protocol API.
+      - path: /AGENTS.md
+        status: 200
+        file: ../skills/thorchain-AGENTS.md
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+  - host: https://docs.thorchain.org
+    documents:
+      - path: /llms.txt
+        status: 200
+        file: ../llms/thorchain-llms.txt
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404

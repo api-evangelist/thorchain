@@ -1,0 +1,25 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for THORChain THORNode API
+  version: 1.0.0
+extends: openapi/thorchain-thornode-openapi.yaml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: thorchain
+      x-apievangelist-artifact-tier: enriched
+      x-access: open-read-only-no-auth
+      x-base-url: https://gateway.liquify.com/chain/thorchain_api
+      x-write-path: >-
+        State changes are made on-chain by broadcasting signed L1 transactions
+        with encoded memos to the current inbound vault address (see
+        /thorchain/inbound_addresses and /thorchain/quote/swap), not via this API.
+  - target: $.servers
+    update:
+      - url: https://gateway.liquify.com/chain/thorchain_api
+        description: Public THORNode gateway (Liquify). Spec ships without servers[]; added by API Evangelist.
+  - target: $.info
+    update:
+      x-apievangelist-conventions: conventions/thorchain-conventions.yml
+      x-apievangelist-errors: errors/thorchain-problem-types.yml
+      x-apievangelist-data-model: data-model/thorchain-data-model.yml

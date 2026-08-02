@@ -1,0 +1,16 @@
+generated: '2026-07-21'
+method: generated
+source: openapi/thorchain-thornode-openapi.yaml, openapi/thorchain-midgard-openapi.json
+skills:
+  - file: thorchain-quote-and-track-swap.md
+    name: Quote and track a THORChain cross-chain swap
+    api: openapi/thorchain-thornode-openapi.yaml
+    operations: [quoteswap, inboundAddresses, txStatus, txStages, txSigners]
+  - file: thorchain-explore-pools-and-prices.md
+    name: Explore THORChain pools, depths and prices
+    api: openapi/thorchain-thornode-openapi.yaml
+    operations: [pools, pool, oraclePrices, GetPoolStats, GetDepthHistory, GetSwapHistory]
+  - file: thorchain-check-positions.md
+    name: Check THORChain liquidity, savers and RUNEPool positions
+    api: openapi/thorchain-thornode-openapi.yaml
+    operations: [liquidityProvider, saver, runeProvider, GetMemberDetail, GetSaverDetail]

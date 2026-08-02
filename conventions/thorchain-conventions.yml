@@ -1,0 +1,69 @@
+generated: '2026-07-21'
+method: searched
+source: >-
+  https://dev.thorchain.org/, openapi/thorchain-thornode-openapi.yaml,
+  openapi/thorchain-midgard-openapi.json
+summary: >-
+  Cross-cutting request/response semantics for THORChain's two public read APIs
+  (THORNode application REST + Midgard indexer). Both are open, unauthenticated,
+  JSON-over-HTTPS GET APIs. There is NO idempotency contract and no write API —
+  state changes are made by broadcasting signed L1 transactions with encoded
+  memos to inbound vault addresses, not by calling these APIs.
+authentication:
+  style: none
+  note: Open public read access; no keys or tokens. See authentication/thorchain-authentication.yml.
+idempotency:
+  supported: false
+  note: >-
+    APIs are read-only (GET only) so idempotency keys are not applicable. The
+    on-chain write path is naturally idempotent by transaction hash — a given
+    signed transaction can only be committed once.
+pagination:
+  midgard:
+    style: limit-offset + cursor
+    params: [limit, offset, nextPageToken, prevPageToken, from, to, count, interval]
+    note: >-
+      /v2/actions and history endpoints accept limit (max 50) and offset, and
+      return nextPageToken/prevPageToken for cursor paging. Time-series history
+      endpoints use interval (5min/hour/day/week/month/quarter/year), count,
+      and from/to unix-second bounds.
+  thornode:
+    style: height + cursor
+    params: [height, offset]
+    note: >-
+      Most THORNode endpoints accept an optional ?height= query to read state
+      at a past block. /thorchain/queue/swap/paginated exposes offset paging.
+versioning:
+  midgard: { scheme: uri-path, current: v2 }
+  thornode: { scheme: semantic (spec version 3.19.1), path: /thorchain/* }
+  note: >-
+    Midgard is versioned in the URI path (/v2). THORNode carries no URI version
+    for the application layer; breaking changes ship with THORChain network
+    upgrades (see /thorchain/version and /thorchain/constants for live values).
+request_tracing:
+  request_id_header: none
+  note: No provider request-id header documented; use gateway-level tracing.
+error_envelope:
+  content_type: application/json
+  shape: '{ "error": "message" }'
+  cross_ref: errors/thorchain-problem-types.yml
+rate_limit_signaling:
+  note: >-
+    No standard rate-limit headers defined by the protocol API. Public gateways
+    (Liquify, Nine Realms) enforce per-IP limits and return HTTP 429 when
+    exceeded. Run your own THORNode for unlimited access.
+asset_notation:
+  note: >-
+    Assets use CHAIN.TICKER-ID notation (e.g. BTC.BTC, ETH.ETH,
+    ETH.USDC-0XA0B86991C6218B36C1D19D4A2E9EB0CE3606EB48). Amounts are integers
+    in 1e8 fixed-point (tor/e8) regardless of the native asset's decimals.
+memos:
+  note: >-
+    THORChain actions (swap, add/withdraw liquidity, loans, bond) are encoded
+    as transaction MEMO strings. Use /thorchain/quote/swap to get a ready-to-use
+    memo + inbound vault address, and /thorchain/memo/* reference endpoints to
+    construct/validate memos. See conventions cross-ref in skills/.
+cross_references:
+  errors: errors/thorchain-problem-types.yml
+  authentication: authentication/thorchain-authentication.yml
+  lifecycle: lifecycle/thorchain-lifecycle.yml

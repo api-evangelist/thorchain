@@ -1,0 +1,29 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://thorchain.org/mcp",
+      "service-desc": [
+        {
+          "href": "https://thorchain.org/openapi.json",
+          "type": "application/vnd.oai.openapi+json"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://thorchain.org/AGENTS.md",
+          "type": "text/markdown"
+        },
+        {
+          "href": "https://dev.thorchain.org/",
+          "type": "text/html"
+        }
+      ],
+      "service-meta": [
+        {
+          "href": "https://thorchain.org/.well-known/mcp-server-card.json",
+          "type": "application/json"
+        }
+      ]
+    }
+  ]
+}

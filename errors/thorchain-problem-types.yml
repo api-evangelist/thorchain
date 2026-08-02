@@ -1,0 +1,51 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/thorchain-thornode-openapi.yaml, openapi/thorchain-midgard-openapi.json
+format: json
+notes: >-
+  Derived from the response codes declared across both OpenAPI specs. THORChain
+  APIs are read-only and do NOT use RFC 9457 problem+json; errors are returned
+  as plain JSON with an "error" (or "message") string field and the HTTP status
+  code. The THORNode spec declares 404 for lookups of unknown addresses/assets/
+  hashes; Midgard declares only 200 in-spec but the live service returns
+  standard 400/404/429/5xx. This catalog captures the observed error envelope
+  and the meaningful status codes for API consumers.
+envelope:
+  content_type: application/json
+  fields:
+    - name: error
+      description: Human-readable error message (THORNode).
+    - name: message
+      description: Alternative message field returned by some Midgard/gateway errors.
+problems:
+  - status: 400
+    title: Bad request
+    detail: Malformed path/query parameter (e.g. invalid asset notation or address).
+    remediation: >-
+      Use canonical CHAIN.ASSET notation (e.g. BTC.BTC, ETH.ETH,
+      ETH.USDC-0X...) and valid bech32/hex addresses for the target chain.
+  - status: 404
+    title: Not found
+    detail: >-
+      Requested resource does not exist — unknown transaction hash, address
+      with no records, unknown pool/asset, or THORName not registered.
+    source_operations:
+      - openapi/thorchain-thornode-openapi.yaml#tx
+      - openapi/thorchain-thornode-openapi.yaml#pool
+      - openapi/thorchain-thornode-openapi.yaml#liquidityProvider
+      - openapi/thorchain-thornode-openapi.yaml#thorname
+    remediation: Verify the identifier and that the record exists at the queried height.
+  - status: 429
+    title: Too many requests
+    detail: >-
+      Rate limited by the public gateway/node operator (Liquify, Nine Realms,
+      etc.). The protocol API defines no auth; limits are per-IP at the gateway.
+    remediation: Back off and retry; run your own THORNode or use a paid gateway tier for higher limits.
+  - status: 500
+    title: Internal server error
+    detail: Node or indexer error while serving the request.
+    remediation: Retry; if persistent try an alternate public endpoint or node.
+  - status: 503
+    title: Service unavailable
+    detail: Node syncing, indexer catching up, or endpoint temporarily overloaded.
+    remediation: Retry against another endpoint; check /thorchain/lastblock for node sync height.

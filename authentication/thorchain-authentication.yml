@@ -1,0 +1,20 @@
+generated: '2026-07-21'
+method: searched
+source: openapi/thorchain-thornode-openapi.yaml, openapi/thorchain-midgard-openapi.json
+docs: https://dev.thorchain.org/
+summary:
+  types: []
+  api_key_in: []
+  oauth2_flows: []
+  access: open
+  note: >-
+    Both THORChain public APIs — the THORNode REST API and the Midgard indexer
+    API — are open, read-only, and require NO authentication. Neither OpenAPI
+    declares any securityScheme; there are no API keys, OAuth flows, or bearer
+    tokens. Access is unauthenticated GET over HTTPS. Public gateways (e.g.
+    Liquify, Nine Realms) may apply per-IP rate limiting, and some third-party
+    hosted endpoints offer optional API keys for higher rate tiers, but the
+    protocol APIs themselves define no auth. Write access to THORChain happens
+    on-chain: state changes are effected by broadcasting signed L1 transactions
+    with encoded memos to inbound vault addresses, not by calling an authed API.
+schemes: []
