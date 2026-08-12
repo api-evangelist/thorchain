@@ -705,6 +705,8 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: Overlay
+  url: overlays/thorchain-midgard-overlay.yaml
 - type: AgenticAccess
   url: agentic-access/thorchain-agentic-access.yml
 - type: DomainSecurity
