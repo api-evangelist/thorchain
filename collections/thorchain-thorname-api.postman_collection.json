@@ -1,0 +1,308 @@
+{
+  "item": [
+    {
+      "id": "9eb2b8a4-bbb1-4559-8e51-dd7103a7916c",
+      "name": "Thorname",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c1e8008b-1041-4bd0-ad1d-dce66e78a918",
+          "name": "THORName Details",
+          "request": {
+            "name": "THORName Details",
+            "description": {
+              "content": "Returns an array of chains and their addresses associated with the given THORName",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "thorname",
+                "lookup",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) a THORName"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a21403c5-af3c-4a61-b2ca-8d681dd6e710",
+              "name": "object containing THORName data for a specific name",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "thorname",
+                    "lookup",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) a THORName"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"owner\": \"thor102y0m3uptg0vvudeyh00r2fnz70wq7d8y7mu2g\",\n  \"expire\": \"string\",\n  \"entries\": [\n    {\n      \"chain\": \"string\",\n      \"address\": \"string\"\n    },\n    {\n      \"chain\": \"string\",\n      \"address\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3fe7b806-fb1e-45a6-97be-25b532122baf",
+          "name": "THORName owner",
+          "request": {
+            "name": "THORName owner",
+            "description": {
+              "content": "Returns an array of THORNames owned by the address. The address is not necessarily an\nassociated address for those thornames.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "thorname",
+                "owner",
+                ":address"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "address",
+                  "description": "(Required) Address which owns a THORName."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "280715b5-ffb5-4334-864c-80619e8dfa96",
+              "name": "object containing a list of THORName names for a specific address",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "thorname",
+                    "owner",
+                    ":address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) Address which owns a THORName."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  \"myname\",\n  \"myname\"\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8cdb2a1d-fd79-4b2d-8162-ddcfcf9c712b",
+          "name": "Gives a list of THORNames by reverse lookup",
+          "request": {
+            "name": "Gives a list of THORNames by reverse lookup",
+            "description": {
+              "content": "Returns an array of THORNames associated with the given address",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "thorname",
+                "rlookup",
+                ":address"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "address",
+                  "description": "(Required) Address to match THORNames against."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6f95a86f-4e8e-4994-846d-922efeab6f42",
+              "name": "object containing a list of THORName names for a specific address",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "thorname",
+                    "rlookup",
+                    ":address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) Address to match THORNames against."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  \"myname\",\n  \"myname\"\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d86fba0b-fbdb-4f18-a6c8-c94f93c4b7a8",
+    "name": "Thornode Auth Thorname API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Thornode REST API.\n\nContact Support:\n Email: devs@thorchain.org",
+      "type": "text/plain"
+    }
+  }
+}

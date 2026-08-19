@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Thornode Auth Knownpools API",
+    "version": "3.19.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Knownpools",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Known Pools List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/knownpools"
+          },
+          "docs": "Returns an object with known pools and their statuses"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

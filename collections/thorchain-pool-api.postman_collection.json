@@ -1,0 +1,238 @@
+{
+  "item": [
+    {
+      "id": "45109dfa-e503-4c87-b758-6f983b52ccb7",
+      "name": "Pool",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "575b1533-cf1b-4918-8b10-8068d3618757",
+          "name": "Details of a Pool",
+          "request": {
+            "name": "Details of a Pool",
+            "description": {
+              "content": "Returns details of the pool: depths, price, 24h volume, APY. ",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "pool",
+                ":asset"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "period",
+                  "value": "<string>",
+                  "description": "Specifies the base interval from which APY is extrapolated.\nDefault is 14d.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "asset",
+                  "description": "(Required) pool name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a4eafe71-b297-4ed8-ad43-287ee3feb7ed",
+              "name": "Object containing details for one pool",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "pool",
+                    ":asset"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "period",
+                      "value": "100d"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset",
+                      "description": "(Required) pool name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"asset\": \"string\",\n  \"volume24h\": \"string\",\n  \"assetDepth\": \"string\",\n  \"runeDepth\": \"string\",\n  \"assetPrice\": \"string\",\n  \"assetPriceUSD\": \"string\",\n  \"liquidityInUSD\": \"string\",\n  \"annualPercentageRate\": \"string\",\n  \"poolAPY\": \"string\",\n  \"earnings\": \"string\",\n  \"earningsAnnualAsPercentOfDepth\": \"string\",\n  \"status\": \"string\",\n  \"liquidityUnits\": \"string\",\n  \"synthUnits\": \"string\",\n  \"synthSupply\": \"string\",\n  \"units\": \"string\",\n  \"nativeDecimal\": \"string\",\n  \"saversUnits\": \"string\",\n  \"saversDepth\": \"string\",\n  \"saversAPR\": \"string\",\n  \"totalCollateral\": \"string\",\n  \"totalDebtTor\": \"string\",\n  \"lpLuvi\": \"string\",\n  \"depthMinus2Percent\": \"string\",\n  \"depthPlus2Percent\": \"string\",\n  \"saversYieldShare\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "995a90fe-fba8-49b4-a3c7-b7a3264395e2",
+          "name": "Pool Statistics",
+          "request": {
+            "name": "Pool Statistics",
+            "description": {
+              "content": "Statistics about the pool. The description of the fields have pointers about the\ncorresponding v2/history location. Visit the history endpoint for drilldowns.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "pool",
+                ":asset",
+                "stats"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "period",
+                  "value": "<string>",
+                  "description": "Restricts aggregation type fields to the last period only.\nDefault is 14d.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "asset",
+                  "description": "(Required) pool name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "27dd9e7a-f480-4cde-bc58-a3b3440487a5",
+              "name": "Stats for one pool.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "pool",
+                    ":asset",
+                    "stats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "period",
+                      "value": "24h"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset",
+                      "description": "(Required) pool name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"asset\": \"string\",\n  \"status\": \"string\",\n  \"assetPrice\": \"string\",\n  \"assetPriceUSD\": \"string\",\n  \"assetDepth\": \"string\",\n  \"runeDepth\": \"string\",\n  \"liquidityUnits\": \"string\",\n  \"synthUnits\": \"string\",\n  \"synthSupply\": \"string\",\n  \"units\": \"string\",\n  \"toAssetVolume\": \"string\",\n  \"toRuneVolume\": \"string\",\n  \"swapVolume\": \"string\",\n  \"toAssetCount\": \"string\",\n  \"toRuneCount\": \"string\",\n  \"swapCount\": \"string\",\n  \"uniqueSwapperCount\": \"string\",\n  \"toAssetAverageSlip\": \"string\",\n  \"toRuneAverageSlip\": \"string\",\n  \"averageSlip\": \"string\",\n  \"toAssetFees\": \"string\",\n  \"toRuneFees\": \"string\",\n  \"totalFees\": \"string\",\n  \"poolAPY\": \"string\",\n  \"annualPercentageRate\": \"string\",\n  \"earnings\": \"string\",\n  \"earningsAnnualAsPercentOfDepth\": \"string\",\n  \"saversAPR\": \"string\",\n  \"addAssetLiquidityVolume\": \"string\",\n  \"addRuneLiquidityVolume\": \"string\",\n  \"addLiquidityVolume\": \"string\",\n  \"addLiquidityCount\": \"string\",\n  \"withdrawAssetVolume\": \"string\",\n  \"withdrawRuneVolume\": \"string\",\n  \"withdrawVolume\": \"string\",\n  \"withdrawCount\": \"string\",\n  \"uniqueMemberCount\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e68cd45d-098b-4274-b29f-a68a462b2c41",
+    "name": "Thornode Auth Pool API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Thornode REST API.\n\nContact Support:\n Email: devs@thorchain.org",
+      "type": "text/plain"
+    }
+  }
+}

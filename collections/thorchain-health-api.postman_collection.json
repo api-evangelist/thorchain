@@ -1,0 +1,173 @@
+{
+  "item": [
+    {
+      "id": "744828ca-5f5e-46c0-8698-b359703a86a5",
+      "name": "Health",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7d5fdd7f-bde7-457c-a7df-3ec2871cd264",
+          "name": "ping",
+          "request": {
+            "name": "ping",
+            "description": {},
+            "url": {
+              "path": [
+                "thorchain",
+                "ping"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ac35fce9-7f3c-4397-8a0f-2e849bfe5a40",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "ping"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ping\": \"pong\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "614f53ea-5d97-41f5-928d-37123908b63d",
+          "name": "Health Info",
+          "request": {
+            "name": "Health Info",
+            "description": {
+              "content": "Returns an object containing the health response of the API.\nMeaning of heights:\n\nlastThorNode - Latest block as reported by ThorNode.\n\nlastFetched - Latest block fetched from ThorNode.\n\nlastCommitted - Latest block committed to the DB but not fully processed yet.\n\nlastAggregated - Latest block fully processed and aggregated.\n\ngenesisInfo - The genesis height Midgard bootstrapped with.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "health"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0737424e-dade-4987-8180-940e6978eb14",
+              "name": "Returns health status for Midgard",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "health"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"database\": false,\n  \"scannerHeight\": \"string\",\n  \"inSync\": false,\n  \"lastThorNode\": {\n    \"height\": 9492,\n    \"timestamp\": 7453\n  },\n  \"lastFetched\": {\n    \"height\": 7616,\n    \"timestamp\": 342\n  },\n  \"lastCommitted\": {\n    \"height\": 1276,\n    \"timestamp\": 1653\n  },\n  \"lastAggregated\": {\n    \"height\": 6579,\n    \"timestamp\": 6589\n  },\n  \"genesisInfo\": {\n    \"height\": 3884,\n    \"hash\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d25cd462-774a-410b-8cf6-b9a60ea34566",
+    "name": "Thornode Auth Health API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Thornode REST API.\n\nContact Support:\n Email: devs@thorchain.org",
+      "type": "text/plain"
+    }
+  }
+}

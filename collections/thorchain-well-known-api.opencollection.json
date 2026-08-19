@@ -1,0 +1,51 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Thornode Auth .well Known API",
+    "version": "3.19.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": ".well Known",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get well-known public agent rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/.well-known/agent-rules"
+          },
+          "docs": "Get well-known public agent rules"
+        },
+        {
+          "info": {
+            "name": "Get the MCP server card",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/.well-known/mcp-server-card.json"
+          },
+          "docs": "Get the MCP server card"
+        },
+        {
+          "info": {
+            "name": "Get the AI plugin manifest",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/.well-known/ai-plugin.json"
+          },
+          "docs": "Get the AI plugin manifest"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

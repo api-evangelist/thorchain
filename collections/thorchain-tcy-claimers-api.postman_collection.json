@@ -1,0 +1,302 @@
+{
+  "item": [
+    {
+      "id": "bd369cb2-5dca-4fea-8ea7-c52f05f10689",
+      "name": "TCY Claimers",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ea2e66aa-d290-4ce0-b74e-74fcdc69d13c",
+          "name": "tcy Claimer",
+          "request": {
+            "name": "tcy Claimer",
+            "description": {
+              "content": "Returns the tcy claimer information for an address.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "tcy_claimer",
+                ":address"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<long>",
+                  "description": "optional block height, defaults to current tip"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "address",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bfdc4e1b-df16-4b86-b7fd-84b252907bea",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "tcy_claimer",
+                    ":address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "height",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"amount\": \"0\",\n  \"asset\": \"BTC.BTC\",\n  \"l1_address\": \"thor1xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "49f2b3d3-cfd4-4cb9-8f4d-37f7d9da0c26",
+          "name": "tcy Claimers",
+          "request": {
+            "name": "tcy Claimers",
+            "description": {
+              "content": "Returns all tcy claimers information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "tcy_claimers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<long>",
+                  "description": "optional block height, defaults to current tip"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "359329d3-df1b-4f79-ba2e-941063838406",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "tcy_claimers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "height",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"amount\": \"0\",\n    \"asset\": \"BTC.BTC\"\n  },\n  {\n    \"amount\": \"0\",\n    \"asset\": \"BTC.BTC\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "12754479-621d-4ca1-90ad-3d490dd9bb08",
+          "name": "tcy Protocol Owned",
+          "request": {
+            "name": "tcy Protocol Owned",
+            "description": {
+              "content": "Returns the amount of TCY held by the claim module in excess of the outstanding tcy_claimer entitlements (protocol-owned TCY accumulated by the claim-module rune→TCY swap cycle).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "tcy_protocol_owned"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<long>",
+                  "description": "optional block height, defaults to current tip"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "61afc359-4f65-4aca-808d-d5c0d2329342",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "tcy_protocol_owned"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "height",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"amount\": \"3096016855586000\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "6d5a9c4d-162f-4867-90a9-a64453e8539c",
+    "name": "Thornode Auth TCY Claimers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Thornode REST API.\n\nContact Support:\n Email: devs@thorchain.org",
+      "type": "text/plain"
+    }
+  }
+}

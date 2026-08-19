@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Thornode Auth Llms.txt API",
+    "version": "3.19.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Llms.txt",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the short AI-agent resource summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/llms.txt"
+          },
+          "docs": "Get the short AI-agent resource summary"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

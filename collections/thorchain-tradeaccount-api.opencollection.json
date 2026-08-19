@@ -1,0 +1,42 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Thornode Auth TradeAccount API",
+    "version": "3.19.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "TradeAccount",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "trade_account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/trade/account/:address",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the units and depth of a trade account"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

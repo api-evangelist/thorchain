@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Thornode Auth Tcy API",
+    "version": "3.19.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tcy",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Tcy Distribution",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/tcy/distribution/:address",
+            "params": [
+              {
+                "name": "address",
+                "value": "thor102y0m3uptg0vvudeyh00r2fnz70wq7d8y7mu2g",
+                "type": "path",
+                "description": "Address which is assigned to TCY Holder."
+              },
+              {
+                "name": "period",
+                "value": "90d",
+                "type": "query",
+                "description": "Specifies the base interval from which APR will be calculated.\nDefault is 30d.\n"
+              }
+            ]
+          },
+          "docs": "Returns an array of TCY distribution for the given address.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

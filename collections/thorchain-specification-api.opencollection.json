@@ -1,0 +1,40 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Thornode Auth Specification API",
+    "version": "3.19.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Specification",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Documentation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/doc"
+          },
+          "docs": "Swagger/OpenAPI 3.0 specification generated documents."
+        },
+        {
+          "info": {
+            "name": "Swagger File",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/swagger.json"
+          },
+          "docs": "Returns human and machine readable swagger/openapi specification"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

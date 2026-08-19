@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Thornode Auth Churns API",
+    "version": "3.19.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Churns",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Churns List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/churns"
+          },
+          "docs": "Returns block height and timestamp for each churn."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

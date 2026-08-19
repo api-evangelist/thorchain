@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Thornode Auth Borrowers API",
+    "version": "3.19.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Borrowers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Borrowers List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/borrowers",
+            "params": [
+              {
+                "name": "asset",
+                "value": "",
+                "type": "query",
+                "description": "Return only borrowers getting loan against this asset as collateral."
+              }
+            ]
+          },
+          "docs": "Returns an array containing the addresses for all borrowers.\nAddresses are only shown once.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

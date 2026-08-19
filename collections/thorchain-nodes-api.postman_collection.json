@@ -1,0 +1,290 @@
+{
+  "item": [
+    {
+      "id": "02073f79-7e66-4fda-8889-50e5970343da",
+      "name": "Nodes",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ae493a33-d9f4-440d-a8dc-9efdfca98327",
+          "name": "Nodes List",
+          "request": {
+            "name": "Nodes List",
+            "description": {
+              "content": "Returns a list of Node public keys and adresses.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "nodes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a8a0a63d-1373-4e14-9c3b-3283a7e361c1",
+              "name": "Returns an object containing Node public key data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "nodes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"nodeAddress\": \"thor102y0m3uptg0vvudeyh00r2fnz70wq7d8y7mu2g\",\n    \"secp256k1\": \"thorpub1addwnpepqgxwdf3ure0pg5fwnpeux3ym9n06267lkres54zwjh4c8048ezhj5024qyr\",\n    \"ed25519\": \"thorpub1addwnpepqgxwdf3ure0pg5fwnpeux3ym9n06267lkres54zwjh4c8048ezhj5024qyr\"\n  },\n  {\n    \"nodeAddress\": \"thor102y0m3uptg0vvudeyh00r2fnz70wq7d8y7mu2g\",\n    \"secp256k1\": \"thorpub1addwnpepqgxwdf3ure0pg5fwnpeux3ym9n06267lkres54zwjh4c8048ezhj5024qyr\",\n    \"ed25519\": \"thorpub1addwnpepqgxwdf3ure0pg5fwnpeux3ym9n06267lkres54zwjh4c8048ezhj5024qyr\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f0fd8019-c0c2-4223-800a-3d8e75e55d99",
+          "name": "node",
+          "request": {
+            "name": "node",
+            "description": {
+              "content": "Returns node information for the provided node address.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "node",
+                ":address"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<long>",
+                  "description": "optional block height, defaults to current tip"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "address",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b1a881f2-e532-480a-8f53-f796ece14327",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "node",
+                    ":address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "height",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"node_address\": \"thor1f3s7q037eancht7sg0aj995dht25rwrnu4ats5\",\n  \"status\": \"Active\",\n  \"pub_key_set\": {\n    \"secp256k1\": \"thorpub1addwnpepq27ck6u44zl8qqdnmzjjc8rg72amrxrsp42p9vd7kt6marhy6ww76z8shwe\",\n    \"ed25519\": \"thorpub1addwnpepq27ck6u44zl8qqdnmzjjc8rg72amrxrsp42p9vd7kt6marhy6ww76z8shwe\"\n  },\n  \"validator_cons_pub_key\": \"thor104gsqwta048e80j909g6y9kkqdjrw0lff866ew\",\n  \"peer_id\": \"16Uiu2HAmRgsiryer3pWCPJz18PQZDFFs1GBqCPGGJczrQXdoTBMk\",\n  \"active_block_height\": 123456,\n  \"status_since\": 100000,\n  \"node_operator_address\": \"thor1f3s7q037eancht7sg0aj995dht25rwrnu4ats5\",\n  \"total_bond\": \"123456789\",\n  \"bond_providers\": {\n    \"node_operator_fee\": \"string\",\n    \"providers\": [\n      {\n        \"bond_address\": \"string\",\n        \"bond\": \"string\"\n      },\n      {\n        \"bond_address\": \"string\",\n        \"bond\": \"string\"\n      }\n    ]\n  },\n  \"signer_membership\": [\n    \"thorpub1addwnpepq2jqhv5rdqlkusfxy05stfzcgslhhz5qh8pxetw5ry2aa6awgdh3shq8s82\",\n    \"thorpub1addwnpepq2jqhv5rdqlkusfxy05stfzcgslhhz5qh8pxetw5ry2aa6awgdh3shq8s82\"\n  ],\n  \"requested_to_leave\": false,\n  \"forced_to_leave\": true,\n  \"leave_height\": 0,\n  \"ip_address\": \"10.20.30.40\",\n  \"version\": \"0.35.0\",\n  \"slash_points\": 42,\n  \"jail\": {\n    \"release_height\": 1234,\n    \"reason\": \"string\"\n  },\n  \"current_award\": \"123456\",\n  \"observe_chains\": [\n    {\n      \"chain\": \"BTC\",\n      \"height\": 2000000\n    },\n    {\n      \"chain\": \"BTC\",\n      \"height\": 2000000\n    }\n  ],\n  \"maintenance\": false,\n  \"missing_blocks\": 9403,\n  \"preflight_status\": {\n    \"status\": \"Ready\",\n    \"reason\": \"OK\",\n    \"code\": 0\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ccb18728-70d3-407e-a602-e95123e110a2",
+          "name": "nodes",
+          "request": {
+            "name": "nodes",
+            "description": {
+              "content": "Returns node information for all registered validators.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "nodes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<long>",
+                  "description": "optional block height, defaults to current tip"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8a231823-599c-4dc6-8870-51f312f81c62",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "nodes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "height",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"node_address\": \"thor1f3s7q037eancht7sg0aj995dht25rwrnu4ats5\",\n    \"status\": \"Active\",\n    \"pub_key_set\": {\n      \"secp256k1\": \"thorpub1addwnpepq27ck6u44zl8qqdnmzjjc8rg72amrxrsp42p9vd7kt6marhy6ww76z8shwe\",\n      \"ed25519\": \"thorpub1addwnpepq27ck6u44zl8qqdnmzjjc8rg72amrxrsp42p9vd7kt6marhy6ww76z8shwe\"\n    },\n    \"validator_cons_pub_key\": \"thor104gsqwta048e80j909g6y9kkqdjrw0lff866ew\",\n    \"peer_id\": \"16Uiu2HAmRgsiryer3pWCPJz18PQZDFFs1GBqCPGGJczrQXdoTBMk\",\n    \"active_block_height\": 123456,\n    \"status_since\": 100000,\n    \"node_operator_address\": \"thor1f3s7q037eancht7sg0aj995dht25rwrnu4ats5\",\n    \"total_bond\": \"123456789\",\n    \"bond_providers\": {\n      \"node_operator_fee\": \"string\",\n      \"providers\": [\n        {\n          \"bond_address\": \"string\",\n          \"bond\": \"string\"\n        },\n        {\n          \"bond_address\": \"string\",\n          \"bond\": \"string\"\n        }\n      ]\n    },\n    \"signer_membership\": [\n      \"thorpub1addwnpepq2jqhv5rdqlkusfxy05stfzcgslhhz5qh8pxetw5ry2aa6awgdh3shq8s82\",\n      \"thorpub1addwnpepq2jqhv5rdqlkusfxy05stfzcgslhhz5qh8pxetw5ry2aa6awgdh3shq8s82\"\n    ],\n    \"requested_to_leave\": true,\n    \"forced_to_leave\": true,\n    \"leave_height\": 0,\n    \"ip_address\": \"10.20.30.40\",\n    \"version\": \"0.35.0\",\n    \"slash_points\": 42,\n    \"jail\": {\n      \"release_height\": 1234,\n      \"reason\": \"string\"\n    },\n    \"current_award\": \"123456\",\n    \"observe_chains\": [\n      {\n        \"chain\": \"BTC\",\n        \"height\": 2000000\n      },\n      {\n        \"chain\": \"BTC\",\n        \"height\": 2000000\n      }\n    ],\n    \"maintenance\": false,\n    \"missing_blocks\": 7158,\n    \"preflight_status\": {\n      \"status\": \"Ready\",\n      \"reason\": \"OK\",\n      \"code\": 0\n    }\n  },\n  {\n    \"node_address\": \"thor1f3s7q037eancht7sg0aj995dht25rwrnu4ats5\",\n    \"status\": \"Active\",\n    \"pub_key_set\": {\n      \"secp256k1\": \"thorpub1addwnpepq27ck6u44zl8qqdnmzjjc8rg72amrxrsp42p9vd7kt6marhy6ww76z8shwe\",\n      \"ed25519\": \"thorpub1addwnpepq27ck6u44zl8qqdnmzjjc8rg72amrxrsp42p9vd7kt6marhy6ww76z8shwe\"\n    },\n    \"validator_cons_pub_key\": \"thor104gsqwta048e80j909g6y9kkqdjrw0lff866ew\",\n    \"peer_id\": \"16Uiu2HAmRgsiryer3pWCPJz18PQZDFFs1GBqCPGGJczrQXdoTBMk\",\n    \"active_block_height\": 123456,\n    \"status_since\": 100000,\n    \"node_operator_address\": \"thor1f3s7q037eancht7sg0aj995dht25rwrnu4ats5\",\n    \"total_bond\": \"123456789\",\n    \"bond_providers\": {\n      \"node_operator_fee\": \"string\",\n      \"providers\": [\n        {\n          \"bond_address\": \"string\",\n          \"bond\": \"string\"\n        },\n        {\n          \"bond_address\": \"string\",\n          \"bond\": \"string\"\n        }\n      ]\n    },\n    \"signer_membership\": [\n      \"thorpub1addwnpepq2jqhv5rdqlkusfxy05stfzcgslhhz5qh8pxetw5ry2aa6awgdh3shq8s82\",\n      \"thorpub1addwnpepq2jqhv5rdqlkusfxy05stfzcgslhhz5qh8pxetw5ry2aa6awgdh3shq8s82\"\n    ],\n    \"requested_to_leave\": true,\n    \"forced_to_leave\": true,\n    \"leave_height\": 0,\n    \"ip_address\": \"10.20.30.40\",\n    \"version\": \"0.35.0\",\n    \"slash_points\": 42,\n    \"jail\": {\n      \"release_height\": 1234,\n      \"reason\": \"string\"\n    },\n    \"current_award\": \"123456\",\n    \"observe_chains\": [\n      {\n        \"chain\": \"BTC\",\n        \"height\": 2000000\n      },\n      {\n        \"chain\": \"BTC\",\n        \"height\": 2000000\n      }\n    ],\n    \"maintenance\": false,\n    \"missing_blocks\": 230,\n    \"preflight_status\": {\n      \"status\": \"Ready\",\n      \"reason\": \"OK\",\n      \"code\": 0\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "131c594c-80ba-46a6-a375-d83d169ef14d",
+    "name": "Thornode Auth Nodes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Thornode REST API.\n\nContact Support:\n Email: devs@thorchain.org",
+      "type": "text/plain"
+    }
+  }
+}

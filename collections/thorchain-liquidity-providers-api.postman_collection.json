@@ -1,0 +1,256 @@
+{
+  "item": [
+    {
+      "id": "31f57855-d303-4477-9c74-4964741666aa",
+      "name": "Liquidity Providers",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "53439763-cd4d-4713-ae87-5bec6b7952f5",
+          "name": "liquidity Provider",
+          "request": {
+            "name": "liquidity Provider",
+            "description": {
+              "content": "Returns the liquidity provider information for an address and asset.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "pool",
+                ":asset",
+                "liquidity_provider",
+                ":address"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<long>",
+                  "description": "optional block height, defaults to current tip"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "asset",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "address",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c53d77b4-12d0-4e8c-bf31-f9b2573d23a0",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "pool",
+                    ":asset",
+                    "liquidity_provider",
+                    ":address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "height",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"asset\": \"BTC.BTC\",\n  \"units\": \"0\",\n  \"pending_rune\": \"0\",\n  \"pending_asset\": \"242000000\",\n  \"rune_deposit_value\": \"0\",\n  \"asset_deposit_value\": \"0\",\n  \"rune_address\": \"thor1xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\",\n  \"asset_address\": \"bc1qn9esxuw8ca7ts8l6w66kdh800s09msvutydc46\",\n  \"last_add_height\": 82745,\n  \"last_withdraw_height\": 82745,\n  \"pending_tx_id\": \"C4C876802xxxxxxxxxxBC408829878446A37011EBBA0C5CAA3DD64A548879CB228\",\n  \"rune_redeem_value\": \"0\",\n  \"asset_redeem_value\": \"0\",\n  \"luvi_deposit_value\": \"0\",\n  \"luvi_redeem_value\": \"0\",\n  \"luvi_growth_pct\": \"0\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cc466b94-7810-4138-b70c-2d86a232344e",
+          "name": "liquidity Providers",
+          "request": {
+            "name": "liquidity Providers",
+            "description": {
+              "content": "Returns all liquidity provider information for an asset.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "pool",
+                ":asset",
+                "liquidity_providers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<long>",
+                  "description": "optional block height, defaults to current tip"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "asset",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "13ffebcd-5258-436c-a146-622e59fd1950",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "pool",
+                    ":asset",
+                    "liquidity_providers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "height",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"asset\": \"BTC.BTC\",\n    \"units\": \"0\",\n    \"pending_rune\": \"0\",\n    \"pending_asset\": \"242000000\",\n    \"rune_deposit_value\": \"0\",\n    \"asset_deposit_value\": \"0\",\n    \"rune_address\": \"thor1xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\",\n    \"asset_address\": \"bc1qn9esxuw8ca7ts8l6w66kdh800s09msvutydc46\",\n    \"last_add_height\": 82745,\n    \"last_withdraw_height\": 82745,\n    \"pending_tx_id\": \"C4C876802xxxxxxxxxxBC408829878446A37011EBBA0C5CAA3DD64A548879CB228\"\n  },\n  {\n    \"asset\": \"BTC.BTC\",\n    \"units\": \"0\",\n    \"pending_rune\": \"0\",\n    \"pending_asset\": \"242000000\",\n    \"rune_deposit_value\": \"0\",\n    \"asset_deposit_value\": \"0\",\n    \"rune_address\": \"thor1xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\",\n    \"asset_address\": \"bc1qn9esxuw8ca7ts8l6w66kdh800s09msvutydc46\",\n    \"last_add_height\": 82745,\n    \"last_withdraw_height\": 82745,\n    \"pending_tx_id\": \"C4C876802xxxxxxxxxxBC408829878446A37011EBBA0C5CAA3DD64A548879CB228\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "22ac8c31-08b9-4320-8ebd-cf1154d1bde9",
+    "name": "Thornode Auth Liquidity Providers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Thornode REST API.\n\nContact Support:\n Email: devs@thorchain.org",
+      "type": "text/plain"
+    }
+  }
+}

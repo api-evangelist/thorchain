@@ -1,0 +1,136 @@
+{
+  "item": [
+    {
+      "id": "95a4ea6f-04b1-44c7-8107-7fc45171a320",
+      "name": "TradeAccounts",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "806a7b0a-64e8-486d-9d9b-dca71906e812",
+          "name": "trade accounts",
+          "request": {
+            "name": "trade accounts",
+            "description": {
+              "content": "Returns all trade accounts for an asset",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "trade",
+                "accounts",
+                ":asset"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<long>",
+                  "description": "optional block height, defaults to current tip"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "asset",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "615229f6-54de-4851-ace1-a53dcb7d6399",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "trade",
+                    "accounts",
+                    ":asset"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "height",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"asset\": \"BTC~BTC\",\n    \"units\": \"string\",\n    \"owner\": \"string\",\n    \"last_add_height\": 7255,\n    \"last_withdraw_height\": 6704\n  },\n  {\n    \"asset\": \"BTC~BTC\",\n    \"units\": \"string\",\n    \"owner\": \"string\",\n    \"last_add_height\": 7446,\n    \"last_withdraw_height\": 2956\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "04af0fa0-ea56-461f-b52b-18456f12b296",
+    "name": "Thornode Auth TradeAccounts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Thornode REST API.\n\nContact Support:\n Email: devs@thorchain.org",
+      "type": "text/plain"
+    }
+  }
+}

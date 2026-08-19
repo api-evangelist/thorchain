@@ -1,0 +1,582 @@
+{
+  "item": [
+    {
+      "id": "0e5ae3eb-09d0-4b22-b91a-5dc87c8fc7d5",
+      "name": "Vaults",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c45967aa-b33f-46e8-a604-087e7f3b4f23",
+          "name": "asgard",
+          "request": {
+            "name": "asgard",
+            "description": {
+              "content": "Returns current asgard vaults.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "vaults",
+                "asgard"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<long>",
+                  "description": "optional block height, defaults to current tip"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "640e9e7d-3f02-4930-9a6d-b35eb8985578",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "vaults",
+                    "asgard"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "height",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"coins\": [\n      {\n        \"asset\": \"BTC.BTC\",\n        \"amount\": \"100000\",\n        \"decimals\": 6\n      },\n      {\n        \"asset\": \"BTC.BTC\",\n        \"amount\": \"100000\",\n        \"decimals\": 6\n      }\n    ],\n    \"status\": \"string\",\n    \"routers\": [\n      {\n        \"chain\": \"ETH\",\n        \"router\": \"0x3624525075b88B24ecc29CE226b0CEc1fFcB6976\"\n      },\n      {\n        \"chain\": \"ETH\",\n        \"router\": \"0x3624525075b88B24ecc29CE226b0CEc1fFcB6976\"\n      }\n    ],\n    \"addresses\": [\n      {\n        \"chain\": \"BTC\",\n        \"address\": \"bc1qd45uzetakjvdy5ynjjyp4nlnj89am88e4e5jeq\"\n      },\n      {\n        \"chain\": \"BTC\",\n        \"address\": \"bc1qd45uzetakjvdy5ynjjyp4nlnj89am88e4e5jeq\"\n      }\n    ],\n    \"block_height\": 6725,\n    \"pub_key\": \"string\",\n    \"pub_key_eddsa\": \"string\",\n    \"pub_key_frost\": \"string\",\n    \"deficit\": [\n      {\n        \"asset\": \"BTC.BTC\",\n        \"amount\": \"100000\",\n        \"decimals\": 6\n      },\n      {\n        \"asset\": \"BTC.BTC\",\n        \"amount\": \"100000\",\n        \"decimals\": 6\n      }\n    ],\n    \"type\": \"AsgardVault\",\n    \"status_since\": 5275,\n    \"membership\": [\n      \"string\",\n      \"string\"\n    ],\n    \"chains\": [\n      \"string\",\n      \"string\"\n    ],\n    \"inbound_tx_count\": 1151,\n    \"outbound_tx_count\": 5347,\n    \"pending_tx_block_heights\": [\n      1938,\n      9482\n    ],\n    \"frozen\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  {\n    \"coins\": [\n      {\n        \"asset\": \"BTC.BTC\",\n        \"amount\": \"100000\",\n        \"decimals\": 6\n      },\n      {\n        \"asset\": \"BTC.BTC\",\n        \"amount\": \"100000\",\n        \"decimals\": 6\n      }\n    ],\n    \"status\": \"string\",\n    \"routers\": [\n      {\n        \"chain\": \"ETH\",\n        \"router\": \"0x3624525075b88B24ecc29CE226b0CEc1fFcB6976\"\n      },\n      {\n        \"chain\": \"ETH\",\n        \"router\": \"0x3624525075b88B24ecc29CE226b0CEc1fFcB6976\"\n      }\n    ],\n    \"addresses\": [\n      {\n        \"chain\": \"BTC\",\n        \"address\": \"bc1qd45uzetakjvdy5ynjjyp4nlnj89am88e4e5jeq\"\n      },\n      {\n        \"chain\": \"BTC\",\n        \"address\": \"bc1qd45uzetakjvdy5ynjjyp4nlnj89am88e4e5jeq\"\n      }\n    ],\n    \"block_height\": 5408,\n    \"pub_key\": \"string\",\n    \"pub_key_eddsa\": \"string\",\n    \"pub_key_frost\": \"string\",\n    \"deficit\": [\n      {\n        \"asset\": \"BTC.BTC\",\n        \"amount\": \"100000\",\n        \"decimals\": 6\n      },\n      {\n        \"asset\": \"BTC.BTC\",\n        \"amount\": \"100000\",\n        \"decimals\": 6\n      }\n    ],\n    \"type\": \"YggdrasilVault\",\n    \"status_since\": 3852,\n    \"membership\": [\n      \"string\",\n      \"string\"\n    ],\n    \"chains\": [\n      \"string\",\n      \"string\"\n    ],\n    \"inbound_tx_count\": 8056,\n    \"outbound_tx_count\": 6844,\n    \"pending_tx_block_heights\": [\n      9507,\n      5912\n    ],\n    \"frozen\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0348b213-5d4f-486d-82ae-245326d1069b",
+          "name": "yggdrasil",
+          "request": {
+            "name": "yggdrasil",
+            "description": {
+              "content": "Returns current yggdrasil vaults.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "vaults",
+                "yggdrasil"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<long>",
+                  "description": "optional block height, defaults to current tip"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "57925c1a-d605-43f2-81cc-ecb276efd88a",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "vaults",
+                    "yggdrasil"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "height",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"coins\": [\n      {\n        \"asset\": \"BTC.BTC\",\n        \"amount\": \"100000\",\n        \"decimals\": 6\n      },\n      {\n        \"asset\": \"BTC.BTC\",\n        \"amount\": \"100000\",\n        \"decimals\": 6\n      }\n    ],\n    \"routers\": [\n      {\n        \"chain\": \"ETH\",\n        \"router\": \"0x3624525075b88B24ecc29CE226b0CEc1fFcB6976\"\n      },\n      {\n        \"chain\": \"ETH\",\n        \"router\": \"0x3624525075b88B24ecc29CE226b0CEc1fFcB6976\"\n      }\n    ],\n    \"status\": \"string\",\n    \"bond\": \"123456789\",\n    \"total_value\": \"83456789\",\n    \"addresses\": [\n      {\n        \"chain\": \"BTC\",\n        \"address\": \"bc1qd45uzetakjvdy5ynjjyp4nlnj89am88e4e5jeq\"\n      },\n      {\n        \"chain\": \"BTC\",\n        \"address\": \"bc1qd45uzetakjvdy5ynjjyp4nlnj89am88e4e5jeq\"\n      }\n    ],\n    \"block_height\": 1907,\n    \"pub_key\": \"string\",\n    \"type\": \"YggdrasilVault\",\n    \"status_since\": 9,\n    \"membership\": [\n      \"string\",\n      \"string\"\n    ],\n    \"chains\": [\n      \"string\",\n      \"string\"\n    ],\n    \"inbound_tx_count\": 4448,\n    \"outbound_tx_count\": 631,\n    \"pending_tx_block_heights\": [\n      7448,\n      8072\n    ]\n  },\n  {\n    \"coins\": [\n      {\n        \"asset\": \"BTC.BTC\",\n        \"amount\": \"100000\",\n        \"decimals\": 6\n      },\n      {\n        \"asset\": \"BTC.BTC\",\n        \"amount\": \"100000\",\n        \"decimals\": 6\n      }\n    ],\n    \"routers\": [\n      {\n        \"chain\": \"ETH\",\n        \"router\": \"0x3624525075b88B24ecc29CE226b0CEc1fFcB6976\"\n      },\n      {\n        \"chain\": \"ETH\",\n        \"router\": \"0x3624525075b88B24ecc29CE226b0CEc1fFcB6976\"\n      }\n    ],\n    \"status\": \"string\",\n    \"bond\": \"123456789\",\n    \"total_value\": \"83456789\",\n    \"addresses\": [\n      {\n        \"chain\": \"BTC\",\n        \"address\": \"bc1qd45uzetakjvdy5ynjjyp4nlnj89am88e4e5jeq\"\n      },\n      {\n        \"chain\": \"BTC\",\n        \"address\": \"bc1qd45uzetakjvdy5ynjjyp4nlnj89am88e4e5jeq\"\n      }\n    ],\n    \"block_height\": 9872,\n    \"pub_key\": \"string\",\n    \"type\": \"AsgardVault\",\n    \"status_since\": 9407,\n    \"membership\": [\n      \"string\",\n      \"string\"\n    ],\n    \"chains\": [\n      \"string\",\n      \"string\"\n    ],\n    \"inbound_tx_count\": 241,\n    \"outbound_tx_count\": 102,\n    \"pending_tx_block_heights\": [\n      4079,\n      8566\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c05971d9-0142-4cb1-b369-78cb1322a34e",
+          "name": "vault",
+          "request": {
+            "name": "vault",
+            "description": {
+              "content": "Returns the vault for the provided pubkey.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "vault",
+                ":pubkey"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<long>",
+                  "description": "optional block height, defaults to current tip"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "pubkey",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8f00e701-c147-4f34-8dce-a9d9960a9ac4",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "vault",
+                    ":pubkey"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "height",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "pubkey",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"coins\": [\n    {\n      \"asset\": \"BTC.BTC\",\n      \"amount\": \"100000\",\n      \"decimals\": 6\n    },\n    {\n      \"asset\": \"BTC.BTC\",\n      \"amount\": \"100000\",\n      \"decimals\": 6\n    }\n  ],\n  \"status\": \"string\",\n  \"routers\": [\n    {\n      \"chain\": \"ETH\",\n      \"router\": \"0x3624525075b88B24ecc29CE226b0CEc1fFcB6976\"\n    },\n    {\n      \"chain\": \"ETH\",\n      \"router\": \"0x3624525075b88B24ecc29CE226b0CEc1fFcB6976\"\n    }\n  ],\n  \"addresses\": [\n    {\n      \"chain\": \"BTC\",\n      \"address\": \"bc1qd45uzetakjvdy5ynjjyp4nlnj89am88e4e5jeq\"\n    },\n    {\n      \"chain\": \"BTC\",\n      \"address\": \"bc1qd45uzetakjvdy5ynjjyp4nlnj89am88e4e5jeq\"\n    }\n  ],\n  \"block_height\": 3976,\n  \"pub_key\": \"string\",\n  \"pub_key_eddsa\": \"string\",\n  \"pub_key_frost\": \"string\",\n  \"deficit\": [\n    {\n      \"asset\": \"BTC.BTC\",\n      \"amount\": \"100000\",\n      \"decimals\": 6\n    },\n    {\n      \"asset\": \"BTC.BTC\",\n      \"amount\": \"100000\",\n      \"decimals\": 6\n    }\n  ],\n  \"type\": \"YggdrasilVault\",\n  \"status_since\": 3271,\n  \"membership\": [\n    \"string\",\n    \"string\"\n  ],\n  \"chains\": [\n    \"string\",\n    \"string\"\n  ],\n  \"inbound_tx_count\": 5372,\n  \"outbound_tx_count\": 5220,\n  \"pending_tx_block_heights\": [\n    4066,\n    4549\n  ],\n  \"frozen\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "84609d25-a25c-424d-92e8-bb056a615674",
+          "name": "vault Keysign Party",
+          "request": {
+            "name": "vault Keysign Party",
+            "description": {
+              "content": "Returns the keysign-eligible signer set for the provided vault pubkey. The optional signing_height is the signing height used for jail-release evaluation against current vault and node-account state; it is not a historical state query.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "vault",
+                ":pubkey",
+                "keysign_party"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "signing_height",
+                  "value": "<long>",
+                  "description": "optional signing height, defaults to current tip"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "pubkey",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4ed6e665-fba9-4e48-bc5a-73403cc823d6",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "vault",
+                    ":pubkey",
+                    "keysign_party"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "signing_height",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "pubkey",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pub_key\": \"thorpub1addwnpep...\",\n  \"signers\": [\n    \"thorpub1addwnpep...\",\n    \"thorpub1addwnpep...\"\n  ],\n  \"height\": 5591,\n  \"threshold\": 8731,\n  \"required_signers\": 5583,\n  \"never_signers\": [\n    \"thorpub1addwnpep...\",\n    \"thorpub1addwnpep...\"\n  ],\n  \"jailed_fallback_signers\": [\n    \"thorpub1addwnpep...\",\n    \"thorpub1addwnpep...\"\n  ],\n  \"active_signer_count\": 664\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b9a49d52-661c-413d-b1e1-1b503d3f4861",
+          "name": "vault Pubkeys",
+          "request": {
+            "name": "vault Pubkeys",
+            "description": {
+              "content": "Returns all pubkeys for current vaults.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "vaults",
+                "pubkeys"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<long>",
+                  "description": "optional block height, defaults to current tip"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cf57312d-5bb3-4a96-9df8-4caa0834686e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "vaults",
+                    "pubkeys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "height",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"asgard\": [\n    {\n      \"pub_key\": \"thorpub1addwnpepq068dr0x7ue973drmq4eqmzhcq3650n7nx5fhgn9gl207luxp6vaklu52tc\",\n      \"routers\": [\n        {\n          \"chain\": \"ETH\",\n          \"router\": \"0x3624525075b88B24ecc29CE226b0CEc1fFcB6976\"\n        },\n        {\n          \"chain\": \"ETH\",\n          \"router\": \"0x3624525075b88B24ecc29CE226b0CEc1fFcB6976\"\n        }\n      ],\n      \"pub_key_eddsa\": \"thorpub1addwnpepq068dr0x7ue973drmq4eqmzhcq3650n7nx5fhgn9gl207luxp6vaklu52tc\",\n      \"pub_key_frost\": \"thorpub1zcjduepq068dr0x7ue973drmq4eqmzhcq3650n7nx5fhgn9gl207luxp6vaklu52tc\",\n      \"membership\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"pub_key\": \"thorpub1addwnpepq068dr0x7ue973drmq4eqmzhcq3650n7nx5fhgn9gl207luxp6vaklu52tc\",\n      \"routers\": [\n        {\n          \"chain\": \"ETH\",\n          \"router\": \"0x3624525075b88B24ecc29CE226b0CEc1fFcB6976\"\n        },\n        {\n          \"chain\": \"ETH\",\n          \"router\": \"0x3624525075b88B24ecc29CE226b0CEc1fFcB6976\"\n        }\n      ],\n      \"pub_key_eddsa\": \"thorpub1addwnpepq068dr0x7ue973drmq4eqmzhcq3650n7nx5fhgn9gl207luxp6vaklu52tc\",\n      \"pub_key_frost\": \"thorpub1zcjduepq068dr0x7ue973drmq4eqmzhcq3650n7nx5fhgn9gl207luxp6vaklu52tc\",\n      \"membership\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"yggdrasil\": [\n    {\n      \"pub_key\": \"thorpub1addwnpepq068dr0x7ue973drmq4eqmzhcq3650n7nx5fhgn9gl207luxp6vaklu52tc\",\n      \"routers\": [\n        {\n          \"chain\": \"ETH\",\n          \"router\": \"0x3624525075b88B24ecc29CE226b0CEc1fFcB6976\"\n        },\n        {\n          \"chain\": \"ETH\",\n          \"router\": \"0x3624525075b88B24ecc29CE226b0CEc1fFcB6976\"\n        }\n      ],\n      \"pub_key_eddsa\": \"thorpub1addwnpepq068dr0x7ue973drmq4eqmzhcq3650n7nx5fhgn9gl207luxp6vaklu52tc\",\n      \"pub_key_frost\": \"thorpub1zcjduepq068dr0x7ue973drmq4eqmzhcq3650n7nx5fhgn9gl207luxp6vaklu52tc\",\n      \"membership\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"pub_key\": \"thorpub1addwnpepq068dr0x7ue973drmq4eqmzhcq3650n7nx5fhgn9gl207luxp6vaklu52tc\",\n      \"routers\": [\n        {\n          \"chain\": \"ETH\",\n          \"router\": \"0x3624525075b88B24ecc29CE226b0CEc1fFcB6976\"\n        },\n        {\n          \"chain\": \"ETH\",\n          \"router\": \"0x3624525075b88B24ecc29CE226b0CEc1fFcB6976\"\n        }\n      ],\n      \"pub_key_eddsa\": \"thorpub1addwnpepq068dr0x7ue973drmq4eqmzhcq3650n7nx5fhgn9gl207luxp6vaklu52tc\",\n      \"pub_key_frost\": \"thorpub1zcjduepq068dr0x7ue973drmq4eqmzhcq3650n7nx5fhgn9gl207luxp6vaklu52tc\",\n      \"membership\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"inactive\": [\n    {\n      \"pub_key\": \"thorpub1addwnpepq068dr0x7ue973drmq4eqmzhcq3650n7nx5fhgn9gl207luxp6vaklu52tc\",\n      \"routers\": [\n        {\n          \"chain\": \"ETH\",\n          \"router\": \"0x3624525075b88B24ecc29CE226b0CEc1fFcB6976\"\n        },\n        {\n          \"chain\": \"ETH\",\n          \"router\": \"0x3624525075b88B24ecc29CE226b0CEc1fFcB6976\"\n        }\n      ],\n      \"pub_key_eddsa\": \"thorpub1addwnpepq068dr0x7ue973drmq4eqmzhcq3650n7nx5fhgn9gl207luxp6vaklu52tc\",\n      \"pub_key_frost\": \"thorpub1zcjduepq068dr0x7ue973drmq4eqmzhcq3650n7nx5fhgn9gl207luxp6vaklu52tc\",\n      \"membership\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"pub_key\": \"thorpub1addwnpepq068dr0x7ue973drmq4eqmzhcq3650n7nx5fhgn9gl207luxp6vaklu52tc\",\n      \"routers\": [\n        {\n          \"chain\": \"ETH\",\n          \"router\": \"0x3624525075b88B24ecc29CE226b0CEc1fFcB6976\"\n        },\n        {\n          \"chain\": \"ETH\",\n          \"router\": \"0x3624525075b88B24ecc29CE226b0CEc1fFcB6976\"\n        }\n      ],\n      \"pub_key_eddsa\": \"thorpub1addwnpepq068dr0x7ue973drmq4eqmzhcq3650n7nx5fhgn9gl207luxp6vaklu52tc\",\n      \"pub_key_frost\": \"thorpub1zcjduepq068dr0x7ue973drmq4eqmzhcq3650n7nx5fhgn9gl207luxp6vaklu52tc\",\n      \"membership\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "529581dd-6815-47db-91f6-4c8c1320d72a",
+          "name": "vault Solvency",
+          "request": {
+            "name": "vault Solvency",
+            "description": {
+              "content": "Returns aggregate vault solvency showing over-solvent or under-solvent amounts per asset.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "vaults",
+                "solvency"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<long>",
+                  "description": "optional block height, defaults to current tip"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ba0a6746-dade-4d28-bcdf-077d1dd5ff15",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "vaults",
+                    "solvency"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "height",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"assets\": [\n    {\n      \"asset\": \"BTC.BTC\",\n      \"amount\": \"1000000000\"\n    },\n    {\n      \"asset\": \"BTC.BTC\",\n      \"amount\": \"1000000000\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "002822c5-0909-4dde-8de6-c3364d93eb66",
+    "name": "Thornode Auth Vaults API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Thornode REST API.\n\nContact Support:\n Email: devs@thorchain.org",
+      "type": "text/plain"
+    }
+  }
+}

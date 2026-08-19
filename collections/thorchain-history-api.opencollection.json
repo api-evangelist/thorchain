@@ -1,0 +1,504 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Thornode Auth History API",
+    "version": "3.19.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "History",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Affiliate earnings History",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/history/affiliate",
+            "params": [
+              {
+                "name": "thorname",
+                "value": "",
+                "type": "query",
+                "description": "Return history given thorname. Returns sum of all thornames if missing."
+              },
+              {
+                "name": "interval",
+                "value": "day",
+                "type": "query",
+                "description": "Interval of calculations"
+              },
+              {
+                "name": "count",
+                "value": "30",
+                "type": "query",
+                "description": "Number of intervals to return. Should be between [1..400]."
+              },
+              {
+                "name": "to",
+                "value": "1608825600",
+                "type": "query",
+                "description": "End time of the query as unix timestamp. If only count is given, defaults to now.\n"
+              },
+              {
+                "name": "from",
+                "value": "1606780800",
+                "type": "query",
+                "description": "Start time of the query as unix timestamp"
+              }
+            ]
+          },
+          "docs": "Returns affiliate count, earnings in USD in specified interval.\nIf thorname is not specified returns all thornames\n\nHistory endpoint has two modes:\n* With Interval parameter it returns a series of time buckets. From and To dates will\n  be rounded to the Interval boundaries.\n* Without Interval parameter a single From..To search is performed with exact timestamps.\n\n\n* Interval: possible values: 5min, hour, day, week, month, quarter, year.\n* count: [1..400]. Defines number of intervals. Don't provi"
+        },
+        {
+          "info": {
+            "name": "Affiliate Liquidity Fee Earnings History",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/history/affiliate/earnings",
+            "params": [
+              {
+                "name": "thorname",
+                "value": "",
+                "type": "query",
+                "description": "Return earnings for given thorname. Returns all affiliates if missing."
+              },
+              {
+                "name": "interval",
+                "value": "day",
+                "type": "query",
+                "description": "Interval of calculations"
+              },
+              {
+                "name": "count",
+                "value": "30",
+                "type": "query",
+                "description": "Number of intervals to return. Should be between [1..400]."
+              },
+              {
+                "name": "to",
+                "value": "1608825600",
+                "type": "query",
+                "description": "End time of the query as unix timestamp. If only count is given, defaults to now.\n"
+              },
+              {
+                "name": "from",
+                "value": "1606780800",
+                "type": "query",
+                "description": "Start time of the query as unix timestamp"
+              }
+            ]
+          },
+          "docs": "Returns affiliate earnings (liquidity fees) in USD and RUNE in specified interval.\nIf thorname is not specified returns all affiliates.\n\nHistory endpoint has two modes:\n* With Interval parameter it returns a series of time buckets. From and To dates will\n  be rounded to the Interval boundaries.\n* Without Interval parameter a single From..To search is performed with exact timestamps.\n\n\n* Interval: possible values: 5min, hour, day, week, month, quarter, year.\n* count: [1..400]. Defines number of i"
+        },
+        {
+          "info": {
+            "name": "Affiliate Volume Stats",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/history/affiliate/stats",
+            "params": [
+              {
+                "name": "thorname",
+                "value": "",
+                "type": "query",
+                "description": "Return history given thorname. Returns sum of all thornames if missing."
+              },
+              {
+                "name": "interval",
+                "value": "day",
+                "type": "query",
+                "description": "Interval of calculations"
+              },
+              {
+                "name": "count",
+                "value": "30",
+                "type": "query",
+                "description": "Number of intervals to return. Should be between [1..400]."
+              },
+              {
+                "name": "to",
+                "value": "1608825600",
+                "type": "query",
+                "description": "End time of the query as unix timestamp. If only count is given, defaults to now.\n"
+              },
+              {
+                "name": "from",
+                "value": "1606780800",
+                "type": "query",
+                "description": "Start time of the query as unix timestamp"
+              }
+            ]
+          },
+          "docs": "Returns affiliate count, swap volume in USD in specified interval.\nIf thorname is not specified returns all thornames\n\nHistory endpoint has two modes:\n* With Interval parameter it returns a series of time buckets. From and To dates will\n  be rounded to the Interval boundaries.\n* Without Interval parameter a single From..To search is performed with exact timestamps.\n\n\n* Interval: possible values: 5min, hour, day, week, month, quarter, year.\n* count: [1..400]. Defines number of intervals. Don't pr"
+        },
+        {
+          "info": {
+            "name": "Depth and Price History",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/history/depths/:pool",
+            "params": [
+              {
+                "name": "pool",
+                "value": "",
+                "type": "path",
+                "description": "Return stats for this single pool."
+              },
+              {
+                "name": "interval",
+                "value": "day",
+                "type": "query",
+                "description": "Interval of calculations"
+              },
+              {
+                "name": "count",
+                "value": "30",
+                "type": "query",
+                "description": "Number of intervals to return. Should be between [1..400]."
+              },
+              {
+                "name": "to",
+                "value": "1608825600",
+                "type": "query",
+                "description": "End time of the query as unix timestamp. If only count is given, defaults to now.\n"
+              },
+              {
+                "name": "from",
+                "value": "1606780800",
+                "type": "query",
+                "description": "Start time of the query as unix timestamp"
+              }
+            ]
+          },
+          "docs": "Returns the asset and rune depths and price.\nThe values report the state at the end of each interval.\n\nHistory endpoint has two modes:\n* With Interval parameter it returns a series of time buckets. From and To dates will\n  be rounded to the Interval boundaries.\n* Without Interval parameter a single From..To search is performed with exact timestamps.\n\n\n* Interval: possible values: 5min, hour, day, week, month, quarter, year.\n* count: [1..400]. Defines number of intervals. Don't provide if Interva"
+        },
+        {
+          "info": {
+            "name": "Earnings History",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/history/earnings",
+            "params": [
+              {
+                "name": "interval",
+                "value": "day",
+                "type": "query",
+                "description": "Interval of calculations"
+              },
+              {
+                "name": "count",
+                "value": "30",
+                "type": "query",
+                "description": "Number of intervals to return. Should be between [1..400]."
+              },
+              {
+                "name": "to",
+                "value": "1608825600",
+                "type": "query",
+                "description": "End time of the query as unix timestamp. If only count is given, defaults to now.\n"
+              },
+              {
+                "name": "from",
+                "value": "1606780800",
+                "type": "query",
+                "description": "Start time of the query as unix timestamp"
+              }
+            ]
+          },
+          "docs": "Returns earnings data for the specified interval.\n\nHistory endpoint has two modes:\n* With Interval parameter it returns a series of time buckets. From and To dates will\n  be rounded to the Interval boundaries.\n* Without Interval parameter a single From..To search is performed with exact timestamps.\n\n\n* Interval: possible values: 5min, hour, day, week, month, quarter, year.\n* count: [1..400]. Defines number of intervals. Don't provide if Interval is missing.\n* from/to: optional int, unix second.\n"
+        },
+        {
+          "info": {
+            "name": "Liquidity Changes History",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/history/liquidity_changes",
+            "params": [
+              {
+                "name": "pool",
+                "value": "",
+                "type": "query",
+                "description": "Return stats for given pool. Returns sum of all pools if missing"
+              },
+              {
+                "name": "interval",
+                "value": "day",
+                "type": "query",
+                "description": "Interval of calculations"
+              },
+              {
+                "name": "count",
+                "value": "30",
+                "type": "query",
+                "description": "Number of intervals to return. Should be between [1..400]"
+              },
+              {
+                "name": "to",
+                "value": "1608825600",
+                "type": "query",
+                "description": "End time of the query as unix timestamp. If only count is given, defaults to now\n"
+              },
+              {
+                "name": "from",
+                "value": "1606780800",
+                "type": "query",
+                "description": "Start time of the query as unix timestamp"
+              }
+            ]
+          },
+          "docs": "Returns withdrawals and deposits for given time interval.\nIf pool is not specified returns for all pools\n\nHistory endpoint has two modes:\n* With Interval parameter it returns a series of time buckets. From and To dates will\n  be rounded to the Interval boundaries.\n* Without Interval parameter a single From..To search is performed with exact timestamps.\n\n\n* Interval: possible values: 5min, hour, day, week, month, quarter, year.\n* count: [1..400]. Defines number of intervals. Don't provide if Inte"
+        },
+        {
+          "info": {
+            "name": "Reserve income and expenses over bucketed history",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/history/reserve",
+            "params": [
+              {
+                "name": "interval",
+                "value": "day",
+                "type": "query",
+                "description": "Interval of calculations"
+              },
+              {
+                "name": "count",
+                "value": "30",
+                "type": "query",
+                "description": "Number of intervals to return. Should be between [1..400]."
+              },
+              {
+                "name": "to",
+                "value": "1608825600",
+                "type": "query",
+                "description": "End time of the query as unix timestamp. If only count is given, defaults to now.\n"
+              },
+              {
+                "name": "from",
+                "value": "1606780800",
+                "type": "query",
+                "description": "Start time of the query as unix timestamp"
+              }
+            ]
+          },
+          "docs": "Returns reserve module network fee, outbound fee, and gas reimbursement flow in\nbucketed history\n"
+        },
+        {
+          "info": {
+            "name": "Rune price history in USD",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/history/rune",
+            "params": [
+              {
+                "name": "interval",
+                "value": "day",
+                "type": "query",
+                "description": "Interval of calculations"
+              },
+              {
+                "name": "count",
+                "value": "30",
+                "type": "query",
+                "description": "Number of intervals to return. Should be between [1..400]."
+              },
+              {
+                "name": "to",
+                "value": "1608825600",
+                "type": "query",
+                "description": "End time of the query as unix timestamp. If only count is given, defaults to now.\n"
+              },
+              {
+                "name": "from",
+                "value": "1606780800",
+                "type": "query",
+                "description": "Start time of the query as unix timestamp"
+              }
+            ]
+          },
+          "docs": "Returns rune price history in USD based on the time bucket given\n"
+        },
+        {
+          "info": {
+            "name": "RUNEPool total members and units History",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/history/runepool",
+            "params": [
+              {
+                "name": "interval",
+                "value": "day",
+                "type": "query",
+                "description": "Interval of calculations"
+              },
+              {
+                "name": "count",
+                "value": "30",
+                "type": "query",
+                "description": "Number of intervals to return. Should be between [1..400]."
+              },
+              {
+                "name": "to",
+                "value": "1608825600",
+                "type": "query",
+                "description": "End time of the query as unix timestamp. If only count is given, defaults to now.\n"
+              },
+              {
+                "name": "from",
+                "value": "1606780800",
+                "type": "query",
+                "description": "Start time of the query as unix timestamp"
+              }
+            ]
+          },
+          "docs": "Returns RUNEPool members and units.\nThe values report the state at the end of each interval.\n\nHistory endpoint has two modes:\n* With Interval parameter it returns a series of time buckets. From and To dates will\n  be rounded to the Interval boundaries.\n* Without Interval parameter a single From..To search is performed with exact timestamps.\n\n\n* Interval: possible values: 5min, hour, day, week, month, quarter, year.\n* count: [1..400]. Defines number of intervals. Don't provide if Interval is miss"
+        },
+        {
+          "info": {
+            "name": "Savers Units and Depth History",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/history/savers/:pool",
+            "params": [
+              {
+                "name": "pool",
+                "value": "",
+                "type": "path",
+                "description": "Return stats for this single pool."
+              },
+              {
+                "name": "interval",
+                "value": "day",
+                "type": "query",
+                "description": "Interval of calculations"
+              },
+              {
+                "name": "count",
+                "value": "30",
+                "type": "query",
+                "description": "Number of intervals to return. Should be between [1..400]."
+              },
+              {
+                "name": "to",
+                "value": "1608825600",
+                "type": "query",
+                "description": "End time of the query as unix timestamp. If only count is given, defaults to now.\n"
+              },
+              {
+                "name": "from",
+                "value": "1606780800",
+                "type": "query",
+                "description": "Start time of the query as unix timestamp"
+              }
+            ]
+          },
+          "docs": "Returns savers depths and units.\nThe values report the state at the end of each interval.\n\nHistory endpoint has two modes:\n* With Interval parameter it returns a series of time buckets. From and To dates will\n  be rounded to the Interval boundaries.\n* Without Interval parameter a single From..To search is performed with exact timestamps.\n\n\n* Interval: possible values: 5min, hour, day, week, month, quarter, year.\n* count: [1..400]. Defines number of intervals. Don't provide if Interval is missing"
+        },
+        {
+          "info": {
+            "name": "Swaps History",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/history/swaps",
+            "params": [
+              {
+                "name": "pool",
+                "value": "",
+                "type": "query",
+                "description": "Return history given pool. Returns sum of all pools if missing."
+              },
+              {
+                "name": "interval",
+                "value": "day",
+                "type": "query",
+                "description": "Interval of calculations"
+              },
+              {
+                "name": "count",
+                "value": "30",
+                "type": "query",
+                "description": "Number of intervals to return. Should be between [1..400]."
+              },
+              {
+                "name": "to",
+                "value": "1608825600",
+                "type": "query",
+                "description": "End time of the query as unix timestamp. If only count is given, defaults to now.\n"
+              },
+              {
+                "name": "from",
+                "value": "1606780800",
+                "type": "query",
+                "description": "Start time of the query as unix timestamp"
+              }
+            ]
+          },
+          "docs": "Returns swap count, volume, fees, slip in specified interval.\nIf pool is not specified returns for all pools\n\nHistory endpoint has two modes:\n* With Interval parameter it returns a series of time buckets. From and To dates will\n  be rounded to the Interval boundaries.\n* Without Interval parameter a single From..To search is performed with exact timestamps.\n\n\n* Interval: possible values: 5min, hour, day, week, month, quarter, year.\n* count: [1..400]. Defines number of intervals. Don't provide if "
+        },
+        {
+          "info": {
+            "name": "Total Value Locked History",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/history/tvl",
+            "params": [
+              {
+                "name": "interval",
+                "value": "day",
+                "type": "query",
+                "description": "Interval of calculations"
+              },
+              {
+                "name": "count",
+                "value": "30",
+                "type": "query",
+                "description": "Number of intervals to return. Should be between [1..400]."
+              },
+              {
+                "name": "to",
+                "value": "1608825600",
+                "type": "query",
+                "description": "End time of the query as unix timestamp. If only count is given, defaults to now.\n"
+              },
+              {
+                "name": "from",
+                "value": "1606780800",
+                "type": "query",
+                "description": "Start time of the query as unix timestamp"
+              }
+            ]
+          },
+          "docs": "Returns total pool depths, total bonds, and total value locked in specified interval.\n\nTotal Value Locked = Total Bonds + 2 * Total Pool Depths\n\nHistory endpoint has two modes:\n* With Interval parameter it returns a series of time buckets. From and To dates will\n  be rounded to the Interval boundaries.\n* Without Interval parameter a single From..To search is performed with exact timestamps.\n\n* Interval: possible values: 5min, hour, day, week, month, quarter, year.\n* count: [1..400]. Defines numb"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

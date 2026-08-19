@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Thornode Auth Codes API",
+    "version": "3.19.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Codes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "codes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/codes",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              }
+            ]
+          },
+          "docs": "Returns all whitelisted contract codes"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

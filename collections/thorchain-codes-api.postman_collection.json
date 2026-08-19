@@ -1,0 +1,116 @@
+{
+  "item": [
+    {
+      "id": "ca99ea11-5bb8-41c6-b480-794555596079",
+      "name": "Codes",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "248d6f1e-3e77-4829-9346-4c3dd522fac6",
+          "name": "codes",
+          "request": {
+            "name": "codes",
+            "description": {
+              "content": "Returns all whitelisted contract codes",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "codes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<long>",
+                  "description": "optional block height, defaults to current tip"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2887a325-0638-475b-be11-6e8ebf8a8637",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "codes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "height",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"codes\": [\n    {\n      \"code\": \"a70d5005130246ff44470494ed5cb63d7c9ddffebda8e556e56d11c2057b0820\",\n      \"deployers\": [\n        \"thor1e0lmk5juawc46jwjwd0xfz587njej7ay5fh6cd\",\n        \"thor1e0lmk5juawc46jwjwd0xfz587njej7ay5fh6cd\"\n      ],\n      \"origin\": \"https://gitlab.com/thorchain/rujira/-/tree/main/contracts/rujira-merge\"\n    },\n    {\n      \"code\": \"a70d5005130246ff44470494ed5cb63d7c9ddffebda8e556e56d11c2057b0820\",\n      \"deployers\": [\n        \"thor1e0lmk5juawc46jwjwd0xfz587njej7ay5fh6cd\",\n        \"thor1e0lmk5juawc46jwjwd0xfz587njej7ay5fh6cd\"\n      ],\n      \"origin\": \"https://gitlab.com/thorchain/rujira/-/tree/main/contracts/rujira-merge\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "09c806bc-dffe-48fc-b0ec-ac0009408564",
+    "name": "Thornode Auth Codes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Thornode REST API.\n\nContact Support:\n Email: devs@thorchain.org",
+      "type": "text/plain"
+    }
+  }
+}

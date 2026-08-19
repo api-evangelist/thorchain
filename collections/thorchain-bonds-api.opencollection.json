@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Thornode Auth Bonds API",
+    "version": "3.19.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Bonds",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Bonder Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/bonds/:address",
+            "params": [
+              {
+                "name": "address",
+                "value": "thor102y0m3uptg0vvudeyh00r2fnz70wq7d8y7mu2g",
+                "type": "path",
+                "description": "Address of the bonder"
+              }
+            ]
+          },
+          "docs": "Returns the bond details of a given address.\nThe response contains the bond amount, the bond status, and the bond type.\nThis is wrapper from THORNode nodes API.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,102 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Thornode Auth Reference Memos API",
+    "version": "3.19.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Reference Memos",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "referenceMemo",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/memo/:asset/:reference",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              },
+              {
+                "name": "asset",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "reference",
+                "value": "",
+                "type": "path",
+                "description": "the reference number to lookup"
+              }
+            ]
+          },
+          "docs": "Returns the memoless transaction memo for the provided asset and reference number."
+        },
+        {
+          "info": {
+            "name": "referenceMemoByHash",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/memo/:hash",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              },
+              {
+                "name": "hash",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the memoless transaction memo for the provided reference hash."
+        },
+        {
+          "info": {
+            "name": "referenceMemoCheck",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/memo/check/:asset/:amount",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              },
+              {
+                "name": "asset",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "amount",
+                "value": "",
+                "type": "path",
+                "description": "the transaction amount in base units to check"
+              }
+            ]
+          },
+          "docs": "Pre-flight check for memoless transactions. Returns what reference would be extracted from the amount and whether it's available for registration."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

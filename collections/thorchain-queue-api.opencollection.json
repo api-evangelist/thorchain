@@ -1,0 +1,217 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Thornode Auth Queue API",
+    "version": "3.19.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Queue",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "queue",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/queue",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              }
+            ]
+          },
+          "docs": "Returns queue statistics."
+        },
+        {
+          "info": {
+            "name": "queueSwap",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/queue/swap",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              }
+            ]
+          },
+          "docs": "Returns the swap queue."
+        },
+        {
+          "info": {
+            "name": "queueSwapPaginated",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/queue/swap/paginated",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to skip"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to return"
+              }
+            ]
+          },
+          "docs": "Returns the swap queue with pagination."
+        },
+        {
+          "info": {
+            "name": "limitSwaps",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/queue/limit_swaps",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to skip"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to return"
+              },
+              {
+                "name": "source_asset",
+                "value": "",
+                "type": "query",
+                "description": "Filter by source asset (e.g., \"BTC.BTC\")"
+              },
+              {
+                "name": "target_asset",
+                "value": "",
+                "type": "query",
+                "description": "Filter by target asset (e.g., \"ETH.ETH\")"
+              },
+              {
+                "name": "sender",
+                "value": "",
+                "type": "query",
+                "description": "Filter by sender address"
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "Sort by field"
+              },
+              {
+                "name": "sort_order",
+                "value": "",
+                "type": "query",
+                "description": "Sort order"
+              }
+            ]
+          },
+          "docs": "Returns limit swaps with pagination and filtering."
+        },
+        {
+          "info": {
+            "name": "limitSwapsSummary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/queue/limit_swaps/summary",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              },
+              {
+                "name": "source_asset",
+                "value": "",
+                "type": "query",
+                "description": "Filter by source asset (e.g., \"BTC.BTC\")"
+              },
+              {
+                "name": "target_asset",
+                "value": "",
+                "type": "query",
+                "description": "Filter by target asset (e.g., \"ETH.ETH\")"
+              }
+            ]
+          },
+          "docs": "Returns limit swaps summary statistics."
+        },
+        {
+          "info": {
+            "name": "queueScheduled",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/queue/scheduled",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              }
+            ]
+          },
+          "docs": "Returns the scheduled queue."
+        },
+        {
+          "info": {
+            "name": "queueOutbound",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/queue/outbound",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              }
+            ]
+          },
+          "docs": "Returns the outbound queue including estimated RUNE values."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

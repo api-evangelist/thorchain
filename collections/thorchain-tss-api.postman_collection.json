@@ -1,0 +1,522 @@
+{
+  "item": [
+    {
+      "id": "83749e59-5445-44d3-9ce5-935252840e5f",
+      "name": "TSS",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a4f422b2-9823-44eb-8094-d94767be6ddb",
+          "name": "keysign",
+          "request": {
+            "name": "keysign",
+            "description": {
+              "content": "Returns keysign information for the provided height - the height being the first block a tx out item appears in the signed-but-unobserved outbound queue.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "keysign",
+                ":height"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "height",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cc2ea81b-5ce8-48e1-be26-3bc8611b3671",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "keysign",
+                    ":height"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "height",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"keysign\": {\n    \"tx_array\": [\n      {\n        \"chain\": \"ETH\",\n        \"to_address\": \"0x66fb1cd65b97fa40457b90b7d1ca6b92cb64b32b\",\n        \"coin\": {\n          \"asset\": \"BTC.BTC\",\n          \"amount\": \"100000\",\n          \"decimals\": 6\n        },\n        \"max_gas\": [\n          {\n            \"asset\": \"BTC.BTC\",\n            \"amount\": \"100000\",\n            \"decimals\": 6\n          },\n          {\n            \"asset\": \"BTC.BTC\",\n            \"amount\": \"100000\",\n            \"decimals\": 6\n          }\n        ],\n        \"height\": 1234,\n        \"in_hash\": \"208BF0ACD78C89A0534B0457BA0867B101961A2319C1E49DD28676526904BBEA\",\n        \"out_hash\": \"0D0B2FDB6DAD6E5FD3C5E46D39128F9DA15E96F0B2CC054CE059EA3532B150FB\",\n        \"vault_pub_key\": \"thorpub1addwnpepqt45wmsxj29xpgdrdsvg2h3dx68qeapgykw3hlyj6vuds2r0pnkwx5gt9m4\",\n        \"vault_pub_key_eddsa\": \"thorpub1addwnpepqt45wmsxj29xpgdrdsvg2h3dx68qeapgykw3hlyj6vuds2r0pnkwx5gt9m4\",\n        \"gas_rate\": 8366,\n        \"memo\": \"OUT:208BF0ACD78C89A0534B0457BA0867B101961A2319C1E49DD28676526904BBEA\",\n        \"original_memo\": \"=:BTC.BTC:bc1q0lwf0ycw4gkh8v6y8g9yqwxvqnvm24kvdezgpg\",\n        \"aggregator\": \"0xe4ddca21881bac219af7f217703db0475d2a9f02\",\n        \"aggregator_target_asset\": \"0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48\",\n        \"aggregator_target_limit\": \"100\",\n        \"clout_spent\": \"1234\"\n      },\n      {\n        \"chain\": \"ETH\",\n        \"to_address\": \"0x66fb1cd65b97fa40457b90b7d1ca6b92cb64b32b\",\n        \"coin\": {\n          \"asset\": \"BTC.BTC\",\n          \"amount\": \"100000\",\n          \"decimals\": 6\n        },\n        \"max_gas\": [\n          {\n            \"asset\": \"BTC.BTC\",\n            \"amount\": \"100000\",\n            \"decimals\": 6\n          },\n          {\n            \"asset\": \"BTC.BTC\",\n            \"amount\": \"100000\",\n            \"decimals\": 6\n          }\n        ],\n        \"height\": 1234,\n        \"in_hash\": \"208BF0ACD78C89A0534B0457BA0867B101961A2319C1E49DD28676526904BBEA\",\n        \"out_hash\": \"0D0B2FDB6DAD6E5FD3C5E46D39128F9DA15E96F0B2CC054CE059EA3532B150FB\",\n        \"vault_pub_key\": \"thorpub1addwnpepqt45wmsxj29xpgdrdsvg2h3dx68qeapgykw3hlyj6vuds2r0pnkwx5gt9m4\",\n        \"vault_pub_key_eddsa\": \"thorpub1addwnpepqt45wmsxj29xpgdrdsvg2h3dx68qeapgykw3hlyj6vuds2r0pnkwx5gt9m4\",\n        \"gas_rate\": 2553,\n        \"memo\": \"OUT:208BF0ACD78C89A0534B0457BA0867B101961A2319C1E49DD28676526904BBEA\",\n        \"original_memo\": \"=:BTC.BTC:bc1q0lwf0ycw4gkh8v6y8g9yqwxvqnvm24kvdezgpg\",\n        \"aggregator\": \"0xe4ddca21881bac219af7f217703db0475d2a9f02\",\n        \"aggregator_target_asset\": \"0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48\",\n        \"aggregator_target_limit\": \"100\",\n        \"clout_spent\": \"1234\"\n      }\n    ],\n    \"height\": 2044\n  },\n  \"signature\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5664e187-e3b3-464f-9169-6e3e48629598",
+          "name": "keysign Pubkey",
+          "request": {
+            "name": "keysign Pubkey",
+            "description": {
+              "content": "Returns keysign information for the provided height and pubkey - the height being the block at which a tx out item is scheduled to be signed and moved from the scheduled outbound queue to the outbound queue.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "keysign",
+                ":height",
+                ":pubkey"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "height",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "pubkey",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1d757f1d-af94-470d-bff4-82d7fda1202b",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "keysign",
+                    ":height",
+                    ":pubkey"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "height",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "pubkey",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"keysign\": {\n    \"tx_array\": [\n      {\n        \"chain\": \"ETH\",\n        \"to_address\": \"0x66fb1cd65b97fa40457b90b7d1ca6b92cb64b32b\",\n        \"coin\": {\n          \"asset\": \"BTC.BTC\",\n          \"amount\": \"100000\",\n          \"decimals\": 6\n        },\n        \"max_gas\": [\n          {\n            \"asset\": \"BTC.BTC\",\n            \"amount\": \"100000\",\n            \"decimals\": 6\n          },\n          {\n            \"asset\": \"BTC.BTC\",\n            \"amount\": \"100000\",\n            \"decimals\": 6\n          }\n        ],\n        \"height\": 1234,\n        \"in_hash\": \"208BF0ACD78C89A0534B0457BA0867B101961A2319C1E49DD28676526904BBEA\",\n        \"out_hash\": \"0D0B2FDB6DAD6E5FD3C5E46D39128F9DA15E96F0B2CC054CE059EA3532B150FB\",\n        \"vault_pub_key\": \"thorpub1addwnpepqt45wmsxj29xpgdrdsvg2h3dx68qeapgykw3hlyj6vuds2r0pnkwx5gt9m4\",\n        \"vault_pub_key_eddsa\": \"thorpub1addwnpepqt45wmsxj29xpgdrdsvg2h3dx68qeapgykw3hlyj6vuds2r0pnkwx5gt9m4\",\n        \"gas_rate\": 509,\n        \"memo\": \"OUT:208BF0ACD78C89A0534B0457BA0867B101961A2319C1E49DD28676526904BBEA\",\n        \"original_memo\": \"=:BTC.BTC:bc1q0lwf0ycw4gkh8v6y8g9yqwxvqnvm24kvdezgpg\",\n        \"aggregator\": \"0xe4ddca21881bac219af7f217703db0475d2a9f02\",\n        \"aggregator_target_asset\": \"0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48\",\n        \"aggregator_target_limit\": \"100\",\n        \"clout_spent\": \"1234\"\n      },\n      {\n        \"chain\": \"ETH\",\n        \"to_address\": \"0x66fb1cd65b97fa40457b90b7d1ca6b92cb64b32b\",\n        \"coin\": {\n          \"asset\": \"BTC.BTC\",\n          \"amount\": \"100000\",\n          \"decimals\": 6\n        },\n        \"max_gas\": [\n          {\n            \"asset\": \"BTC.BTC\",\n            \"amount\": \"100000\",\n            \"decimals\": 6\n          },\n          {\n            \"asset\": \"BTC.BTC\",\n            \"amount\": \"100000\",\n            \"decimals\": 6\n          }\n        ],\n        \"height\": 1234,\n        \"in_hash\": \"208BF0ACD78C89A0534B0457BA0867B101961A2319C1E49DD28676526904BBEA\",\n        \"out_hash\": \"0D0B2FDB6DAD6E5FD3C5E46D39128F9DA15E96F0B2CC054CE059EA3532B150FB\",\n        \"vault_pub_key\": \"thorpub1addwnpepqt45wmsxj29xpgdrdsvg2h3dx68qeapgykw3hlyj6vuds2r0pnkwx5gt9m4\",\n        \"vault_pub_key_eddsa\": \"thorpub1addwnpepqt45wmsxj29xpgdrdsvg2h3dx68qeapgykw3hlyj6vuds2r0pnkwx5gt9m4\",\n        \"gas_rate\": 2687,\n        \"memo\": \"OUT:208BF0ACD78C89A0534B0457BA0867B101961A2319C1E49DD28676526904BBEA\",\n        \"original_memo\": \"=:BTC.BTC:bc1q0lwf0ycw4gkh8v6y8g9yqwxvqnvm24kvdezgpg\",\n        \"aggregator\": \"0xe4ddca21881bac219af7f217703db0475d2a9f02\",\n        \"aggregator_target_asset\": \"0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48\",\n        \"aggregator_target_limit\": \"100\",\n        \"clout_spent\": \"1234\"\n      }\n    ],\n    \"height\": 9666\n  },\n  \"signature\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "275b396d-159c-45e6-9983-0274a1b144a0",
+          "name": "keygen Pubkey",
+          "request": {
+            "name": "keygen Pubkey",
+            "description": {
+              "content": "Returns keygen information for the provided height and pubkey - the pubkey being of one of the members of a keygen block for that height",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "keygen",
+                ":height",
+                ":pubkey"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "height",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "pubkey",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d2b6fcf8-50e7-45b0-a012-231b64eda134",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "keygen",
+                    ":height",
+                    ":pubkey"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "height",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "pubkey",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"keygen_block\": {\n    \"keygens\": [\n      {\n        \"id\": \"string\",\n        \"type\": \"string\",\n        \"members\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      {\n        \"id\": \"string\",\n        \"type\": \"string\",\n        \"members\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    ],\n    \"height\": 1427\n  },\n  \"signature\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "555dd2bc-d072-4d31-bf7f-a9465df379b9",
+          "name": "metrics",
+          "request": {
+            "name": "metrics",
+            "description": {
+              "content": "Returns keygen and keysign metrics for current vaults.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "metrics"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<long>",
+                  "description": "optional block height, defaults to current tip"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b699814d-cff0-4ad8-af5a-81cf4ad83333",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "metrics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "height",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"keygen\": [\n    {\n      \"node_tss_times\": [\n        {\n          \"address\": \"string\",\n          \"tss_time\": \"string\"\n        },\n        {\n          \"address\": \"string\",\n          \"tss_time\": \"string\"\n        }\n      ],\n      \"pub_key\": \"string\"\n    },\n    {\n      \"node_tss_times\": [\n        {\n          \"address\": \"string\",\n          \"tss_time\": \"string\"\n        },\n        {\n          \"address\": \"string\",\n          \"tss_time\": \"string\"\n        }\n      ],\n      \"pub_key\": \"string\"\n    }\n  ],\n  \"keysign\": {\n    \"tx_id\": \"string\",\n    \"node_tss_times\": [\n      {\n        \"address\": \"string\",\n        \"tss_time\": 210\n      },\n      {\n        \"address\": \"string\",\n        \"tss_time\": 524\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2707d3ca-79de-45f8-b6ef-8ef635e96293",
+          "name": "metrics Keygen",
+          "request": {
+            "name": "metrics Keygen",
+            "description": {
+              "content": "Returns keygen metrics for the provided vault pubkey.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "metric",
+                "keygen",
+                ":pubkey"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<long>",
+                  "description": "optional block height, defaults to current tip"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "pubkey",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2c9980c8-d636-4e60-a3b2-7fc433d1615c",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "metric",
+                    "keygen",
+                    ":pubkey"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "height",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "pubkey",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"node_tss_times\": [\n      {\n        \"address\": \"string\",\n        \"tss_time\": \"string\"\n      },\n      {\n        \"address\": \"string\",\n        \"tss_time\": \"string\"\n      }\n    ],\n    \"pub_key\": \"string\"\n  },\n  {\n    \"node_tss_times\": [\n      {\n        \"address\": \"string\",\n        \"tss_time\": \"string\"\n      },\n      {\n        \"address\": \"string\",\n        \"tss_time\": \"string\"\n      }\n    ],\n    \"pub_key\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "8aa0f970-f2f2-4858-87ef-82efcf7cbfdd",
+    "name": "Thornode Auth TSS API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Thornode REST API.\n\nContact Support:\n Email: devs@thorchain.org",
+      "type": "text/plain"
+    }
+  }
+}

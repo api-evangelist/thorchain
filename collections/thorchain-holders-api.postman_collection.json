@@ -1,0 +1,126 @@
+{
+  "item": [
+    {
+      "id": "e65a3815-0a68-4bd1-b444-bf5bffa1b72a",
+      "name": "Holders",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3345b76d-8cac-4d0c-b622-76bf3d3b894e",
+          "name": "Current top holders for an asset",
+          "request": {
+            "name": "Current top holders for an asset",
+            "description": {
+              "content": "Returns all coin amounts of the given asset ordered by their amounts in descending order.\n\nThis endpoint is enabled only if the midgard startup config allows it.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "holders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "asset",
+                  "value": "<string>",
+                  "description": "Asset to get the top holders for."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<long>",
+                  "description": "Number of top holders to return, default is 100, maximum is 1000."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2981d05d-0ef1-4ebb-9012-028b5d5c3112",
+              "name": "object containing balance details for a given address",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "holders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "asset",
+                      "value": "THOR.RUNE"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "150"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"address\": \"thor102y0m3uptg0vvudeyh00r2fnz70wq7d8y7mu2g\",\n    \"coins\": [\n      {\n        \"asset\": \"string\",\n        \"amount\": \"string\"\n      },\n      {\n        \"asset\": \"string\",\n        \"amount\": \"string\"\n      }\n    ]\n  },\n  {\n    \"address\": \"thor102y0m3uptg0vvudeyh00r2fnz70wq7d8y7mu2g\",\n    \"coins\": [\n      {\n        \"asset\": \"string\",\n        \"amount\": \"string\"\n      },\n      {\n        \"asset\": \"string\",\n        \"amount\": \"string\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "bcca43ce-9205-41ae-b0ba-8bca9b368396",
+    "name": "Thornode Auth Holders API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Thornode REST API.\n\nContact Support:\n Email: devs@thorchain.org",
+      "type": "text/plain"
+    }
+  }
+}

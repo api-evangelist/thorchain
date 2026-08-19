@@ -1,0 +1,61 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Thornode Auth TCY Stakers API",
+    "version": "3.19.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "TCY Stakers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "tcyStaker",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/tcy_staker/:address",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the tcy staker information for an address."
+        },
+        {
+          "info": {
+            "name": "tcyStakers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/tcy_stakers",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              }
+            ]
+          },
+          "docs": "Returns all tcy stakers information."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

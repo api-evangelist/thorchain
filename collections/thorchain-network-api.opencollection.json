@@ -1,0 +1,301 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Thornode Auth Network API",
+    "version": "3.19.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Network",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Network Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/network"
+          },
+          "docs": "Returns an object containing Network data"
+        },
+        {
+          "info": {
+            "name": "network",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/network",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              }
+            ]
+          },
+          "docs": "Returns network overview statistics."
+        },
+        {
+          "info": {
+            "name": "outboundFees",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/outbound_fees",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              }
+            ]
+          },
+          "docs": "Returns the last block information for all chains."
+        },
+        {
+          "info": {
+            "name": "outboundFeeAsset",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/outbound_fee/:asset",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              },
+              {
+                "name": "asset",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the outbound fee information for the provided asset."
+        },
+        {
+          "info": {
+            "name": "inboundAddresses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/inbound_addresses",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              }
+            ]
+          },
+          "docs": "Returns the set of asgard addresses that should be used for inbound transactions."
+        },
+        {
+          "info": {
+            "name": "lastblock",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/lastblock",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              }
+            ]
+          },
+          "docs": "Returns the last block information for all chains."
+        },
+        {
+          "info": {
+            "name": "lastblockChain",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/lastblock/:chain",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              },
+              {
+                "name": "chain",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the last block information for the provided chain."
+        },
+        {
+          "info": {
+            "name": "version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/version",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              }
+            ]
+          },
+          "docs": "Returns the network's current THORNode version, the network's next THORNode version, and the querier's THORNode version."
+        },
+        {
+          "info": {
+            "name": "upgradeProposals",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/upgrade_proposals",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              }
+            ]
+          },
+          "docs": "Returns the current upgrade proposals."
+        },
+        {
+          "info": {
+            "name": "upgradeProposal",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/upgrade_proposal/:name",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the upgrade proposal for the provided name."
+        },
+        {
+          "info": {
+            "name": "upgradeVotes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/upgrade_votes/:name",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the upgrade votes for the provided name."
+        },
+        {
+          "info": {
+            "name": "constants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/constants",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              }
+            ]
+          },
+          "docs": "Returns constant configuration, can be overridden by mimir."
+        },
+        {
+          "info": {
+            "name": "ragnarok",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/ragnarok",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              }
+            ]
+          },
+          "docs": "Returns a boolean indicating whether the chain is in ragnarok."
+        },
+        {
+          "info": {
+            "name": "ban",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/ban/:address",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the ban status for the provided node address."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

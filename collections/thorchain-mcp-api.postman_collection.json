@@ -1,0 +1,171 @@
+{
+  "item": [
+    {
+      "id": "31f5c7e5-9e50-4d2e-ba71-14ac924cf067",
+      "name": "Mcp",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "be3ea596-a032-47ce-a7f6-f5b91b9d0b48",
+          "name": "Get read-only MCP endpoint metadata",
+          "request": {
+            "name": "Get read-only MCP endpoint metadata",
+            "description": {},
+            "url": {
+              "path": [
+                "mcp"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5f4a072a-2ed5-4578-b595-013d4a05a015",
+              "name": "JSON MCP server card",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mcp"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1ab2a864-c19e-4902-842f-589c3278bfae",
+          "name": "Call the read-only MCP JSON-RPC endpoint",
+          "request": {
+            "name": "Call the read-only MCP JSON-RPC endpoint",
+            "description": {},
+            "url": {
+              "path": [
+                "mcp"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "52d303f2-7473-4127-a165-37db65807d0f",
+              "name": "JSON-RPC MCP response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mcp"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bcb11c0f-b63c-41ef-9652-d1715cc870a3",
+              "name": "Notification accepted without response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mcp"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "90db4606-a3df-40a7-adeb-ed754f886d0d",
+    "name": "Thornode Auth Mcp API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Thornode REST API.\n\nContact Support:\n Email: devs@thorchain.org",
+      "type": "text/plain"
+    }
+  }
+}

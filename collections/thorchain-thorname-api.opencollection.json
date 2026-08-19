@@ -1,0 +1,75 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Thornode Auth Thorname API",
+    "version": "3.19.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Thorname",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "THORName Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/thorname/lookup/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "thorchain",
+                "type": "path",
+                "description": "a THORName"
+              }
+            ]
+          },
+          "docs": "Returns an array of chains and their addresses associated with the given THORName"
+        },
+        {
+          "info": {
+            "name": "THORName owner",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/thorname/owner/:address",
+            "params": [
+              {
+                "name": "address",
+                "value": "thor102y0m3uptg0vvudeyh00r2fnz70wq7d8y7mu2g",
+                "type": "path",
+                "description": "Address which owns a THORName."
+              }
+            ]
+          },
+          "docs": "Returns an array of THORNames owned by the address. The address is not necessarily an\nassociated address for those thornames.\n"
+        },
+        {
+          "info": {
+            "name": "Gives a list of THORNames by reverse lookup",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/thorname/rlookup/:address",
+            "params": [
+              {
+                "name": "address",
+                "value": "bnb1jxfh2g85q3v0tdq56fnevx6xcxtcnhtsmcu64m",
+                "type": "path",
+                "description": "Address to match THORNames against."
+              }
+            ]
+          },
+          "docs": "Returns an array of THORNames associated with the given address"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Thornode Auth Supply API",
+    "version": "3.19.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Supply",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "supply",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/supply",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              }
+            ]
+          },
+          "docs": "Returns the RUNE supply breakdown."
+        },
+        {
+          "info": {
+            "name": "supply_cmc",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/supply/cmc",
+            "params": [
+              {
+                "name": "asset",
+                "value": "",
+                "type": "query",
+                "description": "The asset to query supply for (default rune)."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The type of supply value to return."
+              }
+            ]
+          },
+          "docs": "Returns a single supply value as plain text for CoinMarketCap integration."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

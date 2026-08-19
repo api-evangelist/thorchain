@@ -1,0 +1,228 @@
+{
+  "item": [
+    {
+      "id": "d599a13a-5818-4f9f-a90c-fdbeb8c93c39",
+      "name": "Quote",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "de258e08-89b3-45dd-9201-f39a276b7cda",
+          "name": "quoteswap",
+          "request": {
+            "name": "quoteswap",
+            "description": {
+              "content": "Provide a quote estimate for the provided swap.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "quote",
+                "swap"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<long>",
+                  "description": "optional block height, defaults to current tip"
+                },
+                {
+                  "disabled": false,
+                  "key": "from_asset",
+                  "value": "<string>",
+                  "description": "the source asset"
+                },
+                {
+                  "disabled": false,
+                  "key": "to_asset",
+                  "value": "<string>",
+                  "description": "the target asset"
+                },
+                {
+                  "disabled": false,
+                  "key": "amount",
+                  "value": "<long>",
+                  "description": "the source asset amount in 1e8 decimals"
+                },
+                {
+                  "disabled": false,
+                  "key": "destination",
+                  "value": "<string>",
+                  "description": "the destination address, required to generate memo"
+                },
+                {
+                  "disabled": false,
+                  "key": "refund_address",
+                  "value": "<string>",
+                  "description": "the refund address, refunds will be sent here if the swap fails"
+                },
+                {
+                  "disabled": false,
+                  "key": "streaming_interval",
+                  "value": "<long>",
+                  "description": "the interval in which streaming swaps are swapped"
+                },
+                {
+                  "disabled": false,
+                  "key": "streaming_quantity",
+                  "value": "<long>",
+                  "description": "the quantity of swaps within a streaming swap"
+                },
+                {
+                  "disabled": false,
+                  "key": "tolerance_bps",
+                  "value": "<long>",
+                  "description": "the maximum basis points from the current feeless swap price to set the limit in the generated memo"
+                },
+                {
+                  "disabled": false,
+                  "key": "liquidity_tolerance_bps",
+                  "value": "<long>",
+                  "description": "the maximum basis points of tolerance for pool price movements to set the limit in the generated memo"
+                },
+                {
+                  "disabled": false,
+                  "key": "affiliate_bps",
+                  "value": "<long>",
+                  "description": "the affiliate fee in basis points"
+                },
+                {
+                  "disabled": false,
+                  "key": "affiliate",
+                  "value": "<string>",
+                  "description": "the affiliate (address or thorname)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "df48e03b-b641-45b6-8af1-92027253f604",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "quote",
+                    "swap"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "height",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "from_asset",
+                      "value": "BTC.BTC"
+                    },
+                    {
+                      "key": "to_asset",
+                      "value": "ETH.ETH"
+                    },
+                    {
+                      "key": "amount",
+                      "value": "1000000"
+                    },
+                    {
+                      "key": "destination",
+                      "value": "0x1c7b17362c84287bd1184447e6dfeaf920c31bbe"
+                    },
+                    {
+                      "key": "refund_address",
+                      "value": "0x1c7b17362c84287bd1184447e6dfeaf920c31bbe"
+                    },
+                    {
+                      "key": "streaming_interval",
+                      "value": "10"
+                    },
+                    {
+                      "key": "streaming_quantity",
+                      "value": "10"
+                    },
+                    {
+                      "key": "tolerance_bps",
+                      "value": "100"
+                    },
+                    {
+                      "key": "liquidity_tolerance_bps",
+                      "value": "100"
+                    },
+                    {
+                      "key": "affiliate_bps",
+                      "value": "100"
+                    },
+                    {
+                      "key": "affiliate",
+                      "value": "t"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"expected_amount_out\": \"10000\",\n  \"outbound_delay_blocks\": 9525,\n  \"outbound_delay_seconds\": 8287,\n  \"fees\": {\n    \"asset\": \"ETH.ETH\",\n    \"liquidity\": \"1234\",\n    \"total\": \"9876\",\n    \"slippage_bps\": 7374,\n    \"total_bps\": 3542,\n    \"affiliate\": \"1234\",\n    \"outbound\": \"1234\"\n  },\n  \"warning\": \"Do not cache this response. Do not send funds after the expiry.\",\n  \"notes\": \"Transfer the inbound_address the asset with the memo. Do not use multi-in, multi-out transactions.\",\n  \"expiry\": 1671660285,\n  \"inbound_address\": \"bc1qjk3xzu5slu7mtmc8jc9yed3zqvkhkttm700g9a\",\n  \"inbound_confirmation_blocks\": 8623,\n  \"inbound_confirmation_seconds\": 6696,\n  \"router\": \"0x3624525075b88B24ecc29CE226b0CEc1fFcB6976\",\n  \"dust_threshold\": \"10000\",\n  \"recommended_min_amount_in\": \"15000\",\n  \"recommended_gas_rate\": \"10\",\n  \"gas_rate_units\": \"gwei\",\n  \"memo\": \"=:ETH.ETH:0x1c7b17362c84287bd1184447e6dfeaf920c31bbe:1440450000:thor17gw75axcnr8747pkanye45pnrwk7p9c3cqncsv:100\",\n  \"max_streaming_quantity\": 10,\n  \"streaming_swap_blocks\": 100,\n  \"streaming_swap_seconds\": 600,\n  \"total_swap_seconds\": 600\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "0cb0f893-8dd6-4634-ace0-4694262b0a96",
+    "name": "Thornode Auth Quote API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Thornode REST API.\n\nContact Support:\n Email: devs@thorchain.org",
+      "type": "text/plain"
+    }
+  }
+}

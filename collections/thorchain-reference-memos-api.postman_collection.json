@@ -1,0 +1,372 @@
+{
+  "item": [
+    {
+      "id": "32d00641-0889-46f8-a06d-6457444df25e",
+      "name": "Reference Memos",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "019afb27-f711-43fc-83c9-e9dc1c632a38",
+          "name": "reference Memo",
+          "request": {
+            "name": "reference Memo",
+            "description": {
+              "content": "Returns the memoless transaction memo for the provided asset and reference number.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "memo",
+                ":asset",
+                ":reference"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<long>",
+                  "description": "optional block height, defaults to current tip"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "asset",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "reference",
+                  "description": "(Required) the reference number to lookup"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "58e94366-50d6-441d-9246-a667f1391a3d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "memo",
+                    ":asset",
+                    ":reference"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "height",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reference",
+                      "description": "(Required) the reference number to lookup"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"asset\": \"BTC.BTC\",\n  \"memo\": \"=:ETH.ETH:0x1c7b17362c84287bd1184447e6dfeaf920c31bbe:1000:0:100\",\n  \"reference\": \"20002\",\n  \"height\": \"12345678\",\n  \"registration_hash\": \"AF524818D42B63D25BBA0CCC4909F127CAA645C0F9CD07324F2824CC151A64C8\",\n  \"registered_by\": \"thor1zupk5lmc84r2dh738a9g3zscavannjy3nzplwt\",\n  \"used_by_txs\": [\n    \"AF524818D42B63D25BBA0CCC4909F127CAA645C0F9CD07324F2824CC151A64C8\",\n    \"BF524818D42B63D25BBA0CCC4909F127CAA645C0F9CD07324F2824CC151A64C9\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "650c75a5-cead-48c8-861d-3805486853fb",
+          "name": "reference Memo By Hash",
+          "request": {
+            "name": "reference Memo By Hash",
+            "description": {
+              "content": "Returns the memoless transaction memo for the provided reference hash.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "memo",
+                ":hash"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<long>",
+                  "description": "optional block height, defaults to current tip"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "hash",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "12c61d44-04b5-4f83-ab92-1007593cbc3e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "memo",
+                    ":hash"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "height",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hash",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"asset\": \"BTC.BTC\",\n  \"memo\": \"=:ETH.ETH:0x1c7b17362c84287bd1184447e6dfeaf920c31bbe:1000:0:100\",\n  \"reference\": \"20002\",\n  \"height\": \"12345678\",\n  \"registration_hash\": \"AF524818D42B63D25BBA0CCC4909F127CAA645C0F9CD07324F2824CC151A64C8\",\n  \"registered_by\": \"thor1zupk5lmc84r2dh738a9g3zscavannjy3nzplwt\",\n  \"used_by_txs\": [\n    \"AF524818D42B63D25BBA0CCC4909F127CAA645C0F9CD07324F2824CC151A64C8\",\n    \"BF524818D42B63D25BBA0CCC4909F127CAA645C0F9CD07324F2824CC151A64C9\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4df60355-3d03-409f-b5f4-e87e24074ecd",
+          "name": "reference Memo Check",
+          "request": {
+            "name": "reference Memo Check",
+            "description": {
+              "content": "Pre-flight check for memoless transactions. Returns what reference would be extracted from the amount and whether it's available for registration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "memo",
+                "check",
+                ":asset",
+                ":amount"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<long>",
+                  "description": "optional block height, defaults to current tip"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "asset",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "amount",
+                  "description": "(Required) the transaction amount in base units to check"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4c855a83-ca75-46e3-929b-9b12b4575b8a",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "memo",
+                    "check",
+                    ":asset",
+                    ":amount"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "height",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "amount",
+                      "description": "(Required) the transaction amount in base units to check"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reference\": \"20002\",\n  \"available\": true,\n  \"can_register\": true,\n  \"expires_at\": \"0\",\n  \"usage_count\": \"0\",\n  \"max_use\": \"0\",\n  \"memo\": \"=:ETH.ETH:0x1c7b17362c84287bd1184447e6dfeaf920c31bbe\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d7c2f31a-7211-4e76-8368-d2e887c0cd72",
+    "name": "Thornode Auth Reference Memos API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Thornode REST API.\n\nContact Support:\n Email: devs@thorchain.org",
+      "type": "text/plain"
+    }
+  }
+}

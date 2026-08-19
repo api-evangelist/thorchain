@@ -1,0 +1,87 @@
+{
+  "item": [
+    {
+      "id": "c545f2a8-b1b4-443b-8ab7-fb0dbeb3b90a",
+      "name": "Llms Full.txt",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7cd48e4a-a8e2-460d-b2f8-a4ed2f67d8f2",
+          "name": "Get the expanded AI-agent resource map",
+          "request": {
+            "name": "Get the expanded AI-agent resource map",
+            "description": {},
+            "url": {
+              "path": [
+                "llms-full.txt"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7da76ce7-e6d2-461c-9e36-bc5537c93eab",
+              "name": "Plain-text LLM resource map",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "llms-full.txt"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "45f22171-9b65-4c18-a87a-e4fda544bed5",
+    "name": "Thornode Auth Llms Full.txt API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Thornode REST API.\n\nContact Support:\n Email: devs@thorchain.org",
+      "type": "text/plain"
+    }
+  }
+}

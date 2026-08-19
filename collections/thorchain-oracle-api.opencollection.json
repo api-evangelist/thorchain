@@ -1,0 +1,61 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Thornode Auth Oracle API",
+    "version": "3.19.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Oracle",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "oraclePrice",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/oracle/price/:symbol",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              },
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns oracle price for a symbol."
+        },
+        {
+          "info": {
+            "name": "oraclePrices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/oracle/prices",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              }
+            ]
+          },
+          "docs": "Returns all available oracle prices."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

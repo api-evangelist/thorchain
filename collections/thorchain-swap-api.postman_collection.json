@@ -1,0 +1,184 @@
+{
+  "item": [
+    {
+      "id": "5cf8899c-4006-4a59-9b35-82acf95c76d0",
+      "name": "Swap",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c1d9a178-941e-448b-b4b6-5e6b3e320bfe",
+          "name": "swap Details",
+          "request": {
+            "name": "swap Details",
+            "description": {
+              "content": "Returns detailed information about a specific swap including its state.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "queue",
+                "swap",
+                "details",
+                ":tx_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<long>",
+                  "description": "optional block height, defaults to current tip"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tx_id",
+                  "description": "(Required) Transaction ID of the swap"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "be1a81d5-855f-4e3c-8564-8078d589149c",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "queue",
+                    "swap",
+                    "details",
+                    ":tx_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "height",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tx_id",
+                      "description": "(Required) Transaction ID of the swap"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"swap\": {\n    \"tx\": {\n      \"coins\": [\n        {\n          \"asset\": \"BTC.BTC\",\n          \"amount\": \"100000\",\n          \"decimals\": 6\n        },\n        {\n          \"asset\": \"BTC.BTC\",\n          \"amount\": \"100000\",\n          \"decimals\": 6\n        }\n      ],\n      \"gas\": [\n        {\n          \"asset\": \"BTC.BTC\",\n          \"amount\": \"100000\",\n          \"decimals\": 6\n        },\n        {\n          \"asset\": \"BTC.BTC\",\n          \"amount\": \"100000\",\n          \"decimals\": 6\n        }\n      ],\n      \"id\": \"CF524818D42B63D25BBA0CCC4909F127CAA645C0F9CD07324F2824CC151A64C7\",\n      \"chain\": \"BTC\",\n      \"from_address\": \"bcrt1q0s4mg25tu6termrk8egltfyme4q7sg3h8kkydt\",\n      \"to_address\": \"bcrt1qf3s7q037eancht7sg0aj995dht25rwrnqsf45e\",\n      \"memo\": \"ADD:BTC.BTC:thor1zupk5lmc84r2dh738a9g3zscavannjy3nzplwt\"\n    },\n    \"target_asset\": \"ETH.ETH\",\n    \"trade_target\": \"string\",\n    \"affiliate_basis_points\": \"string\",\n    \"destination\": \"0x66fb1cd65b97fa40457b90b7d1ca6b92cb64b32b\",\n    \"affiliate_address\": \"thor1f3s7q037eancht7sg0aj995dht25rwrnu4ats5\",\n    \"signer\": \"string\",\n    \"aggregator\": \"string\",\n    \"aggregator_target_address\": \"string\",\n    \"aggregator_target_limit\": \"string\",\n    \"swap_type\": \"string\",\n    \"stream_quantity\": 9552,\n    \"stream_interval\": 8174,\n    \"initial_block_height\": 4544,\n    \"state\": {\n      \"interval\": 7298,\n      \"quantity\": 2931,\n      \"ttl\": 9734,\n      \"count\": 2223,\n      \"last_height\": 2172,\n      \"deposit\": \"string\",\n      \"withdrawn\": \"string\",\n      \"in\": \"string\",\n      \"out\": \"string\",\n      \"failed_swaps\": [\n        2964,\n        2794\n      ],\n      \"failed_swap_reasons\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"version\": \"string\",\n    \"index\": 6982\n  },\n  \"status\": \"queued\",\n  \"queue_type\": \"advanced\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3e7b186b-c4b7-442f-94e6-72ec729d2172",
+              "name": "Swap not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "queue",
+                    "swap",
+                    "details",
+                    ":tx_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "height",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tx_id",
+                      "description": "(Required) Transaction ID of the swap"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "bd418747-bde7-4138-b784-eab47ab2ceaa",
+    "name": "Thornode Auth Swap API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Thornode REST API.\n\nContact Support:\n Email: devs@thorchain.org",
+      "type": "text/plain"
+    }
+  }
+}

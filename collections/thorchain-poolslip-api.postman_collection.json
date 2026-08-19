@@ -1,0 +1,218 @@
+{
+  "item": [
+    {
+      "id": "a69e0a39-7945-4562-84da-9994aafe6cd0",
+      "name": "PoolSlip",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c59591ca-5a1a-49a7-bd83-24976018fc2a",
+          "name": "poolslip",
+          "request": {
+            "name": "poolslip",
+            "description": {
+              "content": "Returns the pool slip information for the provided asset.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "slip",
+                ":asset"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<long>",
+                  "description": "optional block height, defaults to current tip"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "asset",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6dfe2dee-a299-4667-bad9-233388fe8c2a",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "slip",
+                    ":asset"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "height",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"asset\": \"BTC.BTC\",\n    \"pool_slip\": 5,\n    \"rollup_count\": 300,\n    \"long_rollup\": 1500,\n    \"rollup\": 1500,\n    \"summed_rollup\": 1500\n  },\n  {\n    \"asset\": \"BTC.BTC\",\n    \"pool_slip\": 5,\n    \"rollup_count\": 300,\n    \"long_rollup\": 1500,\n    \"rollup\": 1500,\n    \"summed_rollup\": 1500\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d285169d-8056-46c8-85d0-e2acb3dbd6f8",
+          "name": "poolslips",
+          "request": {
+            "name": "poolslips",
+            "description": {
+              "content": "Returns the pool slip information for all Available Layer 1 pool assets.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "slips"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<long>",
+                  "description": "optional block height, defaults to current tip"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9beb08cc-eacc-48d5-80a5-4a6ceb676516",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "slips"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "height",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"asset\": \"BTC.BTC\",\n    \"pool_slip\": 5,\n    \"rollup_count\": 300,\n    \"long_rollup\": 1500,\n    \"rollup\": 1500,\n    \"summed_rollup\": 1500\n  },\n  {\n    \"asset\": \"BTC.BTC\",\n    \"pool_slip\": 5,\n    \"rollup_count\": 300,\n    \"long_rollup\": 1500,\n    \"rollup\": 1500,\n    \"summed_rollup\": 1500\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "523e2e81-a271-4e26-b12a-0d0817b01c84",
+    "name": "Thornode Auth PoolSlip API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Thornode REST API.\n\nContact Support:\n Email: devs@thorchain.org",
+      "type": "text/plain"
+    }
+  }
+}

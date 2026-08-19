@@ -1,0 +1,302 @@
+{
+  "item": [
+    {
+      "id": "52244895-e9f4-411b-b282-28257521a0b8",
+      "name": "RUNE Pool",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fc799160-80d2-4f4d-86bc-6b3a58fbf486",
+          "name": "rune Pool",
+          "request": {
+            "name": "rune Pool",
+            "description": {
+              "content": "Returns the pool information for the RUNE pool.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "runepool"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<long>",
+                  "description": "optional block height, defaults to current tip"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e41653ee-1b8b-4e6d-8bdf-aee2a800b6a2",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "runepool"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "height",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pol\": {\n    \"rune_deposited\": \"857134475040\",\n    \"rune_withdrawn\": \"0\",\n    \"value\": \"21999180112172346\",\n    \"pnl\": \"21999180112172346\",\n    \"current_deposit\": \"21999180112172346\"\n  },\n  \"providers\": {\n    \"units\": \"123456\",\n    \"pending_units\": \"123456\",\n    \"pending_rune\": \"123456\",\n    \"value\": \"123456\",\n    \"pnl\": \"123456\",\n    \"current_deposit\": \"123456\",\n    \"rune_deposited\": 9224,\n    \"rune_withdrawn\": false\n  },\n  \"reserve\": {\n    \"units\": \"123456\",\n    \"value\": \"123456\",\n    \"pnl\": \"123456\",\n    \"current_deposit\": \"123456\",\n    \"rune_deposited\": true,\n    \"rune_withdrawn\": 7987.619313391102\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ca24807e-426a-4d4e-bf11-58b7589d4f0e",
+          "name": "rune Provider",
+          "request": {
+            "name": "rune Provider",
+            "description": {
+              "content": "Returns the RUNE Provider information for an address.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "rune_provider",
+                ":address"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<long>",
+                  "description": "optional block height, defaults to current tip"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "address",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b4635fd6-37c7-41f9-be1b-8f1b5e21fb17",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "rune_provider",
+                    ":address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "height",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"rune_address\": \"THOR.RUNE\",\n  \"units\": \"1234\",\n  \"value\": \"123456\",\n  \"pnl\": \"123456\",\n  \"deposit_amount\": \"6677\",\n  \"withdraw_amount\": \"5443\",\n  \"last_deposit_height\": 82745,\n  \"last_withdraw_height\": 82745\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4a0e6a9e-eb1e-47ef-bad7-030f7bce50cc",
+          "name": "rune Providers",
+          "request": {
+            "name": "rune Providers",
+            "description": {
+              "content": "Returns all RUNE Providers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "rune_providers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<long>",
+                  "description": "optional block height, defaults to current tip"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "292a4dcb-8403-4d40-b35d-d4877286ff87",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "rune_providers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "height",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"rune_address\": \"THOR.RUNE\",\n    \"units\": \"1234\",\n    \"value\": \"123456\",\n    \"pnl\": \"123456\",\n    \"deposit_amount\": \"6677\",\n    \"withdraw_amount\": \"5443\",\n    \"last_deposit_height\": 82745,\n    \"last_withdraw_height\": 82745\n  },\n  {\n    \"rune_address\": \"THOR.RUNE\",\n    \"units\": \"1234\",\n    \"value\": \"123456\",\n    \"pnl\": \"123456\",\n    \"deposit_amount\": \"6677\",\n    \"withdraw_amount\": \"5443\",\n    \"last_deposit_height\": 82745,\n    \"last_withdraw_height\": 82745\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "f6789a85-1046-4705-bc17-f9301384c357",
+    "name": "Thornode Auth RUNE Pool API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Thornode REST API.\n\nContact Support:\n Email: devs@thorchain.org",
+      "type": "text/plain"
+    }
+  }
+}

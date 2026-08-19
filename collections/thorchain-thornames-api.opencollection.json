@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Thornode Auth Thornames API",
+    "version": "3.19.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Thornames",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "thorname",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/thorname/:name",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "the thornode to lookup"
+              }
+            ]
+          },
+          "docs": "Returns addresses registered to the provided thorname."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

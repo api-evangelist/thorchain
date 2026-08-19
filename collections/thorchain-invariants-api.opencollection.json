@@ -1,0 +1,61 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Thornode Auth Invariants API",
+    "version": "3.19.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Invariants",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "invariant",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/invariant/:invariant",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              },
+              {
+                "name": "invariant",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns result of running the given invariant."
+        },
+        {
+          "info": {
+            "name": "invariants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/invariants",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              }
+            ]
+          },
+          "docs": "Returns a list of available invariants."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,125 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Thornode Auth TSS API",
+    "version": "3.19.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "TSS",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "keysign",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/keysign/:height",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns keysign information for the provided height - the height being the first block a tx out item appears in the signed-but-unobserved outbound queue."
+        },
+        {
+          "info": {
+            "name": "keysignPubkey",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/keysign/:height/:pubkey",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "pubkey",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns keysign information for the provided height and pubkey - the height being the block at which a tx out item is scheduled to be signed and moved from the scheduled outbound queue to the outbound queue."
+        },
+        {
+          "info": {
+            "name": "keygenPubkey",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/keygen/:height/:pubkey",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "pubkey",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns keygen information for the provided height and pubkey - the pubkey being of one of the members of a keygen block for that height"
+        },
+        {
+          "info": {
+            "name": "metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/metrics",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              }
+            ]
+          },
+          "docs": "Returns keygen and keysign metrics for current vaults."
+        },
+        {
+          "info": {
+            "name": "metricsKeygen",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/metric/keygen/:pubkey",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              },
+              {
+                "name": "pubkey",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns keygen metrics for the provided vault pubkey."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

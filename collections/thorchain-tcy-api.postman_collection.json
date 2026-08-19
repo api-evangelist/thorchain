@@ -1,0 +1,136 @@
+{
+  "item": [
+    {
+      "id": "d731ada4-4869-46fa-a9d7-57dc20740eac",
+      "name": "Tcy",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7de6c818-8d86-4fbe-bcde-b3df1b55cf5a",
+          "name": "Tcy Distribution",
+          "request": {
+            "name": "Tcy Distribution",
+            "description": {
+              "content": "Returns an array of TCY distribution for the given address.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "tcy",
+                "distribution",
+                ":address"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "period",
+                  "value": "<string>",
+                  "description": "Specifies the base interval from which APR will be calculated.\nDefault is 30d.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "address",
+                  "description": "(Required) Address which is assigned to TCY Holder."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5a905621-8583-49bc-9d6f-580c9974b8f2",
+              "name": "object containing TCY distribution data for a specific address",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "tcy",
+                    "distribution",
+                    ":address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "period",
+                      "value": "90d"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) Address which is assigned to TCY Holder."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"apr\": \"string\",\n  \"total\": \"string\",\n  \"address\": \"string\",\n  \"distributions\": [\n    {\n      \"amount\": \"string\",\n      \"price\": \"string\",\n      \"date\": \"string\"\n    },\n    {\n      \"amount\": \"string\",\n      \"price\": \"string\",\n      \"date\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "879ea7fb-3eab-42e2-8c7d-05fd57f400a7",
+    "name": "Thornode Auth Tcy API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Thornode REST API.\n\nContact Support:\n Email: devs@thorchain.org",
+      "type": "text/plain"
+    }
+  }
+}

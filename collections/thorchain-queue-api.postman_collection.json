@@ -1,0 +1,746 @@
+{
+  "item": [
+    {
+      "id": "35711077-35cf-42f2-912e-1b9ff45c8c97",
+      "name": "Queue",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3281f8bb-49a3-4456-a3c0-31ff6d586448",
+          "name": "queue",
+          "request": {
+            "name": "queue",
+            "description": {
+              "content": "Returns queue statistics.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "queue"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<long>",
+                  "description": "optional block height, defaults to current tip"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "00b6da2f-0132-4646-a70f-5c2950967bc0",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "queue"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "height",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"swap\": 0,\n  \"outbound\": 10,\n  \"internal\": 0,\n  \"scheduled_outbound_value\": \"string\",\n  \"scheduled_outbound_clout\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fe17f703-de64-4f84-b3e9-f2be0ae97653",
+          "name": "queue Swap",
+          "request": {
+            "name": "queue Swap",
+            "description": {
+              "content": "Returns the swap queue.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "queue",
+                "swap"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<long>",
+                  "description": "optional block height, defaults to current tip"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b9b95120-4dd9-4f8c-8dba-44d62f05d4bc",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "queue",
+                    "swap"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "height",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"tx\": {\n      \"coins\": [\n        {\n          \"asset\": \"BTC.BTC\",\n          \"amount\": \"100000\",\n          \"decimals\": 6\n        },\n        {\n          \"asset\": \"BTC.BTC\",\n          \"amount\": \"100000\",\n          \"decimals\": 6\n        }\n      ],\n      \"gas\": [\n        {\n          \"asset\": \"BTC.BTC\",\n          \"amount\": \"100000\",\n          \"decimals\": 6\n        },\n        {\n          \"asset\": \"BTC.BTC\",\n          \"amount\": \"100000\",\n          \"decimals\": 6\n        }\n      ],\n      \"id\": \"CF524818D42B63D25BBA0CCC4909F127CAA645C0F9CD07324F2824CC151A64C7\",\n      \"chain\": \"BTC\",\n      \"from_address\": \"bcrt1q0s4mg25tu6termrk8egltfyme4q7sg3h8kkydt\",\n      \"to_address\": \"bcrt1qf3s7q037eancht7sg0aj995dht25rwrnqsf45e\",\n      \"memo\": \"ADD:BTC.BTC:thor1zupk5lmc84r2dh738a9g3zscavannjy3nzplwt\"\n    },\n    \"target_asset\": \"ETH.ETH\",\n    \"trade_target\": \"string\",\n    \"affiliate_basis_points\": \"string\",\n    \"destination\": \"0x66fb1cd65b97fa40457b90b7d1ca6b92cb64b32b\",\n    \"affiliate_address\": \"thor1f3s7q037eancht7sg0aj995dht25rwrnu4ats5\",\n    \"signer\": \"string\",\n    \"aggregator\": \"string\",\n    \"aggregator_target_address\": \"string\",\n    \"aggregator_target_limit\": \"string\",\n    \"swap_type\": \"string\",\n    \"stream_quantity\": 6828,\n    \"stream_interval\": 7441,\n    \"initial_block_height\": 3101,\n    \"state\": {\n      \"interval\": 7605,\n      \"quantity\": 164,\n      \"ttl\": 7077,\n      \"count\": 9437,\n      \"last_height\": 7847,\n      \"deposit\": \"string\",\n      \"withdrawn\": \"string\",\n      \"in\": \"string\",\n      \"out\": \"string\",\n      \"failed_swaps\": [\n        1232,\n        8888\n      ],\n      \"failed_swap_reasons\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"version\": \"string\",\n    \"index\": 3344\n  },\n  {\n    \"tx\": {\n      \"coins\": [\n        {\n          \"asset\": \"BTC.BTC\",\n          \"amount\": \"100000\",\n          \"decimals\": 6\n        },\n        {\n          \"asset\": \"BTC.BTC\",\n          \"amount\": \"100000\",\n          \"decimals\": 6\n        }\n      ],\n      \"gas\": [\n        {\n          \"asset\": \"BTC.BTC\",\n          \"amount\": \"100000\",\n          \"decimals\": 6\n        },\n        {\n          \"asset\": \"BTC.BTC\",\n          \"amount\": \"100000\",\n          \"decimals\": 6\n        }\n      ],\n      \"id\": \"CF524818D42B63D25BBA0CCC4909F127CAA645C0F9CD07324F2824CC151A64C7\",\n      \"chain\": \"BTC\",\n      \"from_address\": \"bcrt1q0s4mg25tu6termrk8egltfyme4q7sg3h8kkydt\",\n      \"to_address\": \"bcrt1qf3s7q037eancht7sg0aj995dht25rwrnqsf45e\",\n      \"memo\": \"ADD:BTC.BTC:thor1zupk5lmc84r2dh738a9g3zscavannjy3nzplwt\"\n    },\n    \"target_asset\": \"ETH.ETH\",\n    \"trade_target\": \"string\",\n    \"affiliate_basis_points\": \"string\",\n    \"destination\": \"0x66fb1cd65b97fa40457b90b7d1ca6b92cb64b32b\",\n    \"affiliate_address\": \"thor1f3s7q037eancht7sg0aj995dht25rwrnu4ats5\",\n    \"signer\": \"string\",\n    \"aggregator\": \"string\",\n    \"aggregator_target_address\": \"string\",\n    \"aggregator_target_limit\": \"string\",\n    \"swap_type\": \"string\",\n    \"stream_quantity\": 2626,\n    \"stream_interval\": 3613,\n    \"initial_block_height\": 6518,\n    \"state\": {\n      \"interval\": 6126,\n      \"quantity\": 2560,\n      \"ttl\": 469,\n      \"count\": 6527,\n      \"last_height\": 945,\n      \"deposit\": \"string\",\n      \"withdrawn\": \"string\",\n      \"in\": \"string\",\n      \"out\": \"string\",\n      \"failed_swaps\": [\n        2659,\n        620\n      ],\n      \"failed_swap_reasons\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"version\": \"string\",\n    \"index\": 6391\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "61d3e59e-fcab-442b-9972-7413d8f7a99f",
+          "name": "queue Swap Paginated",
+          "request": {
+            "name": "queue Swap Paginated",
+            "description": {
+              "content": "Returns the swap queue with pagination.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "queue",
+                "swap",
+                "paginated"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<long>",
+                  "description": "optional block height, defaults to current tip"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of items to skip"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Number of items to return"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d3930fdf-5b28-49a2-9a22-e6f26b896f6c",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "queue",
+                    "swap",
+                    "paginated"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "height",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"swap_queue\": [\n    {\n      \"tx\": {\n        \"coins\": [\n          {\n            \"asset\": \"BTC.BTC\",\n            \"amount\": \"100000\",\n            \"decimals\": 6\n          },\n          {\n            \"asset\": \"BTC.BTC\",\n            \"amount\": \"100000\",\n            \"decimals\": 6\n          }\n        ],\n        \"gas\": [\n          {\n            \"asset\": \"BTC.BTC\",\n            \"amount\": \"100000\",\n            \"decimals\": 6\n          },\n          {\n            \"asset\": \"BTC.BTC\",\n            \"amount\": \"100000\",\n            \"decimals\": 6\n          }\n        ],\n        \"id\": \"CF524818D42B63D25BBA0CCC4909F127CAA645C0F9CD07324F2824CC151A64C7\",\n        \"chain\": \"BTC\",\n        \"from_address\": \"bcrt1q0s4mg25tu6termrk8egltfyme4q7sg3h8kkydt\",\n        \"to_address\": \"bcrt1qf3s7q037eancht7sg0aj995dht25rwrnqsf45e\",\n        \"memo\": \"ADD:BTC.BTC:thor1zupk5lmc84r2dh738a9g3zscavannjy3nzplwt\"\n      },\n      \"target_asset\": \"ETH.ETH\",\n      \"trade_target\": \"string\",\n      \"affiliate_basis_points\": \"string\",\n      \"destination\": \"0x66fb1cd65b97fa40457b90b7d1ca6b92cb64b32b\",\n      \"affiliate_address\": \"thor1f3s7q037eancht7sg0aj995dht25rwrnu4ats5\",\n      \"signer\": \"string\",\n      \"aggregator\": \"string\",\n      \"aggregator_target_address\": \"string\",\n      \"aggregator_target_limit\": \"string\",\n      \"swap_type\": \"string\",\n      \"stream_quantity\": 7833,\n      \"stream_interval\": 4901,\n      \"initial_block_height\": 3053,\n      \"state\": {\n        \"interval\": 587,\n        \"quantity\": 1647,\n        \"ttl\": 7230,\n        \"count\": 66,\n        \"last_height\": 215,\n        \"deposit\": \"string\",\n        \"withdrawn\": \"string\",\n        \"in\": \"string\",\n        \"out\": \"string\",\n        \"failed_swaps\": [\n          2252,\n          1473\n        ],\n        \"failed_swap_reasons\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"version\": \"string\",\n      \"index\": 35\n    },\n    {\n      \"tx\": {\n        \"coins\": [\n          {\n            \"asset\": \"BTC.BTC\",\n            \"amount\": \"100000\",\n            \"decimals\": 6\n          },\n          {\n            \"asset\": \"BTC.BTC\",\n            \"amount\": \"100000\",\n            \"decimals\": 6\n          }\n        ],\n        \"gas\": [\n          {\n            \"asset\": \"BTC.BTC\",\n            \"amount\": \"100000\",\n            \"decimals\": 6\n          },\n          {\n            \"asset\": \"BTC.BTC\",\n            \"amount\": \"100000\",\n            \"decimals\": 6\n          }\n        ],\n        \"id\": \"CF524818D42B63D25BBA0CCC4909F127CAA645C0F9CD07324F2824CC151A64C7\",\n        \"chain\": \"BTC\",\n        \"from_address\": \"bcrt1q0s4mg25tu6termrk8egltfyme4q7sg3h8kkydt\",\n        \"to_address\": \"bcrt1qf3s7q037eancht7sg0aj995dht25rwrnqsf45e\",\n        \"memo\": \"ADD:BTC.BTC:thor1zupk5lmc84r2dh738a9g3zscavannjy3nzplwt\"\n      },\n      \"target_asset\": \"ETH.ETH\",\n      \"trade_target\": \"string\",\n      \"affiliate_basis_points\": \"string\",\n      \"destination\": \"0x66fb1cd65b97fa40457b90b7d1ca6b92cb64b32b\",\n      \"affiliate_address\": \"thor1f3s7q037eancht7sg0aj995dht25rwrnu4ats5\",\n      \"signer\": \"string\",\n      \"aggregator\": \"string\",\n      \"aggregator_target_address\": \"string\",\n      \"aggregator_target_limit\": \"string\",\n      \"swap_type\": \"string\",\n      \"stream_quantity\": 4907,\n      \"stream_interval\": 5158,\n      \"initial_block_height\": 3439,\n      \"state\": {\n        \"interval\": 6781,\n        \"quantity\": 1780,\n        \"ttl\": 4373,\n        \"count\": 8191,\n        \"last_height\": 325,\n        \"deposit\": \"string\",\n        \"withdrawn\": \"string\",\n        \"in\": \"string\",\n        \"out\": \"string\",\n        \"failed_swaps\": [\n          7721,\n          1265\n        ],\n        \"failed_swap_reasons\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"version\": \"string\",\n      \"index\": 1381\n    }\n  ],\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 100,\n    \"total\": 1247,\n    \"has_next\": true,\n    \"has_prev\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3c03f008-30eb-47c5-930b-00f3bc0789dc",
+          "name": "limit Swaps",
+          "request": {
+            "name": "limit Swaps",
+            "description": {
+              "content": "Returns limit swaps with pagination and filtering.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "queue",
+                "limit_swaps"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<long>",
+                  "description": "optional block height, defaults to current tip"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of items to skip"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Number of items to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "source_asset",
+                  "value": "<string>",
+                  "description": "Filter by source asset (e.g., \"BTC.BTC\")"
+                },
+                {
+                  "disabled": false,
+                  "key": "target_asset",
+                  "value": "<string>",
+                  "description": "Filter by target asset (e.g., \"ETH.ETH\")"
+                },
+                {
+                  "disabled": false,
+                  "key": "sender",
+                  "value": "<string>",
+                  "description": "Filter by sender address"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_by",
+                  "value": "ratio",
+                  "description": "Sort by field"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_order",
+                  "value": "asc",
+                  "description": "Sort order"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e091d427-4a12-49d5-aea3-072a2793f329",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "queue",
+                    "limit_swaps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "height",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "source_asset",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "target_asset",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sender",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "ratio"
+                    },
+                    {
+                      "key": "sort_order",
+                      "value": "asc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"limit_swaps\": [\n    {\n      \"swap\": {\n        \"tx\": {\n          \"coins\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"gas\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"id\": \"CF524818D42B63D25BBA0CCC4909F127CAA645C0F9CD07324F2824CC151A64C7\",\n          \"chain\": \"BTC\",\n          \"from_address\": \"bcrt1q0s4mg25tu6termrk8egltfyme4q7sg3h8kkydt\",\n          \"to_address\": \"bcrt1qf3s7q037eancht7sg0aj995dht25rwrnqsf45e\",\n          \"memo\": \"ADD:BTC.BTC:thor1zupk5lmc84r2dh738a9g3zscavannjy3nzplwt\"\n        },\n        \"target_asset\": \"ETH.ETH\",\n        \"trade_target\": \"string\",\n        \"affiliate_basis_points\": \"string\",\n        \"destination\": \"0x66fb1cd65b97fa40457b90b7d1ca6b92cb64b32b\",\n        \"affiliate_address\": \"thor1f3s7q037eancht7sg0aj995dht25rwrnu4ats5\",\n        \"signer\": \"string\",\n        \"aggregator\": \"string\",\n        \"aggregator_target_address\": \"string\",\n        \"aggregator_target_limit\": \"string\",\n        \"swap_type\": \"string\",\n        \"stream_quantity\": 7707,\n        \"stream_interval\": 3494,\n        \"initial_block_height\": 6688,\n        \"state\": {\n          \"interval\": 1650,\n          \"quantity\": 6841,\n          \"ttl\": 716,\n          \"count\": 5921,\n          \"last_height\": 2194,\n          \"deposit\": \"string\",\n          \"withdrawn\": \"string\",\n          \"in\": \"string\",\n          \"out\": \"string\",\n          \"failed_swaps\": [\n            4624,\n            8305\n          ],\n          \"failed_swap_reasons\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"version\": \"string\",\n        \"index\": 11\n      },\n      \"ratio\": \"1234567890123456789\",\n      \"blocks_since_created\": 150,\n      \"time_to_expiry_blocks\": 14850,\n      \"created_timestamp\": 1699123456\n    },\n    {\n      \"swap\": {\n        \"tx\": {\n          \"coins\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"gas\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"id\": \"CF524818D42B63D25BBA0CCC4909F127CAA645C0F9CD07324F2824CC151A64C7\",\n          \"chain\": \"BTC\",\n          \"from_address\": \"bcrt1q0s4mg25tu6termrk8egltfyme4q7sg3h8kkydt\",\n          \"to_address\": \"bcrt1qf3s7q037eancht7sg0aj995dht25rwrnqsf45e\",\n          \"memo\": \"ADD:BTC.BTC:thor1zupk5lmc84r2dh738a9g3zscavannjy3nzplwt\"\n        },\n        \"target_asset\": \"ETH.ETH\",\n        \"trade_target\": \"string\",\n        \"affiliate_basis_points\": \"string\",\n        \"destination\": \"0x66fb1cd65b97fa40457b90b7d1ca6b92cb64b32b\",\n        \"affiliate_address\": \"thor1f3s7q037eancht7sg0aj995dht25rwrnu4ats5\",\n        \"signer\": \"string\",\n        \"aggregator\": \"string\",\n        \"aggregator_target_address\": \"string\",\n        \"aggregator_target_limit\": \"string\",\n        \"swap_type\": \"string\",\n        \"stream_quantity\": 9574,\n        \"stream_interval\": 5163,\n        \"initial_block_height\": 662,\n        \"state\": {\n          \"interval\": 4355,\n          \"quantity\": 1490,\n          \"ttl\": 6584,\n          \"count\": 9322,\n          \"last_height\": 1299,\n          \"deposit\": \"string\",\n          \"withdrawn\": \"string\",\n          \"in\": \"string\",\n          \"out\": \"string\",\n          \"failed_swaps\": [\n            6235,\n            7690\n          ],\n          \"failed_swap_reasons\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"version\": \"string\",\n        \"index\": 1437\n      },\n      \"ratio\": \"1234567890123456789\",\n      \"blocks_since_created\": 150,\n      \"time_to_expiry_blocks\": 14850,\n      \"created_timestamp\": 1699123456\n    }\n  ],\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 100,\n    \"total\": 1247,\n    \"has_next\": true,\n    \"has_prev\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "943b0a40-4011-4e20-9b61-523495542373",
+          "name": "limit Swaps Summary",
+          "request": {
+            "name": "limit Swaps Summary",
+            "description": {
+              "content": "Returns limit swaps summary statistics.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "queue",
+                "limit_swaps",
+                "summary"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<long>",
+                  "description": "optional block height, defaults to current tip"
+                },
+                {
+                  "disabled": false,
+                  "key": "source_asset",
+                  "value": "<string>",
+                  "description": "Filter by source asset (e.g., \"BTC.BTC\")"
+                },
+                {
+                  "disabled": false,
+                  "key": "target_asset",
+                  "value": "<string>",
+                  "description": "Filter by target asset (e.g., \"ETH.ETH\")"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "af3bbed2-20b6-48fb-a706-8e017b86519d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "queue",
+                    "limit_swaps",
+                    "summary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "height",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "source_asset",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "target_asset",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total_limit_swaps\": 1247,\n  \"total_value_usd\": \"12450000.50\",\n  \"asset_pairs\": [\n    {\n      \"source_asset\": \"BTC.BTC\",\n      \"target_asset\": \"ETH.ETH\",\n      \"count\": 456,\n      \"total_value_usd\": \"4500000.00\"\n    },\n    {\n      \"source_asset\": \"BTC.BTC\",\n      \"target_asset\": \"ETH.ETH\",\n      \"count\": 456,\n      \"total_value_usd\": \"4500000.00\"\n    }\n  ],\n  \"oldest_swap_blocks\": 14999,\n  \"average_age_blocks\": 7500\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9eba4fe0-afe6-4915-8799-2cb5653ef4fe",
+          "name": "queue Scheduled",
+          "request": {
+            "name": "queue Scheduled",
+            "description": {
+              "content": "Returns the scheduled queue.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "queue",
+                "scheduled"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<long>",
+                  "description": "optional block height, defaults to current tip"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d0848b34-1a7a-47f8-81c3-e5c170eebd32",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "queue",
+                    "scheduled"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "height",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"chain\": \"ETH\",\n    \"to_address\": \"0x66fb1cd65b97fa40457b90b7d1ca6b92cb64b32b\",\n    \"coin\": {\n      \"asset\": \"BTC.BTC\",\n      \"amount\": \"100000\",\n      \"decimals\": 6\n    },\n    \"max_gas\": [\n      {\n        \"asset\": \"BTC.BTC\",\n        \"amount\": \"100000\",\n        \"decimals\": 6\n      },\n      {\n        \"asset\": \"BTC.BTC\",\n        \"amount\": \"100000\",\n        \"decimals\": 6\n      }\n    ],\n    \"height\": 1234,\n    \"in_hash\": \"208BF0ACD78C89A0534B0457BA0867B101961A2319C1E49DD28676526904BBEA\",\n    \"out_hash\": \"0D0B2FDB6DAD6E5FD3C5E46D39128F9DA15E96F0B2CC054CE059EA3532B150FB\",\n    \"vault_pub_key\": \"thorpub1addwnpepqt45wmsxj29xpgdrdsvg2h3dx68qeapgykw3hlyj6vuds2r0pnkwx5gt9m4\",\n    \"vault_pub_key_eddsa\": \"thorpub1addwnpepqt45wmsxj29xpgdrdsvg2h3dx68qeapgykw3hlyj6vuds2r0pnkwx5gt9m4\",\n    \"gas_rate\": 2010,\n    \"memo\": \"OUT:208BF0ACD78C89A0534B0457BA0867B101961A2319C1E49DD28676526904BBEA\",\n    \"original_memo\": \"=:BTC.BTC:bc1q0lwf0ycw4gkh8v6y8g9yqwxvqnvm24kvdezgpg\",\n    \"aggregator\": \"0xe4ddca21881bac219af7f217703db0475d2a9f02\",\n    \"aggregator_target_asset\": \"0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48\",\n    \"aggregator_target_limit\": \"100\",\n    \"clout_spent\": \"1234\"\n  },\n  {\n    \"chain\": \"ETH\",\n    \"to_address\": \"0x66fb1cd65b97fa40457b90b7d1ca6b92cb64b32b\",\n    \"coin\": {\n      \"asset\": \"BTC.BTC\",\n      \"amount\": \"100000\",\n      \"decimals\": 6\n    },\n    \"max_gas\": [\n      {\n        \"asset\": \"BTC.BTC\",\n        \"amount\": \"100000\",\n        \"decimals\": 6\n      },\n      {\n        \"asset\": \"BTC.BTC\",\n        \"amount\": \"100000\",\n        \"decimals\": 6\n      }\n    ],\n    \"height\": 1234,\n    \"in_hash\": \"208BF0ACD78C89A0534B0457BA0867B101961A2319C1E49DD28676526904BBEA\",\n    \"out_hash\": \"0D0B2FDB6DAD6E5FD3C5E46D39128F9DA15E96F0B2CC054CE059EA3532B150FB\",\n    \"vault_pub_key\": \"thorpub1addwnpepqt45wmsxj29xpgdrdsvg2h3dx68qeapgykw3hlyj6vuds2r0pnkwx5gt9m4\",\n    \"vault_pub_key_eddsa\": \"thorpub1addwnpepqt45wmsxj29xpgdrdsvg2h3dx68qeapgykw3hlyj6vuds2r0pnkwx5gt9m4\",\n    \"gas_rate\": 9854,\n    \"memo\": \"OUT:208BF0ACD78C89A0534B0457BA0867B101961A2319C1E49DD28676526904BBEA\",\n    \"original_memo\": \"=:BTC.BTC:bc1q0lwf0ycw4gkh8v6y8g9yqwxvqnvm24kvdezgpg\",\n    \"aggregator\": \"0xe4ddca21881bac219af7f217703db0475d2a9f02\",\n    \"aggregator_target_asset\": \"0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48\",\n    \"aggregator_target_limit\": \"100\",\n    \"clout_spent\": \"1234\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "80feac0f-f76d-4db2-879a-f6e82896bffd",
+          "name": "queue Outbound",
+          "request": {
+            "name": "queue Outbound",
+            "description": {
+              "content": "Returns the outbound queue including estimated RUNE values.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "queue",
+                "outbound"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<long>",
+                  "description": "optional block height, defaults to current tip"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "85233932-0dea-4abe-88bb-1cf6139347bb",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "queue",
+                    "outbound"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "height",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"chain\": \"ETH\",\n    \"to_address\": \"0x66fb1cd65b97fa40457b90b7d1ca6b92cb64b32b\",\n    \"coin\": {\n      \"asset\": \"BTC.BTC\",\n      \"amount\": \"100000\",\n      \"decimals\": 6\n    },\n    \"max_gas\": [\n      {\n        \"asset\": \"BTC.BTC\",\n        \"amount\": \"100000\",\n        \"decimals\": 6\n      },\n      {\n        \"asset\": \"BTC.BTC\",\n        \"amount\": \"100000\",\n        \"decimals\": 6\n      }\n    ],\n    \"height\": 1234,\n    \"in_hash\": \"208BF0ACD78C89A0534B0457BA0867B101961A2319C1E49DD28676526904BBEA\",\n    \"out_hash\": \"0D0B2FDB6DAD6E5FD3C5E46D39128F9DA15E96F0B2CC054CE059EA3532B150FB\",\n    \"vault_pub_key\": \"thorpub1addwnpepqt45wmsxj29xpgdrdsvg2h3dx68qeapgykw3hlyj6vuds2r0pnkwx5gt9m4\",\n    \"vault_pub_key_eddsa\": \"thorpub1addwnpepqt45wmsxj29xpgdrdsvg2h3dx68qeapgykw3hlyj6vuds2r0pnkwx5gt9m4\",\n    \"gas_rate\": 6586,\n    \"memo\": \"OUT:208BF0ACD78C89A0534B0457BA0867B101961A2319C1E49DD28676526904BBEA\",\n    \"original_memo\": \"=:BTC.BTC:bc1q0lwf0ycw4gkh8v6y8g9yqwxvqnvm24kvdezgpg\",\n    \"aggregator\": \"0xe4ddca21881bac219af7f217703db0475d2a9f02\",\n    \"aggregator_target_asset\": \"0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48\",\n    \"aggregator_target_limit\": \"100\",\n    \"clout_spent\": \"1234\"\n  },\n  {\n    \"chain\": \"ETH\",\n    \"to_address\": \"0x66fb1cd65b97fa40457b90b7d1ca6b92cb64b32b\",\n    \"coin\": {\n      \"asset\": \"BTC.BTC\",\n      \"amount\": \"100000\",\n      \"decimals\": 6\n    },\n    \"max_gas\": [\n      {\n        \"asset\": \"BTC.BTC\",\n        \"amount\": \"100000\",\n        \"decimals\": 6\n      },\n      {\n        \"asset\": \"BTC.BTC\",\n        \"amount\": \"100000\",\n        \"decimals\": 6\n      }\n    ],\n    \"height\": 1234,\n    \"in_hash\": \"208BF0ACD78C89A0534B0457BA0867B101961A2319C1E49DD28676526904BBEA\",\n    \"out_hash\": \"0D0B2FDB6DAD6E5FD3C5E46D39128F9DA15E96F0B2CC054CE059EA3532B150FB\",\n    \"vault_pub_key\": \"thorpub1addwnpepqt45wmsxj29xpgdrdsvg2h3dx68qeapgykw3hlyj6vuds2r0pnkwx5gt9m4\",\n    \"vault_pub_key_eddsa\": \"thorpub1addwnpepqt45wmsxj29xpgdrdsvg2h3dx68qeapgykw3hlyj6vuds2r0pnkwx5gt9m4\",\n    \"gas_rate\": 9604,\n    \"memo\": \"OUT:208BF0ACD78C89A0534B0457BA0867B101961A2319C1E49DD28676526904BBEA\",\n    \"original_memo\": \"=:BTC.BTC:bc1q0lwf0ycw4gkh8v6y8g9yqwxvqnvm24kvdezgpg\",\n    \"aggregator\": \"0xe4ddca21881bac219af7f217703db0475d2a9f02\",\n    \"aggregator_target_asset\": \"0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48\",\n    \"aggregator_target_limit\": \"100\",\n    \"clout_spent\": \"1234\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "9c1b50de-503e-4b19-b86e-6f0611c3849c",
+    "name": "Thornode Auth Queue API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Thornode REST API.\n\nContact Support:\n Email: devs@thorchain.org",
+      "type": "text/plain"
+    }
+  }
+}

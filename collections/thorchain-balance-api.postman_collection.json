@@ -1,0 +1,144 @@
+{
+  "item": [
+    {
+      "id": "b83823b0-ca94-4d18-8e36-cdadb6976151",
+      "name": "Balance",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "25348110-9f21-4fac-8739-0ee440d72f73",
+          "name": "Current balance for an address",
+          "request": {
+            "name": "Current balance for an address",
+            "description": {
+              "content": "Returns all coin amounts of the given address at the specified timestamp or\nheight, or at the latest process block if neither is provided. (Only one of\ntimestamp or height can be specified, not both.)\n\nThis endpoint is enabled only if the midgard startup config allows it.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "balance",
+                ":address"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "timestamp",
+                  "value": "<long>",
+                  "description": "Unix timestamp as seconds since 1970 (if provided, height must not be provided)"
+                },
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<long>",
+                  "description": "Block height (if provided, timestamp must not be provided)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "address",
+                  "description": "(Required) Rune address."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "046d2d88-0a94-49b2-b796-8663bd26ef13",
+              "name": "object containing balance details for a given address",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "balance",
+                    ":address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "timestamp",
+                      "value": "1606780800"
+                    },
+                    {
+                      "key": "height",
+                      "value": "2000000"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) Rune address."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"height\": \"2000000\",\n  \"date\": \"946684801000000000\",\n  \"coins\": [\n    {\n      \"asset\": \"string\",\n      \"amount\": \"string\"\n    },\n    {\n      \"asset\": \"string\",\n      \"amount\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "0548d12c-35c8-4b1e-965f-3dfa06e2c897",
+    "name": "Thornode Auth Balance API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Thornode REST API.\n\nContact Support:\n Email: devs@thorchain.org",
+      "type": "text/plain"
+    }
+  }
+}

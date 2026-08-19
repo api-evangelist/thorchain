@@ -1,0 +1,116 @@
+{
+  "item": [
+    {
+      "id": "b08c5121-803d-4e2d-ad1a-69d13fbc2e72",
+      "name": "SecuredAssets",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4276b21b-7ea9-4b5a-b0cb-e4a39728cd81",
+          "name": "secured assets",
+          "request": {
+            "name": "secured assets",
+            "description": {
+              "content": "Returns the total size and ratio of all secured asset",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "securedassets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<long>",
+                  "description": "optional block height, defaults to current tip"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a5121128-61d6-4f39-b40f-6783ca11b82b",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "securedassets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "height",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"asset\": \"BTC-BTC\",\n    \"supply\": \"string\",\n    \"depth\": \"string\"\n  },\n  {\n    \"asset\": \"BTC-BTC\",\n    \"supply\": \"string\",\n    \"depth\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ebe3c20c-d482-45b9-b833-271847576286",
+    "name": "Thornode Auth SecuredAssets API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Thornode REST API.\n\nContact Support:\n Email: devs@thorchain.org",
+      "type": "text/plain"
+    }
+  }
+}

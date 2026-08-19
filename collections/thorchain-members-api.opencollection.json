@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Thornode Auth Members API",
+    "version": "3.19.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Members",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Members List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/members",
+            "params": [
+              {
+                "name": "pool",
+                "value": "",
+                "type": "query",
+                "description": "Return only members present in the pool."
+              }
+            ]
+          },
+          "docs": "Returns an array containing the addresses for all pool members.\nAddresses are only shown once. If there's both a RUNE address and an asset address\nfor a member, only the RUNE address will be shown.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

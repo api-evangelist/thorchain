@@ -1,0 +1,1514 @@
+{
+  "item": [
+    {
+      "id": "3efc7506-f3fb-4783-b449-2d907fbd48a5",
+      "name": "History",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c3c3142b-ca06-4b62-a2a3-59bc0dfd4ac9",
+          "name": "Affiliate earnings History",
+          "request": {
+            "name": "Affiliate earnings History",
+            "description": {
+              "content": "Returns affiliate count, earnings in USD in specified interval.\nIf thorname is not specified returns all thornames\n\nHistory endpoint has two modes:\n* With Interval parameter it returns a series of time buckets. From and To dates will\n  be rounded to the Interval boundaries.\n* Without Interval parameter a single From..To search is performed with exact timestamps.\n\n\n* Interval: possible values: 5min, hour, day, week, month, quarter, year.\n* count: [1..400]. Defines number of intervals. Don't provide if Interval is missing.\n* from/to: optional int, unix second.\n\nPossible usages with interval.\n* last 10 days: `?interval=day&count=10`\n* last 10 days before to: `?interval=day&count=10&to=1608825600`\n* next 10 days after from: `?interval=day&count=10&from=1606780800`\n* Days between from and to. From defaults to start of chain, to defaults to now.\n  Only the first 400 intervals are returned:\n  `interval=day&from=1606780800&to=1608825600`\n\nPagination is possible with from&count and then using the returned meta.endTime as the\nFrom parameter of the next query.\n\nPossible configurations without interval:\n* exact search for one time frame: `?from=1606780899&to=1608825600`\n* one time frame until now: `?from=1606780899`\n* from chain start until now: no query parameters\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "history",
+                "affiliate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "thorname",
+                  "value": "<string>",
+                  "description": "Return history given thorname. Returns sum of all thornames if missing."
+                },
+                {
+                  "disabled": false,
+                  "key": "interval",
+                  "value": "<string>",
+                  "description": "Interval of calculations"
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "<integer>",
+                  "description": "Number of intervals to return. Should be between [1..400]."
+                },
+                {
+                  "disabled": false,
+                  "key": "to",
+                  "value": "<long>",
+                  "description": "End time of the query as unix timestamp. If only count is given, defaults to now.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "from",
+                  "value": "<long>",
+                  "description": "Start time of the query as unix timestamp"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "957929d3-483f-4d22-b5a9-aeb3c717fe6c",
+              "name": "Affiliate fee count and earnings history",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "history",
+                    "affiliate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "thorname",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "day"
+                    },
+                    {
+                      "key": "count",
+                      "value": "30"
+                    },
+                    {
+                      "key": "to",
+                      "value": "1608825600"
+                    },
+                    {
+                      "key": "from",
+                      "value": "1606780800"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"startTime\": \"string\",\n    \"endTime\": \"string\",\n    \"count\": \"string\",\n    \"volume\": \"string\",\n    \"volumeUSD\": \"string\"\n  },\n  \"intervals\": [\n    {\n      \"startTime\": \"string\",\n      \"endTime\": \"string\",\n      \"count\": \"string\",\n      \"thornames\": [\n        {\n          \"thorname\": \"string\",\n          \"count\": \"string\",\n          \"volume\": \"string\",\n          \"volumeUSD\": \"string\"\n        },\n        {\n          \"thorname\": \"string\",\n          \"count\": \"string\",\n          \"volume\": \"string\",\n          \"volumeUSD\": \"string\"\n        }\n      ],\n      \"volume\": \"string\",\n      \"volumeUSD\": \"string\"\n    },\n    {\n      \"startTime\": \"string\",\n      \"endTime\": \"string\",\n      \"count\": \"string\",\n      \"thornames\": [\n        {\n          \"thorname\": \"string\",\n          \"count\": \"string\",\n          \"volume\": \"string\",\n          \"volumeUSD\": \"string\"\n        },\n        {\n          \"thorname\": \"string\",\n          \"count\": \"string\",\n          \"volume\": \"string\",\n          \"volumeUSD\": \"string\"\n        }\n      ],\n      \"volume\": \"string\",\n      \"volumeUSD\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "491f438d-edaf-4b57-9c58-0c6581eb519b",
+          "name": "Affiliate Liquidity Fee Earnings History",
+          "request": {
+            "name": "Affiliate Liquidity Fee Earnings History",
+            "description": {
+              "content": "Returns affiliate earnings (liquidity fees) in USD and RUNE in specified interval.\nIf thorname is not specified returns all affiliates.\n\nHistory endpoint has two modes:\n* With Interval parameter it returns a series of time buckets. From and To dates will\n  be rounded to the Interval boundaries.\n* Without Interval parameter a single From..To search is performed with exact timestamps.\n\n\n* Interval: possible values: 5min, hour, day, week, month, quarter, year.\n* count: [1..400]. Defines number of intervals. Don't provide if Interval is missing.\n* from/to: optional int, unix second.\n\nPossible usages with interval.\n* last 10 days: `?interval=day&count=10`\n* last 10 days before to: `?interval=day&count=10&to=1608825600`\n* next 10 days after from: `?interval=day&count=10&from=1606780800`\n* Days between from and to. From defaults to start of chain, to defaults to now.\n  Only the first 400 intervals are returned:\n  `interval=day&from=1606780800&to=1608825600`\n\nPagination is possible with from&count and then using the returned endTime as the\nFrom parameter of the next query.\n\nPossible configurations without interval:\n* exact search for one time frame: `?from=1606780899&to=1608825600`\n* one time frame until now: `?from=1606780899`\n* from chain start until now: no query parameters\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "history",
+                "affiliate",
+                "earnings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "thorname",
+                  "value": "<string>",
+                  "description": "Return earnings for given thorname. Returns all affiliates if missing."
+                },
+                {
+                  "disabled": false,
+                  "key": "interval",
+                  "value": "<string>",
+                  "description": "Interval of calculations"
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "<integer>",
+                  "description": "Number of intervals to return. Should be between [1..400]."
+                },
+                {
+                  "disabled": false,
+                  "key": "to",
+                  "value": "<long>",
+                  "description": "End time of the query as unix timestamp. If only count is given, defaults to now.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "from",
+                  "value": "<long>",
+                  "description": "Start time of the query as unix timestamp"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "03af8d45-589c-45b2-9a48-fb04fc55732f",
+              "name": "Affiliate earnings (liquidity fees) history",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "history",
+                    "affiliate",
+                    "earnings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "thorname",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "day"
+                    },
+                    {
+                      "key": "count",
+                      "value": "30"
+                    },
+                    {
+                      "key": "to",
+                      "value": "1608825600"
+                    },
+                    {
+                      "key": "from",
+                      "value": "1606780800"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"startTime\": \"string\",\n    \"endTime\": \"string\",\n    \"totalEarningsRune\": \"string\",\n    \"totalEarningsUSD\": \"string\",\n    \"count\": \"string\",\n    \"affiliates\": [\n      {\n        \"affiliate\": \"string\",\n        \"earningsUSD\": \"string\",\n        \"earningsRUNE\": \"string\",\n        \"count\": \"string\"\n      },\n      {\n        \"affiliate\": \"string\",\n        \"earningsUSD\": \"string\",\n        \"earningsRUNE\": \"string\",\n        \"count\": \"string\"\n      }\n    ]\n  },\n  {\n    \"startTime\": \"string\",\n    \"endTime\": \"string\",\n    \"totalEarningsRune\": \"string\",\n    \"totalEarningsUSD\": \"string\",\n    \"count\": \"string\",\n    \"affiliates\": [\n      {\n        \"affiliate\": \"string\",\n        \"earningsUSD\": \"string\",\n        \"earningsRUNE\": \"string\",\n        \"count\": \"string\"\n      },\n      {\n        \"affiliate\": \"string\",\n        \"earningsUSD\": \"string\",\n        \"earningsRUNE\": \"string\",\n        \"count\": \"string\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b6440667-660b-459f-aacc-f69642d9f41b",
+          "name": "Affiliate Volume Stats",
+          "request": {
+            "name": "Affiliate Volume Stats",
+            "description": {
+              "content": "Returns affiliate count, swap volume in USD in specified interval.\nIf thorname is not specified returns all thornames\n\nHistory endpoint has two modes:\n* With Interval parameter it returns a series of time buckets. From and To dates will\n  be rounded to the Interval boundaries.\n* Without Interval parameter a single From..To search is performed with exact timestamps.\n\n\n* Interval: possible values: 5min, hour, day, week, month, quarter, year.\n* count: [1..400]. Defines number of intervals. Don't provide if Interval is missing.\n* from/to: optional int, unix second.\n\nPossible usages with interval.\n* last 10 days: `?interval=day&count=10`\n* last 10 days before to: `?interval=day&count=10&to=1608825600`\n* next 10 days after from: `?interval=day&count=10&from=1606780800`\n* Days between from and to. From defaults to start of chain, to defaults to now.\n  Only the first 400 intervals are returned:\n  `interval=day&from=1606780800&to=1608825600`\n\nPagination is possible with from&count and then using the returned meta.endTime as the\nFrom parameter of the next query.\n\nPossible configurations without interval:\n* exact search for one time frame: `?from=1606780899&to=1608825600`\n* one time frame until now: `?from=1606780899`\n* from chain start until now: no query parameters\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "history",
+                "affiliate",
+                "stats"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "thorname",
+                  "value": "<string>",
+                  "description": "Return history given thorname. Returns sum of all thornames if missing."
+                },
+                {
+                  "disabled": false,
+                  "key": "interval",
+                  "value": "<string>",
+                  "description": "Interval of calculations"
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "<integer>",
+                  "description": "Number of intervals to return. Should be between [1..400]."
+                },
+                {
+                  "disabled": false,
+                  "key": "to",
+                  "value": "<long>",
+                  "description": "End time of the query as unix timestamp. If only count is given, defaults to now.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "from",
+                  "value": "<long>",
+                  "description": "Start time of the query as unix timestamp"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7d17c863-562a-4976-8682-47096369de5e",
+              "name": "Affiliate count and volume stats history",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "history",
+                    "affiliate",
+                    "stats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "thorname",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "day"
+                    },
+                    {
+                      "key": "count",
+                      "value": "30"
+                    },
+                    {
+                      "key": "to",
+                      "value": "1608825600"
+                    },
+                    {
+                      "key": "from",
+                      "value": "1606780800"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"startTime\": \"string\",\n    \"endTime\": \"string\",\n    \"totalVolumeUSD\": \"string\",\n    \"count\": \"string\",\n    \"affiliates\": [\n      {\n        \"affiliate\": \"string\",\n        \"count\": \"string\",\n        \"volumeUSD\": \"string\"\n      },\n      {\n        \"affiliate\": \"string\",\n        \"count\": \"string\",\n        \"volumeUSD\": \"string\"\n      }\n    ]\n  },\n  {\n    \"startTime\": \"string\",\n    \"endTime\": \"string\",\n    \"totalVolumeUSD\": \"string\",\n    \"count\": \"string\",\n    \"affiliates\": [\n      {\n        \"affiliate\": \"string\",\n        \"count\": \"string\",\n        \"volumeUSD\": \"string\"\n      },\n      {\n        \"affiliate\": \"string\",\n        \"count\": \"string\",\n        \"volumeUSD\": \"string\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "46a502cd-7002-46da-813c-309939b8a5aa",
+          "name": "Depth and Price History",
+          "request": {
+            "name": "Depth and Price History",
+            "description": {
+              "content": "Returns the asset and rune depths and price.\nThe values report the state at the end of each interval.\n\nHistory endpoint has two modes:\n* With Interval parameter it returns a series of time buckets. From and To dates will\n  be rounded to the Interval boundaries.\n* Without Interval parameter a single From..To search is performed with exact timestamps.\n\n\n* Interval: possible values: 5min, hour, day, week, month, quarter, year.\n* count: [1..400]. Defines number of intervals. Don't provide if Interval is missing.\n* from/to: optional int, unix second.\n\nPossible usages with interval.\n* last 10 days: `?interval=day&count=10`\n* last 10 days before to: `?interval=day&count=10&to=1608825600`\n* next 10 days after from: `?interval=day&count=10&from=1606780800`\n* Days between from and to. From defaults to start of chain, to defaults to now.\n  Only the first 400 intervals are returned:\n  `interval=day&from=1606780800&to=1608825600`\n\nPagination is possible with from&count and then using the returned meta.endTime as the\nFrom parameter of the next query.\n\nPossible configurations without interval:\n* exact search for one time frame: `?from=1606780899&to=1608825600`\n* one time frame until now: `?from=1606780899`\n* from chain start until now: no query parameters\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "history",
+                "depths",
+                ":pool"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "interval",
+                  "value": "<string>",
+                  "description": "Interval of calculations"
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "<integer>",
+                  "description": "Number of intervals to return. Should be between [1..400]."
+                },
+                {
+                  "disabled": false,
+                  "key": "to",
+                  "value": "<long>",
+                  "description": "End time of the query as unix timestamp. If only count is given, defaults to now.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "from",
+                  "value": "<long>",
+                  "description": "Start time of the query as unix timestamp"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "pool",
+                  "description": "(Required) Return stats for this single pool."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fb527331-0662-451f-967f-5d9fdc29882b",
+              "name": "Depth and price history",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "history",
+                    "depths",
+                    ":pool"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "day"
+                    },
+                    {
+                      "key": "count",
+                      "value": "30"
+                    },
+                    {
+                      "key": "to",
+                      "value": "1608825600"
+                    },
+                    {
+                      "key": "from",
+                      "value": "1606780800"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "pool",
+                      "description": "(Required) Return stats for this single pool."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"startTime\": \"string\",\n    \"endTime\": \"string\",\n    \"priceShiftLoss\": \"string\",\n    \"luviIncrease\": \"string\",\n    \"startAssetDepth\": \"string\",\n    \"startRuneDepth\": \"string\",\n    \"startLPUnits\": \"string\",\n    \"startMemberCount\": \"string\",\n    \"startSynthUnits\": \"string\",\n    \"endAssetDepth\": \"string\",\n    \"endRuneDepth\": \"string\",\n    \"endLPUnits\": \"string\",\n    \"endMemberCount\": \"string\",\n    \"endSynthUnits\": \"string\"\n  },\n  \"intervals\": [\n    {\n      \"startTime\": \"string\",\n      \"endTime\": \"string\",\n      \"assetDepth\": \"string\",\n      \"runeDepth\": \"string\",\n      \"assetPrice\": \"string\",\n      \"assetPriceUSD\": \"string\",\n      \"liquidityUnits\": \"string\",\n      \"membersCount\": \"string\",\n      \"synthUnits\": \"string\",\n      \"synthSupply\": \"string\",\n      \"units\": \"string\",\n      \"luvi\": \"string\",\n      \"closePriceUSD\": \"string\",\n      \"highPriceUSD\": \"string\",\n      \"lowPriceUSD\": \"string\",\n      \"openPriceUSD\": \"string\"\n    },\n    {\n      \"startTime\": \"string\",\n      \"endTime\": \"string\",\n      \"assetDepth\": \"string\",\n      \"runeDepth\": \"string\",\n      \"assetPrice\": \"string\",\n      \"assetPriceUSD\": \"string\",\n      \"liquidityUnits\": \"string\",\n      \"membersCount\": \"string\",\n      \"synthUnits\": \"string\",\n      \"synthSupply\": \"string\",\n      \"units\": \"string\",\n      \"luvi\": \"string\",\n      \"closePriceUSD\": \"string\",\n      \"highPriceUSD\": \"string\",\n      \"lowPriceUSD\": \"string\",\n      \"openPriceUSD\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ab0ad4e0-9bc7-40aa-9ed3-a04051391b0d",
+          "name": "Earnings History",
+          "request": {
+            "name": "Earnings History",
+            "description": {
+              "content": "Returns earnings data for the specified interval.\n\nHistory endpoint has two modes:\n* With Interval parameter it returns a series of time buckets. From and To dates will\n  be rounded to the Interval boundaries.\n* Without Interval parameter a single From..To search is performed with exact timestamps.\n\n\n* Interval: possible values: 5min, hour, day, week, month, quarter, year.\n* count: [1..400]. Defines number of intervals. Don't provide if Interval is missing.\n* from/to: optional int, unix second.\n\nPossible usages with interval.\n* last 10 days: `?interval=day&count=10`\n* last 10 days before to: `?interval=day&count=10&to=1608825600`\n* next 10 days after from: `?interval=day&count=10&from=1606780800`\n* Days between from and to. From defaults to start of chain, to defaults to now.\n  Only the first 400 intervals are returned:\n  `interval=day&from=1606780800&to=1608825600`\n\nPagination is possible with from&count and then using the returned meta.endTime as the\nFrom parameter of the next query.\n\nPossible configurations without interval:\n* exact search for one time frame: `?from=1606780899&to=1608825600`\n* one time frame until now: `?from=1606780899`\n* from chain start until now: no query parameters\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "history",
+                "earnings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "interval",
+                  "value": "<string>",
+                  "description": "Interval of calculations"
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "<integer>",
+                  "description": "Number of intervals to return. Should be between [1..400]."
+                },
+                {
+                  "disabled": false,
+                  "key": "to",
+                  "value": "<long>",
+                  "description": "End time of the query as unix timestamp. If only count is given, defaults to now.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "from",
+                  "value": "<long>",
+                  "description": "Start time of the query as unix timestamp"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3a5b1008-cf61-42d0-b1ca-0846d41a16ef",
+              "name": "earnings history",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "history",
+                    "earnings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "day"
+                    },
+                    {
+                      "key": "count",
+                      "value": "30"
+                    },
+                    {
+                      "key": "to",
+                      "value": "1608825600"
+                    },
+                    {
+                      "key": "from",
+                      "value": "1606780800"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"startTime\": \"string\",\n    \"endTime\": \"string\",\n    \"liquidityFees\": \"string\",\n    \"blockRewards\": \"string\",\n    \"earnings\": \"string\",\n    \"bondingEarnings\": \"string\",\n    \"liquidityEarnings\": \"string\",\n    \"avgNodeCount\": \"string\",\n    \"runePriceUSD\": \"string\",\n    \"pools\": [\n      {\n        \"pool\": \"string\",\n        \"assetLiquidityFees\": \"string\",\n        \"runeLiquidityFees\": \"string\",\n        \"totalLiquidityFeesRune\": \"string\",\n        \"saverEarning\": \"string\",\n        \"rewards\": \"string\",\n        \"earnings\": \"string\"\n      },\n      {\n        \"pool\": \"string\",\n        \"assetLiquidityFees\": \"string\",\n        \"runeLiquidityFees\": \"string\",\n        \"totalLiquidityFeesRune\": \"string\",\n        \"saverEarning\": \"string\",\n        \"rewards\": \"string\",\n        \"earnings\": \"string\"\n      }\n    ]\n  },\n  \"intervals\": [\n    {\n      \"startTime\": \"string\",\n      \"endTime\": \"string\",\n      \"liquidityFees\": \"string\",\n      \"blockRewards\": \"string\",\n      \"earnings\": \"string\",\n      \"bondingEarnings\": \"string\",\n      \"liquidityEarnings\": \"string\",\n      \"avgNodeCount\": \"string\",\n      \"runePriceUSD\": \"string\",\n      \"pools\": [\n        {\n          \"pool\": \"string\",\n          \"assetLiquidityFees\": \"string\",\n          \"runeLiquidityFees\": \"string\",\n          \"totalLiquidityFeesRune\": \"string\",\n          \"saverEarning\": \"string\",\n          \"rewards\": \"string\",\n          \"earnings\": \"string\"\n        },\n        {\n          \"pool\": \"string\",\n          \"assetLiquidityFees\": \"string\",\n          \"runeLiquidityFees\": \"string\",\n          \"totalLiquidityFeesRune\": \"string\",\n          \"saverEarning\": \"string\",\n          \"rewards\": \"string\",\n          \"earnings\": \"string\"\n        }\n      ]\n    },\n    {\n      \"startTime\": \"string\",\n      \"endTime\": \"string\",\n      \"liquidityFees\": \"string\",\n      \"blockRewards\": \"string\",\n      \"earnings\": \"string\",\n      \"bondingEarnings\": \"string\",\n      \"liquidityEarnings\": \"string\",\n      \"avgNodeCount\": \"string\",\n      \"runePriceUSD\": \"string\",\n      \"pools\": [\n        {\n          \"pool\": \"string\",\n          \"assetLiquidityFees\": \"string\",\n          \"runeLiquidityFees\": \"string\",\n          \"totalLiquidityFeesRune\": \"string\",\n          \"saverEarning\": \"string\",\n          \"rewards\": \"string\",\n          \"earnings\": \"string\"\n        },\n        {\n          \"pool\": \"string\",\n          \"assetLiquidityFees\": \"string\",\n          \"runeLiquidityFees\": \"string\",\n          \"totalLiquidityFeesRune\": \"string\",\n          \"saverEarning\": \"string\",\n          \"rewards\": \"string\",\n          \"earnings\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c8348c04-6c35-4901-9e69-49a08e4b4988",
+          "name": "Liquidity Changes History",
+          "request": {
+            "name": "Liquidity Changes History",
+            "description": {
+              "content": "Returns withdrawals and deposits for given time interval.\nIf pool is not specified returns for all pools\n\nHistory endpoint has two modes:\n* With Interval parameter it returns a series of time buckets. From and To dates will\n  be rounded to the Interval boundaries.\n* Without Interval parameter a single From..To search is performed with exact timestamps.\n\n\n* Interval: possible values: 5min, hour, day, week, month, quarter, year.\n* count: [1..400]. Defines number of intervals. Don't provide if Interval is missing.\n* from/to: optional int, unix second.\n\nPossible usages with interval.\n* last 10 days: `?interval=day&count=10`\n* last 10 days before to: `?interval=day&count=10&to=1608825600`\n* next 10 days after from: `?interval=day&count=10&from=1606780800`\n* Days between from and to. From defaults to start of chain, to defaults to now.\n  Only the first 400 intervals are returned:\n  `interval=day&from=1606780800&to=1608825600`\n\nPagination is possible with from&count and then using the returned meta.endTime as the\nFrom parameter of the next query.\n\nPossible configurations without interval:\n* exact search for one time frame: `?from=1606780899&to=1608825600`\n* one time frame until now: `?from=1606780899`\n* from chain start until now: no query parameters\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "history",
+                "liquidity_changes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pool",
+                  "value": "<string>",
+                  "description": "Return stats for given pool. Returns sum of all pools if missing"
+                },
+                {
+                  "disabled": false,
+                  "key": "interval",
+                  "value": "<string>",
+                  "description": "Interval of calculations"
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "<integer>",
+                  "description": "Number of intervals to return. Should be between [1..400]"
+                },
+                {
+                  "disabled": false,
+                  "key": "to",
+                  "value": "<long>",
+                  "description": "End time of the query as unix timestamp. If only count is given, defaults to now\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "from",
+                  "value": "<long>",
+                  "description": "Start time of the query as unix timestamp"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f985817a-b73c-403c-9375-88566871a0fb",
+              "name": "Withdrawals and deposits history",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "history",
+                    "liquidity_changes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pool",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "day"
+                    },
+                    {
+                      "key": "count",
+                      "value": "30"
+                    },
+                    {
+                      "key": "to",
+                      "value": "1608825600"
+                    },
+                    {
+                      "key": "from",
+                      "value": "1606780800"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"startTime\": \"string\",\n    \"endTime\": \"string\",\n    \"addAssetLiquidityVolume\": \"string\",\n    \"addRuneLiquidityVolume\": \"string\",\n    \"addLiquidityVolume\": \"string\",\n    \"addLiquidityCount\": \"string\",\n    \"withdrawAssetVolume\": \"string\",\n    \"withdrawRuneVolume\": \"string\",\n    \"withdrawVolume\": \"string\",\n    \"withdrawCount\": \"string\",\n    \"net\": \"string\",\n    \"runePriceUSD\": \"string\"\n  },\n  \"intervals\": [\n    {\n      \"startTime\": \"string\",\n      \"endTime\": \"string\",\n      \"addAssetLiquidityVolume\": \"string\",\n      \"addRuneLiquidityVolume\": \"string\",\n      \"addLiquidityVolume\": \"string\",\n      \"addLiquidityCount\": \"string\",\n      \"withdrawAssetVolume\": \"string\",\n      \"withdrawRuneVolume\": \"string\",\n      \"withdrawVolume\": \"string\",\n      \"withdrawCount\": \"string\",\n      \"net\": \"string\",\n      \"runePriceUSD\": \"string\"\n    },\n    {\n      \"startTime\": \"string\",\n      \"endTime\": \"string\",\n      \"addAssetLiquidityVolume\": \"string\",\n      \"addRuneLiquidityVolume\": \"string\",\n      \"addLiquidityVolume\": \"string\",\n      \"addLiquidityCount\": \"string\",\n      \"withdrawAssetVolume\": \"string\",\n      \"withdrawRuneVolume\": \"string\",\n      \"withdrawVolume\": \"string\",\n      \"withdrawCount\": \"string\",\n      \"net\": \"string\",\n      \"runePriceUSD\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5dd8620d-c0c8-4f1c-84a6-fcd3e1d9a617",
+          "name": "Reserve income and expenses over bucketed history",
+          "request": {
+            "name": "Reserve income and expenses over bucketed history",
+            "description": {
+              "content": "Returns reserve module network fee, outbound fee, and gas reimbursement flow in\nbucketed history\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "history",
+                "reserve"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "interval",
+                  "value": "<string>",
+                  "description": "Interval of calculations"
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "<integer>",
+                  "description": "Number of intervals to return. Should be between [1..400]."
+                },
+                {
+                  "disabled": false,
+                  "key": "to",
+                  "value": "<long>",
+                  "description": "End time of the query as unix timestamp. If only count is given, defaults to now.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "from",
+                  "value": "<long>",
+                  "description": "Start time of the query as unix timestamp"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "05543e98-3159-4fc2-873c-411616fc948b",
+              "name": "Reserve",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "history",
+                    "reserve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "day"
+                    },
+                    {
+                      "key": "count",
+                      "value": "30"
+                    },
+                    {
+                      "key": "to",
+                      "value": "1608825600"
+                    },
+                    {
+                      "key": "from",
+                      "value": "1606780800"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"startTime\": \"string\",\n    \"endTime\": \"string\",\n    \"gasFeeOutbound\": \"string\",\n    \"gasReimbursement\": \"string\",\n    \"networkFee\": \"string\"\n  },\n  \"intervals\": [\n    {\n      \"startTime\": \"string\",\n      \"endTime\": \"string\",\n      \"gasFeeOutbound\": \"string\",\n      \"gasReimbursement\": \"string\",\n      \"networkFee\": \"string\"\n    },\n    {\n      \"startTime\": \"string\",\n      \"endTime\": \"string\",\n      \"gasFeeOutbound\": \"string\",\n      \"gasReimbursement\": \"string\",\n      \"networkFee\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2e7dcd17-e34f-4d24-a170-99e70eb02e85",
+          "name": "Rune price history in USD",
+          "request": {
+            "name": "Rune price history in USD",
+            "description": {
+              "content": "Returns rune price history in USD based on the time bucket given\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "history",
+                "rune"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "interval",
+                  "value": "<string>",
+                  "description": "Interval of calculations"
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "<integer>",
+                  "description": "Number of intervals to return. Should be between [1..400]."
+                },
+                {
+                  "disabled": false,
+                  "key": "to",
+                  "value": "<long>",
+                  "description": "End time of the query as unix timestamp. If only count is given, defaults to now.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "from",
+                  "value": "<long>",
+                  "description": "Start time of the query as unix timestamp"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4ef697a7-1d17-4ffc-82a9-39ce52476fdb",
+              "name": "Returns rune price history in USD based on the time bucket given",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "history",
+                    "rune"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "day"
+                    },
+                    {
+                      "key": "count",
+                      "value": "30"
+                    },
+                    {
+                      "key": "to",
+                      "value": "1608825600"
+                    },
+                    {
+                      "key": "from",
+                      "value": "1606780800"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"startTime\": \"string\",\n    \"endTime\": \"string\",\n    \"startRunePriceUSD\": \"string\",\n    \"endRunePriceUSD\": \"string\"\n  },\n  \"intervals\": [\n    {\n      \"startTime\": \"string\",\n      \"endTime\": \"string\",\n      \"runePriceUSD\": \"string\"\n    },\n    {\n      \"startTime\": \"string\",\n      \"endTime\": \"string\",\n      \"runePriceUSD\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9142ee41-4b72-4dfe-8b20-36553a9ef005",
+          "name": "RUNEPool total members and units History",
+          "request": {
+            "name": "RUNEPool total members and units History",
+            "description": {
+              "content": "Returns RUNEPool members and units.\nThe values report the state at the end of each interval.\n\nHistory endpoint has two modes:\n* With Interval parameter it returns a series of time buckets. From and To dates will\n  be rounded to the Interval boundaries.\n* Without Interval parameter a single From..To search is performed with exact timestamps.\n\n\n* Interval: possible values: 5min, hour, day, week, month, quarter, year.\n* count: [1..400]. Defines number of intervals. Don't provide if Interval is missing.\n* from/to: optional int, unix second.\n\nPossible usages with interval.\n* last 10 days: `?interval=day&count=10`\n* last 10 days before to: `?interval=day&count=10&to=1608825600`\n* next 10 days after from: `?interval=day&count=10&from=1606780800`\n* Days between from and to. From defaults to start of chain, to defaults to now.\n  Only the first 400 intervals are returned:\n  `interval=day&from=1606780800&to=1608825600`\n\nPagination is possible with from&count and then using the returned meta.endTime as the\nFrom parameter of the next query.\n\nPossible configurations without interval:\n* exact search for one time frame: `?from=1606780899&to=1608825600`\n* one time frame until now: `?from=1606780899`\n* from chain start until now: no query parameters\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "history",
+                "runepool"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "interval",
+                  "value": "<string>",
+                  "description": "Interval of calculations"
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "<integer>",
+                  "description": "Number of intervals to return. Should be between [1..400]."
+                },
+                {
+                  "disabled": false,
+                  "key": "to",
+                  "value": "<long>",
+                  "description": "End time of the query as unix timestamp. If only count is given, defaults to now.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "from",
+                  "value": "<long>",
+                  "description": "Start time of the query as unix timestamp"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "eb2a6d30-1425-4baf-a8b6-08409b3e27af",
+              "name": "Members and Units history of RUNEPool",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "history",
+                    "runepool"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "day"
+                    },
+                    {
+                      "key": "count",
+                      "value": "30"
+                    },
+                    {
+                      "key": "to",
+                      "value": "1608825600"
+                    },
+                    {
+                      "key": "from",
+                      "value": "1606780800"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"startTime\": \"string\",\n    \"endTime\": \"string\",\n    \"startUnits\": \"string\",\n    \"startCount\": \"string\",\n    \"endUnits\": \"string\",\n    \"endCount\": \"string\"\n  },\n  \"intervals\": [\n    {\n      \"startTime\": \"string\",\n      \"endTime\": \"string\",\n      \"count\": \"string\",\n      \"units\": \"string\",\n      \"depth\": \"string\"\n    },\n    {\n      \"startTime\": \"string\",\n      \"endTime\": \"string\",\n      \"count\": \"string\",\n      \"units\": \"string\",\n      \"depth\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "da224b8f-858a-4d72-9dd2-e81bc58b5dde",
+          "name": "Savers Units and Depth History",
+          "request": {
+            "name": "Savers Units and Depth History",
+            "description": {
+              "content": "Returns savers depths and units.\nThe values report the state at the end of each interval.\n\nHistory endpoint has two modes:\n* With Interval parameter it returns a series of time buckets. From and To dates will\n  be rounded to the Interval boundaries.\n* Without Interval parameter a single From..To search is performed with exact timestamps.\n\n\n* Interval: possible values: 5min, hour, day, week, month, quarter, year.\n* count: [1..400]. Defines number of intervals. Don't provide if Interval is missing.\n* from/to: optional int, unix second.\n\nPossible usages with interval.\n* last 10 days: `?interval=day&count=10`\n* last 10 days before to: `?interval=day&count=10&to=1608825600`\n* next 10 days after from: `?interval=day&count=10&from=1606780800`\n* Days between from and to. From defaults to start of chain, to defaults to now.\n  Only the first 400 intervals are returned:\n  `interval=day&from=1606780800&to=1608825600`\n\nPagination is possible with from&count and then using the returned meta.endTime as the\nFrom parameter of the next query.\n\nPossible configurations without interval:\n* exact search for one time frame: `?from=1606780899&to=1608825600`\n* one time frame until now: `?from=1606780899`\n* from chain start until now: no query parameters\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "history",
+                "savers",
+                ":pool"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "interval",
+                  "value": "<string>",
+                  "description": "Interval of calculations"
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "<integer>",
+                  "description": "Number of intervals to return. Should be between [1..400]."
+                },
+                {
+                  "disabled": false,
+                  "key": "to",
+                  "value": "<long>",
+                  "description": "End time of the query as unix timestamp. If only count is given, defaults to now.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "from",
+                  "value": "<long>",
+                  "description": "Start time of the query as unix timestamp"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "pool",
+                  "description": "(Required) Return stats for this single pool."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3508713d-ce42-42c8-8d90-618226bd231b",
+              "name": "Depth and Units history of savers",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "history",
+                    "savers",
+                    ":pool"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "day"
+                    },
+                    {
+                      "key": "count",
+                      "value": "30"
+                    },
+                    {
+                      "key": "to",
+                      "value": "1608825600"
+                    },
+                    {
+                      "key": "from",
+                      "value": "1606780800"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "pool",
+                      "description": "(Required) Return stats for this single pool."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"startTime\": \"string\",\n    \"endTime\": \"string\",\n    \"startSaversDepth\": \"string\",\n    \"startUnits\": \"string\",\n    \"startSaversCount\": \"string\",\n    \"endSaversDepth\": \"string\",\n    \"endUnits\": \"string\",\n    \"endSaversCount\": \"string\"\n  },\n  \"intervals\": [\n    {\n      \"startTime\": \"string\",\n      \"endTime\": \"string\",\n      \"saversDepth\": \"string\",\n      \"saversCount\": \"string\",\n      \"saversUnits\": \"string\"\n    },\n    {\n      \"startTime\": \"string\",\n      \"endTime\": \"string\",\n      \"saversDepth\": \"string\",\n      \"saversCount\": \"string\",\n      \"saversUnits\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bd931f52-8ac9-49ef-8a26-956bfb7b2884",
+          "name": "Swaps History",
+          "request": {
+            "name": "Swaps History",
+            "description": {
+              "content": "Returns swap count, volume, fees, slip in specified interval.\nIf pool is not specified returns for all pools\n\nHistory endpoint has two modes:\n* With Interval parameter it returns a series of time buckets. From and To dates will\n  be rounded to the Interval boundaries.\n* Without Interval parameter a single From..To search is performed with exact timestamps.\n\n\n* Interval: possible values: 5min, hour, day, week, month, quarter, year.\n* count: [1..400]. Defines number of intervals. Don't provide if Interval is missing.\n* from/to: optional int, unix second.\n\nPossible usages with interval.\n* last 10 days: `?interval=day&count=10`\n* last 10 days before to: `?interval=day&count=10&to=1608825600`\n* next 10 days after from: `?interval=day&count=10&from=1606780800`\n* Days between from and to. From defaults to start of chain, to defaults to now.\n  Only the first 400 intervals are returned:\n  `interval=day&from=1606780800&to=1608825600`\n\nPagination is possible with from&count and then using the returned meta.endTime as the\nFrom parameter of the next query.\n\nPossible configurations without interval:\n* exact search for one time frame: `?from=1606780899&to=1608825600`\n* one time frame until now: `?from=1606780899`\n* from chain start until now: no query parameters\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "history",
+                "swaps"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pool",
+                  "value": "<string>",
+                  "description": "Return history given pool. Returns sum of all pools if missing."
+                },
+                {
+                  "disabled": false,
+                  "key": "interval",
+                  "value": "<string>",
+                  "description": "Interval of calculations"
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "<integer>",
+                  "description": "Number of intervals to return. Should be between [1..400]."
+                },
+                {
+                  "disabled": false,
+                  "key": "to",
+                  "value": "<long>",
+                  "description": "End time of the query as unix timestamp. If only count is given, defaults to now.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "from",
+                  "value": "<long>",
+                  "description": "Start time of the query as unix timestamp"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "39a3ca49-2dde-4c0b-9a26-34c0ee0e30ec",
+              "name": "Swap count, volume, fee and slip history",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "history",
+                    "swaps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pool",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "day"
+                    },
+                    {
+                      "key": "count",
+                      "value": "30"
+                    },
+                    {
+                      "key": "to",
+                      "value": "1608825600"
+                    },
+                    {
+                      "key": "from",
+                      "value": "1606780800"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"startTime\": \"string\",\n    \"endTime\": \"string\",\n    \"toAssetCount\": \"string\",\n    \"toRuneCount\": \"string\",\n    \"toTradeCount\": \"string\",\n    \"fromTradeCount\": \"string\",\n    \"toSecuredCount\": \"string\",\n    \"fromSecuredCount\": \"string\",\n    \"synthMintCount\": \"string\",\n    \"synthRedeemCount\": \"string\",\n    \"totalCount\": \"string\",\n    \"toAssetVolume\": \"string\",\n    \"toRuneVolume\": \"string\",\n    \"toTradeVolume\": \"string\",\n    \"fromTradeVolume\": \"string\",\n    \"toSecuredVolume\": \"string\",\n    \"fromSecuredVolume\": \"string\",\n    \"synthMintVolume\": \"string\",\n    \"synthRedeemVolume\": \"string\",\n    \"totalVolume\": \"string\",\n    \"toAssetVolumeUSD\": \"string\",\n    \"toRuneVolumeUSD\": \"string\",\n    \"toTradeVolumeUSD\": \"string\",\n    \"fromTradeVolumeUSD\": \"string\",\n    \"toSecuredVolumeUSD\": \"string\",\n    \"fromSecuredVolumeUSD\": \"string\",\n    \"synthMintVolumeUSD\": \"string\",\n    \"synthRedeemVolumeUSD\": \"string\",\n    \"totalVolumeUSD\": \"string\",\n    \"toAssetFees\": \"string\",\n    \"toRuneFees\": \"string\",\n    \"toTradeFees\": \"string\",\n    \"fromTradeFees\": \"string\",\n    \"toSecuredFees\": \"string\",\n    \"fromSecuredFees\": \"string\",\n    \"synthMintFees\": \"string\",\n    \"synthRedeemFees\": \"string\",\n    \"totalFees\": \"string\",\n    \"toAssetAverageSlip\": \"string\",\n    \"toRuneAverageSlip\": \"string\",\n    \"synthMintAverageSlip\": \"string\",\n    \"toTradeAverageSlip\": \"string\",\n    \"fromTradeAverageSlip\": \"string\",\n    \"toSecuredAverageSlip\": \"string\",\n    \"fromSecuredAverageSlip\": \"string\",\n    \"synthRedeemAverageSlip\": \"string\",\n    \"averageSlip\": \"string\",\n    \"runePriceUSD\": \"string\"\n  },\n  \"intervals\": [\n    {\n      \"startTime\": \"string\",\n      \"endTime\": \"string\",\n      \"toAssetCount\": \"string\",\n      \"toRuneCount\": \"string\",\n      \"toTradeCount\": \"string\",\n      \"fromTradeCount\": \"string\",\n      \"toSecuredCount\": \"string\",\n      \"fromSecuredCount\": \"string\",\n      \"synthMintCount\": \"string\",\n      \"synthRedeemCount\": \"string\",\n      \"totalCount\": \"string\",\n      \"toAssetVolume\": \"string\",\n      \"toRuneVolume\": \"string\",\n      \"toTradeVolume\": \"string\",\n      \"fromTradeVolume\": \"string\",\n      \"toSecuredVolume\": \"string\",\n      \"fromSecuredVolume\": \"string\",\n      \"synthMintVolume\": \"string\",\n      \"synthRedeemVolume\": \"string\",\n      \"totalVolume\": \"string\",\n      \"toAssetVolumeUSD\": \"string\",\n      \"toRuneVolumeUSD\": \"string\",\n      \"toTradeVolumeUSD\": \"string\",\n      \"fromTradeVolumeUSD\": \"string\",\n      \"toSecuredVolumeUSD\": \"string\",\n      \"fromSecuredVolumeUSD\": \"string\",\n      \"synthMintVolumeUSD\": \"string\",\n      \"synthRedeemVolumeUSD\": \"string\",\n      \"totalVolumeUSD\": \"string\",\n      \"toAssetFees\": \"string\",\n      \"toRuneFees\": \"string\",\n      \"toTradeFees\": \"string\",\n      \"fromTradeFees\": \"string\",\n      \"toSecuredFees\": \"string\",\n      \"fromSecuredFees\": \"string\",\n      \"synthMintFees\": \"string\",\n      \"synthRedeemFees\": \"string\",\n      \"totalFees\": \"string\",\n      \"toAssetAverageSlip\": \"string\",\n      \"toRuneAverageSlip\": \"string\",\n      \"synthMintAverageSlip\": \"string\",\n      \"toTradeAverageSlip\": \"string\",\n      \"fromTradeAverageSlip\": \"string\",\n      \"toSecuredAverageSlip\": \"string\",\n      \"fromSecuredAverageSlip\": \"string\",\n      \"synthRedeemAverageSlip\": \"string\",\n      \"averageSlip\": \"string\",\n      \"runePriceUSD\": \"string\"\n    },\n    {\n      \"startTime\": \"string\",\n      \"endTime\": \"string\",\n      \"toAssetCount\": \"string\",\n      \"toRuneCount\": \"string\",\n      \"toTradeCount\": \"string\",\n      \"fromTradeCount\": \"string\",\n      \"toSecuredCount\": \"string\",\n      \"fromSecuredCount\": \"string\",\n      \"synthMintCount\": \"string\",\n      \"synthRedeemCount\": \"string\",\n      \"totalCount\": \"string\",\n      \"toAssetVolume\": \"string\",\n      \"toRuneVolume\": \"string\",\n      \"toTradeVolume\": \"string\",\n      \"fromTradeVolume\": \"string\",\n      \"toSecuredVolume\": \"string\",\n      \"fromSecuredVolume\": \"string\",\n      \"synthMintVolume\": \"string\",\n      \"synthRedeemVolume\": \"string\",\n      \"totalVolume\": \"string\",\n      \"toAssetVolumeUSD\": \"string\",\n      \"toRuneVolumeUSD\": \"string\",\n      \"toTradeVolumeUSD\": \"string\",\n      \"fromTradeVolumeUSD\": \"string\",\n      \"toSecuredVolumeUSD\": \"string\",\n      \"fromSecuredVolumeUSD\": \"string\",\n      \"synthMintVolumeUSD\": \"string\",\n      \"synthRedeemVolumeUSD\": \"string\",\n      \"totalVolumeUSD\": \"string\",\n      \"toAssetFees\": \"string\",\n      \"toRuneFees\": \"string\",\n      \"toTradeFees\": \"string\",\n      \"fromTradeFees\": \"string\",\n      \"toSecuredFees\": \"string\",\n      \"fromSecuredFees\": \"string\",\n      \"synthMintFees\": \"string\",\n      \"synthRedeemFees\": \"string\",\n      \"totalFees\": \"string\",\n      \"toAssetAverageSlip\": \"string\",\n      \"toRuneAverageSlip\": \"string\",\n      \"synthMintAverageSlip\": \"string\",\n      \"toTradeAverageSlip\": \"string\",\n      \"fromTradeAverageSlip\": \"string\",\n      \"toSecuredAverageSlip\": \"string\",\n      \"fromSecuredAverageSlip\": \"string\",\n      \"synthRedeemAverageSlip\": \"string\",\n      \"averageSlip\": \"string\",\n      \"runePriceUSD\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "db9c4948-0353-42aa-88b0-415f9646591b",
+          "name": "Total Value Locked History",
+          "request": {
+            "name": "Total Value Locked History",
+            "description": {
+              "content": "Returns total pool depths, total bonds, and total value locked in specified interval.\n\nTotal Value Locked = Total Bonds + 2 * Total Pool Depths\n\nHistory endpoint has two modes:\n* With Interval parameter it returns a series of time buckets. From and To dates will\n  be rounded to the Interval boundaries.\n* Without Interval parameter a single From..To search is performed with exact timestamps.\n\n* Interval: possible values: 5min, hour, day, week, month, quarter, year.\n* count: [1..400]. Defines number of intervals. Don't provide if Interval is missing.\n* from/to: optional int, unix second.\n\nPossible usages with interval.\n* last 10 days: `?interval=day&count=10`\n* last 10 days before to: `?interval=day&count=10&to=1608825600`\n* next 10 days after from: `?interval=day&count=10&from=1606780800`\n* Days between from and to. From defaults to start of chain, to defaults to now.\n  Only the first 400 intervals are returned:\n  `interval=day&from=1606780800&to=1608825600`\n\nPagination is possible with from&count and then using the returned meta.endTime as the\nFrom parameter of the next query.\n\nPossible configurations without interval:\n* exact search for one time frame: `?from=1606780899&to=1608825600`\n* one time frame until now: `?from=1606780899`\n* from chain start until now: no query parameters\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "history",
+                "tvl"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "interval",
+                  "value": "<string>",
+                  "description": "Interval of calculations"
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "<integer>",
+                  "description": "Number of intervals to return. Should be between [1..400]."
+                },
+                {
+                  "disabled": false,
+                  "key": "to",
+                  "value": "<long>",
+                  "description": "End time of the query as unix timestamp. If only count is given, defaults to now.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "from",
+                  "value": "<long>",
+                  "description": "Start time of the query as unix timestamp"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "29087b23-5a08-49a6-af05-360ad5616c4f",
+              "name": "Total pool depths, total bonds, and total value locked history",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "history",
+                    "tvl"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "day"
+                    },
+                    {
+                      "key": "count",
+                      "value": "30"
+                    },
+                    {
+                      "key": "to",
+                      "value": "1608825600"
+                    },
+                    {
+                      "key": "from",
+                      "value": "1606780800"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"startTime\": \"string\",\n    \"endTime\": \"string\",\n    \"totalValuePooled\": \"string\",\n    \"runePriceUSD\": \"string\",\n    \"poolsDepth\": [\n      {\n        \"pool\": \"string\",\n        \"totalDepth\": \"string\"\n      },\n      {\n        \"pool\": \"string\",\n        \"totalDepth\": \"string\"\n      }\n    ],\n    \"totalValueBonded\": \"string\",\n    \"totalValueLocked\": \"string\"\n  },\n  \"intervals\": [\n    {\n      \"startTime\": \"string\",\n      \"endTime\": \"string\",\n      \"totalValuePooled\": \"string\",\n      \"runePriceUSD\": \"string\",\n      \"poolsDepth\": [\n        {\n          \"pool\": \"string\",\n          \"totalDepth\": \"string\"\n        },\n        {\n          \"pool\": \"string\",\n          \"totalDepth\": \"string\"\n        }\n      ],\n      \"totalValueBonded\": \"string\",\n      \"totalValueLocked\": \"string\"\n    },\n    {\n      \"startTime\": \"string\",\n      \"endTime\": \"string\",\n      \"totalValuePooled\": \"string\",\n      \"runePriceUSD\": \"string\",\n      \"poolsDepth\": [\n        {\n          \"pool\": \"string\",\n          \"totalDepth\": \"string\"\n        },\n        {\n          \"pool\": \"string\",\n          \"totalDepth\": \"string\"\n        }\n      ],\n      \"totalValueBonded\": \"string\",\n      \"totalValueLocked\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "cb7d70d5-fa68-4fb3-94fc-64e27354afb0",
+    "name": "Thornode Auth History API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Thornode REST API.\n\nContact Support:\n Email: devs@thorchain.org",
+      "type": "text/plain"
+    }
+  }
+}

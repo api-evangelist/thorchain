@@ -1,0 +1,61 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Thornode Auth StreamingSwap API",
+    "version": "3.19.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "StreamingSwap",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "stream_swap",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/swap/streaming/:hash",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              },
+              {
+                "name": "hash",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the state of a streaming swap"
+        },
+        {
+          "info": {
+            "name": "stream_swaps",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/swaps/streaming",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              }
+            ]
+          },
+          "docs": "Returns the state of all streaming swaps"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,71 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Thornode Auth Savers API",
+    "version": "3.19.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Savers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "saver",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/pool/:asset/saver/:address",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              },
+              {
+                "name": "asset",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the saver position given then savers pool and address."
+        },
+        {
+          "info": {
+            "name": "savers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/pool/:asset/savers",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              },
+              {
+                "name": "asset",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns all savers for the savers pool."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

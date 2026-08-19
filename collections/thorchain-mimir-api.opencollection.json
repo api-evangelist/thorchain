@@ -1,0 +1,124 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Thornode Auth Mimir API",
+    "version": "3.19.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Mimir",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "mimir",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/mimir",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              }
+            ]
+          },
+          "docs": "Returns current active mimir configuration."
+        },
+        {
+          "info": {
+            "name": "mimirKey",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/mimir/key/:key",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "the mimir key to lookup"
+              }
+            ]
+          },
+          "docs": "Returns current active mimir configuration for the provided key."
+        },
+        {
+          "info": {
+            "name": "mimirAdmin",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/mimir/admin",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              }
+            ]
+          },
+          "docs": "Returns current admin mimir configuration."
+        },
+        {
+          "info": {
+            "name": "mimirNodes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/mimir/nodes_all",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              }
+            ]
+          },
+          "docs": "Returns current node mimir votes."
+        },
+        {
+          "info": {
+            "name": "mimirNode",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/mimir/node/:address",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns current node mimir configuration for the provided node address."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

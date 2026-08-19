@@ -1,0 +1,134 @@
+{
+  "item": [
+    {
+      "id": "086ad44e-709b-4579-98ac-b571b6baad96",
+      "name": "Thornames",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d408e976-bc34-44af-a7d1-b82e05c5829a",
+          "name": "thorname",
+          "request": {
+            "name": "thorname",
+            "description": {
+              "content": "Returns addresses registered to the provided thorname.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "thorname",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<long>",
+                  "description": "optional block height, defaults to current tip"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) the thornode to lookup"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5372311e-b6c0-43c8-b37b-ee0c0d4f03f3",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "thorname",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "height",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) the thornode to lookup"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"preferred_asset\": \"BTC.BTC\",\n  \"aliases\": [\n    {\n      \"chain\": \"BTC\",\n      \"address\": \"bc1qn9esxuw8ca7ts8l6w66kdh800s09msvutydc46\"\n    },\n    {\n      \"chain\": \"BTC\",\n      \"address\": \"bc1qn9esxuw8ca7ts8l6w66kdh800s09msvutydc46\"\n    }\n  ],\n  \"name\": \"thor\",\n  \"expire_block_height\": 1234,\n  \"owner\": \"thor1f3s7q037eancht7sg0aj995dht25rwrnu4ats5\",\n  \"preferred_asset_swap_threshold_rune\": \"500\",\n  \"affiliate_collector_rune\": \"100\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "f744a2c0-ae2b-4404-ab85-dc013fcb548e",
+    "name": "Thornode Auth Thornames API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Thornode REST API.\n\nContact Support:\n Email: devs@thorchain.org",
+      "type": "text/plain"
+    }
+  }
+}

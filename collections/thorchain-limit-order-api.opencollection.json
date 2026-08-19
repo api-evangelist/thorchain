@@ -1,0 +1,91 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Thornode Auth Limit Order API",
+    "version": "3.19.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Limit Order",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "quotelimit",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/quote/limit",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              },
+              {
+                "name": "from_asset",
+                "value": "",
+                "type": "query",
+                "description": "the source asset"
+              },
+              {
+                "name": "to_asset",
+                "value": "",
+                "type": "query",
+                "description": "the target asset"
+              },
+              {
+                "name": "amount",
+                "value": "",
+                "type": "query",
+                "description": "the source asset amount in 1e8 decimals"
+              },
+              {
+                "name": "destination",
+                "value": "",
+                "type": "query",
+                "description": "the destination address, required to generate memo"
+              },
+              {
+                "name": "refund_address",
+                "value": "",
+                "type": "query",
+                "description": "the refund address, refunds will be sent here if the swap fails"
+              },
+              {
+                "name": "custom_ttl",
+                "value": "",
+                "type": "query",
+                "description": "the custom TTL in blocks for limit orders"
+              },
+              {
+                "name": "streaming_quantity",
+                "value": "",
+                "type": "query",
+                "description": "the quantity of swaps within a streaming swap"
+              },
+              {
+                "name": "affiliate_bps",
+                "value": "",
+                "type": "query",
+                "description": "the affiliate fee in basis points"
+              },
+              {
+                "name": "affiliate",
+                "value": "",
+                "type": "query",
+                "description": "the affiliate (address or thorname)"
+              }
+            ]
+          },
+          "docs": "Provide a limit order quote and memo for the provided limit order"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

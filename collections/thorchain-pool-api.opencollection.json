@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Thornode Auth Pool API",
+    "version": "3.19.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Pool",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Details of a Pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/pool/:asset",
+            "params": [
+              {
+                "name": "asset",
+                "value": "BNB.TOMOB-1E1",
+                "type": "path",
+                "description": "pool name"
+              },
+              {
+                "name": "period",
+                "value": "100d",
+                "type": "query",
+                "description": "Specifies the base interval from which APY is extrapolated.\nDefault is 14d.\n"
+              }
+            ]
+          },
+          "docs": "Returns details of the pool: depths, price, 24h volume, APY. "
+        },
+        {
+          "info": {
+            "name": "Pool Statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/pool/:asset/stats",
+            "params": [
+              {
+                "name": "asset",
+                "value": "BNB.TOMOB-1E1",
+                "type": "path",
+                "description": "pool name"
+              },
+              {
+                "name": "period",
+                "value": "24h",
+                "type": "query",
+                "description": "Restricts aggregation type fields to the last period only.\nDefault is 14d.\n"
+              }
+            ]
+          },
+          "docs": "Statistics about the pool. The description of the fields have pointers about the\ncorresponding v2/history location. Visit the history endpoint for drilldowns.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

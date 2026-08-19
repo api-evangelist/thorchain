@@ -1,0 +1,87 @@
+{
+  "item": [
+    {
+      "id": "f36b2240-ba10-4bb4-a1c2-c54e8ef90110",
+      "name": "AGENTS.md",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e138909b-5e4f-4663-bde2-d4848de043bf",
+          "name": "Get public agent rules",
+          "request": {
+            "name": "Get public agent rules",
+            "description": {},
+            "url": {
+              "path": [
+                "AGENTS.md"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3f79335e-e9a0-4cf9-b601-af6c713e086c",
+              "name": "Markdown agent rules",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "AGENTS.md"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "066cac60-2079-4b41-b048-75ba68c7bfba",
+    "name": "Thornode Auth AGENTS.md API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Thornode REST API.\n\nContact Support:\n Email: devs@thorchain.org",
+      "type": "text/plain"
+    }
+  }
+}

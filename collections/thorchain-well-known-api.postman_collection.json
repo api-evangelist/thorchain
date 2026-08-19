@@ -1,0 +1,203 @@
+{
+  "item": [
+    {
+      "id": "f362870d-6e68-491b-86da-f03dbd67b594",
+      "name": ".well Known",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a238e48b-65d1-41c9-a161-cd50bc7cdacb",
+          "name": "Get well-known public agent rules",
+          "request": {
+            "name": "Get well-known public agent rules",
+            "description": {},
+            "url": {
+              "path": [
+                ".well-known",
+                "agent-rules"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "88457e53-c31d-4024-b6c5-d070ae59b854",
+              "name": "Markdown agent rules",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ".well-known",
+                    "agent-rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2bde3c5b-7b5c-42bc-bd04-9a3821b126fc",
+          "name": "Get the MCP server card",
+          "request": {
+            "name": "Get the MCP server card",
+            "description": {},
+            "url": {
+              "path": [
+                ".well-known",
+                "mcp-server-card.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "08a85096-c54f-4289-a001-b91712cd0185",
+              "name": "JSON MCP server card",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ".well-known",
+                    "mcp-server-card.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "58101f83-af95-4e8e-a9ae-987cd95d3cba",
+          "name": "Get the AI plugin manifest",
+          "request": {
+            "name": "Get the AI plugin manifest",
+            "description": {},
+            "url": {
+              "path": [
+                ".well-known",
+                "ai-plugin.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0da5e790-3b97-437b-b58b-00eec8c1a291",
+              "name": "JSON AI plugin manifest",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ".well-known",
+                    "ai-plugin.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ea7644da-377a-4bea-a030-459be14c165f",
+    "name": "Thornode Auth .well Known API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Thornode REST API.\n\nContact Support:\n Email: devs@thorchain.org",
+      "type": "text/plain"
+    }
+  }
+}

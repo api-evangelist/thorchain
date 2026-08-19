@@ -1,0 +1,87 @@
+{
+  "item": [
+    {
+      "id": "c3213191-3d37-448c-a3dc-98ed104a61e1",
+      "name": "Sitemap.xml",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3916680c-1a0c-4065-beba-3c3d92b900f8",
+          "name": "Get the XML sitemap",
+          "request": {
+            "name": "Get the XML sitemap",
+            "description": {},
+            "url": {
+              "path": [
+                "sitemap.xml"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e73587fd-cbe3-497a-9718-e567b5d979dc",
+              "name": "XML sitemap",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sitemap.xml"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e1d7c446-fd62-43c9-a058-e7444ce2abff",
+    "name": "Thornode Auth Sitemap.xml API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Thornode REST API.\n\nContact Support:\n Email: devs@thorchain.org",
+      "type": "text/plain"
+    }
+  }
+}

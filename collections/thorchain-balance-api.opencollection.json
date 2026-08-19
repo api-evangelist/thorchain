@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Thornode Auth Balance API",
+    "version": "3.19.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Balance",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Current balance for an address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/balance/:address",
+            "params": [
+              {
+                "name": "address",
+                "value": "thor102y0m3uptg0vvudeyh00r2fnz70wq7d8y7mu2g",
+                "type": "path",
+                "description": "Rune address."
+              },
+              {
+                "name": "timestamp",
+                "value": "1606780800",
+                "type": "query",
+                "description": "Unix timestamp as seconds since 1970 (if provided, height must not be provided)"
+              },
+              {
+                "name": "height",
+                "value": "2000000",
+                "type": "query",
+                "description": "Block height (if provided, timestamp must not be provided)"
+              }
+            ]
+          },
+          "docs": "Returns all coin amounts of the given address at the specified timestamp or\nheight, or at the latest process block if neither is provided. (Only one of\ntimestamp or height can be specified, not both.)\n\nThis endpoint is enabled only if the midgard startup config allows it.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

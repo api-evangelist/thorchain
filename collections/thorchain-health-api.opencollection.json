@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Thornode Auth Health API",
+    "version": "3.19.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Health",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "ping",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/ping"
+          }
+        },
+        {
+          "info": {
+            "name": "Health Info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/health"
+          },
+          "docs": "Returns an object containing the health response of the API.\nMeaning of heights:\n\nlastThorNode - Latest block as reported by ThorNode.\n\nlastFetched - Latest block fetched from ThorNode.\n\nlastCommitted - Latest block committed to the DB but not fully processed yet.\n\nlastAggregated - Latest block fully processed and aggregated.\n\ngenesisInfo - The genesis height Midgard bootstrapped with.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

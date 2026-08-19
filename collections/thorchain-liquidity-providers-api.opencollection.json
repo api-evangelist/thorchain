@@ -1,0 +1,71 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Thornode Auth Liquidity Providers API",
+    "version": "3.19.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Liquidity Providers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "liquidityProvider",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/pool/:asset/liquidity_provider/:address",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              },
+              {
+                "name": "asset",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the liquidity provider information for an address and asset."
+        },
+        {
+          "info": {
+            "name": "liquidityProviders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/pool/:asset/liquidity_providers",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              },
+              {
+                "name": "asset",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns all liquidity provider information for an asset."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

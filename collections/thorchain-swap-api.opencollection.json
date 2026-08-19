@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Thornode Auth Swap API",
+    "version": "3.19.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Swap",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "swapDetails",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/queue/swap/details/:tx_id",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              },
+              {
+                "name": "tx_id",
+                "value": "",
+                "type": "path",
+                "description": "Transaction ID of the swap"
+              }
+            ]
+          },
+          "docs": "Returns detailed information about a specific swap including its state."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

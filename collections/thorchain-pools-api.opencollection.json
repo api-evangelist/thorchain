@@ -1,0 +1,129 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Thornode Auth Pools API",
+    "version": "3.19.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Pools",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Pools List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/pools",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter for only pools with this status"
+              },
+              {
+                "name": "period",
+                "value": "100d",
+                "type": "query",
+                "description": "Specifies the base interval from which annualPercentageRate and poolAPY is extrapolated.\nDefault is 14d.\n"
+              }
+            ]
+          },
+          "docs": "Returns an array containing details for a set of pools"
+        },
+        {
+          "info": {
+            "name": "pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/pool/:asset",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              },
+              {
+                "name": "asset",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the pool information for the provided asset."
+        },
+        {
+          "info": {
+            "name": "pools",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/pools",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              }
+            ]
+          },
+          "docs": "Returns the pool information for all assets."
+        },
+        {
+          "info": {
+            "name": "dpool",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/dpool/:asset",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              },
+              {
+                "name": "asset",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the pool information for the provided derived asset."
+        },
+        {
+          "info": {
+            "name": "dpools",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/dpools",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              }
+            ]
+          },
+          "docs": "Returns the pool information for all derived assets."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

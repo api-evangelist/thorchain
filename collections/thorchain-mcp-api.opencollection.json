@@ -1,0 +1,40 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Thornode Auth Mcp API",
+    "version": "3.19.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Mcp",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get read-only MCP endpoint metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/mcp"
+          },
+          "docs": "Get read-only MCP endpoint metadata"
+        },
+        {
+          "info": {
+            "name": "Call the read-only MCP JSON-RPC endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/mcp"
+          },
+          "docs": "Call the read-only MCP JSON-RPC endpoint"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

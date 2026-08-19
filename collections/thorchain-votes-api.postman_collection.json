@@ -1,0 +1,116 @@
+{
+  "item": [
+    {
+      "id": "e7d8e035-5202-4b86-a78b-0270b3e198bb",
+      "name": "Votes",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a0dea550-7aa9-4191-a6aa-cbec8879ef75",
+          "name": "Current Protocol Voting",
+          "request": {
+            "name": "Current Protocol Voting",
+            "description": {
+              "content": "Returns timestamp, key, value for each active node member.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "votes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "period",
+                  "value": "<string>",
+                  "description": "Specifies the base interval from which votes will be shown.\nDefault is 90d.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "13c13953-d650-4c73-b8ed-4007187e01f0",
+              "name": "Array containing the current protocol voting situation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "votes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "period",
+                      "value": "90d"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"value\": \"prop6\",\n    \"votes\": [\n      {\n        \"address\": \"thor1\",\n        \"key\": \"1\",\n        \"date\": \"946684801000000000\"\n      },\n      {\n        \"address\": \"thor1\",\n        \"key\": \"1\",\n        \"date\": \"946684801000000000\"\n      }\n    ]\n  },\n  {\n    \"value\": \"prop6\",\n    \"votes\": [\n      {\n        \"address\": \"thor1\",\n        \"key\": \"1\",\n        \"date\": \"946684801000000000\"\n      },\n      {\n        \"address\": \"thor1\",\n        \"key\": \"1\",\n        \"date\": \"946684801000000000\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "fce6c82b-abc0-4f7b-b6f1-846885297637",
+    "name": "Thornode Auth Votes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Thornode REST API.\n\nContact Support:\n Email: devs@thorchain.org",
+      "type": "text/plain"
+    }
+  }
+}

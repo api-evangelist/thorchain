@@ -1,0 +1,122 @@
+{
+  "item": [
+    {
+      "id": "3eeada35-fb7a-4132-b350-7841a04923e7",
+      "name": "Saver",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e74b01bf-dd16-4c6d-b3f2-0197600da4e6",
+          "name": "Saver Details",
+          "request": {
+            "name": "Saver Details",
+            "description": {
+              "content": "Returns an array of statistics for all the savers associated with a given\nmember address.\nQuery can also be multiple addresses should be separated by comma (',')\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "saver",
+                ":address"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "address",
+                  "description": "(Required) Address to match the saver. an asset address should be given.\n"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "33012b38-f662-4fc2-ae81-579b1b4a08eb",
+              "name": "object containing saver data for a specific member",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "saver",
+                    ":address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) Address to match the saver. an asset address should be given.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pools\": [\n    {\n      \"pool\": \"string\",\n      \"assetAddress\": \"string\",\n      \"saverUnits\": \"string\",\n      \"assetAdded\": \"string\",\n      \"assetRedeem\": \"string\",\n      \"assetDeposit\": \"string\",\n      \"assetWithdrawn\": \"string\",\n      \"dateFirstAdded\": \"string\",\n      \"dateLastAdded\": \"string\"\n    },\n    {\n      \"pool\": \"string\",\n      \"assetAddress\": \"string\",\n      \"saverUnits\": \"string\",\n      \"assetAdded\": \"string\",\n      \"assetRedeem\": \"string\",\n      \"assetDeposit\": \"string\",\n      \"assetWithdrawn\": \"string\",\n      \"dateFirstAdded\": \"string\",\n      \"dateLastAdded\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "85eabf65-e98d-4276-964a-788082a2db65",
+    "name": "Thornode Auth Saver API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Thornode REST API.\n\nContact Support:\n Email: devs@thorchain.org",
+      "type": "text/plain"
+    }
+  }
+}

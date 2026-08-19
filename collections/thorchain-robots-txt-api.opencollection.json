@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Thornode Auth Robots.txt API",
+    "version": "3.19.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Robots.txt",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get crawler and content-signal policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/robots.txt"
+          },
+          "docs": "Get crawler and content-signal policy"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

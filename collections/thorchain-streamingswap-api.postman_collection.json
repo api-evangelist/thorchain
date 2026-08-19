@@ -1,0 +1,222 @@
+{
+  "item": [
+    {
+      "id": "e25640e6-cd29-4aae-821d-80cdc07b7467",
+      "name": "StreamingSwap",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4aa22209-c9f9-44b3-84f9-28b7609f4fe8",
+          "name": "stream swap",
+          "request": {
+            "name": "stream swap",
+            "description": {
+              "content": "Returns the state of a streaming swap",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "swap",
+                "streaming",
+                ":hash"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<long>",
+                  "description": "optional block height, defaults to current tip"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "hash",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2e05dace-188a-4da8-bfa8-d7d91731ea35",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "swap",
+                    "streaming",
+                    ":hash"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "height",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hash",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"trade_target\": \"100\",\n  \"deposit\": \"100\",\n  \"in\": \"100\",\n  \"out\": \"100\",\n  \"tx_id\": \"CF524818D42B63D25BBA0CCC4909F127CAA645C0F9CD07324F2824CC151A64C7\",\n  \"interval\": 8945,\n  \"quantity\": 8700,\n  \"count\": 5869,\n  \"last_height\": 1616,\n  \"initial_height\": 206,\n  \"source_asset\": \"BTC.BTC\",\n  \"target_asset\": \"ETH.ETH\",\n  \"destination\": \"0x66fb1cd65b97fa40457b90b7d1ca6b92cb64b32b\",\n  \"failed_swaps\": [\n    8566,\n    5132\n  ],\n  \"failed_swap_reasons\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4ea644aa-2cf7-4d1f-b0c9-f8af8ed27a13",
+          "name": "stream swaps",
+          "request": {
+            "name": "stream swaps",
+            "description": {
+              "content": "Returns the state of all streaming swaps",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "swaps",
+                "streaming"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<long>",
+                  "description": "optional block height, defaults to current tip"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "669bb376-e4c8-4447-9c4d-db43bbebdf6e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "swaps",
+                    "streaming"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "height",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"trade_target\": \"100\",\n    \"deposit\": \"100\",\n    \"in\": \"100\",\n    \"out\": \"100\",\n    \"tx_id\": \"CF524818D42B63D25BBA0CCC4909F127CAA645C0F9CD07324F2824CC151A64C7\",\n    \"interval\": 3401,\n    \"quantity\": 2795,\n    \"count\": 6400,\n    \"last_height\": 592,\n    \"initial_height\": 2279,\n    \"source_asset\": \"BTC.BTC\",\n    \"target_asset\": \"ETH.ETH\",\n    \"destination\": \"0x66fb1cd65b97fa40457b90b7d1ca6b92cb64b32b\",\n    \"failed_swaps\": [\n      5941,\n      5493\n    ],\n    \"failed_swap_reasons\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  {\n    \"trade_target\": \"100\",\n    \"deposit\": \"100\",\n    \"in\": \"100\",\n    \"out\": \"100\",\n    \"tx_id\": \"CF524818D42B63D25BBA0CCC4909F127CAA645C0F9CD07324F2824CC151A64C7\",\n    \"interval\": 5453,\n    \"quantity\": 9915,\n    \"count\": 7791,\n    \"last_height\": 7225,\n    \"initial_height\": 1707,\n    \"source_asset\": \"BTC.BTC\",\n    \"target_asset\": \"ETH.ETH\",\n    \"destination\": \"0x66fb1cd65b97fa40457b90b7d1ca6b92cb64b32b\",\n    \"failed_swaps\": [\n      5931,\n      3418\n    ],\n    \"failed_swap_reasons\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a33dcb1f-fdd8-41f3-9e9b-d90c176fced3",
+    "name": "Thornode Auth StreamingSwap API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Thornode REST API.\n\nContact Support:\n Email: devs@thorchain.org",
+      "type": "text/plain"
+    }
+  }
+}

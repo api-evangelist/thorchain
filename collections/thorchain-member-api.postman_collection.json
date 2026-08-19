@@ -1,0 +1,134 @@
+{
+  "item": [
+    {
+      "id": "761cbc90-5e34-4397-876e-7c47abe64447",
+      "name": "Member",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5b176eb2-672b-4d37-b218-f7204069b4c8",
+          "name": "Member Details",
+          "request": {
+            "name": "Member Details",
+            "description": {
+              "content": "Returns an array of statistics for all the liquidity providers associated with a given\nmember address.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "member",
+                ":address"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "showSavers",
+                  "value": "false",
+                  "description": "A flag to show saver vault membership details, the default is false.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "address",
+                  "description": "(Required) Address to match liquidity providers. Either a rune or an asset address may be given.\nQuery can also be multiple addresses should be separated by comma (',')\n"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a3ef42af-f93a-4e6c-908f-3374e72c8682",
+              "name": "object containing liquidity provider data for a specific member",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "member",
+                    ":address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "showSavers",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) Address to match liquidity providers. Either a rune or an asset address may be given.\nQuery can also be multiple addresses should be separated by comma (',')\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pools\": [\n    {\n      \"pool\": \"string\",\n      \"runeAddress\": \"string\",\n      \"assetAddress\": \"string\",\n      \"liquidityUnits\": \"string\",\n      \"runeDeposit\": \"string\",\n      \"assetDeposit\": \"string\",\n      \"runeAdded\": \"string\",\n      \"assetAdded\": \"string\",\n      \"runePending\": \"string\",\n      \"assetPending\": \"string\",\n      \"runeWithdrawn\": \"string\",\n      \"assetWithdrawn\": \"string\",\n      \"dateFirstAdded\": \"string\",\n      \"dateLastAdded\": \"string\"\n    },\n    {\n      \"pool\": \"string\",\n      \"runeAddress\": \"string\",\n      \"assetAddress\": \"string\",\n      \"liquidityUnits\": \"string\",\n      \"runeDeposit\": \"string\",\n      \"assetDeposit\": \"string\",\n      \"runeAdded\": \"string\",\n      \"assetAdded\": \"string\",\n      \"runePending\": \"string\",\n      \"assetPending\": \"string\",\n      \"runeWithdrawn\": \"string\",\n      \"assetWithdrawn\": \"string\",\n      \"dateFirstAdded\": \"string\",\n      \"dateLastAdded\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "392829de-95e1-4089-b313-0eb72f77afb3",
+    "name": "Thornode Auth Member API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Thornode REST API.\n\nContact Support:\n Email: devs@thorchain.org",
+      "type": "text/plain"
+    }
+  }
+}

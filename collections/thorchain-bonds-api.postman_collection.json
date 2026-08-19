@@ -1,0 +1,122 @@
+{
+  "item": [
+    {
+      "id": "0c3d3877-360c-493a-b922-cdaa2a780cea",
+      "name": "Bonds",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9fd17569-5990-4e72-9e4d-7efcc56f12df",
+          "name": "Bonder Details",
+          "request": {
+            "name": "Bonder Details",
+            "description": {
+              "content": "Returns the bond details of a given address.\nThe response contains the bond amount, the bond status, and the bond type.\nThis is wrapper from THORNode nodes API.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "bonds",
+                ":address"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "address",
+                  "description": "(Required) Address of the bonder"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "558147eb-daf2-400f-861d-5d23b60ad35e",
+              "name": "object containing bonder data for a specific member",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "bonds",
+                    ":address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) Address of the bonder"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"address\": \"thor1\",\n  \"totalBonded\": \"1000000000\",\n  \"nodes\": [\n    {\n      \"address\": \"thor1\",\n      \"bond\": \"1000000000\",\n      \"status\": \"Active\"\n    },\n    {\n      \"address\": \"thor1\",\n      \"bond\": \"1000000000\",\n      \"status\": \"Active\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e48630cc-6b44-4b52-b74d-b15b19a29a0e",
+    "name": "Thornode Auth Bonds API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Thornode REST API.\n\nContact Support:\n Email: devs@thorchain.org",
+      "type": "text/plain"
+    }
+  }
+}

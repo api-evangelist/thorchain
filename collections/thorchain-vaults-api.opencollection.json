@@ -1,0 +1,142 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Thornode Auth Vaults API",
+    "version": "3.19.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Vaults",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "asgard",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/vaults/asgard",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              }
+            ]
+          },
+          "docs": "Returns current asgard vaults."
+        },
+        {
+          "info": {
+            "name": "yggdrasil",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/vaults/yggdrasil",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              }
+            ]
+          },
+          "docs": "Returns current yggdrasil vaults."
+        },
+        {
+          "info": {
+            "name": "vault",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/vault/:pubkey",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              },
+              {
+                "name": "pubkey",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the vault for the provided pubkey."
+        },
+        {
+          "info": {
+            "name": "vaultKeysignParty",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/vault/:pubkey/keysign_party",
+            "params": [
+              {
+                "name": "signing_height",
+                "value": "",
+                "type": "query",
+                "description": "optional signing height, defaults to current tip"
+              },
+              {
+                "name": "pubkey",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the keysign-eligible signer set for the provided vault pubkey. The optional signing_height is the signing height used for jail-release evaluation against current vault and node-account state; it is not a historical state query."
+        },
+        {
+          "info": {
+            "name": "vaultPubkeys",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/vaults/pubkeys",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              }
+            ]
+          },
+          "docs": "Returns all pubkeys for current vaults."
+        },
+        {
+          "info": {
+            "name": "vaultSolvency",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/vaults/solvency",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              }
+            ]
+          },
+          "docs": "Returns aggregate vault solvency showing over-solvent or under-solvent amounts per asset."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

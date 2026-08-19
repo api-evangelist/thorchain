@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Thornode Auth Member API",
+    "version": "3.19.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Member",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Member Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/member/:address",
+            "params": [
+              {
+                "name": "address",
+                "value": "bnb1jxfh2g85q3v0tdq56fnevx6xcxtcnhtsmcu64m,bc1qcxssye4j6730h7ehgega3gyykkuwgdgmmpu62n",
+                "type": "path",
+                "description": "Address to match liquidity providers. Either a rune or an asset address may be given.\nQuery can also be multiple addresses should be separated by comma (',')\n"
+              },
+              {
+                "name": "showSavers",
+                "value": "true",
+                "type": "query",
+                "description": "A flag to show saver vault membership details, the default is false.\n"
+              }
+            ]
+          },
+          "docs": "Returns an array of statistics for all the liquidity providers associated with a given\nmember address.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

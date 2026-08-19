@@ -1,0 +1,80 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Thornode Auth RUNE Pool API",
+    "version": "3.19.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "RUNE Pool",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "runePool",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/runepool",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              }
+            ]
+          },
+          "docs": "Returns the pool information for the RUNE pool."
+        },
+        {
+          "info": {
+            "name": "runeProvider",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/rune_provider/:address",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the RUNE Provider information for an address."
+        },
+        {
+          "info": {
+            "name": "runeProviders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/rune_providers",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              }
+            ]
+          },
+          "docs": "Returns all RUNE Providers."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

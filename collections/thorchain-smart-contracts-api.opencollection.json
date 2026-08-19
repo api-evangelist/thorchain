@@ -1,0 +1,73 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Thornode Auth Smart Contracts API",
+    "version": "3.19.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Smart Contracts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "contractInfos",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/contracts",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              },
+              {
+                "name": "contract",
+                "value": "",
+                "type": "query",
+                "description": "optional contract type prefix to filter results"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query",
+                "description": "optional contract version prefix to filter results"
+              }
+            ]
+          },
+          "docs": "Returns type and version for all contracts with stored `contract_info`"
+        },
+        {
+          "info": {
+            "name": "contractInfo",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/contract/:address",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns type and version from `contract_info` for requested address"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

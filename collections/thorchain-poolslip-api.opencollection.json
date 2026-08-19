@@ -1,0 +1,61 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Thornode Auth PoolSlip API",
+    "version": "3.19.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "PoolSlip",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "poolslip",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/slip/:asset",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              },
+              {
+                "name": "asset",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the pool slip information for the provided asset."
+        },
+        {
+          "info": {
+            "name": "poolslips",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/slips",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              }
+            ]
+          },
+          "docs": "Returns the pool slip information for all Available Layer 1 pool assets."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

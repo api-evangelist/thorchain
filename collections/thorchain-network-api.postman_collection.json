@@ -1,0 +1,1286 @@
+{
+  "item": [
+    {
+      "id": "e9f663b4-8726-4379-94fa-2ff281a28bbc",
+      "name": "Network",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "006f588b-ccc9-449c-9851-b7fdbb5a8f6d",
+          "name": "Network Data",
+          "request": {
+            "name": "Network Data",
+            "description": {
+              "content": "Returns an object containing Network data",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "network"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b9aeb44d-e120-4555-b628-e9e0f78840cf",
+              "name": "Returns an object containing Network data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "network"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"bondMetrics\": {\n    \"totalActiveBond\": \"string\",\n    \"averageActiveBond\": \"string\",\n    \"medianActiveBond\": \"string\",\n    \"minimumActiveBond\": \"string\",\n    \"maximumActiveBond\": \"string\",\n    \"bondHardCap\": \"string\",\n    \"totalStandbyBond\": \"string\",\n    \"averageStandbyBond\": \"string\",\n    \"medianStandbyBond\": \"string\",\n    \"minimumStandbyBond\": \"string\",\n    \"maximumStandbyBond\": \"string\"\n  },\n  \"blockRewards\": {\n    \"blockReward\": \"string\",\n    \"bondReward\": \"string\",\n    \"poolReward\": \"string\"\n  },\n  \"activeBonds\": [\n    \"string\",\n    \"string\"\n  ],\n  \"standbyBonds\": [\n    \"string\",\n    \"string\"\n  ],\n  \"activeNodeCount\": \"string\",\n  \"standbyNodeCount\": \"string\",\n  \"totalPooledRune\": \"string\",\n  \"totalReserve\": \"string\",\n  \"nextChurnHeight\": \"string\",\n  \"poolActivationCountdown\": \"string\",\n  \"poolShareFactor\": \"string\",\n  \"bondingAPY\": \"string\",\n  \"liquidityAPY\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "05bd8f6c-ce7c-424a-9a7c-bc88138b7a4b",
+          "name": "network",
+          "request": {
+            "name": "network",
+            "description": {
+              "content": "Returns network overview statistics.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "network"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<long>",
+                  "description": "optional block height, defaults to current tip"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a0d5c9ab-4132-414b-b1b9-0144ad22fc4c",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "network"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "height",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"bond_reward_rune\": \"857134475040\",\n  \"total_bond_units\": \"0\",\n  \"available_pools_rune\": \"4785723312627752\",\n  \"vaults_liquidity_rune\": \"5792105087034476\",\n  \"effective_security_bond\": \"0\",\n  \"total_reserve\": \"21999180112172346\",\n  \"vaults_migrating\": false,\n  \"xmr_active_vault_ready\": false,\n  \"gas_spent_rune\": \"1000000000\",\n  \"gas_withheld_rune\": \"1500000000\",\n  \"native_outbound_fee_rune\": \"100000000\",\n  \"native_tx_fee_rune\": \"100000000\",\n  \"tns_register_fee_rune\": \"1000000000\",\n  \"tns_fee_per_block_rune\": \"20\",\n  \"rune_price_in_tor\": \"10\",\n  \"tor_price_in_rune\": \"10\",\n  \"tor_price_halted\": false,\n  \"outbound_fee_multiplier\": \"15000\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "51a3e201-57a6-43c3-bdfe-b0c19ba79594",
+          "name": "outbound Fees",
+          "request": {
+            "name": "outbound Fees",
+            "description": {
+              "content": "Returns the last block information for all chains.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "outbound_fees"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<long>",
+                  "description": "optional block height, defaults to current tip"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ce067f1e-eae1-44d3-91ae-9c9bd4832c03",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "outbound_fees"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "height",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"asset\": \"ETH.ETH\",\n    \"outbound_fee\": \"300000\",\n    \"fee_withheld_rune\": \"30000000000000\",\n    \"fee_spent_rune\": \"20000000000000\",\n    \"surplus_rune\": \"10000000000000\",\n    \"dynamic_multiplier_basis_points\": \"15000\"\n  },\n  {\n    \"asset\": \"ETH.ETH\",\n    \"outbound_fee\": \"300000\",\n    \"fee_withheld_rune\": \"30000000000000\",\n    \"fee_spent_rune\": \"20000000000000\",\n    \"surplus_rune\": \"10000000000000\",\n    \"dynamic_multiplier_basis_points\": \"15000\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ecc3494e-aaec-4647-b0d6-54d8095d1473",
+          "name": "outbound Fee Asset",
+          "request": {
+            "name": "outbound Fee Asset",
+            "description": {
+              "content": "Returns the outbound fee information for the provided asset.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "outbound_fee",
+                ":asset"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<long>",
+                  "description": "optional block height, defaults to current tip"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "asset",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d207efb5-c5a8-4505-a23c-a0b70810afb3",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "outbound_fee",
+                    ":asset"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "height",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"asset\": \"ETH.ETH\",\n    \"outbound_fee\": \"300000\",\n    \"fee_withheld_rune\": \"30000000000000\",\n    \"fee_spent_rune\": \"20000000000000\",\n    \"surplus_rune\": \"10000000000000\",\n    \"dynamic_multiplier_basis_points\": \"15000\"\n  },\n  {\n    \"asset\": \"ETH.ETH\",\n    \"outbound_fee\": \"300000\",\n    \"fee_withheld_rune\": \"30000000000000\",\n    \"fee_spent_rune\": \"20000000000000\",\n    \"surplus_rune\": \"10000000000000\",\n    \"dynamic_multiplier_basis_points\": \"15000\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ba41bfe4-6c00-4c38-9bbe-3083b515a1fa",
+          "name": "inbound Addresses",
+          "request": {
+            "name": "inbound Addresses",
+            "description": {
+              "content": "Returns the set of asgard addresses that should be used for inbound transactions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "inbound_addresses"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<long>",
+                  "description": "optional block height, defaults to current tip"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "601359da-9db8-4c92-a3fc-8b9abbaab638",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "inbound_addresses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "height",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"halted\": false,\n    \"global_trading_paused\": false,\n    \"chain_trading_paused\": false,\n    \"chain_lp_actions_paused\": false,\n    \"chain\": \"BTC\",\n    \"pub_key\": \"thorpub1addwnpepq2jqhv5rdqlkusfxy05stfzcgslhhz5qh8pxetw5ry2aa6awgdh3shq8s82\",\n    \"address\": \"bc1qn9esxuw8ca7ts8l6w66kdh800s09msvutydc46\",\n    \"router\": \"0xD37BbE5744D730a1d98d8DC97c42F0Ca46aD7146\",\n    \"observed_fee_rate\": \"114\",\n    \"gas_rate\": \"216\",\n    \"gas_rate_units\": \"satsperbyte\",\n    \"outbound_tx_size\": \"1000\",\n    \"outbound_fee\": \"216000\",\n    \"dust_threshold\": \"10000\"\n  },\n  {\n    \"halted\": false,\n    \"global_trading_paused\": false,\n    \"chain_trading_paused\": false,\n    \"chain_lp_actions_paused\": false,\n    \"chain\": \"BTC\",\n    \"pub_key\": \"thorpub1addwnpepq2jqhv5rdqlkusfxy05stfzcgslhhz5qh8pxetw5ry2aa6awgdh3shq8s82\",\n    \"address\": \"bc1qn9esxuw8ca7ts8l6w66kdh800s09msvutydc46\",\n    \"router\": \"0xD37BbE5744D730a1d98d8DC97c42F0Ca46aD7146\",\n    \"observed_fee_rate\": \"114\",\n    \"gas_rate\": \"216\",\n    \"gas_rate_units\": \"satsperbyte\",\n    \"outbound_tx_size\": \"1000\",\n    \"outbound_fee\": \"216000\",\n    \"dust_threshold\": \"10000\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1959b370-4a8d-4f1c-9162-b31d84fab752",
+          "name": "lastblock",
+          "request": {
+            "name": "lastblock",
+            "description": {
+              "content": "Returns the last block information for all chains.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "lastblock"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<long>",
+                  "description": "optional block height, defaults to current tip"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "451dd900-3e90-445c-a754-6b49230fbe5e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "lastblock"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "height",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"chain\": \"string\",\n    \"last_observed_in\": 5779,\n    \"last_signed_out\": 6089,\n    \"thorchain\": 337\n  },\n  {\n    \"chain\": \"string\",\n    \"last_observed_in\": 3962,\n    \"last_signed_out\": 9854,\n    \"thorchain\": 6404\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "88b705dc-fda9-48b1-ac5b-470c1fe0f2ac",
+          "name": "lastblock Chain",
+          "request": {
+            "name": "lastblock Chain",
+            "description": {
+              "content": "Returns the last block information for the provided chain.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "lastblock",
+                ":chain"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<long>",
+                  "description": "optional block height, defaults to current tip"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "chain",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "93c22c87-6ab5-402b-895b-ce4cb0c15ed9",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "lastblock",
+                    ":chain"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "height",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chain",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"chain\": \"string\",\n    \"last_observed_in\": 8284,\n    \"last_signed_out\": 8602,\n    \"thorchain\": 3892\n  },\n  {\n    \"chain\": \"string\",\n    \"last_observed_in\": 9600,\n    \"last_signed_out\": 3019,\n    \"thorchain\": 609\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1938063f-03d9-4a24-af37-87ec0374289a",
+          "name": "version",
+          "request": {
+            "name": "version",
+            "description": {
+              "content": "Returns the network's current THORNode version, the network's next THORNode version, and the querier's THORNode version.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "version"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<long>",
+                  "description": "optional block height, defaults to current tip"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5e814bee-1bd0-4181-84cc-85c97a6732ed",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "height",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"current\": \"0.17.0\",\n  \"next\": \"0.18.0\",\n  \"querier\": \"0.16.0\",\n  \"next_since_height\": 2000000\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cdfb49b5-82c9-434e-b548-53a5f9e12cc0",
+          "name": "upgrade Proposals",
+          "request": {
+            "name": "upgrade Proposals",
+            "description": {
+              "content": "Returns the current upgrade proposals.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "upgrade_proposals"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<long>",
+                  "description": "optional block height, defaults to current tip"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6c7b5625-8883-4773-a5cb-3a3016188fad",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "upgrade_proposals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "height",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"name\": \"scheduled upgrade 1\",\n    \"height\": 1234,\n    \"info\": \"{\\\"binaries\\\":{\\\"linux/amd64\\\":\\\"https://link.to.binary.amd64\\\",\\\"linux/arm64\\\":\\\"https://link.to.binary.arm64\\\"}}\",\n    \"approved\": true,\n    \"approved_percent\": \"0.8\",\n    \"validators_to_quorum\": 20,\n    \"approvers\": [\n      \"thor1f3s7q037eancht7sg0aj995dht25rwrnu4ats5\",\n      \"thor1f3s7q037eancht7sg0aj995dht25rwrnu4ats5\"\n    ],\n    \"rejecters\": [\n      \"thor1f3s7q037eancht7sg0aj995dht25rwrnu4ats5\",\n      \"thor1f3s7q037eancht7sg0aj995dht25rwrnu4ats5\"\n    ]\n  },\n  {\n    \"name\": \"scheduled upgrade 1\",\n    \"height\": 1234,\n    \"info\": \"{\\\"binaries\\\":{\\\"linux/amd64\\\":\\\"https://link.to.binary.amd64\\\",\\\"linux/arm64\\\":\\\"https://link.to.binary.arm64\\\"}}\",\n    \"approved\": true,\n    \"approved_percent\": \"0.8\",\n    \"validators_to_quorum\": 20,\n    \"approvers\": [\n      \"thor1f3s7q037eancht7sg0aj995dht25rwrnu4ats5\",\n      \"thor1f3s7q037eancht7sg0aj995dht25rwrnu4ats5\"\n    ],\n    \"rejecters\": [\n      \"thor1f3s7q037eancht7sg0aj995dht25rwrnu4ats5\",\n      \"thor1f3s7q037eancht7sg0aj995dht25rwrnu4ats5\"\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9462922e-aa56-41ad-94f4-f381c73fc6c5",
+          "name": "upgrade Proposal",
+          "request": {
+            "name": "upgrade Proposal",
+            "description": {
+              "content": "Returns the upgrade proposal for the provided name.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "upgrade_proposal",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<long>",
+                  "description": "optional block height, defaults to current tip"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4d3eef5c-d6a1-46f0-807f-28e1cfb599db",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "upgrade_proposal",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "height",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"scheduled upgrade 1\",\n  \"height\": 1234,\n  \"info\": \"{\\\"binaries\\\":{\\\"linux/amd64\\\":\\\"https://link.to.binary.amd64\\\",\\\"linux/arm64\\\":\\\"https://link.to.binary.arm64\\\"}}\",\n  \"approved\": true,\n  \"approved_percent\": \"0.8\",\n  \"validators_to_quorum\": 20,\n  \"approvers\": [\n    \"thor1f3s7q037eancht7sg0aj995dht25rwrnu4ats5\",\n    \"thor1f3s7q037eancht7sg0aj995dht25rwrnu4ats5\"\n  ],\n  \"rejecters\": [\n    \"thor1f3s7q037eancht7sg0aj995dht25rwrnu4ats5\",\n    \"thor1f3s7q037eancht7sg0aj995dht25rwrnu4ats5\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "16d4e924-e99b-4f1b-a45e-ce053c0b1c47",
+          "name": "upgrade Votes",
+          "request": {
+            "name": "upgrade Votes",
+            "description": {
+              "content": "Returns the upgrade votes for the provided name.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "upgrade_votes",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<long>",
+                  "description": "optional block height, defaults to current tip"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "790b12a0-4386-4be7-8c6c-dd327c8159d1",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "upgrade_votes",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "height",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"node_address\": \"thor1f3s7q037eancht7sg0aj995dht25rwrnu4ats5\",\n    \"vote\": \"approve\",\n    \"height\": 2312.185954327165\n  },\n  {\n    \"node_address\": \"thor1f3s7q037eancht7sg0aj995dht25rwrnu4ats5\",\n    \"vote\": \"approve\",\n    \"height\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "317ac012-bdff-4e5d-b2bd-4958c04e34bb",
+          "name": "constants",
+          "request": {
+            "name": "constants",
+            "description": {
+              "content": "Returns constant configuration, can be overridden by mimir.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "constants"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<long>",
+                  "description": "optional block height, defaults to current tip"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c7e4db6b-14f0-43ef-9fd6-4ba9d24ce6ed",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "constants"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "height",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"int_64_values\": {\n    \"key_0\": \"string\"\n  },\n  \"bool_values\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  },\n  \"string_values\": {\n    \"DefaultPoolStatus\": \"Staged\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c17d1b2e-9b05-44fc-b1e6-80e8c855490c",
+          "name": "ragnarok",
+          "request": {
+            "name": "ragnarok",
+            "description": {
+              "content": "Returns a boolean indicating whether the chain is in ragnarok.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "ragnarok"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<long>",
+                  "description": "optional block height, defaults to current tip"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "67e94fd0-7563-4902-aef3-b919b3725039",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "ragnarok"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "height",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "false",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c464f46d-613f-49c8-ac12-4f51b9368059",
+          "name": "ban",
+          "request": {
+            "name": "ban",
+            "description": {
+              "content": "Returns the ban status for the provided node address.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "ban",
+                ":address"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<long>",
+                  "description": "optional block height, defaults to current tip"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "address",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c72dbcb7-20f6-43d1-af6e-8b1621ac04ef",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "ban",
+                    ":address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "height",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"node_address\": \"thor1f3s7q037eancht7sg0aj995dht25rwrnu4ats5\",\n  \"block_height\": 6669,\n  \"signers\": [\n    \"thor1f3s7q037eancht7sg0aj995dht25rwrnu4ats5\",\n    \"thor1f3s7q037eancht7sg0aj995dht25rwrnu4ats5\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "860649d5-b908-47e8-8b06-ed000a0c11c1",
+    "name": "Thornode Auth Network API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Thornode REST API.\n\nContact Support:\n Email: devs@thorchain.org",
+      "type": "text/plain"
+    }
+  }
+}

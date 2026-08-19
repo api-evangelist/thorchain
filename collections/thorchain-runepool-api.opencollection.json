@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Thornode Auth Runepool API",
+    "version": "3.19.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Runepool",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "RUNEPool Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/runepool/:address",
+            "params": [
+              {
+                "name": "address",
+                "value": "thor1jxfh2g85q3v0tdq56fnevx6xcxtcnhtsmcu64m,thor2qcxssye4j6730h7ehgega3gyykkuwgdgmmpu62n",
+                "type": "path",
+                "description": "Address to match the RUNEPool. multiple rune addresses can be given.\n"
+              }
+            ]
+          },
+          "docs": "Returns an array of statistics for all the RUNEPool associated with given\nmember addresses.\nQuery can also be multiple addresses should be separated by comma (',')\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

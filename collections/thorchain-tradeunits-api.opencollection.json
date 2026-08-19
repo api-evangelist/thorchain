@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Thornode Auth TradeUnits API",
+    "version": "3.19.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "TradeUnits",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "trade_units",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/trade/units",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              }
+            ]
+          },
+          "docs": "Returns the total units and depth for each trade asset"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

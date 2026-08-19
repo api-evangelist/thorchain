@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Thornode Auth Holders API",
+    "version": "3.19.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Holders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Current top holders for an asset",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/holders",
+            "params": [
+              {
+                "name": "asset",
+                "value": "THOR.RUNE",
+                "type": "query",
+                "description": "Asset to get the top holders for."
+              },
+              {
+                "name": "limit",
+                "value": "150",
+                "type": "query",
+                "description": "Number of top holders to return, default is 100, maximum is 1000."
+              }
+            ]
+          },
+          "docs": "Returns all coin amounts of the given asset ordered by their amounts in descending order.\n\nThis endpoint is enabled only if the midgard startup config allows it.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,138 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Thornode Auth Transactions API",
+    "version": "3.19.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Transactions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "tx",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/tx/:hash",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              },
+              {
+                "name": "hash",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the observed transaction for a provided inbound or outbound hash."
+        },
+        {
+          "info": {
+            "name": "txSignersOld",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/tx/:hash/signers",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              },
+              {
+                "name": "hash",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deprecated - migrate to /thorchain/tx/details."
+        },
+        {
+          "info": {
+            "name": "txSigners",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/tx/details/:hash",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              },
+              {
+                "name": "hash",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the signers for a provided inbound or outbound hash."
+        },
+        {
+          "info": {
+            "name": "txStages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/tx/stages/:hash",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              },
+              {
+                "name": "hash",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the processing stages of a provided inbound hash."
+        },
+        {
+          "info": {
+            "name": "txStatus",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/tx/status/:hash",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              },
+              {
+                "name": "hash",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the status of a provided inbound hash."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

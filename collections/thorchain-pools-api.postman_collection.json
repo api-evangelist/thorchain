@@ -1,0 +1,498 @@
+{
+  "item": [
+    {
+      "id": "3c539a71-eb56-449e-9a14-438d0ca8f6b5",
+      "name": "Pools",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c9162703-7668-47fc-9e25-8e5ff9aff735",
+          "name": "Pools List",
+          "request": {
+            "name": "Pools List",
+            "description": {
+              "content": "Returns an array containing details for a set of pools",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "pools"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter for only pools with this status"
+                },
+                {
+                  "disabled": false,
+                  "key": "period",
+                  "value": "<string>",
+                  "description": "Specifies the base interval from which annualPercentageRate and poolAPY is extrapolated.\nDefault is 14d.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "958f846c-5e05-48f8-8e8d-60e8b748ad7f",
+              "name": "Array of pool details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "pools"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "period",
+                      "value": "100d"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"asset\": \"string\",\n    \"volume24h\": \"string\",\n    \"assetDepth\": \"string\",\n    \"runeDepth\": \"string\",\n    \"assetPrice\": \"string\",\n    \"assetPriceUSD\": \"string\",\n    \"liquidityInUSD\": \"string\",\n    \"annualPercentageRate\": \"string\",\n    \"poolAPY\": \"string\",\n    \"earnings\": \"string\",\n    \"earningsAnnualAsPercentOfDepth\": \"string\",\n    \"status\": \"string\",\n    \"liquidityUnits\": \"string\",\n    \"synthUnits\": \"string\",\n    \"synthSupply\": \"string\",\n    \"units\": \"string\",\n    \"nativeDecimal\": \"string\",\n    \"saversUnits\": \"string\",\n    \"saversDepth\": \"string\",\n    \"saversAPR\": \"string\",\n    \"totalCollateral\": \"string\",\n    \"totalDebtTor\": \"string\",\n    \"lpLuvi\": \"string\",\n    \"depthMinus2Percent\": \"string\",\n    \"depthPlus2Percent\": \"string\",\n    \"saversYieldShare\": \"string\"\n  },\n  {\n    \"asset\": \"string\",\n    \"volume24h\": \"string\",\n    \"assetDepth\": \"string\",\n    \"runeDepth\": \"string\",\n    \"assetPrice\": \"string\",\n    \"assetPriceUSD\": \"string\",\n    \"liquidityInUSD\": \"string\",\n    \"annualPercentageRate\": \"string\",\n    \"poolAPY\": \"string\",\n    \"earnings\": \"string\",\n    \"earningsAnnualAsPercentOfDepth\": \"string\",\n    \"status\": \"string\",\n    \"liquidityUnits\": \"string\",\n    \"synthUnits\": \"string\",\n    \"synthSupply\": \"string\",\n    \"units\": \"string\",\n    \"nativeDecimal\": \"string\",\n    \"saversUnits\": \"string\",\n    \"saversDepth\": \"string\",\n    \"saversAPR\": \"string\",\n    \"totalCollateral\": \"string\",\n    \"totalDebtTor\": \"string\",\n    \"lpLuvi\": \"string\",\n    \"depthMinus2Percent\": \"string\",\n    \"depthPlus2Percent\": \"string\",\n    \"saversYieldShare\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "af64c25a-edd1-4ad7-a22d-6047dcc1cfef",
+          "name": "pool",
+          "request": {
+            "name": "pool",
+            "description": {
+              "content": "Returns the pool information for the provided asset.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "pool",
+                ":asset"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<long>",
+                  "description": "optional block height, defaults to current tip"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "asset",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "74e7bbc6-9ee0-4750-bbf4-68a3f12abbf2",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "pool",
+                    ":asset"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "height",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"asset\": \"BTC.BTC\",\n  \"status\": \"Available\",\n  \"pending_inbound_asset\": \"101713319\",\n  \"pending_inbound_rune\": \"464993836\",\n  \"balance_asset\": \"3197744873\",\n  \"balance_rune\": \"13460619152985\",\n  \"asset_tor_price\": \"123456\",\n  \"pool_units\": \"14694928607473\",\n  \"LP_units\": \"14694928607473\",\n  \"synth_units\": \"0\",\n  \"synth_supply\": \"0\",\n  \"savers_depth\": \"199998\",\n  \"savers_units\": \"199998\",\n  \"savers_fill_bps\": \"4500\",\n  \"savers_capacity_remaining\": \"1000\",\n  \"synth_mint_paused\": true,\n  \"synth_supply_remaining\": \"123456\",\n  \"derived_depth_bps\": \"123456\",\n  \"short_code\": \"b\",\n  \"decimals\": 6,\n  \"trading_halted\": false,\n  \"volume_asset\": \"123456\",\n  \"volume_rune\": \"123456\",\n  \"pol_reserve_rune_deposited\": \"10000000000\",\n  \"rolling_pool_liquidity_fee_rune\": \"12345678\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b16e211c-ddab-4f8f-ab4f-0eb8de914514",
+          "name": "pools",
+          "request": {
+            "name": "pools",
+            "description": {
+              "content": "Returns the pool information for all assets.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "pools"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<long>",
+                  "description": "optional block height, defaults to current tip"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "464720c5-f263-4139-aef8-0f04bf71f385",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "pools"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "height",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"asset\": \"BTC.BTC\",\n    \"status\": \"Available\",\n    \"pending_inbound_asset\": \"101713319\",\n    \"pending_inbound_rune\": \"464993836\",\n    \"balance_asset\": \"3197744873\",\n    \"balance_rune\": \"13460619152985\",\n    \"asset_tor_price\": \"123456\",\n    \"pool_units\": \"14694928607473\",\n    \"LP_units\": \"14694928607473\",\n    \"synth_units\": \"0\",\n    \"synth_supply\": \"0\",\n    \"savers_depth\": \"199998\",\n    \"savers_units\": \"199998\",\n    \"savers_fill_bps\": \"4500\",\n    \"savers_capacity_remaining\": \"1000\",\n    \"synth_mint_paused\": true,\n    \"synth_supply_remaining\": \"123456\",\n    \"derived_depth_bps\": \"123456\",\n    \"short_code\": \"b\",\n    \"decimals\": 6,\n    \"trading_halted\": false,\n    \"volume_asset\": \"123456\",\n    \"volume_rune\": \"123456\",\n    \"pol_reserve_rune_deposited\": \"10000000000\",\n    \"rolling_pool_liquidity_fee_rune\": \"12345678\"\n  },\n  {\n    \"asset\": \"BTC.BTC\",\n    \"status\": \"Available\",\n    \"pending_inbound_asset\": \"101713319\",\n    \"pending_inbound_rune\": \"464993836\",\n    \"balance_asset\": \"3197744873\",\n    \"balance_rune\": \"13460619152985\",\n    \"asset_tor_price\": \"123456\",\n    \"pool_units\": \"14694928607473\",\n    \"LP_units\": \"14694928607473\",\n    \"synth_units\": \"0\",\n    \"synth_supply\": \"0\",\n    \"savers_depth\": \"199998\",\n    \"savers_units\": \"199998\",\n    \"savers_fill_bps\": \"4500\",\n    \"savers_capacity_remaining\": \"1000\",\n    \"synth_mint_paused\": true,\n    \"synth_supply_remaining\": \"123456\",\n    \"derived_depth_bps\": \"123456\",\n    \"short_code\": \"b\",\n    \"decimals\": 6,\n    \"trading_halted\": false,\n    \"volume_asset\": \"123456\",\n    \"volume_rune\": \"123456\",\n    \"pol_reserve_rune_deposited\": \"10000000000\",\n    \"rolling_pool_liquidity_fee_rune\": \"12345678\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ac8b34d7-b16f-42db-a457-b074c158c31d",
+          "name": "dpool",
+          "request": {
+            "name": "dpool",
+            "description": {
+              "content": "Returns the pool information for the provided derived asset.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "dpool",
+                ":asset"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<long>",
+                  "description": "optional block height, defaults to current tip"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "asset",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "78be3274-f9a9-4694-ad3e-3875a6a8cc07",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "dpool",
+                    ":asset"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "height",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"asset\": \"BTC.BTC\",\n  \"status\": \"Available\",\n  \"balance_asset\": \"3197744873\",\n  \"balance_rune\": \"13460619152985\",\n  \"derived_depth_bps\": \"123456\",\n  \"decimals\": 6\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f058c6e4-a68a-4980-87a9-42325cf79460",
+          "name": "dpools",
+          "request": {
+            "name": "dpools",
+            "description": {
+              "content": "Returns the pool information for all derived assets.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "thorchain",
+                "dpools"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<long>",
+                  "description": "optional block height, defaults to current tip"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6ff9ae81-abe8-4c45-8e0e-8d419d9ed47e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thorchain",
+                    "dpools"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "height",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"asset\": \"BTC.BTC\",\n    \"status\": \"Available\",\n    \"balance_asset\": \"3197744873\",\n    \"balance_rune\": \"13460619152985\",\n    \"derived_depth_bps\": \"123456\",\n    \"decimals\": 6\n  },\n  {\n    \"asset\": \"BTC.BTC\",\n    \"status\": \"Available\",\n    \"balance_asset\": \"3197744873\",\n    \"balance_rune\": \"13460619152985\",\n    \"derived_depth_bps\": \"123456\",\n    \"decimals\": 6\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "166a4633-ea3a-4ccf-90c7-aef34b6f6760",
+    "name": "Thornode Auth Pools API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Thornode REST API.\n\nContact Support:\n Email: devs@thorchain.org",
+      "type": "text/plain"
+    }
+  }
+}

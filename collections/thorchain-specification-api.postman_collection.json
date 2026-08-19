@@ -1,0 +1,152 @@
+{
+  "item": [
+    {
+      "id": "d5ac57fe-a28d-493e-821b-21ab78ea1f53",
+      "name": "Specification",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0a693ac9-de06-41a1-8095-64feba61426f",
+          "name": "Documentation",
+          "request": {
+            "name": "Documentation",
+            "description": {
+              "content": "Swagger/OpenAPI 3.0 specification generated documents.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "doc"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dcb35e83-61e2-48b5-9602-6b142716332a",
+              "name": "swagger/OpenAPI 3.0 spec generated docs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "doc"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3bc91d35-cd9b-45b3-85c1-e354a63c4679",
+          "name": "Swagger File",
+          "request": {
+            "name": "Swagger File",
+            "description": {
+              "content": "Returns human and machine readable swagger/openapi specification",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "swagger.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f3ac8303-394f-4bda-9465-c128be5ebc44",
+              "name": "human and machine readable swagger/openapi specification",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "swagger.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "29833a8e-fedc-4c7b-8f9b-2f726c5ea53b",
+    "name": "Thornode Auth Specification API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Thornode REST API.\n\nContact Support:\n Email: devs@thorchain.org",
+      "type": "text/plain"
+    }
+  }
+}

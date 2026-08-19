@@ -1,0 +1,80 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Thornode Auth TCY Claimers API",
+    "version": "3.19.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "TCY Claimers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "tcyClaimer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/tcy_claimer/:address",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the tcy claimer information for an address."
+        },
+        {
+          "info": {
+            "name": "tcyClaimers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/tcy_claimers",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              }
+            ]
+          },
+          "docs": "Returns all tcy claimers information."
+        },
+        {
+          "info": {
+            "name": "tcyProtocolOwned",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/thorchain/tcy_protocol_owned",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "optional block height, defaults to current tip"
+              }
+            ]
+          },
+          "docs": "Returns the amount of TCY held by the claim module in excess of the outstanding tcy_claimer entitlements (protocol-owned TCY accumulated by the claim-module rune→TCY swap cycle)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
