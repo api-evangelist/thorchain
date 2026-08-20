@@ -42,6 +42,16 @@ tags:
 - Crypto Web3
 - Blockchain
 - DeFi
+- Cross-Chain
+- Liquidity
+- Decentralized Exchange
+- Cosmos
+- Web3 Infrastructure
+tags_raw:
+- Company
+- Crypto Web3
+- Blockchain
+- DeFi
 - Cross-chain
 - Liquidity
 - Decentralized Exchange
@@ -74,6 +84,8 @@ apis:
   humanURL: https://dev.thorchain.org/
   baseURL: https://gateway.liquify.com/chain/thorchain_api
   tags:
+  - Authentication
+  tags_raw:
   - Auth
   properties:
   - type: OpenAPI
@@ -84,6 +96,8 @@ apis:
   humanURL: https://dev.thorchain.org/
   baseURL: https://gateway.liquify.com/chain/thorchain_api
   tags:
+  - Balances
+  tags_raw:
   - Balance
   properties:
   - type: OpenAPI
@@ -274,6 +288,8 @@ apis:
   humanURL: https://dev.thorchain.org/
   baseURL: https://gateway.liquify.com/chain/thorchain_api
   tags:
+  - llms-txt
+  tags_raw:
   - Llms.txt
   properties:
   - type: OpenAPI
@@ -284,6 +300,8 @@ apis:
   humanURL: https://dev.thorchain.org/
   baseURL: https://gateway.liquify.com/chain/thorchain_api
   tags:
+  - MCP
+  tags_raw:
   - Mcp
   properties:
   - type: OpenAPI
@@ -394,6 +412,8 @@ apis:
   humanURL: https://dev.thorchain.org/
   baseURL: https://gateway.liquify.com/chain/thorchain_api
   tags:
+  - Quotes
+  tags_raw:
   - Quote
   properties:
   - type: OpenAPI
@@ -434,6 +454,8 @@ apis:
   humanURL: https://dev.thorchain.org/
   baseURL: https://gateway.liquify.com/chain/thorchain_api
   tags:
+  - RUNE Pool
+  tags_raw:
   - Runepool
   properties:
   - type: OpenAPI
@@ -655,6 +677,8 @@ apis:
   humanURL: https://dev.thorchain.org/
   baseURL: https://gateway.liquify.com/chain/thorchain_api
   tags:
+  - Transaction
+  tags_raw:
   - Transactions
   properties:
   - type: OpenAPI
@@ -675,6 +699,8 @@ apis:
   humanURL: https://dev.thorchain.org/
   baseURL: https://gateway.liquify.com/chain/thorchain_api
   tags:
+  - Vault
+  tags_raw:
   - Vaults
   properties:
   - type: OpenAPI
