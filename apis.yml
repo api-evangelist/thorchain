@@ -53,7 +53,7 @@ tags:
 - Crypto Web3
 - Blockchain
 - DeFi
-- Cross-Chain
+- Cross-chain
 - Liquidity
 - Decentralized Exchange
 - Cosmos
@@ -465,7 +465,7 @@ apis:
   humanURL: https://dev.thorchain.org/
   baseURL: https://gateway.liquify.com/chain/thorchain_api
   tags:
-  - RUNE Pool
+  - Runepool
   tags_raw:
   - Runepool
   properties:
