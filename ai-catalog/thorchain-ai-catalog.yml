@@ -45,6 +45,7 @@ conformance:
       is a valid application extension media type. ARD permits extension types without core registration.'
     - '[THORChain Public Discovery Skill] Media type ''application/agent-skills+md'' is a valid application
       extension media type. ARD permits extension types without core registration.'
+  did_web: null
 catalog:
   host_display_name: THORChain
   host_identifier: thorchain.org
