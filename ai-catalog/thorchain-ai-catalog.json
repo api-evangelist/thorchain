@@ -1,0 +1,58 @@
+{
+  "specVersion": "1.0",
+  "host": {
+    "displayName": "THORChain",
+    "identifier": "thorchain.org",
+    "documentationUrl": "https://thorchain.org/AGENTS.md"
+  },
+  "entries": [
+    {
+      "identifier": "urn:air:thorchain.org:mcp:public-discovery",
+      "displayName": "THORChain Public Discovery",
+      "type": "application/mcp-server-card+json",
+      "url": "https://thorchain.org/.well-known/mcp/server-card.json",
+      "description": "Read-only tools and resources for THORChain website discovery and official documentation references.",
+      "extensions": {
+        "org.thorchain.discovery": {
+          "representativeQueries": [
+            "Where are the official THORChain developer documentation and API references?",
+            "What public discovery tools does the THORChain website expose?",
+            "What are the rules for agents accessing THORChain website resources?"
+          ]
+        }
+      }
+    },
+    {
+      "identifier": "urn:air:thorchain.org:api:website-discovery",
+      "displayName": "THORChain Website Discovery API",
+      "type": "application/vnd.oai.openapi+json;version=3.1.0",
+      "url": "https://thorchain.org/openapi.json",
+      "description": "OpenAPI description of public website discovery endpoints; not an API for trading or signing.",
+      "extensions": {
+        "org.thorchain.discovery": {
+          "representativeQueries": [
+            "Which public machine-readable resources are available on thorchain.org?",
+            "How do I call the read-only THORChain discovery MCP?",
+            "Where can I read the THORChain website API description?"
+          ]
+        }
+      }
+    },
+    {
+      "identifier": "urn:air:thorchain.org:skill:public-discovery",
+      "displayName": "THORChain Public Discovery Skill",
+      "type": "application/agent-skills+md",
+      "url": "https://thorchain.org/.well-known/agent-skills/thorchain-public-discovery/SKILL.md",
+      "description": "Published instructions for finding official THORChain public resources without transaction or account authority.",
+      "extensions": {
+        "org.thorchain.discovery": {
+          "representativeQueries": [
+            "How should an agent discover official THORChain resources?",
+            "Which THORChain sources should an agent prefer?",
+            "What actions are outside the public discovery skill's scope?"
+          ]
+        }
+      }
+    }
+  ]
+}
