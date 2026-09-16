@@ -455,18 +455,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/thorchain-rune-pool-api-openapi.yml
-- aid: thorchain:thorchain-runepool-api
-  name: THORChain Runepool API
-  description: The Runepool API from THORChain — 1 operation(s) for runepool.
-  humanURL: https://dev.thorchain.org/
-  baseURL: https://gateway.liquify.com/chain/thorchain_api
-  tags:
-  - RUNE Pool
-  tags_raw:
-  - Runepool
-  properties:
-  - type: OpenAPI
-    url: openapi/thorchain-runepool-api-openapi.yml
 - aid: thorchain:thorchain-saver-api
   name: THORChain Saver API
   description: The Saver API from THORChain — 1 operation(s) for saver.
@@ -609,8 +597,8 @@ apis:
     url: openapi/thorchain-tcy-stakers-api-openapi.yml
 - aid: thorchain:thorchain-thorchain-website-discovery-api
   name: THORChain Website Discovery API
-  description: The THORChain Website Discovery API from THORChain — 1 operation(s) for thorchain website
-    discovery.
+  description: >-
+    The THORChain Website Discovery API from THORChain — 1 operation(s) for thorchain website discovery.
   humanURL: https://dev.thorchain.org/
   baseURL: https://gateway.liquify.com/chain/thorchain_api
   tags:
