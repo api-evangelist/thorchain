@@ -1,19 +1,15 @@
 aid: thorchain
 name: THORChain
-description: >-
-  THORChain is a permissionless, decentralized cross-chain liquidity protocol
-  (a Cosmos-SDK / CometBFT Layer-1) that enables native asset swaps between
-  independent blockchains — such as Bitcoin, Ethereum, and Cosmos assets —
-  without wrapping, bridging, or centralized custody. Liquidity providers earn
-  fees on continuous liquidity pools denominated against the RUNE settlement
-  asset, and swaps are secured by a rotating set of bonded THORNode validators
-  using threshold-signature (TSS) vaults. For developers, THORChain exposes two
-  open, read-only, unauthenticated HTTPS APIs: the THORNode application REST API
-  (pools, swap quotes with ready-to-use memos and inbound vault addresses,
-  transactions, nodes, vaults, THORNames, savers, trade accounts, RUNEPool and
-  network state) and the Midgard indexer API (time-series history, actions,
-  analytics, and member details). It also publishes an agent-native discovery
-  surface — an MCP server card, AGENTS.md, ai-plugin manifest, and llms.txt.
+description: 'THORChain is a permissionless, decentralized cross-chain liquidity protocol (a Cosmos-SDK
+  / CometBFT Layer-1) that enables native asset swaps between independent blockchains — such as Bitcoin,
+  Ethereum, and Cosmos assets — without wrapping, bridging, or centralized custody. Liquidity providers
+  earn fees on continuous liquidity pools denominated against the RUNE settlement asset, and swaps are
+  secured by a rotating set of bonded THORNode validators using threshold-signature (TSS) vaults. For
+  developers, THORChain exposes two open, read-only, unauthenticated HTTPS APIs: the THORNode application
+  REST API (pools, swap quotes with ready-to-use memos and inbound vault addresses, transactions, nodes,
+  vaults, THORNames, savers, trade accounts, RUNEPool and network state) and the Midgard indexer API (time-series
+  history, actions, analytics, and member details). It also publishes an agent-native discovery surface
+  — an MCP server card, AGENTS.md, ai-plugin manifest, and llms.txt.'
 url: https://raw.githubusercontent.com/api-evangelist/thorchain/refs/heads/main/apis.yml
 deliveryModel:
   model: unknown
@@ -47,7 +43,7 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.23'
 created: '2026-07-17'
-modified: '2026-07-21'
+modified: '2026-09-16'
 tags:
 - Company
 - Crypto Web3
@@ -612,9 +608,9 @@ apis:
   - type: OpenAPI
     url: openapi/thorchain-tcy-stakers-api-openapi.yml
 - aid: thorchain:thorchain-thorchain-website-discovery-api
-  name: THORChain THORChain Website Discovery API
-  description: >-
-    The THORChain Website Discovery API from THORChain — 1 operation(s) for thorchain website discovery.
+  name: THORChain Website Discovery API
+  description: The THORChain Website Discovery API from THORChain — 1 operation(s) for thorchain website
+    discovery.
   humanURL: https://dev.thorchain.org/
   baseURL: https://gateway.liquify.com/chain/thorchain_api
   tags:
