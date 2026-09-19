@@ -349,6 +349,8 @@ apis:
   humanURL: https://dev.thorchain.org/
   baseURL: https://gateway.liquify.com/chain/thorchain_api
   tags:
+  - Networks
+  tags_raw:
   - Network
   properties:
   - type: OpenAPI
@@ -359,6 +361,8 @@ apis:
   humanURL: https://dev.thorchain.org/
   baseURL: https://gateway.liquify.com/chain/thorchain_api
   tags:
+  - Node
+  tags_raw:
   - Nodes
   properties:
   - type: OpenAPI
@@ -409,6 +413,8 @@ apis:
   humanURL: https://dev.thorchain.org/
   baseURL: https://gateway.liquify.com/chain/thorchain_api
   tags:
+  - Queues
+  tags_raw:
   - Queue
   properties:
   - type: OpenAPI
