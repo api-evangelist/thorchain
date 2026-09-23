@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Thornode Auth Quote API
+  title: Thornode Quote API
   version: 3.19.1
   contact:
     email: devs@thorchain.org
@@ -95,7 +95,19 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/QuoteSwapResponse'
+      summary: Quoteswap
+      x-summary-source: derived
 components:
+  parameters:
+    queryHeight:
+      name: height
+      in: query
+      description: optional block height, defaults to current tip
+      required: false
+      schema:
+        type: integer
+        format: int64
+        minimum: 0
   schemas:
     QuoteFees:
       type: object
@@ -228,13 +240,3 @@ components:
           format: int64
           description: total number of seconds a swap is expected to take (inbound conf + streaming swap + outbound delay)
           example: 600
-  parameters:
-    queryHeight:
-      name: height
-      in: query
-      description: optional block height, defaults to current tip
-      required: false
-      schema:
-        type: integer
-        format: int64
-        minimum: 0

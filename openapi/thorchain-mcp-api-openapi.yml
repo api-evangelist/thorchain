@@ -1,12 +1,16 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Thornode Auth Mcp API
-  version: 3.19.1
-  contact:
-    email: devs@thorchain.org
-  description: Thornode REST API.
+  title: THORChain Website Discovery MCP API
+  summary: Machine-readable discovery entry points for THORChain public resources.
+  description: This OpenAPI file describes stable discovery resources hosted on thorchain.org and points agents to the official THORChain developer API documentation. Protocol API behavior is documented in the linked Midgard and THORNode Swagger references.
+  version: 1.0.0
+  license:
+    name: Public documentation
+servers:
+- url: https://thorchain.org
+  description: THORChain public website
 tags:
-- name: Mcp
+- name: MCP
 paths:
   /mcp:
     get:
@@ -16,7 +20,7 @@ paths:
         '200':
           description: JSON MCP server card
       tags:
-      - Mcp
+      - MCP
     post:
       operationId: postMcpJsonRpc
       summary: Call the read-only MCP JSON-RPC endpoint
@@ -26,4 +30,7 @@ paths:
         '204':
           description: Notification accepted without response
       tags:
-      - Mcp
+      - MCP
+externalDocs:
+  description: THORChain developer API documentation
+  url: https://dev.thorchain.org/concepts/connecting-to-thorchain.html

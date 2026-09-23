@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Thornode Auth Savers API
+  title: Thornode Savers API
   version: 3.19.1
   contact:
     email: devs@thorchain.org
@@ -25,6 +25,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SaverResponse'
+      summary: Saver
+      x-summary-source: derived
   /thorchain/pool/{asset}/savers:
     parameters:
     - $ref: '#/components/parameters/queryHeight'
@@ -41,32 +43,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SaversResponse'
+      summary: Savers
+      x-summary-source: derived
 components:
-  parameters:
-    queryHeight:
-      name: height
-      in: query
-      description: optional block height, defaults to current tip
-      required: false
-      schema:
-        type: integer
-        format: int64
-        minimum: 0
-    address:
-      name: address
-      in: path
-      required: true
-      schema:
-        type: string
-        example: thor1zupk5lmc84r2dh738a9g3zscavannjy3nzplwt
-    asset:
-      name: asset
-      in: path
-      required: true
-      schema:
-        type: string
-        example: BTC.BTC
   schemas:
+    SaverResponse:
+      $ref: '#/components/schemas/Saver'
     Saver:
       type: object
       required:
@@ -107,5 +89,27 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Saver'
-    SaverResponse:
-      $ref: '#/components/schemas/Saver'
+  parameters:
+    address:
+      name: address
+      in: path
+      required: true
+      schema:
+        type: string
+        example: thor1zupk5lmc84r2dh738a9g3zscavannjy3nzplwt
+    queryHeight:
+      name: height
+      in: query
+      description: optional block height, defaults to current tip
+      required: false
+      schema:
+        type: integer
+        format: int64
+        minimum: 0
+    asset:
+      name: asset
+      in: path
+      required: true
+      schema:
+        type: string
+        example: BTC.BTC

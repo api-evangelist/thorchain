@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Thornode Auth Limit Order API
+  title: Thornode Limit Order API
   version: 3.19.1
   contact:
     email: devs@thorchain.org
@@ -81,45 +81,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/QuoteLimitResponse'
+      summary: Quotelimit
+      x-summary-source: derived
 components:
   schemas:
-    QuoteFees:
-      type: object
-      required:
-      - asset
-      - liquidity
-      - total
-      - slippage_bps
-      - total_bps
-      properties:
-        asset:
-          type: string
-          example: ETH.ETH
-          description: the target asset used for all fees
-        affiliate:
-          type: string
-          example: '1234'
-          description: affiliate fee in the target asset
-        outbound:
-          type: string
-          example: '1234'
-          description: outbound fee in the target asset
-        liquidity:
-          type: string
-          example: '1234'
-          description: liquidity fees paid to pools in the target asset
-        total:
-          type: string
-          example: '9876'
-          description: total fees in the target asset
-        slippage_bps:
-          type: integer
-          format: int64
-          description: the swap slippage in basis points
-        total_bps:
-          type: integer
-          format: int64
-          description: total basis points in fees relative to amount out
     QuoteLimitResponse:
       type: object
       required:
@@ -202,6 +167,43 @@ components:
           format: int64
           description: the timestamp when the limit order will expire
           example: 1671660285
+    QuoteFees:
+      type: object
+      required:
+      - asset
+      - liquidity
+      - total
+      - slippage_bps
+      - total_bps
+      properties:
+        asset:
+          type: string
+          example: ETH.ETH
+          description: the target asset used for all fees
+        affiliate:
+          type: string
+          example: '1234'
+          description: affiliate fee in the target asset
+        outbound:
+          type: string
+          example: '1234'
+          description: outbound fee in the target asset
+        liquidity:
+          type: string
+          example: '1234'
+          description: liquidity fees paid to pools in the target asset
+        total:
+          type: string
+          example: '9876'
+          description: total fees in the target asset
+        slippage_bps:
+          type: integer
+          format: int64
+          description: the swap slippage in basis points
+        total_bps:
+          type: integer
+          format: int64
+          description: total basis points in fees relative to amount out
   parameters:
     queryHeight:
       name: height

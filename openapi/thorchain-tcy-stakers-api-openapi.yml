@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Thornode Auth TCY Stakers API
+  title: Thornode TCY Stakers API
   version: 3.19.1
   contact:
     email: devs@thorchain.org
@@ -24,6 +24,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TCYStakerResponse'
+      summary: Tcy staker
+      x-summary-source: derived
   /thorchain/tcy_stakers:
     parameters:
     - $ref: '#/components/parameters/queryHeight'
@@ -39,19 +41,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TCYStakersResponse'
+      summary: Tcy stakers
+      x-summary-source: derived
 components:
   schemas:
-    TCYStaker:
-      type: object
-      required:
-      - amount
-      properties:
-        address:
-          type: string
-          example: thor1xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-        amount:
-          type: string
-          example: '0'
     TCYStakersResponse:
       type: array
       items:
@@ -66,7 +59,25 @@ components:
         amount:
           type: string
           example: '0'
+    TCYStaker:
+      type: object
+      required:
+      - amount
+      properties:
+        address:
+          type: string
+          example: thor1xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+        amount:
+          type: string
+          example: '0'
   parameters:
+    address:
+      name: address
+      in: path
+      required: true
+      schema:
+        type: string
+        example: thor1zupk5lmc84r2dh738a9g3zscavannjy3nzplwt
     queryHeight:
       name: height
       in: query
@@ -76,10 +87,3 @@ components:
         type: integer
         format: int64
         minimum: 0
-    address:
-      name: address
-      in: path
-      required: true
-      schema:
-        type: string
-        example: thor1zupk5lmc84r2dh738a9g3zscavannjy3nzplwt

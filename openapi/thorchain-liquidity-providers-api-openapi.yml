@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Thornode Auth Liquidity Providers API
+  title: Thornode Liquidity Providers API
   version: 3.19.1
   contact:
     email: devs@thorchain.org
@@ -25,6 +25,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LiquidityProviderResponse'
+      summary: Liquidity provider
+      x-summary-source: derived
   /thorchain/pool/{asset}/liquidity_providers:
     parameters:
     - $ref: '#/components/parameters/queryHeight'
@@ -41,12 +43,61 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LiquidityProvidersResponse'
+      summary: Liquidity providers
+      x-summary-source: derived
 components:
   schemas:
     LiquidityProvidersResponse:
       type: array
       items:
         $ref: '#/components/schemas/LiquidityProviderSummary'
+    LiquidityProviderSummary:
+      type: object
+      required:
+      - asset
+      - units
+      - pending_rune
+      - pending_asset
+      - rune_deposit_value
+      - asset_deposit_value
+      properties:
+        asset:
+          type: string
+          example: BTC.BTC
+        rune_address:
+          type: string
+          example: thor1xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+        asset_address:
+          type: string
+          example: bc1qn9esxuw8ca7ts8l6w66kdh800s09msvutydc46
+        last_add_height:
+          type: integer
+          format: int64
+          example: 82745
+        last_withdraw_height:
+          type: integer
+          format: int64
+          example: 82745
+        units:
+          type: string
+          example: '0'
+        pending_rune:
+          type: string
+          example: '0'
+        pending_asset:
+          type: string
+          example: '242000000'
+        pending_tx_id:
+          type: string
+          example: C4C876802xxxxxxxxxxBC408829878446A37011EBBA0C5CAA3DD64A548879CB228
+        rune_deposit_value:
+          type: string
+          example: '0'
+        asset_deposit_value:
+          type: string
+          example: '0'
+    LiquidityProviderResponse:
+      $ref: '#/components/schemas/LiquidityProvider'
     LiquidityProvider:
       type: object
       required:
@@ -107,53 +158,6 @@ components:
         luvi_growth_pct:
           type: string
           example: '0'
-    LiquidityProviderSummary:
-      type: object
-      required:
-      - asset
-      - units
-      - pending_rune
-      - pending_asset
-      - rune_deposit_value
-      - asset_deposit_value
-      properties:
-        asset:
-          type: string
-          example: BTC.BTC
-        rune_address:
-          type: string
-          example: thor1xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-        asset_address:
-          type: string
-          example: bc1qn9esxuw8ca7ts8l6w66kdh800s09msvutydc46
-        last_add_height:
-          type: integer
-          format: int64
-          example: 82745
-        last_withdraw_height:
-          type: integer
-          format: int64
-          example: 82745
-        units:
-          type: string
-          example: '0'
-        pending_rune:
-          type: string
-          example: '0'
-        pending_asset:
-          type: string
-          example: '242000000'
-        pending_tx_id:
-          type: string
-          example: C4C876802xxxxxxxxxxBC408829878446A37011EBBA0C5CAA3DD64A548879CB228
-        rune_deposit_value:
-          type: string
-          example: '0'
-        asset_deposit_value:
-          type: string
-          example: '0'
-    LiquidityProviderResponse:
-      $ref: '#/components/schemas/LiquidityProvider'
   parameters:
     address:
       name: address

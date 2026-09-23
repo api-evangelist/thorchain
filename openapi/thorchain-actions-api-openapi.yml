@@ -1,10 +1,12 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Thornode Auth Actions API
-  version: 3.19.1
   contact:
     email: devs@thorchain.org
-  description: Thornode REST API.
+  description: The Midgard Public API queries THORChain and any chains linked via the Bifröst and prepares information about the network to be readily available for public users. The API parses transaction event data from THORChain and stores them in a time-series database to make time-dependent queries easy. Midgard does not hold critical information. To interact with THORChain protocol, users should query THORNode directly.
+  title: Midgard Public Actions API
+  version: 2.34.2
+servers:
+- url: https://gateway.liquify.com/chain/thorchain_midgard
 tags:
 - name: Actions
 paths:
@@ -16,9 +18,7 @@ paths:
 
         result in one or more outbound transactions. Results are paginated by sets of 50.
 
-        Filters may be applied to query actions.
-
-        '
+        Filters may be applied to query actions.'
       operationId: GetActions
       parameters:
       - description: 'Comma separated list. Address of sender or recipient of any in/out transaction related
@@ -146,68 +146,101 @@ paths:
       tags:
       - Actions
 components:
-  responses:
-    ActionsResponse:
-      content:
-        application/json:
-          schema:
-            properties:
-              actions:
-                items:
-                  $ref: '#/components/schemas/Action'
-                type: array
-              count:
-                description: 'Int64, number of results matching the given filters. It may be -1 if
-
-                  Midgard is having trouble counting the results and has to cancel the count query
-
-                  (temporary fix). Also, if new action parameters is used it won''t be returned.
-
-                  '
-                type: string
-              meta:
-                $ref: '#/components/schemas/ActionMeta'
-            required:
-            - actions
-            - meta
-            type: object
-      description: Returns an array of actions for the given filters.
   schemas:
-    BondMetadata:
+    WithdrawMetadata:
       properties:
-        fee:
-          description: node operator fee
+        asymmetry:
+          description: 'Decimal (-1.0 <=> 1.0), indicates how asymmetrical the withdrawal was. 0 means
+
+            totally symmetrical
+
+            '
+          type: string
+        basisPoints:
+          description: 'Int64 (Basis points, 0-10000, where 10000=100%), percentage of total pool ownership
+
+            withdrawn
+
+            '
+          type: string
+        impermanentLossProtection:
+          description: Int64, additional Rune paid out because of impermanent loss protection
+          type: string
+        liquidityUnits:
+          description: 'Int64, amount of liquidity units removed from the member as result of the withdrawal
+
+            '
           type: string
         memo:
-          description: Transaction memo of bond event
+          description: Transaction memo of the withdraw action
           type: string
-        nodeAddress:
-          description: node address
+        networkFees:
+          $ref: '#/components/schemas/NetworkFees'
+      required:
+      - liquidityUnits
+      - asymmetry
+      - basisPoints
+      - networkFees
+      - impermanentLossProtection
+      - memo
+      type: object
+    Coin:
+      description: Represents a digital currency amount
+      properties:
+        amount:
+          description: Int64(e8), asset Amount.
           type: string
-        provider:
-          description: bond provider address
+        asset:
+          description: Asset in CHAIN.SYMBOL format
+          type: string
+      required:
+      - asset
+      - amount
+      type: object
+    NetworkFees:
+      description: 'List of network fees associated to an action. One network fee is charged for each
+
+        outbound transaction
+
+        '
+      items:
+        $ref: '#/components/schemas/Coin'
+      type: array
+    TcyMetadata:
+      properties:
+        memo:
+          description: Transaction memo of tcy message.
           type: string
       required:
       - memo
-      - nodeAddress
       type: object
-    ContractMetadata:
+    Transaction:
+      description: Transaction data
       properties:
-        attributes:
-          description: contract attributes emitted from its event
-          type: object
-        contractType:
-          description: contract type defined by cosmwasm
+        address:
+          description: Sender address
           type: string
-        funds:
-          description: contract funds emitted from its event
+        affiliate:
+          description: if transactions flaged as affiliate
+          type: boolean
+        coins:
+          $ref: '#/components/schemas/Coins'
+        height:
+          description: 'The thorchain height that the outbound transaction occurred.
+
+            '
           type: string
-        msg:
-          description: contract massages emitted from its event
-          type: object
+        txID:
+          description: 'Transaction id hash. Some transactions (such as outbound transactions made in the
+
+            native asset) may have a zero value.
+
+            '
+          type: string
       required:
-      - contractType
-      - attributes
+      - txID
+      - address
+      - coins
       type: object
     Metadata:
       properties:
@@ -239,115 +272,6 @@ components:
           $ref: '#/components/schemas/ThornameMetadata'
         withdraw:
           $ref: '#/components/schemas/WithdrawMetadata'
-      type: object
-    RunePoolDepositMetadata:
-      properties:
-        units:
-          description: "Int64, amount of units assigned to the member as result of the \ndeposit\n"
-          type: string
-      required:
-      - units
-      type: object
-    RefundMetadata:
-      properties:
-        affiliateAddress:
-          description: Affiliate fee address of the swap, empty if fee swap
-          type: string
-        affiliateFee:
-          description: Int64 (Basis points, 0-1000, where 1000=10%)
-          type: string
-        memo:
-          description: Transaction memo of the refund action
-          type: string
-        networkFees:
-          $ref: '#/components/schemas/NetworkFees'
-        reason:
-          description: Reason for the refund
-          type: string
-        txType:
-          description: "The type of the transaction given from its Memo\nType of Transaction type: \n\"unknown\", \"add\", \"withdraw\", \"swap\", \"limitOrder\", \"outbound\", \"donate\",\n\"bond\", \"unbond\", \"leave\", \"yggdrasilFund\", \"yggdrasilReturn\", \"reserve\",\n\"refund\", \"migrate\", \"ragnarok\", \"switch\", \"noOp\", \"consolidate\", \"thorname\",\n\"loanOpen\", \"loanRepayment\"\n"
-          example: loanOpen
-          type: string
-      required:
-      - networkFees
-      - reason
-      - memo
-      - affiliateFee
-      - affiliateAddress
-      - txType
-      type: object
-    TcyMetadata:
-      properties:
-        memo:
-          description: Transaction memo of tcy message.
-          type: string
-      required:
-      - memo
-      type: object
-    LimitSwapMetadata:
-      properties:
-        memo:
-          description: Transaction memo of bond event
-          type: string
-      required:
-      - memo
-      type: object
-    Coin:
-      description: Represents a digital currency amount
-      properties:
-        amount:
-          description: Int64(e8), asset Amount.
-          type: string
-        asset:
-          description: Asset in CHAIN.SYMBOL format
-          type: string
-      required:
-      - asset
-      - amount
-      type: object
-    FailedMetadata:
-      properties:
-        code:
-          description: failed transaction code
-          type: string
-        memo:
-          description: failed transaction memo
-          type: string
-        reason:
-          description: failed transaction code
-          type: string
-      required:
-      - memo
-      - reason
-      - code
-      type: object
-    Transaction:
-      description: Transaction data
-      properties:
-        address:
-          description: Sender address
-          type: string
-        affiliate:
-          description: if transactions flaged as affiliate
-          type: boolean
-        coins:
-          $ref: '#/components/schemas/Coins'
-        height:
-          description: 'The thorchain height that the outbound transaction occurred.
-
-            '
-          type: string
-        txID:
-          description: 'Transaction id hash. Some transactions (such as outbound transactions made in the
-
-            native asset) may have a zero value.
-
-            '
-          type: string
-      required:
-      - txID
-      - address
-      - coins
       type: object
     ThornameMetadata:
       properties:
@@ -390,70 +314,120 @@ components:
       - registrationFee
       - txType
       type: object
-    WithdrawMetadata:
+    RunePoolDepositMetadata:
       properties:
-        asymmetry:
-          description: 'Decimal (-1.0 <=> 1.0), indicates how asymmetrical the withdrawal was. 0 means
-
-            totally symmetrical
-
-            '
+        units:
+          description: "Int64, amount of units assigned to the member as result of the \ndeposit\n"
           type: string
-        basisPoints:
-          description: 'Int64 (Basis points, 0-10000, where 10000=100%), percentage of total pool ownership
-
-            withdrawn
-
-            '
+      required:
+      - units
+      type: object
+    SwapMetadata:
+      properties:
+        affiliateAddress:
+          description: Affiliate fee address of the swap, empty if fee swap
           type: string
-        impermanentLossProtection:
-          description: Int64, additional Rune paid out because of impermanent loss protection
+        affiliateFee:
+          description: Int64 (Basis points, 0-1000, where 1000=10%)
           type: string
-        liquidityUnits:
-          description: 'Int64, amount of liquidity units removed from the member as result of the withdrawal
-
-            '
+        inPriceUSD:
+          description: in asset price usd at the first interval
+          type: string
+        isStreamingSwap:
+          description: indicate whether this action was streaming
+          example: true
+          type: boolean
+        liquidityFee:
+          description: Int64(e8), RUNE amount charged as swap liquidity fee
           type: string
         memo:
-          description: Transaction memo of the withdraw action
+          description: Transaction memo of the swap action
           type: string
         networkFees:
           $ref: '#/components/schemas/NetworkFees'
+        outPriceUSD:
+          description: out asset price usd at the first interval
+          type: string
+        streamingSwapMeta:
+          $ref: '#/components/schemas/StreamingSwapMeta'
+        swapSlip:
+          description: Int64 (Basis points, 0-10000, where 10000=100%), swap slip percentage
+          type: string
+        swapTarget:
+          description: Int64(e8), minimum output amount specified for the swap
+          type: string
+        txType:
+          description: "The type of the transaction given from its Memo.\nType of Transaction: \n\"unknown\", \"add\", \"withdraw\", \"swap\", \"limitOrder\", \"outbound\", \"donate\",\n\"bond\", \"unbond\", \"leave\", \"yggdrasilFund\", \"yggdrasilReturn\", \"reserve\",\n\"refund\", \"migrate\", \"ragnarok\", \"switch\", \"noOp\", \"consolidate\", \"thorname\",\n\"loanOpen\", \"loanRepayment\"\n"
+          example: loanOpen
+          type: string
       required:
-      - liquidityUnits
-      - asymmetry
-      - basisPoints
       - networkFees
-      - impermanentLossProtection
+      - liquidityFee
+      - swapSlip
+      - swapTarget
+      - affiliateFee
+      - affiliateAddress
       - memo
+      - isStreamingSwap
+      - txType
+      - inPriceUSD
+      - outPriceUSD
       type: object
-    NetworkFees:
-      description: 'List of network fees associated to an action. One network fee is charged for each
-
-        outbound transaction
-
-        '
+    Coins:
       items:
         $ref: '#/components/schemas/Coin'
       type: array
-    SendMetadata:
+    AddLiquidityMetadata:
       properties:
-        code:
-          description: failed transaction code
+        affiliateAddress:
+          description: Affiliate fee address of the addLiquidity
+          type: string
+        affiliateFee:
+          description: Int64 (Basis points, 0-1000, where 1000=10%)
+          type: string
+        liquidityUnits:
+          description: 'Int64, amount of liquidity units assigned to the member as result of the liquidity
+
+            deposit
+
+            '
           type: string
         memo:
-          description: Transaction memo of the send action
+          description: Transaction memo of the addLiquidity action
+          type: string
+      required:
+      - liquidityUnits
+      - memo
+      - affiliateAddress
+      - affiliateFee
+      type: object
+    RefundMetadata:
+      properties:
+        affiliateAddress:
+          description: Affiliate fee address of the swap, empty if fee swap
+          type: string
+        affiliateFee:
+          description: Int64 (Basis points, 0-1000, where 1000=10%)
+          type: string
+        memo:
+          description: Transaction memo of the refund action
           type: string
         networkFees:
           $ref: '#/components/schemas/NetworkFees'
         reason:
-          description: failed transaction code
+          description: Reason for the refund
+          type: string
+        txType:
+          description: "The type of the transaction given from its Memo\nType of Transaction type: \n\"unknown\", \"add\", \"withdraw\", \"swap\", \"limitOrder\", \"outbound\", \"donate\",\n\"bond\", \"unbond\", \"leave\", \"yggdrasilFund\", \"yggdrasilReturn\", \"reserve\",\n\"refund\", \"migrate\", \"ragnarok\", \"switch\", \"noOp\", \"consolidate\", \"thorname\",\n\"loanOpen\", \"loanRepayment\"\n"
+          example: loanOpen
           type: string
       required:
       - networkFees
-      - memo
       - reason
-      - code
+      - memo
+      - affiliateFee
+      - affiliateAddress
+      - txType
       type: object
     RunePoolWithdrawMetadata:
       properties:
@@ -485,45 +459,101 @@ components:
       - affiliateAddress
       - affiliateBasisPoint
       type: object
-    RebondMetadata:
+    LimitSwapMetadata:
       properties:
         memo:
           description: Transaction memo of bond event
           type: string
-        newBondAddress:
-          description: new bond address
+      required:
+      - memo
+      type: object
+    StreamingSwapMeta:
+      description: Streaming Metadata associated with the action if it was streaming swap
+      properties:
+        count:
+          description: Int64, Number of swaps events which already happened.
+          type: string
+        depositedCoin:
+          $ref: '#/components/schemas/Coin'
+        failedSwapReasons:
+          description: Array of failed swaps reasons in streaming swap.
+          items:
+            description: The reason why swap got failed
+            type: string
+          type: array
+        failedSwaps:
+          description: Array of failed swaps index in streaming swap.
+          items:
+            description: Int64, Failed Swap number
+            type: string
+          type: array
+        inCoin:
+          $ref: '#/components/schemas/Coin'
+        interval:
+          description: Int64, Number of blocks between swpas. (Blocks/Swap) E.g. 1 means every block.
+          type: string
+        lastHeight:
+          description: 'Int64, The last blockheight the final swap happened (not outbound). This field will be missing until the final swap happens.
+
+            '
+          type: string
+        outCoin:
+          $ref: '#/components/schemas/Coin'
+        outEstimation:
+          description: 'Int64, The estimated output based on the first swap block * quantity.
+
+            This is the current method quote calculate the estimation.
+
+            '
+          type: string
+        quantity:
+          description: 'Int64,  Number of swaps which thorchain is planning to execute. Total count at the end might be less.
+
+            '
+          type: string
+      required:
+      - count
+      - quantity
+      - interval
+      - lastHeight
+      - inCoin
+      - outCoin
+      - depositedCoin
+      - outEstimation
+      type: object
+    FailedMetadata:
+      properties:
+        code:
+          description: failed transaction code
+          type: string
+        memo:
+          description: failed transaction memo
+          type: string
+        reason:
+          description: failed transaction code
+          type: string
+      required:
+      - memo
+      - reason
+      - code
+      type: object
+    BondMetadata:
+      properties:
+        fee:
+          description: node operator fee
+          type: string
+        memo:
+          description: Transaction memo of bond event
           type: string
         nodeAddress:
           description: node address
           type: string
+        provider:
+          description: bond provider address
+          type: string
       required:
       - memo
       - nodeAddress
-      - newBondAddress
-      type: object
-    AddLiquidityMetadata:
-      properties:
-        affiliateAddress:
-          description: Affiliate fee address of the addLiquidity
-          type: string
-        affiliateFee:
-          description: Int64 (Basis points, 0-1000, where 1000=10%)
-          type: string
-        liquidityUnits:
-          description: 'Int64, amount of liquidity units assigned to the member as result of the liquidity
-
-            deposit
-
-            '
-          type: string
-        memo:
-          description: Transaction memo of the addLiquidity action
-          type: string
-      required:
-      - liquidityUnits
-      - memo
-      - affiliateAddress
-      - affiliateFee
       type: object
     Action:
       description: action details among with related transactions
@@ -586,59 +616,58 @@ components:
       - height
       - metadata
       type: object
-    StreamingSwapMeta:
-      description: Streaming Metadata associated with the action if it was streaming swap
+    ContractMetadata:
       properties:
-        count:
-          description: Int64, Number of swaps events which already happened.
+        attributes:
+          description: contract attributes emitted from its event
+          type: object
+        contractType:
+          description: contract type defined by cosmwasm
           type: string
-        depositedCoin:
-          $ref: '#/components/schemas/Coin'
-        failedSwapReasons:
-          description: Array of failed swaps reasons in streaming swap.
-          items:
-            description: The reason why swap got failed
-            type: string
-          type: array
-        failedSwaps:
-          description: Array of failed swaps index in streaming swap.
-          items:
-            description: Int64, Failed Swap number
-            type: string
-          type: array
-        inCoin:
-          $ref: '#/components/schemas/Coin'
-        interval:
-          description: Int64, Number of blocks between swpas. (Blocks/Swap) E.g. 1 means every block.
+        funds:
+          description: contract funds emitted from its event
           type: string
-        lastHeight:
-          description: 'Int64, The last blockheight the final swap happened (not outbound). This field will be missing until the final swap happens.
-
-            '
+        msg:
+          description: contract massages emitted from its event
+          type: object
+      required:
+      - contractType
+      - attributes
+      type: object
+    SendMetadata:
+      properties:
+        code:
+          description: failed transaction code
           type: string
-        outCoin:
-          $ref: '#/components/schemas/Coin'
-        outEstimation:
-          description: 'Int64, The estimated output based on the first swap block * quantity.
-
-            This is the current method quote calculate the estimation.
-
-            '
+        memo:
+          description: Transaction memo of the send action
           type: string
-        quantity:
-          description: 'Int64,  Number of swaps which thorchain is planning to execute. Total count at the end might be less.
-
-            '
+        networkFees:
+          $ref: '#/components/schemas/NetworkFees'
+        reason:
+          description: failed transaction code
           type: string
       required:
-      - count
-      - quantity
-      - interval
-      - lastHeight
-      - inCoin
-      - outCoin
-      - depositedCoin
-      - outEstimation
+      - networkFees
+      - memo
+      - reason
+      - code
+      type: object
+    RebondMetadata:
+      properties:
+        memo:
+          description: Transaction memo of bond event
+          type: string
+        newBondAddress:
+          description: new bond address
+          type: string
+        nodeAddress:
+          description: node address
+          type: string
+      required:
+      - memo
+      - nodeAddress
+      - newBondAddress
       type: object
     ActionMeta:
       description: action query metadata
@@ -657,58 +686,29 @@ components:
       - nextPageToken
       - prevPageToken
       type: object
-    Coins:
-      items:
-        $ref: '#/components/schemas/Coin'
-      type: array
-    SwapMetadata:
-      properties:
-        affiliateAddress:
-          description: Affiliate fee address of the swap, empty if fee swap
-          type: string
-        affiliateFee:
-          description: Int64 (Basis points, 0-1000, where 1000=10%)
-          type: string
-        inPriceUSD:
-          description: in asset price usd at the first interval
-          type: string
-        isStreamingSwap:
-          description: indicate whether this action was streaming
-          example: true
-          type: boolean
-        liquidityFee:
-          description: Int64(e8), RUNE amount charged as swap liquidity fee
-          type: string
-        memo:
-          description: Transaction memo of the swap action
-          type: string
-        networkFees:
-          $ref: '#/components/schemas/NetworkFees'
-        outPriceUSD:
-          description: out asset price usd at the first interval
-          type: string
-        streamingSwapMeta:
-          $ref: '#/components/schemas/StreamingSwapMeta'
-        swapSlip:
-          description: Int64 (Basis points, 0-10000, where 10000=100%), swap slip percentage
-          type: string
-        swapTarget:
-          description: Int64(e8), minimum output amount specified for the swap
-          type: string
-        txType:
-          description: "The type of the transaction given from its Memo.\nType of Transaction: \n\"unknown\", \"add\", \"withdraw\", \"swap\", \"limitOrder\", \"outbound\", \"donate\",\n\"bond\", \"unbond\", \"leave\", \"yggdrasilFund\", \"yggdrasilReturn\", \"reserve\",\n\"refund\", \"migrate\", \"ragnarok\", \"switch\", \"noOp\", \"consolidate\", \"thorname\",\n\"loanOpen\", \"loanRepayment\"\n"
-          example: loanOpen
-          type: string
-      required:
-      - networkFees
-      - liquidityFee
-      - swapSlip
-      - swapTarget
-      - affiliateFee
-      - affiliateAddress
-      - memo
-      - isStreamingSwap
-      - txType
-      - inPriceUSD
-      - outPriceUSD
-      type: object
+  responses:
+    ActionsResponse:
+      content:
+        application/json:
+          schema:
+            properties:
+              actions:
+                items:
+                  $ref: '#/components/schemas/Action'
+                type: array
+              count:
+                description: 'Int64, number of results matching the given filters. It may be -1 if
+
+                  Midgard is having trouble counting the results and has to cancel the count query
+
+                  (temporary fix). Also, if new action parameters is used it won''t be returned.
+
+                  '
+                type: string
+              meta:
+                $ref: '#/components/schemas/ActionMeta'
+            required:
+            - actions
+            - meta
+            type: object
+      description: Returns an array of actions for the given filters.

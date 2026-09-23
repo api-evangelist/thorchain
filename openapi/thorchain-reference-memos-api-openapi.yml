@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Thornode Auth Reference Memos API
+  title: Thornode Reference Memos API
   version: 3.19.1
   contact:
     email: devs@thorchain.org
@@ -31,6 +31,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ReferenceMemoResponse'
+      summary: Reference memo
+      x-summary-source: derived
   /thorchain/memo/{hash}:
     parameters:
     - $ref: '#/components/parameters/queryHeight'
@@ -47,6 +49,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ReferenceMemoResponse'
+      summary: Reference memo by hash
+      x-summary-source: derived
   /thorchain/memo/check/{asset}/{amount}:
     parameters:
     - $ref: '#/components/parameters/queryHeight'
@@ -70,46 +74,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ReferenceMemoPreflightResponse'
+      summary: Reference memo check
+      x-summary-source: derived
 components:
   schemas:
-    ReferenceMemoPreflightResponse:
-      type: object
-      required:
-      - reference
-      - available
-      - can_register
-      - expires_at
-      - usage_count
-      - max_use
-      properties:
-        reference:
-          type: string
-          description: the reference ID that would be generated from the amount
-          example: '20002'
-        available:
-          type: boolean
-          description: whether this reference is currently available (not registered or expired)
-          example: true
-        can_register:
-          type: boolean
-          description: whether a new registration can be made with this reference
-          example: true
-        expires_at:
-          type: string
-          description: block height when current registration expires (0 if available)
-          example: '0'
-        memo:
-          type: string
-          description: the currently registered memo (only present if not available)
-          example: =:ETH.ETH:0x1c7b17362c84287bd1184447e6dfeaf920c31bbe
-        usage_count:
-          type: string
-          description: the number of times this reference has been used
-          example: '0'
-        max_use:
-          type: string
-          description: the maximum number of times this reference can be used (0 = unlimited)
-          example: '0'
     ReferenceMemoResponse:
       type: object
       required:
@@ -153,6 +121,44 @@ components:
           example:
           - AF524818D42B63D25BBA0CCC4909F127CAA645C0F9CD07324F2824CC151A64C8
           - BF524818D42B63D25BBA0CCC4909F127CAA645C0F9CD07324F2824CC151A64C9
+    ReferenceMemoPreflightResponse:
+      type: object
+      required:
+      - reference
+      - available
+      - can_register
+      - expires_at
+      - usage_count
+      - max_use
+      properties:
+        reference:
+          type: string
+          description: the reference ID that would be generated from the amount
+          example: '20002'
+        available:
+          type: boolean
+          description: whether this reference is currently available (not registered or expired)
+          example: true
+        can_register:
+          type: boolean
+          description: whether a new registration can be made with this reference
+          example: true
+        expires_at:
+          type: string
+          description: block height when current registration expires (0 if available)
+          example: '0'
+        memo:
+          type: string
+          description: the currently registered memo (only present if not available)
+          example: =:ETH.ETH:0x1c7b17362c84287bd1184447e6dfeaf920c31bbe
+        usage_count:
+          type: string
+          description: the number of times this reference has been used
+          example: '0'
+        max_use:
+          type: string
+          description: the maximum number of times this reference can be used (0 = unlimited)
+          example: '0'
   parameters:
     queryHeight:
       name: height
@@ -163,13 +169,6 @@ components:
         type: integer
         format: int64
         minimum: 0
-    asset:
-      name: asset
-      in: path
-      required: true
-      schema:
-        type: string
-        example: BTC.BTC
     hash:
       name: hash
       in: path
@@ -177,3 +176,10 @@ components:
       schema:
         type: string
         example: CF524818D42B63D25BBA0CCC4909F127CAA645C0F9CD07324F2824CC151A64C7
+    asset:
+      name: asset
+      in: path
+      required: true
+      schema:
+        type: string
+        example: BTC.BTC

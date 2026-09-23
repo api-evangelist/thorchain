@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Thornode Auth SecuredAssets API
+  title: Thornode Secured Assets API
   version: 3.19.1
   contact:
     email: devs@thorchain.org
@@ -23,12 +23,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SecuredAssetsResponse'
+      summary: Secured assets
+      x-summary-source: derived
 components:
+  parameters:
+    queryHeight:
+      name: height
+      in: query
+      description: optional block height, defaults to current tip
+      required: false
+      schema:
+        type: integer
+        format: int64
+        minimum: 0
   schemas:
-    SecuredAssetsResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/SecuredAssetResponse'
     SecuredAssetResponse:
       type: object
       required:
@@ -46,13 +54,7 @@ components:
         depth:
           type: string
           description: total deposits of the asset
-  parameters:
-    queryHeight:
-      name: height
-      in: query
-      description: optional block height, defaults to current tip
-      required: false
-      schema:
-        type: integer
-        format: int64
-        minimum: 0
+    SecuredAssetsResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/SecuredAssetResponse'

@@ -1,30 +1,15 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Thornode Auth Health API
-  version: 3.19.1
+  title: Thorchain Health API
   contact:
     email: devs@thorchain.org
-  description: Thornode REST API.
+  version: '1.0'
+  description: 'Operations tagged Health across 2 of this provider''s published API definitions: thorchain-midgard-openapi.json, thorchain-thornode-openapi.yaml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://gateway.liquify.com/chain/thorchain_midgard
 tags:
 - name: Health
 paths:
-  /thorchain/ping:
-    get:
-      operationId: ping
-      tags:
-      - Health
-      responses:
-        200:
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                title: Ping
-                properties:
-                  ping:
-                    type: string
-                    example: pong
   /v2/health:
     get:
       description: 'Returns an object containing the health response of the API.
@@ -44,9 +29,7 @@ paths:
         lastAggregated - Latest block fully processed and aggregated.
 
 
-        genesisInfo - The genesis height Midgard bootstrapped with.
-
-        '
+        genesisInfo - The genesis height Midgard bootstrapped with.'
       operationId: GetHealth
       responses:
         '200':
@@ -54,8 +37,41 @@ paths:
       summary: Health Info
       tags:
       - Health
+    servers:
+    - url: https://gateway.liquify.com/chain/thorchain_midgard
+  /thorchain/ping:
+    get:
+      operationId: ping
+      tags:
+      - Health
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                title: Ping
+                properties:
+                  ping:
+                    type: string
+                    example: pong
+      summary: Ping
+      x-summary-source: derived
 components:
   schemas:
+    GenesisInf:
+      properties:
+        hash:
+          description: Genesis Block hash
+          type: string
+        height:
+          description: Genesis Block height
+          type: integer
+      required:
+      - height
+      - hash
+      type: object
     HeightTS:
       properties:
         height:
@@ -98,18 +114,6 @@ components:
       - lastCommitted
       - lastAggregated
       type: object
-    GenesisInf:
-      properties:
-        hash:
-          description: Genesis Block hash
-          type: string
-        height:
-          description: Genesis Block height
-          type: integer
-      required:
-      - height
-      - hash
-      type: object
   responses:
     HealthResponse:
       content:
@@ -117,3 +121,6 @@ components:
           schema:
             $ref: '#/components/schemas/Health'
       description: Returns health status for Midgard
+x-refined-from:
+- thorchain-midgard-openapi.json
+- thorchain-thornode-openapi.yaml

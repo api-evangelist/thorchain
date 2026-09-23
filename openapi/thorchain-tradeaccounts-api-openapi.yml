@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Thornode Auth TradeAccounts API
+  title: Thornode Trade Accounts API
   version: 3.19.1
   contact:
     email: devs@thorchain.org
@@ -24,24 +24,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TradeAccountsResponse'
+      summary: Trade accounts
+      x-summary-source: derived
 components:
-  parameters:
-    asset:
-      name: asset
-      in: path
-      required: true
-      schema:
-        type: string
-        example: BTC.BTC
-    queryHeight:
-      name: height
-      in: query
-      description: optional block height, defaults to current tip
-      required: false
-      schema:
-        type: integer
-        format: int64
-        minimum: 0
   schemas:
     TradeAccountResponse:
       type: object
@@ -72,3 +57,20 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/TradeAccountResponse'
+  parameters:
+    queryHeight:
+      name: height
+      in: query
+      description: optional block height, defaults to current tip
+      required: false
+      schema:
+        type: integer
+        format: int64
+        minimum: 0
+    asset:
+      name: asset
+      in: path
+      required: true
+      schema:
+        type: string
+        example: BTC.BTC

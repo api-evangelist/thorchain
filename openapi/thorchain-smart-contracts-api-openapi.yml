@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Thornode Auth Smart Contracts API
+  title: Thornode Smart Contracts API
   version: 3.19.1
   contact:
     email: devs@thorchain.org
@@ -25,6 +25,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ContractInfosResponse'
+      summary: Contract infos
+      x-summary-source: derived
   /thorchain/contract/{address}:
     parameters:
     - $ref: '#/components/parameters/queryHeight'
@@ -41,8 +43,59 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ContractInfoResponse'
+      summary: Contract info
+      x-summary-source: derived
 components:
+  parameters:
+    address:
+      name: address
+      in: path
+      required: true
+      schema:
+        type: string
+        example: thor1zupk5lmc84r2dh738a9g3zscavannjy3nzplwt
+    contract:
+      name: contract
+      in: query
+      required: false
+      description: optional contract type prefix to filter results
+      schema:
+        type: string
+        example: rujira-fin
+    queryHeight:
+      name: height
+      in: query
+      description: optional block height, defaults to current tip
+      required: false
+      schema:
+        type: integer
+        format: int64
+        minimum: 0
+    version:
+      name: version
+      in: query
+      required: false
+      description: optional contract version prefix to filter results
+      schema:
+        type: string
+        example: 2.0.0
   schemas:
+    ContractInfoResponse:
+      type: object
+      required:
+      - info
+      properties:
+        info:
+          $ref: '#/components/schemas/ContractInfo'
+    ContractInfosResponse:
+      type: object
+      required:
+      - infos
+      properties:
+        infos:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContractInfo'
     ContractInfo:
       type: object
       required:
@@ -59,52 +112,3 @@ components:
         version:
           type: string
           example: 2.0.0
-    ContractInfosResponse:
-      type: object
-      required:
-      - infos
-      properties:
-        infos:
-          type: array
-          items:
-            $ref: '#/components/schemas/ContractInfo'
-    ContractInfoResponse:
-      type: object
-      required:
-      - info
-      properties:
-        info:
-          $ref: '#/components/schemas/ContractInfo'
-  parameters:
-    queryHeight:
-      name: height
-      in: query
-      description: optional block height, defaults to current tip
-      required: false
-      schema:
-        type: integer
-        format: int64
-        minimum: 0
-    contract:
-      name: contract
-      in: query
-      required: false
-      description: optional contract type prefix to filter results
-      schema:
-        type: string
-        example: rujira-fin
-    address:
-      name: address
-      in: path
-      required: true
-      schema:
-        type: string
-        example: thor1zupk5lmc84r2dh738a9g3zscavannjy3nzplwt
-    version:
-      name: version
-      in: query
-      required: false
-      description: optional contract version prefix to filter results
-      schema:
-        type: string
-        example: 2.0.0

@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Thornode Auth Oracle API
+  title: Thornode Oracle API
   version: 3.19.1
   contact:
     email: devs@thorchain.org
@@ -24,6 +24,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OraclePriceResponse'
+      summary: Oracle price
+      x-summary-source: derived
   /thorchain/oracle/prices:
     parameters:
     - $ref: '#/components/parameters/queryHeight'
@@ -39,6 +41,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OraclePricesResponse'
+      summary: Oracle prices
+      x-summary-source: derived
 components:
   schemas:
     OraclePrice:
@@ -50,13 +54,6 @@ components:
         amount:
           type: string
           example: '105126.5321'
-    OraclePriceResponse:
-      type: object
-      properties:
-        price:
-          type: object
-          items:
-            $ref: '#/components/schemas/OraclePrice'
     OraclePricesResponse:
       type: object
       properties:
@@ -64,7 +61,21 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/OraclePrice'
+    OraclePriceResponse:
+      type: object
+      properties:
+        price:
+          type: object
+          items:
+            $ref: '#/components/schemas/OraclePrice'
   parameters:
+    symbol:
+      name: symbol
+      in: path
+      required: true
+      schema:
+        type: string
+        example: BTC
     queryHeight:
       name: height
       in: query
@@ -74,10 +85,3 @@ components:
         type: integer
         format: int64
         minimum: 0
-    symbol:
-      name: symbol
-      in: path
-      required: true
-      schema:
-        type: string
-        example: BTC

@@ -1,10 +1,12 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Thornode Auth Network API
-  version: 3.19.1
+  title: Thorchain Network API
   contact:
     email: devs@thorchain.org
-  description: Thornode REST API.
+  version: '1.0'
+  description: 'Operations tagged Network across 2 of this provider''s published API definitions: thorchain-midgard-openapi.json, thorchain-thornode-openapi.yaml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://gateway.liquify.com/chain/thorchain_midgard
 tags:
 - name: Network
 paths:
@@ -18,6 +20,8 @@ paths:
       summary: Network Data
       tags:
       - Network
+    servers:
+    - url: https://gateway.liquify.com/chain/thorchain_midgard
   /thorchain/network:
     parameters:
     - $ref: '#/components/parameters/queryHeight'
@@ -33,6 +37,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/NetworkResponse'
+      summary: Network
+      x-summary-source: derived
   /thorchain/outbound_fees:
     parameters:
     - $ref: '#/components/parameters/queryHeight'
@@ -48,6 +54,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OutboundFeesResponse'
+      summary: Outbound fees
+      x-summary-source: derived
   /thorchain/outbound_fee/{asset}:
     parameters:
     - $ref: '#/components/parameters/queryHeight'
@@ -64,6 +72,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OutboundFeesResponse'
+      summary: Outbound fee asset
+      x-summary-source: derived
   /thorchain/inbound_addresses:
     parameters:
     - $ref: '#/components/parameters/queryHeight'
@@ -79,6 +89,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InboundAddressesResponse'
+      summary: Inbound addresses
+      x-summary-source: derived
   /thorchain/lastblock:
     parameters:
     - $ref: '#/components/parameters/queryHeight'
@@ -94,6 +106,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LastBlockResponse'
+      summary: Lastblock
+      x-summary-source: derived
   /thorchain/lastblock/{chain}:
     parameters:
     - $ref: '#/components/parameters/queryHeight'
@@ -110,6 +124,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LastBlockResponse'
+      summary: Lastblock chain
+      x-summary-source: derived
   /thorchain/version:
     parameters:
     - $ref: '#/components/parameters/queryHeight'
@@ -125,6 +141,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/VersionResponse'
+      summary: Version
+      x-summary-source: derived
   /thorchain/upgrade_proposals:
     parameters:
     - $ref: '#/components/parameters/queryHeight'
@@ -140,6 +158,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UpgradeProposalsResponse'
+      summary: Upgrade proposals
+      x-summary-source: derived
   /thorchain/upgrade_proposal/{name}:
     parameters:
     - $ref: '#/components/parameters/queryHeight'
@@ -156,6 +176,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UpgradeProposalResponse'
+      summary: Upgrade proposal
+      x-summary-source: derived
   /thorchain/upgrade_votes/{name}:
     parameters:
     - $ref: '#/components/parameters/queryHeight'
@@ -172,6 +194,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UpgradeVotesResponse'
+      summary: Upgrade votes
+      x-summary-source: derived
   /thorchain/constants:
     parameters:
     - $ref: '#/components/parameters/queryHeight'
@@ -187,6 +211,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConstantsResponse'
+      summary: Constants
+      x-summary-source: derived
   /thorchain/ragnarok:
     parameters:
     - $ref: '#/components/parameters/queryHeight'
@@ -203,6 +229,8 @@ paths:
               schema:
                 type: boolean
                 example: false
+      summary: Ragnarok
+      x-summary-source: derived
   /thorchain/ban/{address}:
     parameters:
     - $ref: '#/components/parameters/queryHeight'
@@ -219,14 +247,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BanResponse'
+      summary: Ban
+      x-summary-source: derived
 components:
-  responses:
-    NetworkResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Network'
-      description: Returns an object containing Network data
   schemas:
     BondMetrics:
       properties:
@@ -377,6 +400,38 @@ components:
       - bondingAPY
       - liquidityAPY
       type: object
+    BanResponse:
+      type: object
+      properties:
+        node_address:
+          type: string
+          example: thor1f3s7q037eancht7sg0aj995dht25rwrnu4ats5
+        block_height:
+          type: integer
+          format: int64
+        signers:
+          type: array
+          items:
+            type: string
+            example: thor1f3s7q037eancht7sg0aj995dht25rwrnu4ats5
+    UpgradeVote:
+      type: object
+      required:
+      - height
+      - node_address
+      - vote
+      properties:
+        node_address:
+          type: string
+          example: thor1f3s7q037eancht7sg0aj995dht25rwrnu4ats5
+          description: the node address of the voter
+        vote:
+          type: string
+          enum:
+          - approve
+          - reject
+          example: approve
+          description: the vote cast by the node
     UpgradeProposal:
       type: object
       required:
@@ -422,73 +477,66 @@ components:
             type: string
             example: thor1f3s7q037eancht7sg0aj995dht25rwrnu4ats5
           description: the list of node addresses that have rejected the upgrade
-    BanResponse:
-      type: object
-      properties:
-        node_address:
-          type: string
-          example: thor1f3s7q037eancht7sg0aj995dht25rwrnu4ats5
-        block_height:
-          type: integer
-          format: int64
-        signers:
-          type: array
-          items:
-            type: string
-            example: thor1f3s7q037eancht7sg0aj995dht25rwrnu4ats5
-    UpgradeProposalResponse:
-      $ref: '#/components/schemas/UpgradeProposal'
-    LastBlockResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/LastBlock'
-    UpgradeVotesResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/UpgradeVote'
-    UpgradeProposalsResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/UpgradeProposal'
-    ConstantsResponse:
-      type: object
-      properties:
-        int_64_values:
-          type: object
-          additionalProperties:
-            type: string
-          example:
-            AsgardSize: 40
-        bool_values:
-          type: object
-          additionalProperties:
-            type: string
-          example:
-            StrictBondLiquidityRatio: true
-        string_values:
-          type: object
-          additionalProperties:
-            type: string
-          example:
-            DefaultPoolStatus: Staged
-    UpgradeVote:
+    InboundAddress:
       type: object
       required:
-      - height
-      - node_address
-      - vote
+      - halted
+      - global_trading_paused
+      - chain_trading_paused
+      - chain_lp_actions_paused
       properties:
-        node_address:
+        chain:
           type: string
-          example: thor1f3s7q037eancht7sg0aj995dht25rwrnu4ats5
-          description: the node address of the voter
-        vote:
+          example: BTC
+        pub_key:
           type: string
-          enum:
-          - approve
-          - reject
-          example: approve
-          description: the vote cast by the node
+          example: thorpub1addwnpepq2jqhv5rdqlkusfxy05stfzcgslhhz5qh8pxetw5ry2aa6awgdh3shq8s82
+        address:
+          type: string
+          example: bc1qn9esxuw8ca7ts8l6w66kdh800s09msvutydc46
+        router:
+          type: string
+          example: '0xD37BbE5744D730a1d98d8DC97c42F0Ca46aD7146'
+        halted:
+          type: boolean
+          example: false
+          description: Returns true if trading is unavailable for this chain, either because trading is halted globally or specifically for this chain
+        global_trading_paused:
+          type: boolean
+          example: false
+          description: Returns true if trading is paused globally
+        chain_trading_paused:
+          type: boolean
+          example: false
+          description: Returns true if trading is paused for this chain
+        chain_lp_actions_paused:
+          type: boolean
+          example: false
+          description: Returns true if LP actions are paused for this chain
+        observed_fee_rate:
+          type: string
+          example: '114'
+          description: The chain's observed fee rate in 1e8 format, before the 1.5x that makes an outbound more likely to have a sufficient gas rate.  Used by validators to check whether they need to report a fee change.
+        gas_rate:
+          type: string
+          example: '216'
+          description: The minimum fee rate used by vaults to send outbound TXs. The actual fee rate may be higher. For EVM chains this is returned in gwei (1e9).
+        gas_rate_units:
+          type: string
+          example: satsperbyte
+          description: Units of the gas_rate.
+        outbound_tx_size:
+          type: string
+          example: '1000'
+          description: Avg size of outbound TXs on each chain. For UTXO chains it may be larger than average, as it takes into account vault consolidation txs, which can have many vouts
+        outbound_fee:
+          type: string
+          example: '216000'
+          description: The total outbound fee charged to the user for outbound txs in the gas asset of the chain.  Can be observed_fee_rate * 1.5 * outbound_tx_size or else kept to an equivalent of Mimir key MinimumL1OutboundFeeUSD.
+        dust_threshold:
+          type: string
+          example: '10000'
+          description: Defines the minimum transaction size for the chain in base units (sats, wei, uatom). Transactions with asset amounts lower than the dust_threshold are ignored.
     VersionResponse:
       type: object
       required:
@@ -513,6 +561,65 @@ components:
           type: string
           example: 0.16.0
           description: querier version
+    UpgradeProposalsResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/UpgradeProposal'
+    OutboundFee:
+      type: object
+      required:
+      - asset
+      - outbound_fee
+      properties:
+        asset:
+          type: string
+          example: ETH.ETH
+          description: the asset to display the outbound fee for
+        outbound_fee:
+          type: string
+          example: '300000'
+          description: the asset's outbound fee, in (1e8-format) units of the asset
+        fee_withheld_rune:
+          type: string
+          example: '30000000000000'
+          description: Total RUNE the network has withheld as fees to later cover gas costs for this asset's outbounds
+        fee_spent_rune:
+          type: string
+          example: '20000000000000'
+          description: Total RUNE the network has spent to reimburse gas costs for this asset's outbounds
+        surplus_rune:
+          type: string
+          example: '10000000000000'
+          description: amount of RUNE by which the fee_withheld_rune exceeds the fee_spent_rune
+        dynamic_multiplier_basis_points:
+          type: string
+          example: '15000'
+          description: dynamic multiplier basis points, based on the surplus_rune, affecting the size of the outbound_fee
+    UpgradeProposalResponse:
+      $ref: '#/components/schemas/UpgradeProposal'
+    InboundAddressesResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/InboundAddress'
+    LastBlock:
+      type: object
+      required:
+      - chain
+      - last_observed_in
+      - last_signed_out
+      - thorchain
+      properties:
+        chain:
+          type: string
+        last_observed_in:
+          type: integer
+          format: int64
+        last_signed_out:
+          type: integer
+          format: int64
+        thorchain:
+          type: integer
+          format: int64
     NetworkResponse:
       type: object
       required:
@@ -606,124 +713,61 @@ components:
           type: boolean
           example: false
           description: indicates if all anchor chains are halted (true), or at least one anchor chain is available (false)
-    LastBlock:
-      type: object
-      required:
-      - chain
-      - last_observed_in
-      - last_signed_out
-      - thorchain
-      properties:
-        chain:
-          type: string
-        last_observed_in:
-          type: integer
-          format: int64
-        last_signed_out:
-          type: integer
-          format: int64
-        thorchain:
-          type: integer
-          format: int64
-    InboundAddressesResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/InboundAddress'
-    OutboundFee:
-      type: object
-      required:
-      - asset
-      - outbound_fee
-      properties:
-        asset:
-          type: string
-          example: ETH.ETH
-          description: the asset to display the outbound fee for
-        outbound_fee:
-          type: string
-          example: '300000'
-          description: the asset's outbound fee, in (1e8-format) units of the asset
-        fee_withheld_rune:
-          type: string
-          example: '30000000000000'
-          description: Total RUNE the network has withheld as fees to later cover gas costs for this asset's outbounds
-        fee_spent_rune:
-          type: string
-          example: '20000000000000'
-          description: Total RUNE the network has spent to reimburse gas costs for this asset's outbounds
-        surplus_rune:
-          type: string
-          example: '10000000000000'
-          description: amount of RUNE by which the fee_withheld_rune exceeds the fee_spent_rune
-        dynamic_multiplier_basis_points:
-          type: string
-          example: '15000'
-          description: dynamic multiplier basis points, based on the surplus_rune, affecting the size of the outbound_fee
     OutboundFeesResponse:
       type: array
       items:
         $ref: '#/components/schemas/OutboundFee'
-    InboundAddress:
+    UpgradeVotesResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/UpgradeVote'
+    LastBlockResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/LastBlock'
+    ConstantsResponse:
       type: object
-      required:
-      - halted
-      - global_trading_paused
-      - chain_trading_paused
-      - chain_lp_actions_paused
       properties:
-        chain:
-          type: string
-          example: BTC
-        pub_key:
-          type: string
-          example: thorpub1addwnpepq2jqhv5rdqlkusfxy05stfzcgslhhz5qh8pxetw5ry2aa6awgdh3shq8s82
-        address:
-          type: string
-          example: bc1qn9esxuw8ca7ts8l6w66kdh800s09msvutydc46
-        router:
-          type: string
-          example: '0xD37BbE5744D730a1d98d8DC97c42F0Ca46aD7146'
-        halted:
-          type: boolean
-          example: false
-          description: Returns true if trading is unavailable for this chain, either because trading is halted globally or specifically for this chain
-        global_trading_paused:
-          type: boolean
-          example: false
-          description: Returns true if trading is paused globally
-        chain_trading_paused:
-          type: boolean
-          example: false
-          description: Returns true if trading is paused for this chain
-        chain_lp_actions_paused:
-          type: boolean
-          example: false
-          description: Returns true if LP actions are paused for this chain
-        observed_fee_rate:
-          type: string
-          example: '114'
-          description: The chain's observed fee rate in 1e8 format, before the 1.5x that makes an outbound more likely to have a sufficient gas rate.  Used by validators to check whether they need to report a fee change.
-        gas_rate:
-          type: string
-          example: '216'
-          description: The minimum fee rate used by vaults to send outbound TXs. The actual fee rate may be higher. For EVM chains this is returned in gwei (1e9).
-        gas_rate_units:
-          type: string
-          example: satsperbyte
-          description: Units of the gas_rate.
-        outbound_tx_size:
-          type: string
-          example: '1000'
-          description: Avg size of outbound TXs on each chain. For UTXO chains it may be larger than average, as it takes into account vault consolidation txs, which can have many vouts
-        outbound_fee:
-          type: string
-          example: '216000'
-          description: The total outbound fee charged to the user for outbound txs in the gas asset of the chain.  Can be observed_fee_rate * 1.5 * outbound_tx_size or else kept to an equivalent of Mimir key MinimumL1OutboundFeeUSD.
-        dust_threshold:
-          type: string
-          example: '10000'
-          description: Defines the minimum transaction size for the chain in base units (sats, wei, uatom). Transactions with asset amounts lower than the dust_threshold are ignored.
+        int_64_values:
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            AsgardSize: 40
+        bool_values:
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            StrictBondLiquidityRatio: true
+        string_values:
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            DefaultPoolStatus: Staged
+  responses:
+    NetworkResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Network'
+      description: Returns an object containing Network data
   parameters:
+    chain:
+      name: chain
+      in: path
+      required: true
+      schema:
+        type: string
+        example: BTC
+    asset:
+      name: asset
+      in: path
+      required: true
+      schema:
+        type: string
+        example: BTC.BTC
     address:
       name: address
       in: path
@@ -740,13 +784,6 @@ components:
         type: integer
         format: int64
         minimum: 0
-    chain:
-      name: chain
-      in: path
-      required: true
-      schema:
-        type: string
-        example: BTC
     name:
       name: name
       in: path
@@ -754,10 +791,6 @@ components:
       schema:
         type: string
         example: v3.137.0
-    asset:
-      name: asset
-      in: path
-      required: true
-      schema:
-        type: string
-        example: BTC.BTC
+x-refined-from:
+- thorchain-midgard-openapi.json
+- thorchain-thornode-openapi.yaml

@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Thornode Auth Thornames API
+  title: Thornode Thornames API
   version: 3.19.1
   contact:
     email: devs@thorchain.org
@@ -29,19 +29,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThornameResponse'
+      summary: Thorname
+      x-summary-source: derived
 components:
+  parameters:
+    queryHeight:
+      name: height
+      in: query
+      description: optional block height, defaults to current tip
+      required: false
+      schema:
+        type: integer
+        format: int64
+        minimum: 0
   schemas:
-    ThornameResponse:
-      $ref: '#/components/schemas/Thorname'
-    ThornameAlias:
-      type: object
-      properties:
-        chain:
-          type: string
-          example: BTC
-        address:
-          type: string
-          example: bc1qn9esxuw8ca7ts8l6w66kdh800s09msvutydc46
     Thorname:
       type: object
       required:
@@ -73,13 +74,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ThornameAlias'
-  parameters:
-    queryHeight:
-      name: height
-      in: query
-      description: optional block height, defaults to current tip
-      required: false
-      schema:
-        type: integer
-        format: int64
-        minimum: 0
+    ThornameAlias:
+      type: object
+      properties:
+        chain:
+          type: string
+          example: BTC
+        address:
+          type: string
+          example: bc1qn9esxuw8ca7ts8l6w66kdh800s09msvutydc46
+    ThornameResponse:
+      $ref: '#/components/schemas/Thorname'

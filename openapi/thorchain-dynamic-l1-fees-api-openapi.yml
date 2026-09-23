@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Thornode Auth Dynamic L1 Fees API
+  title: Thornode Dynamic L1 Fees API
   version: 3.19.1
   contact:
     email: devs@thorchain.org
@@ -18,9 +18,7 @@ paths:
 
         last active epoch, and latest sealed-epoch fees in TOR (1e8-precision
 
-        USD value).
-
-        '
+        USD value).'
       operationId: dynamicL1Fees
       tags:
       - Dynamic L1 Fees
@@ -31,6 +29,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DynamicL1FeesResponse'
+      summary: Dynamic L1 fees
+      x-summary-source: derived
   /thorchain/dynamic_l1_fees/{thorname}:
     parameters:
     - $ref: '#/components/parameters/queryHeight'
@@ -43,9 +43,7 @@ paths:
     get:
       description: 'Returns the dynamic L1 fee state and full epoch history for every
 
-        pair tracked for the given thorname (ADR-026).
-
-        '
+        pair tracked for the given thorname (ADR-026).'
       operationId: dynamicL1FeesByThorname
       tags:
       - Dynamic L1 Fees
@@ -56,6 +54,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DynamicL1FeesByThornameResponse'
+      summary: Dynamic L1 fees by thorname
+      x-summary-source: derived
   /thorchain/dynamic_l1_fees_current:
     parameters:
     - $ref: '#/components/parameters/queryHeight'
@@ -66,9 +66,7 @@ paths:
 
         live volume and fees recorded so far this epoch in TOR (1e8-precision
 
-        USD value). The response also includes the current epoch number.
-
-        '
+        USD value). The response also includes the current epoch number.'
       operationId: dynamicL1FeesCurrent
       tags:
       - Dynamic L1 Fees
@@ -79,31 +77,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DynamicL1FeesCurrentResponse'
+      summary: Dynamic L1 fees current
+      x-summary-source: derived
 components:
   schemas:
-    DynamicL1FeePairDetail:
-      type: object
-      required:
-      - pair
-      - dynamic_bps
-      - last_active_epoch
-      - history
-      properties:
-        pair:
-          type: string
-          example: BTC.BTC|THOR.RUNE
-        dynamic_bps:
-          type: integer
-          format: uint64
-          example: 12
-        last_active_epoch:
-          type: integer
-          format: uint64
-          example: 42
-        history:
-          type: array
-          items:
-            $ref: '#/components/schemas/DynamicL1FeeHistoryEntry'
     DynamicL1FeeCurrentEntry:
       type: object
       required:
@@ -141,35 +118,40 @@ components:
           format: uint64
           description: current epoch index this accumulator belongs to
           example: 42
-    DynamicL1FeeHistoryEntry:
+    DynamicL1FeesCurrentResponse:
       type: object
       required:
       - epoch
-      - volume_tor
-      - fees_tor
-      - bps_at_close
+      - entries
       properties:
         epoch:
           type: integer
           format: uint64
-          example: 41
-        volume_tor:
+          description: current epoch number derived from block height
+          example: 42
+        entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/DynamicL1FeeCurrentEntry'
+    DynamicL1FeesByThornameResponse:
+      type: object
+      required:
+      - thorname
+      - whitelist_state
+      - pairs
+      properties:
+        thorname:
           type: string
-          description: 'TOR-denominated (1e8-precision USD value) swap volume in this epoch
-
-            '
-          example: '10000000000'
-        fees_tor:
-          type: string
-          description: 'TOR-denominated (1e8-precision USD value) fees accrued in this epoch
-
-            '
-          example: '12345678'
-        bps_at_close:
+          example: alice
+        whitelist_state:
           type: integer
-          format: uint64
-          description: dynamic_bps value at the close of the epoch
-          example: 12
+          format: int64
+          description: see DynamicL1FeeEntry.whitelist_state
+          example: 1
+        pairs:
+          type: array
+          items:
+            $ref: '#/components/schemas/DynamicL1FeePairDetail'
     DynamicL1FeeEntry:
       type: object
       required:
@@ -216,21 +198,29 @@ components:
 
             '
           example: '12345678'
-    DynamicL1FeesCurrentResponse:
+    DynamicL1FeePairDetail:
       type: object
       required:
-      - epoch
-      - entries
+      - pair
+      - dynamic_bps
+      - last_active_epoch
+      - history
       properties:
-        epoch:
+        pair:
+          type: string
+          example: BTC.BTC|THOR.RUNE
+        dynamic_bps:
           type: integer
           format: uint64
-          description: current epoch number derived from block height
+          example: 12
+        last_active_epoch:
+          type: integer
+          format: uint64
           example: 42
-        entries:
+        history:
           type: array
           items:
-            $ref: '#/components/schemas/DynamicL1FeeCurrentEntry'
+            $ref: '#/components/schemas/DynamicL1FeeHistoryEntry'
     DynamicL1FeesResponse:
       type: object
       required:
@@ -240,25 +230,35 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/DynamicL1FeeEntry'
-    DynamicL1FeesByThornameResponse:
+    DynamicL1FeeHistoryEntry:
       type: object
       required:
-      - thorname
-      - whitelist_state
-      - pairs
+      - epoch
+      - volume_tor
+      - fees_tor
+      - bps_at_close
       properties:
-        thorname:
-          type: string
-          example: alice
-        whitelist_state:
+        epoch:
           type: integer
-          format: int64
-          description: see DynamicL1FeeEntry.whitelist_state
-          example: 1
-        pairs:
-          type: array
-          items:
-            $ref: '#/components/schemas/DynamicL1FeePairDetail'
+          format: uint64
+          example: 41
+        volume_tor:
+          type: string
+          description: 'TOR-denominated (1e8-precision USD value) swap volume in this epoch
+
+            '
+          example: '10000000000'
+        fees_tor:
+          type: string
+          description: 'TOR-denominated (1e8-precision USD value) fees accrued in this epoch
+
+            '
+          example: '12345678'
+        bps_at_close:
+          type: integer
+          format: uint64
+          description: dynamic_bps value at the close of the epoch
+          example: 12
   parameters:
     queryHeight:
       name: height

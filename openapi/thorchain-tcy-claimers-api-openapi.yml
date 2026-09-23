@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Thornode Auth TCY Claimers API
+  title: Thornode TCY Claimers API
   version: 3.19.1
   contact:
     email: devs@thorchain.org
@@ -24,6 +24,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TCYClaimerResponse'
+      summary: Tcy claimer
+      x-summary-source: derived
   /thorchain/tcy_claimers:
     parameters:
     - $ref: '#/components/parameters/queryHeight'
@@ -39,6 +41,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TCYClaimersResponse'
+      summary: Tcy claimers
+      x-summary-source: derived
   /thorchain/tcy_protocol_owned:
     parameters:
     - $ref: '#/components/parameters/queryHeight'
@@ -54,31 +58,23 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TCYProtocolOwnedResponse'
+      summary: Tcy protocol owned
+      x-summary-source: derived
 components:
-  parameters:
-    queryHeight:
-      name: height
-      in: query
-      description: optional block height, defaults to current tip
-      required: false
-      schema:
-        type: integer
-        format: int64
-        minimum: 0
-    address:
-      name: address
-      in: path
-      required: true
-      schema:
-        type: string
-        example: thor1zupk5lmc84r2dh738a9g3zscavannjy3nzplwt
   schemas:
-    TCYClaimerResponse:
-      $ref: '#/components/schemas/TCYClaimer'
     TCYClaimersResponse:
       type: array
       items:
         $ref: '#/components/schemas/TCYClaimerSummary'
+    TCYProtocolOwnedResponse:
+      type: object
+      properties:
+        amount:
+          type: string
+          example: '3096016855586000'
+          description: protocol-owned TCY in 1e8 base units (claim module tcy balance minus the sum of outstanding tcy_claimer entitlements)
+      required:
+      - amount
     TCYClaimer:
       type: object
       required:
@@ -106,12 +102,22 @@ components:
         asset:
           type: string
           example: BTC.BTC
-    TCYProtocolOwnedResponse:
-      type: object
-      properties:
-        amount:
-          type: string
-          example: '3096016855586000'
-          description: protocol-owned TCY in 1e8 base units (claim module tcy balance minus the sum of outstanding tcy_claimer entitlements)
-      required:
-      - amount
+    TCYClaimerResponse:
+      $ref: '#/components/schemas/TCYClaimer'
+  parameters:
+    address:
+      name: address
+      in: path
+      required: true
+      schema:
+        type: string
+        example: thor1zupk5lmc84r2dh738a9g3zscavannjy3nzplwt
+    queryHeight:
+      name: height
+      in: query
+      description: optional block height, defaults to current tip
+      required: false
+      schema:
+        type: integer
+        format: int64
+        minimum: 0

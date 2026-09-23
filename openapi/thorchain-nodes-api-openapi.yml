@@ -1,10 +1,12 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Thornode Auth Nodes API
-  version: 3.19.1
+  title: Thorchain Nodes API
   contact:
     email: devs@thorchain.org
-  description: Thornode REST API.
+  version: '1.0'
+  description: 'Operations tagged Nodes across 2 of this provider''s published API definitions: thorchain-midgard-openapi.json, thorchain-thornode-openapi.yaml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://gateway.liquify.com/chain/thorchain_midgard
 tags:
 - name: Nodes
 paths:
@@ -18,6 +20,8 @@ paths:
       summary: Nodes List
       tags:
       - Nodes
+    servers:
+    - url: https://gateway.liquify.com/chain/thorchain_midgard
   /thorchain/node/{address}:
     parameters:
     - $ref: '#/components/parameters/queryHeight'
@@ -34,6 +38,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/NodeResponse'
+      summary: Node
+      x-summary-source: derived
   /thorchain/nodes:
     parameters:
     - $ref: '#/components/parameters/queryHeight'
@@ -49,6 +55,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/NodesResponse'
+      summary: Nodes
+      x-summary-source: derived
 components:
   schemas:
     Node:
@@ -74,12 +82,6 @@ components:
       items:
         $ref: '#/components/schemas/Node'
       type: array
-    NodeResponse:
-      $ref: '#/components/schemas/Node_2'
-    NodesResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/Node_2'
     Node_2:
       type: object
       required:
@@ -259,6 +261,12 @@ components:
               type: integer
               format: int64
               example: 0
+    NodesResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/Node_2'
+    NodeResponse:
+      $ref: '#/components/schemas/Node_2'
   responses:
     NodesResponse:
       content:
@@ -283,3 +291,6 @@ components:
         type: integer
         format: int64
         minimum: 0
+x-refined-from:
+- thorchain-midgard-openapi.json
+- thorchain-thornode-openapi.yaml

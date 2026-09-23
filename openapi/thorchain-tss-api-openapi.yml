@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Thornode Auth TSS API
+  title: Thornode TSS API
   version: 3.19.1
   contact:
     email: devs@thorchain.org
@@ -23,6 +23,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/KeysignResponse'
+      summary: Keysign
+      x-summary-source: derived
   /thorchain/keysign/{height}/{pubkey}:
     parameters:
     - $ref: '#/components/parameters/pathHeight'
@@ -39,6 +41,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/KeysignResponse'
+      summary: Keysign pubkey
+      x-summary-source: derived
   /thorchain/keygen/{height}/{pubkey}:
     parameters:
     - $ref: '#/components/parameters/pathHeight'
@@ -55,6 +59,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/KeygenResponse'
+      summary: Keygen pubkey
+      x-summary-source: derived
   /thorchain/metrics:
     parameters:
     - $ref: '#/components/parameters/queryHeight'
@@ -70,6 +76,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MetricsResponse'
+      summary: Metrics
+      x-summary-source: derived
   /thorchain/metric/keygen/{pubkey}:
     parameters:
     - $ref: '#/components/parameters/queryHeight'
@@ -86,8 +94,150 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/KeygenMetricsResponse'
+      summary: Metrics keygen
+      x-summary-source: derived
 components:
+  parameters:
+    pubkey:
+      name: pubkey
+      in: path
+      required: true
+      schema:
+        type: string
+        example: thorpub1addwnpepq068dr0x7ue973drmq4eqmzhcq3650n7nx5fhgn9gl207luxp6vaklu52tc
+    pathHeight:
+      name: height
+      in: path
+      required: true
+      schema:
+        type: integer
+        format: int64
+        minimum: 0
+    queryHeight:
+      name: height
+      in: query
+      description: optional block height, defaults to current tip
+      required: false
+      schema:
+        type: integer
+        format: int64
+        minimum: 0
   schemas:
+    KeygenResponse:
+      type: object
+      required:
+      - keygen_block
+      - signature
+      properties:
+        keygen_block:
+          type: object
+          title: KeygenBlock
+          required:
+          - keygens
+          properties:
+            height:
+              type: integer
+              format: int64
+              description: the height of the keygen block
+            keygens:
+              type: array
+              items:
+                type: object
+                title: keygen
+                properties:
+                  id:
+                    type: string
+                  type:
+                    type: string
+                  members:
+                    type: array
+                    items:
+                      type: string
+                      description: pubkeys of the keygen block member nodes
+        signature:
+          type: string
+    Coin:
+      type: object
+      required:
+      - asset
+      - amount
+      properties:
+        asset:
+          type: string
+          example: BTC.BTC
+        amount:
+          type: string
+          example: '100000'
+        decimals:
+          type: integer
+          format: int64
+          example: 6
+    KeygenMetric:
+      type: object
+      required:
+      - node_tss_times
+      properties:
+        pub_key:
+          type: string
+        node_tss_times:
+          type: array
+          items:
+            type: object
+            title: NodeKeygenMetric
+            properties:
+              address:
+                type: string
+              tss_time:
+                type: string
+    TssMetric:
+      type: object
+      properties:
+        address:
+          type: string
+        tss_time:
+          type: integer
+          format: int64
+    MetricsResponse:
+      type: object
+      properties:
+        keygen:
+          $ref: '#/components/schemas/KeygenMetricsResponse'
+        keysign:
+          type: object
+          title: KeysignMetrics
+          properties:
+            tx_id:
+              type: string
+            node_tss_times:
+              type: array
+              items:
+                $ref: '#/components/schemas/TssMetric'
+    KeygenMetricsResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/KeygenMetric'
+    KeysignResponse:
+      type: object
+      required:
+      - keysign
+      - signature
+      properties:
+        keysign:
+          type: object
+          title: KeysignInfo
+          required:
+          - tx_array
+          properties:
+            height:
+              type: integer
+              format: int64
+              description: the block(s) in which a tx out item is scheduled to be signed and moved from the scheduled outbound queue to the outbound queue
+            tx_array:
+              type: array
+              items:
+                $ref: '#/components/schemas/TxOutItem'
+        signature:
+          type: string
     TxOutItem:
       type: object
       required:
@@ -149,143 +299,3 @@ components:
           type: string
           description: clout spent in RUNE for the outbound
           example: '1234'
-    KeygenResponse:
-      type: object
-      required:
-      - keygen_block
-      - signature
-      properties:
-        keygen_block:
-          type: object
-          title: KeygenBlock
-          required:
-          - keygens
-          properties:
-            height:
-              type: integer
-              format: int64
-              description: the height of the keygen block
-            keygens:
-              type: array
-              items:
-                type: object
-                title: keygen
-                properties:
-                  id:
-                    type: string
-                  type:
-                    type: string
-                  members:
-                    type: array
-                    items:
-                      type: string
-                      description: pubkeys of the keygen block member nodes
-        signature:
-          type: string
-    KeygenMetricsResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/KeygenMetric'
-    KeygenMetric:
-      type: object
-      required:
-      - node_tss_times
-      properties:
-        pub_key:
-          type: string
-        node_tss_times:
-          type: array
-          items:
-            type: object
-            title: NodeKeygenMetric
-            properties:
-              address:
-                type: string
-              tss_time:
-                type: string
-    KeysignResponse:
-      type: object
-      required:
-      - keysign
-      - signature
-      properties:
-        keysign:
-          type: object
-          title: KeysignInfo
-          required:
-          - tx_array
-          properties:
-            height:
-              type: integer
-              format: int64
-              description: the block(s) in which a tx out item is scheduled to be signed and moved from the scheduled outbound queue to the outbound queue
-            tx_array:
-              type: array
-              items:
-                $ref: '#/components/schemas/TxOutItem'
-        signature:
-          type: string
-    Coin:
-      type: object
-      required:
-      - asset
-      - amount
-      properties:
-        asset:
-          type: string
-          example: BTC.BTC
-        amount:
-          type: string
-          example: '100000'
-        decimals:
-          type: integer
-          format: int64
-          example: 6
-    TssMetric:
-      type: object
-      properties:
-        address:
-          type: string
-        tss_time:
-          type: integer
-          format: int64
-    MetricsResponse:
-      type: object
-      properties:
-        keygen:
-          $ref: '#/components/schemas/KeygenMetricsResponse'
-        keysign:
-          type: object
-          title: KeysignMetrics
-          properties:
-            tx_id:
-              type: string
-            node_tss_times:
-              type: array
-              items:
-                $ref: '#/components/schemas/TssMetric'
-  parameters:
-    queryHeight:
-      name: height
-      in: query
-      description: optional block height, defaults to current tip
-      required: false
-      schema:
-        type: integer
-        format: int64
-        minimum: 0
-    pubkey:
-      name: pubkey
-      in: path
-      required: true
-      schema:
-        type: string
-        example: thorpub1addwnpepq068dr0x7ue973drmq4eqmzhcq3650n7nx5fhgn9gl207luxp6vaklu52tc
-    pathHeight:
-      name: height
-      in: path
-      required: true
-      schema:
-        type: integer
-        format: int64
-        minimum: 0

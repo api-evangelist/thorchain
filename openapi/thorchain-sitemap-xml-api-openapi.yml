@@ -1,10 +1,14 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Thornode Auth Sitemap.xml API
-  version: 3.19.1
-  contact:
-    email: devs@thorchain.org
-  description: Thornode REST API.
+  title: THORChain Website Discovery Sitemap.xml API
+  summary: Machine-readable discovery entry points for THORChain public resources.
+  description: This OpenAPI file describes stable discovery resources hosted on thorchain.org and points agents to the official THORChain developer API documentation. Protocol API behavior is documented in the linked Midgard and THORNode Swagger references.
+  version: 1.0.0
+  license:
+    name: Public documentation
+servers:
+- url: https://thorchain.org
+  description: THORChain public website
 tags:
 - name: Sitemap.xml
 paths:
@@ -17,3 +21,6 @@ paths:
           description: XML sitemap
       tags:
       - Sitemap.xml
+externalDocs:
+  description: THORChain developer API documentation
+  url: https://dev.thorchain.org/concepts/connecting-to-thorchain.html

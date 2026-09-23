@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Thornode Auth Supply API
+  title: Thornode Supply API
   version: 3.19.1
   contact:
     email: devs@thorchain.org
@@ -23,6 +23,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SupplyResponse'
+      summary: Supply
+      x-summary-source: derived
   /thorchain/supply/cmc:
     parameters:
     - name: asset
@@ -58,6 +60,8 @@ paths:
               schema:
                 type: integer
                 example: 30000000000
+      summary: Supply cmc
+      x-summary-source: derived
 components:
   parameters:
     queryHeight:
@@ -70,6 +74,14 @@ components:
         format: int64
         minimum: 0
   schemas:
+    LockedSupply:
+      type: object
+      properties:
+        reserve:
+          type: integer
+          format: int64
+          description: RUNE locked in the reserve module
+          example: 10000000000
     SupplyResponse:
       type: object
       required:
@@ -88,11 +100,3 @@ components:
           format: int64
           description: total RUNE supply
           example: 50000000000
-    LockedSupply:
-      type: object
-      properties:
-        reserve:
-          type: integer
-          format: int64
-          description: RUNE locked in the reserve module
-          example: 10000000000

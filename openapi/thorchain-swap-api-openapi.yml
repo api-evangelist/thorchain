@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Thornode Auth Swap API
+  title: Thornode Swap API
   version: 3.19.1
   contact:
     email: devs@thorchain.org
@@ -31,84 +31,10 @@ paths:
                 $ref: '#/components/schemas/SwapDetailsResponse'
         404:
           description: Swap not found
+      summary: Swap details
+      x-summary-source: derived
 components:
   schemas:
-    SwapState:
-      type: object
-      description: State tracking for swap execution
-      properties:
-        interval:
-          type: integer
-          format: int64
-          description: the interval for streaming swaps
-        quantity:
-          type: integer
-          format: int64
-          description: the number of swaps to execute
-        ttl:
-          type: integer
-          format: int64
-          description: time to live
-        count:
-          type: integer
-          format: int64
-          description: number of swaps executed
-        last_height:
-          type: integer
-          format: int64
-          description: last height when a swap was executed
-        deposit:
-          type: string
-          description: total deposit amount
-        withdrawn:
-          type: string
-          description: amount withdrawn
-        in:
-          type: string
-          description: total amount swapped in
-        out:
-          type: string
-          description: total amount swapped out
-        failed_swaps:
-          type: array
-          items:
-            type: integer
-            format: int64
-          description: list of failed swap indices
-        failed_swap_reasons:
-          type: array
-          items:
-            type: string
-          description: reasons for failed swaps
-    Tx:
-      type: object
-      required:
-      - coins
-      - gas
-      properties:
-        id:
-          type: string
-          example: CF524818D42B63D25BBA0CCC4909F127CAA645C0F9CD07324F2824CC151A64C7
-        chain:
-          type: string
-          example: BTC
-        from_address:
-          type: string
-          example: bcrt1q0s4mg25tu6termrk8egltfyme4q7sg3h8kkydt
-        to_address:
-          type: string
-          example: bcrt1qf3s7q037eancht7sg0aj995dht25rwrnqsf45e
-        coins:
-          type: array
-          items:
-            $ref: '#/components/schemas/Coin'
-        gas:
-          type: array
-          items:
-            $ref: '#/components/schemas/Coin'
-        memo:
-          type: string
-          example: ADD:BTC.BTC:thor1zupk5lmc84r2dh738a9g3zscavannjy3nzplwt
     MsgSwap:
       type: object
       required:
@@ -189,6 +115,82 @@ components:
           type: integer
           format: int64
           example: 6
+    SwapState:
+      type: object
+      description: State tracking for swap execution
+      properties:
+        interval:
+          type: integer
+          format: int64
+          description: the interval for streaming swaps
+        quantity:
+          type: integer
+          format: int64
+          description: the number of swaps to execute
+        ttl:
+          type: integer
+          format: int64
+          description: time to live
+        count:
+          type: integer
+          format: int64
+          description: number of swaps executed
+        last_height:
+          type: integer
+          format: int64
+          description: last height when a swap was executed
+        deposit:
+          type: string
+          description: total deposit amount
+        withdrawn:
+          type: string
+          description: amount withdrawn
+        in:
+          type: string
+          description: total amount swapped in
+        out:
+          type: string
+          description: total amount swapped out
+        failed_swaps:
+          type: array
+          items:
+            type: integer
+            format: int64
+          description: list of failed swap indices
+        failed_swap_reasons:
+          type: array
+          items:
+            type: string
+          description: reasons for failed swaps
+    Tx:
+      type: object
+      required:
+      - coins
+      - gas
+      properties:
+        id:
+          type: string
+          example: CF524818D42B63D25BBA0CCC4909F127CAA645C0F9CD07324F2824CC151A64C7
+        chain:
+          type: string
+          example: BTC
+        from_address:
+          type: string
+          example: bcrt1q0s4mg25tu6termrk8egltfyme4q7sg3h8kkydt
+        to_address:
+          type: string
+          example: bcrt1qf3s7q037eancht7sg0aj995dht25rwrnqsf45e
+        coins:
+          type: array
+          items:
+            $ref: '#/components/schemas/Coin'
+        gas:
+          type: array
+          items:
+            $ref: '#/components/schemas/Coin'
+        memo:
+          type: string
+          example: ADD:BTC.BTC:thor1zupk5lmc84r2dh738a9g3zscavannjy3nzplwt
     SwapDetailsResponse:
       type: object
       properties:

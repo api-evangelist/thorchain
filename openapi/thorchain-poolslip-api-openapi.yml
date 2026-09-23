@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Thornode Auth PoolSlip API
+  title: Thornode Pool Slip API
   version: 3.19.1
   contact:
     email: devs@thorchain.org
@@ -24,6 +24,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PoolSlipResponse'
+      summary: Poolslip
+      x-summary-source: derived
   /thorchain/slips:
     parameters:
     - $ref: '#/components/parameters/queryHeight'
@@ -39,24 +41,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PoolSlipResponse'
+      summary: Poolslips
+      x-summary-source: derived
 components:
-  parameters:
-    asset:
-      name: asset
-      in: path
-      required: true
-      schema:
-        type: string
-        example: BTC.BTC
-    queryHeight:
-      name: height
-      in: query
-      description: optional block height, defaults to current tip
-      required: false
-      schema:
-        type: integer
-        format: int64
-        minimum: 0
   schemas:
     PoolSlipResponse:
       type: array
@@ -98,3 +85,20 @@ components:
             format: int64
             example: 1500
             description: Summed pool slips over a number of previous block heights, to checksum the stored rollup
+  parameters:
+    queryHeight:
+      name: height
+      in: query
+      description: optional block height, defaults to current tip
+      required: false
+      schema:
+        type: integer
+        format: int64
+        minimum: 0
+    asset:
+      name: asset
+      in: path
+      required: true
+      schema:
+        type: string
+        example: BTC.BTC
