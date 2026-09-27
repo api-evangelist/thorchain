@@ -21,13 +21,6 @@ paths:
       tags:
       - Knownpools
 components:
-  schemas:
-    KnownPools:
-      additionalProperties:
-        type: string
-      example:
-        BTC.BTC: available
-      type: object
   responses:
     KnownPoolsResponse:
       content:
@@ -35,3 +28,10 @@ components:
           schema:
             $ref: '#/components/schemas/KnownPools'
       description: Object containing known pools to status mapping
+  schemas:
+    KnownPools:
+      additionalProperties:
+        type: string
+      example:
+        BTC.BTC: available
+      type: object

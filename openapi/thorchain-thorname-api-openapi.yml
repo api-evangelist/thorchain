@@ -67,26 +67,19 @@ paths:
       tags:
       - Thorname
 components:
-  responses:
-    THORNameDetailsResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/THORNameDetails'
-      description: object containing THORName data for a specific name
-    ReverseTHORNameResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ReverseTHORNames'
-      description: object containing a list of THORName names for a specific address
   schemas:
-    ReverseTHORNames:
-      items:
-        description: THORName name
-        example: myname
-        type: string
-      type: array
+    THORNameEntry:
+      properties:
+        address:
+          description: address on blockchain
+          type: string
+        chain:
+          description: blockchain
+          type: string
+      required:
+      - chain
+      - address
+      type: object
     THORNameDetails:
       properties:
         entries:
@@ -106,15 +99,22 @@ components:
       - expire
       - entries
       type: object
-    THORNameEntry:
-      properties:
-        address:
-          description: address on blockchain
-          type: string
-        chain:
-          description: blockchain
-          type: string
-      required:
-      - chain
-      - address
-      type: object
+    ReverseTHORNames:
+      items:
+        description: THORName name
+        example: myname
+        type: string
+      type: array
+  responses:
+    THORNameDetailsResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/THORNameDetails'
+      description: object containing THORName data for a specific name
+    ReverseTHORNameResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ReverseTHORNames'
+      description: object containing a list of THORName names for a specific address

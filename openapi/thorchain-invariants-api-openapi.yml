@@ -62,6 +62,13 @@ components:
         type: string
         example: asgard
   schemas:
+    InvariantsResponse:
+      type: object
+      properties:
+        invariants:
+          type: array
+          items:
+            type: string
     InvariantResponse:
       type: object
       required:
@@ -85,10 +92,3 @@ components:
           - 'insolvent: 200000rune'
           - 'oversolvent: 1btc/btc'
           description: Informative message about the invariant result.
-    InvariantsResponse:
-      type: object
-      properties:
-        invariants:
-          type: array
-          items:
-            type: string

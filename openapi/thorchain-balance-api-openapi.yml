@@ -50,7 +50,27 @@ paths:
       tags:
       - Balance
 components:
+  responses:
+    BalanceResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Balance'
+      description: object containing balance details for a given address
   schemas:
+    Coin:
+      description: Represents a digital currency amount
+      properties:
+        amount:
+          description: Int64(e8), asset Amount.
+          type: string
+        asset:
+          description: Asset in CHAIN.SYMBOL format
+          type: string
+      required:
+      - asset
+      - amount
+      type: object
     Balance:
       properties:
         coins:
@@ -72,23 +92,3 @@ components:
       items:
         $ref: '#/components/schemas/Coin'
       type: array
-    Coin:
-      description: Represents a digital currency amount
-      properties:
-        amount:
-          description: Int64(e8), asset Amount.
-          type: string
-        asset:
-          description: Asset in CHAIN.SYMBOL format
-          type: string
-      required:
-      - asset
-      - amount
-      type: object
-  responses:
-    BalanceResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Balance'
-      description: object containing balance details for a given address

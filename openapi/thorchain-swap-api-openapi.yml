@@ -35,6 +35,48 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    SwapDetailsResponse:
+      type: object
+      properties:
+        swap:
+          $ref: '#/components/schemas/MsgSwap'
+        status:
+          type: string
+          description: Current status of the swap
+          example: queued
+        queue_type:
+          type: string
+          description: Type of queue the swap is in
+          example: advanced
+    Tx:
+      type: object
+      required:
+      - coins
+      - gas
+      properties:
+        id:
+          type: string
+          example: CF524818D42B63D25BBA0CCC4909F127CAA645C0F9CD07324F2824CC151A64C7
+        chain:
+          type: string
+          example: BTC
+        from_address:
+          type: string
+          example: bcrt1q0s4mg25tu6termrk8egltfyme4q7sg3h8kkydt
+        to_address:
+          type: string
+          example: bcrt1qf3s7q037eancht7sg0aj995dht25rwrnqsf45e
+        coins:
+          type: array
+          items:
+            $ref: '#/components/schemas/Coin'
+        gas:
+          type: array
+          items:
+            $ref: '#/components/schemas/Coin'
+        memo:
+          type: string
+          example: ADD:BTC.BTC:thor1zupk5lmc84r2dh738a9g3zscavannjy3nzplwt
     MsgSwap:
       type: object
       required:
@@ -162,48 +204,6 @@ components:
           items:
             type: string
           description: reasons for failed swaps
-    Tx:
-      type: object
-      required:
-      - coins
-      - gas
-      properties:
-        id:
-          type: string
-          example: CF524818D42B63D25BBA0CCC4909F127CAA645C0F9CD07324F2824CC151A64C7
-        chain:
-          type: string
-          example: BTC
-        from_address:
-          type: string
-          example: bcrt1q0s4mg25tu6termrk8egltfyme4q7sg3h8kkydt
-        to_address:
-          type: string
-          example: bcrt1qf3s7q037eancht7sg0aj995dht25rwrnqsf45e
-        coins:
-          type: array
-          items:
-            $ref: '#/components/schemas/Coin'
-        gas:
-          type: array
-          items:
-            $ref: '#/components/schemas/Coin'
-        memo:
-          type: string
-          example: ADD:BTC.BTC:thor1zupk5lmc84r2dh738a9g3zscavannjy3nzplwt
-    SwapDetailsResponse:
-      type: object
-      properties:
-        swap:
-          $ref: '#/components/schemas/MsgSwap'
-        status:
-          type: string
-          description: Current status of the swap
-          example: queued
-        queue_type:
-          type: string
-          description: Type of queue the swap is in
-          example: advanced
   parameters:
     queryHeight:
       name: height

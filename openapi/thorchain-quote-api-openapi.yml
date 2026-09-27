@@ -98,54 +98,7 @@ paths:
       summary: Quoteswap
       x-summary-source: derived
 components:
-  parameters:
-    queryHeight:
-      name: height
-      in: query
-      description: optional block height, defaults to current tip
-      required: false
-      schema:
-        type: integer
-        format: int64
-        minimum: 0
   schemas:
-    QuoteFees:
-      type: object
-      required:
-      - asset
-      - liquidity
-      - total
-      - slippage_bps
-      - total_bps
-      properties:
-        asset:
-          type: string
-          example: ETH.ETH
-          description: the target asset used for all fees
-        affiliate:
-          type: string
-          example: '1234'
-          description: affiliate fee in the target asset
-        outbound:
-          type: string
-          example: '1234'
-          description: outbound fee in the target asset
-        liquidity:
-          type: string
-          example: '1234'
-          description: liquidity fees paid to pools in the target asset
-        total:
-          type: string
-          example: '9876'
-          description: total fees in the target asset
-        slippage_bps:
-          type: integer
-          format: int64
-          description: the swap slippage in basis points
-        total_bps:
-          type: integer
-          format: int64
-          description: total basis points in fees relative to amount out
     QuoteSwapResponse:
       type: object
       required:
@@ -240,3 +193,50 @@ components:
           format: int64
           description: total number of seconds a swap is expected to take (inbound conf + streaming swap + outbound delay)
           example: 600
+    QuoteFees:
+      type: object
+      required:
+      - asset
+      - liquidity
+      - total
+      - slippage_bps
+      - total_bps
+      properties:
+        asset:
+          type: string
+          example: ETH.ETH
+          description: the target asset used for all fees
+        affiliate:
+          type: string
+          example: '1234'
+          description: affiliate fee in the target asset
+        outbound:
+          type: string
+          example: '1234'
+          description: outbound fee in the target asset
+        liquidity:
+          type: string
+          example: '1234'
+          description: liquidity fees paid to pools in the target asset
+        total:
+          type: string
+          example: '9876'
+          description: total fees in the target asset
+        slippage_bps:
+          type: integer
+          format: int64
+          description: the swap slippage in basis points
+        total_bps:
+          type: integer
+          format: int64
+          description: total basis points in fees relative to amount out
+  parameters:
+    queryHeight:
+      name: height
+      in: query
+      description: optional block height, defaults to current tip
+      required: false
+      schema:
+        type: integer
+        format: int64
+        minimum: 0

@@ -160,15 +160,6 @@ components:
           description: the maximum number of times this reference can be used (0 = unlimited)
           example: '0'
   parameters:
-    queryHeight:
-      name: height
-      in: query
-      description: optional block height, defaults to current tip
-      required: false
-      schema:
-        type: integer
-        format: int64
-        minimum: 0
     hash:
       name: hash
       in: path
@@ -183,3 +174,12 @@ components:
       schema:
         type: string
         example: BTC.BTC
+    queryHeight:
+      name: height
+      in: query
+      description: optional block height, defaults to current tip
+      required: false
+      schema:
+        type: integer
+        format: int64
+        minimum: 0

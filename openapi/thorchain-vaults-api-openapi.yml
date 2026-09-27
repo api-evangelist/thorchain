@@ -113,237 +113,7 @@ paths:
       summary: Vault solvency
       x-summary-source: derived
 components:
-  parameters:
-    pubkey:
-      name: pubkey
-      in: path
-      required: true
-      schema:
-        type: string
-        example: thorpub1addwnpepq068dr0x7ue973drmq4eqmzhcq3650n7nx5fhgn9gl207luxp6vaklu52tc
-    querySigningHeight:
-      name: signing_height
-      in: query
-      description: optional signing height, defaults to current tip
-      required: false
-      schema:
-        type: integer
-        format: int64
-        minimum: 0
-    queryHeight:
-      name: height
-      in: query
-      description: optional block height, defaults to current tip
-      required: false
-      schema:
-        type: integer
-        format: int64
-        minimum: 0
   schemas:
-    YggdrasilVault:
-      type: object
-      required:
-      - coins
-      - routers
-      - status
-      - bond
-      - total_value
-      - addresses
-      properties:
-        block_height:
-          type: integer
-          format: int64
-        pub_key:
-          type: string
-        coins:
-          type: array
-          items:
-            $ref: '#/components/schemas/Coin'
-        type:
-          type: string
-          enum:
-          - AsgardVault
-          - YggdrasilVault
-        status_since:
-          type: integer
-          format: int64
-        membership:
-          type: array
-          description: the list of node public keys which are members of the vault
-          items:
-            type: string
-        chains:
-          type: array
-          items:
-            type: string
-        inbound_tx_count:
-          type: integer
-          format: int64
-        outbound_tx_count:
-          type: integer
-          format: int64
-        pending_tx_block_heights:
-          type: array
-          items:
-            type: integer
-            format: int64
-        routers:
-          type: array
-          items:
-            $ref: '#/components/schemas/VaultRouter'
-        status:
-          type: string
-        bond:
-          type: string
-          description: current node bond
-          example: '123456789'
-        total_value:
-          type: string
-          description: value in rune of the vault's assets
-          example: '83456789'
-        addresses:
-          type: array
-          items:
-            $ref: '#/components/schemas/VaultAddress'
-    KeysignPartyResponse:
-      type: object
-      required:
-      - pub_key
-      - signers
-      - height
-      - threshold
-      - required_signers
-      - never_signers
-      - jailed_fallback_signers
-      - active_signer_count
-      properties:
-        pub_key:
-          type: string
-          example: thorpub1addwnpep...
-        signers:
-          type: array
-          items:
-            type: string
-            example: thorpub1addwnpep...
-        height:
-          type: integer
-          format: int64
-        threshold:
-          type: integer
-          format: int64
-        required_signers:
-          type: integer
-          format: int64
-        never_signers:
-          type: array
-          items:
-            type: string
-            example: thorpub1addwnpep...
-        jailed_fallback_signers:
-          type: array
-          items:
-            type: string
-            example: thorpub1addwnpep...
-        active_signer_count:
-          type: integer
-          format: int64
-    Coin:
-      type: object
-      required:
-      - asset
-      - amount
-      properties:
-        asset:
-          type: string
-          example: BTC.BTC
-        amount:
-          type: string
-          example: '100000'
-        decimals:
-          type: integer
-          format: int64
-          example: 6
-    VaultSolvencyAsset:
-      type: object
-      required:
-      - asset
-      - amount
-      properties:
-        asset:
-          type: string
-          example: BTC.BTC
-          description: Asset identifier
-        amount:
-          type: string
-          example: '1000000000'
-          description: Solvency amount for the asset. Positive values indicate over-solvency, negative values indicate under-solvency.
-    VaultResponse:
-      $ref: '#/components/schemas/Vault'
-    VaultInfo:
-      type: object
-      required:
-      - pub_key
-      - routers
-      properties:
-        pub_key:
-          type: string
-          example: thorpub1addwnpepq068dr0x7ue973drmq4eqmzhcq3650n7nx5fhgn9gl207luxp6vaklu52tc
-        pub_key_eddsa:
-          type: string
-          example: thorpub1addwnpepq068dr0x7ue973drmq4eqmzhcq3650n7nx5fhgn9gl207luxp6vaklu52tc
-        pub_key_frost:
-          type: string
-          example: thorpub1zcjduepq068dr0x7ue973drmq4eqmzhcq3650n7nx5fhgn9gl207luxp6vaklu52tc
-        routers:
-          type: array
-          items:
-            $ref: '#/components/schemas/VaultRouter'
-        membership:
-          type: array
-          description: the list of node public keys which are members of the vault
-          items:
-            type: string
-    VaultPubkeysResponse:
-      type: object
-      required:
-      - asgard
-      - yggdrasil
-      - inactive
-      properties:
-        asgard:
-          type: array
-          items:
-            $ref: '#/components/schemas/VaultInfo'
-        yggdrasil:
-          type: array
-          items:
-            $ref: '#/components/schemas/VaultInfo'
-        inactive:
-          type: array
-          items:
-            $ref: '#/components/schemas/VaultInfo'
-    VaultRouter:
-      type: object
-      properties:
-        chain:
-          type: string
-          example: ETH
-        router:
-          type: string
-          example: '0x3624525075b88B24ecc29CE226b0CEc1fFcB6976'
-    VaultSolvencyResponse:
-      type: object
-      required:
-      - assets
-      properties:
-        assets:
-          type: array
-          items:
-            $ref: '#/components/schemas/VaultSolvencyAsset'
-    VaultsResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/Vault'
     Vault:
       type: object
       required:
@@ -411,10 +181,116 @@ components:
           type: array
           items:
             type: string
+    KeysignPartyResponse:
+      type: object
+      required:
+      - pub_key
+      - signers
+      - height
+      - threshold
+      - required_signers
+      - never_signers
+      - jailed_fallback_signers
+      - active_signer_count
+      properties:
+        pub_key:
+          type: string
+          example: thorpub1addwnpep...
+        signers:
+          type: array
+          items:
+            type: string
+            example: thorpub1addwnpep...
+        height:
+          type: integer
+          format: int64
+        threshold:
+          type: integer
+          format: int64
+        required_signers:
+          type: integer
+          format: int64
+        never_signers:
+          type: array
+          items:
+            type: string
+            example: thorpub1addwnpep...
+        jailed_fallback_signers:
+          type: array
+          items:
+            type: string
+            example: thorpub1addwnpep...
+        active_signer_count:
+          type: integer
+          format: int64
     YggdrasilVaultsResponse:
       type: array
       items:
         $ref: '#/components/schemas/YggdrasilVault'
+    VaultPubkeysResponse:
+      type: object
+      required:
+      - asgard
+      - yggdrasil
+      - inactive
+      properties:
+        asgard:
+          type: array
+          items:
+            $ref: '#/components/schemas/VaultInfo'
+        yggdrasil:
+          type: array
+          items:
+            $ref: '#/components/schemas/VaultInfo'
+        inactive:
+          type: array
+          items:
+            $ref: '#/components/schemas/VaultInfo'
+    VaultResponse:
+      $ref: '#/components/schemas/Vault'
+    Coin:
+      type: object
+      required:
+      - asset
+      - amount
+      properties:
+        asset:
+          type: string
+          example: BTC.BTC
+        amount:
+          type: string
+          example: '100000'
+        decimals:
+          type: integer
+          format: int64
+          example: 6
+    VaultsResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/Vault'
+    VaultSolvencyResponse:
+      type: object
+      required:
+      - assets
+      properties:
+        assets:
+          type: array
+          items:
+            $ref: '#/components/schemas/VaultSolvencyAsset'
+    VaultSolvencyAsset:
+      type: object
+      required:
+      - asset
+      - amount
+      properties:
+        asset:
+          type: string
+          example: BTC.BTC
+          description: Asset identifier
+        amount:
+          type: string
+          example: '1000000000'
+          description: Solvency amount for the asset. Positive values indicate over-solvency, negative values indicate under-solvency.
     VaultAddress:
       type: object
       required:
@@ -427,3 +303,127 @@ components:
         address:
           type: string
           example: bc1qd45uzetakjvdy5ynjjyp4nlnj89am88e4e5jeq
+    YggdrasilVault:
+      type: object
+      required:
+      - coins
+      - routers
+      - status
+      - bond
+      - total_value
+      - addresses
+      properties:
+        block_height:
+          type: integer
+          format: int64
+        pub_key:
+          type: string
+        coins:
+          type: array
+          items:
+            $ref: '#/components/schemas/Coin'
+        type:
+          type: string
+          enum:
+          - AsgardVault
+          - YggdrasilVault
+        status_since:
+          type: integer
+          format: int64
+        membership:
+          type: array
+          description: the list of node public keys which are members of the vault
+          items:
+            type: string
+        chains:
+          type: array
+          items:
+            type: string
+        inbound_tx_count:
+          type: integer
+          format: int64
+        outbound_tx_count:
+          type: integer
+          format: int64
+        pending_tx_block_heights:
+          type: array
+          items:
+            type: integer
+            format: int64
+        routers:
+          type: array
+          items:
+            $ref: '#/components/schemas/VaultRouter'
+        status:
+          type: string
+        bond:
+          type: string
+          description: current node bond
+          example: '123456789'
+        total_value:
+          type: string
+          description: value in rune of the vault's assets
+          example: '83456789'
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/VaultAddress'
+    VaultInfo:
+      type: object
+      required:
+      - pub_key
+      - routers
+      properties:
+        pub_key:
+          type: string
+          example: thorpub1addwnpepq068dr0x7ue973drmq4eqmzhcq3650n7nx5fhgn9gl207luxp6vaklu52tc
+        pub_key_eddsa:
+          type: string
+          example: thorpub1addwnpepq068dr0x7ue973drmq4eqmzhcq3650n7nx5fhgn9gl207luxp6vaklu52tc
+        pub_key_frost:
+          type: string
+          example: thorpub1zcjduepq068dr0x7ue973drmq4eqmzhcq3650n7nx5fhgn9gl207luxp6vaklu52tc
+        routers:
+          type: array
+          items:
+            $ref: '#/components/schemas/VaultRouter'
+        membership:
+          type: array
+          description: the list of node public keys which are members of the vault
+          items:
+            type: string
+    VaultRouter:
+      type: object
+      properties:
+        chain:
+          type: string
+          example: ETH
+        router:
+          type: string
+          example: '0x3624525075b88B24ecc29CE226b0CEc1fFcB6976'
+  parameters:
+    querySigningHeight:
+      name: signing_height
+      in: query
+      description: optional signing height, defaults to current tip
+      required: false
+      schema:
+        type: integer
+        format: int64
+        minimum: 0
+    queryHeight:
+      name: height
+      in: query
+      description: optional block height, defaults to current tip
+      required: false
+      schema:
+        type: integer
+        format: int64
+        minimum: 0
+    pubkey:
+      name: pubkey
+      in: path
+      required: true
+      schema:
+        type: string
+        example: thorpub1addwnpepq068dr0x7ue973drmq4eqmzhcq3650n7nx5fhgn9gl207luxp6vaklu52tc

@@ -123,6 +123,13 @@ components:
       items:
         $ref: '#/components/schemas/StreamingSwap'
   parameters:
+    hash:
+      name: hash
+      in: path
+      required: true
+      schema:
+        type: string
+        example: CF524818D42B63D25BBA0CCC4909F127CAA645C0F9CD07324F2824CC151A64C7
     queryHeight:
       name: height
       in: query
@@ -132,10 +139,3 @@ components:
         type: integer
         format: int64
         minimum: 0
-    hash:
-      name: hash
-      in: path
-      required: true
-      schema:
-        type: string
-        example: CF524818D42B63D25BBA0CCC4909F127CAA645C0F9CD07324F2824CC151A64C7

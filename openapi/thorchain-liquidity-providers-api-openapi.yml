@@ -47,10 +47,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    LiquidityProvidersResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/LiquidityProviderSummary'
     LiquidityProviderSummary:
       type: object
       required:
@@ -96,8 +92,6 @@ components:
         asset_deposit_value:
           type: string
           example: '0'
-    LiquidityProviderResponse:
-      $ref: '#/components/schemas/LiquidityProvider'
     LiquidityProvider:
       type: object
       required:
@@ -158,6 +152,12 @@ components:
         luvi_growth_pct:
           type: string
           example: '0'
+    LiquidityProviderResponse:
+      $ref: '#/components/schemas/LiquidityProvider'
+    LiquidityProvidersResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/LiquidityProviderSummary'
   parameters:
     address:
       name: address
@@ -166,6 +166,13 @@ components:
       schema:
         type: string
         example: thor1zupk5lmc84r2dh738a9g3zscavannjy3nzplwt
+    asset:
+      name: asset
+      in: path
+      required: true
+      schema:
+        type: string
+        example: BTC.BTC
     queryHeight:
       name: height
       in: query
@@ -175,10 +182,3 @@ components:
         type: integer
         format: int64
         minimum: 0
-    asset:
-      name: asset
-      in: path
-      required: true
-      schema:
-        type: string
-        example: BTC.BTC

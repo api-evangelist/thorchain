@@ -26,16 +26,6 @@ paths:
       summary: Trade units
       x-summary-source: derived
 components:
-  parameters:
-    queryHeight:
-      name: height
-      in: query
-      description: optional block height, defaults to current tip
-      required: false
-      schema:
-        type: integer
-        format: int64
-        minimum: 0
   schemas:
     TradeUnitsResponse:
       type: array
@@ -58,3 +48,13 @@ components:
         depth:
           type: string
           description: total depth of trade asset
+  parameters:
+    queryHeight:
+      name: height
+      in: query
+      description: optional block height, defaults to current tip
+      required: false
+      schema:
+        type: integer
+        format: int64
+        minimum: 0

@@ -59,6 +59,10 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    Nodes:
+      items:
+        $ref: '#/components/schemas/Node'
+      type: array
     Node:
       properties:
         ed25519:
@@ -78,10 +82,12 @@ components:
       - secp256k1
       - ed25519
       type: object
-    Nodes:
-      items:
-        $ref: '#/components/schemas/Node'
+    NodesResponse:
       type: array
+      items:
+        $ref: '#/components/schemas/Node_2'
+    NodeResponse:
+      $ref: '#/components/schemas/Node_2'
     Node_2:
       type: object
       required:
@@ -261,12 +267,6 @@ components:
               type: integer
               format: int64
               example: 0
-    NodesResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/Node_2'
-    NodeResponse:
-      $ref: '#/components/schemas/Node_2'
   responses:
     NodesResponse:
       content:

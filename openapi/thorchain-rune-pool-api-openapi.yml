@@ -85,23 +85,6 @@ paths:
       tags:
       - RUNE Pool
 components:
-  parameters:
-    address:
-      name: address
-      in: path
-      required: true
-      schema:
-        type: string
-        example: thor1zupk5lmc84r2dh738a9g3zscavannjy3nzplwt
-    queryHeight:
-      name: height
-      in: query
-      description: optional block height, defaults to current tip
-      required: false
-      schema:
-        type: integer
-        format: int64
-        minimum: 0
   schemas:
     POL:
       type: object
@@ -132,8 +115,6 @@ components:
           type: string
           example: '21999180112172346'
           description: current amount of rune deposited
-    RUNEProviderResponse:
-      $ref: '#/components/schemas/RUNEProvider'
     RUNEPoolResponse:
       type: object
       required:
@@ -247,6 +228,13 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/RUNEProvider'
+    RUNEProviderResponse:
+      $ref: '#/components/schemas/RUNEProvider'
+    RUNEPoolDetails:
+      description: List details of all the RUNEPools identified with the given addresses
+      items:
+        $ref: '#/components/schemas/RUNEPoolProvider'
+      type: array
     RUNEPoolProvider:
       properties:
         dateFirstAdded:
@@ -279,11 +267,23 @@ components:
       - dateFirstAdded
       - dateLastAdded
       type: object
-    RUNEPoolDetails:
-      description: List details of all the RUNEPools identified with the given addresses
-      items:
-        $ref: '#/components/schemas/RUNEPoolProvider'
-      type: array
+  parameters:
+    address:
+      name: address
+      in: path
+      required: true
+      schema:
+        type: string
+        example: thor1zupk5lmc84r2dh738a9g3zscavannjy3nzplwt
+    queryHeight:
+      name: height
+      in: query
+      description: optional block height, defaults to current tip
+      required: false
+      schema:
+        type: integer
+        format: int64
+        minimum: 0
   responses:
     RUNEPoolDetailsResponse:
       content:

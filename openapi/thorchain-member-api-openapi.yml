@@ -44,14 +44,17 @@ paths:
       tags:
       - Member
 components:
-  responses:
-    MemberDetailsResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/MemberDetails'
-      description: object containing liquidity provider data for a specific member
   schemas:
+    MemberDetails:
+      properties:
+        pools:
+          description: List details of all the liquidity providers identified with the given address
+          items:
+            $ref: '#/components/schemas/MemberPool'
+          type: array
+      required:
+      - pools
+      type: object
     MemberPool:
       properties:
         assetAdded:
@@ -116,13 +119,10 @@ components:
       - dateFirstAdded
       - dateLastAdded
       type: object
-    MemberDetails:
-      properties:
-        pools:
-          description: List details of all the liquidity providers identified with the given address
-          items:
-            $ref: '#/components/schemas/MemberPool'
-          type: array
-      required:
-      - pools
-      type: object
+  responses:
+    MemberDetailsResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/MemberDetails'
+      description: object containing liquidity provider data for a specific member

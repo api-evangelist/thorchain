@@ -35,7 +35,24 @@ paths:
       tags:
       - Borrower
 components:
+  responses:
+    BorrowerDetailsResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BorrowerDetails'
+      description: object containing loan data for a specific borrower
   schemas:
+    BorrowerDetails:
+      properties:
+        pools:
+          description: List details of all the loans identified with the given address
+          items:
+            $ref: '#/components/schemas/BorrowerPool'
+          type: array
+      required:
+      - pools
+      type: object
     BorrowerPool:
       properties:
         collateral_asset:
@@ -75,20 +92,3 @@ components:
       - last_open_loan_timestamp
       - last_repay_loan_timestamp
       type: object
-    BorrowerDetails:
-      properties:
-        pools:
-          description: List details of all the loans identified with the given address
-          items:
-            $ref: '#/components/schemas/BorrowerPool'
-          type: array
-      required:
-      - pools
-      type: object
-  responses:
-    BorrowerDetailsResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/BorrowerDetails'
-      description: object containing loan data for a specific borrower

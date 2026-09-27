@@ -43,14 +43,21 @@ paths:
       tags:
       - Votes
 components:
-  responses:
-    VotesResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Votes'
-      description: Array containing the current protocol voting situation
   schemas:
+    VoteValue:
+      properties:
+        value:
+          description: value of the vote
+          example: prop6
+          type: string
+        votes:
+          items:
+            $ref: '#/components/schemas/VoteItem'
+          type: array
+      required:
+      - value
+      - votes
+      type: object
     VoteItem:
       properties:
         address:
@@ -74,17 +81,10 @@ components:
       items:
         $ref: '#/components/schemas/VoteValue'
       type: array
-    VoteValue:
-      properties:
-        value:
-          description: value of the vote
-          example: prop6
-          type: string
-        votes:
-          items:
-            $ref: '#/components/schemas/VoteItem'
-          type: array
-      required:
-      - value
-      - votes
-      type: object
+  responses:
+    VotesResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Votes'
+      description: Array containing the current protocol voting situation

@@ -40,6 +40,22 @@ paths:
       - Holders
 components:
   schemas:
+    Coins:
+      items:
+        $ref: '#/components/schemas/Coin'
+      type: array
+    Holder:
+      properties:
+        address:
+          description: address of the holder
+          example: thor102y0m3uptg0vvudeyh00r2fnz70wq7d8y7mu2g
+          type: string
+        coins:
+          $ref: '#/components/schemas/Coins'
+      required:
+      - address
+      - coins
+      type: object
     Coin:
       description: Represents a digital currency amount
       properties:
@@ -57,22 +73,6 @@ components:
       items:
         $ref: '#/components/schemas/Holder'
       type: array
-    Coins:
-      items:
-        $ref: '#/components/schemas/Coin'
-      type: array
-    Holder:
-      properties:
-        address:
-          description: address of the holder
-          example: thor102y0m3uptg0vvudeyh00r2fnz70wq7d8y7mu2g
-          type: string
-        coins:
-          $ref: '#/components/schemas/Coins'
-      required:
-      - address
-      - coins
-      type: object
   responses:
     HolderResponse:
       content:

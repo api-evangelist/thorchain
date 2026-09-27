@@ -51,22 +51,6 @@ paths:
       - Tcy
 components:
   schemas:
-    TCYDistributionItem:
-      properties:
-        amount:
-          description: Int64(e8), amount of RUNE distributed to the TCY holder.
-          type: string
-        date:
-          description: Int64, Unix timestamp for the TCY distribution.
-          type: string
-        price:
-          description: Int64(e8), RUNE price at the time of distribution.
-          type: string
-      required:
-      - amount
-      - price
-      - date
-      type: object
     TCYDistribution:
       properties:
         address:
@@ -88,6 +72,22 @@ components:
       - total
       - address
       - distributions
+      type: object
+    TCYDistributionItem:
+      properties:
+        amount:
+          description: Int64(e8), amount of RUNE distributed to the TCY holder.
+          type: string
+        date:
+          description: Int64, Unix timestamp for the TCY distribution.
+          type: string
+        price:
+          description: Int64(e8), RUNE price at the time of distribution.
+          type: string
+      required:
+      - amount
+      - price
+      - date
       type: object
   responses:
     TCYDistributionResponse:

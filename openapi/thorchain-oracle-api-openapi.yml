@@ -45,15 +45,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    OraclePrice:
-      type: object
-      properties:
-        symbol:
-          type: string
-          example: BTC
-        amount:
-          type: string
-          example: '105126.5321'
     OraclePricesResponse:
       type: object
       properties:
@@ -68,14 +59,16 @@ components:
           type: object
           items:
             $ref: '#/components/schemas/OraclePrice'
+    OraclePrice:
+      type: object
+      properties:
+        symbol:
+          type: string
+          example: BTC
+        amount:
+          type: string
+          example: '105126.5321'
   parameters:
-    symbol:
-      name: symbol
-      in: path
-      required: true
-      schema:
-        type: string
-        example: BTC
     queryHeight:
       name: height
       in: query
@@ -85,3 +78,10 @@ components:
         type: integer
         format: int64
         minimum: 0
+    symbol:
+      name: symbol
+      in: path
+      required: true
+      schema:
+        type: string
+        example: BTC

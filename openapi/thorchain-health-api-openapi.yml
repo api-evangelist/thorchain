@@ -72,18 +72,6 @@ components:
       - height
       - hash
       type: object
-    HeightTS:
-      properties:
-        height:
-          description: Block height
-          type: integer
-        timestamp:
-          description: Block timestamp (seconds since epoch)
-          type: integer
-      required:
-      - height
-      - timestamp
-      type: object
     Health:
       properties:
         database:
@@ -113,6 +101,18 @@ components:
       - lastFetched
       - lastCommitted
       - lastAggregated
+      type: object
+    HeightTS:
+      properties:
+        height:
+          description: Block height
+          type: integer
+        timestamp:
+          description: Block timestamp (seconds since epoch)
+          type: integer
+      required:
+      - height
+      - timestamp
       type: object
   responses:
     HealthResponse:

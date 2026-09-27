@@ -45,6 +45,17 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    TCYStaker:
+      type: object
+      required:
+      - amount
+      properties:
+        address:
+          type: string
+          example: thor1xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+        amount:
+          type: string
+          example: '0'
     TCYStakersResponse:
       type: array
       items:
@@ -56,17 +67,6 @@ components:
       required:
       - amount
       properties:
-        amount:
-          type: string
-          example: '0'
-    TCYStaker:
-      type: object
-      required:
-      - amount
-      properties:
-        address:
-          type: string
-          example: thor1xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
         amount:
           type: string
           example: '0'
