@@ -1083,7 +1083,239 @@ paths:
       tags:
       - History
 components:
+  responses:
+    EarningsHistoryResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EarningsHistory'
+      description: earnings history
+    ReserveHistoryResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ReserveHistory'
+      description: Reserve
+    SwapHistoryResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SwapHistory'
+      description: Swap count, volume, fee and slip history
+    RunePriceHistoryResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RunePriceHistory'
+      description: Returns rune price history in USD based on the time bucket given
+    LiquidityHistoryResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/LiquidityHistory'
+      description: Withdrawals and deposits history
+    AffiliateEarningResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AffiliateEarning'
+      description: Affiliate earnings (liquidity fees) history
+    DepthHistoryResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DepthHistory'
+      description: Depth and price history
+    AffiliateHistoryResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AffiliateHistory'
+      description: Affiliate fee count and earnings history
+    AffiliateStatsResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AffiliateStats'
+      description: Affiliate count and volume stats history
+    RUNEPoolHistoryResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RUNEPoolHistory'
+      description: Members and Units history of RUNEPool
+    SaversHistoryResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SaversHistory'
+      description: Depth and Units history of savers
+    TVLHistoryResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TVLHistory'
+      description: Total pool depths, total bonds, and total value locked history
   schemas:
+    RunePriceMeta:
+      properties:
+        endRunePriceUSD:
+          description: 'Int64(e8), The price of Rune based on the USD pools at the end of the interval
+
+            '
+          type: string
+        endTime:
+          description: Int64, The end time of bucket in unix timestamp
+          type: string
+        startRunePriceUSD:
+          description: 'Int64(e8), The price of Rune based on the USD pools at the start of the interval
+
+            '
+          type: string
+        startTime:
+          description: Int64, The beginning time of bucket in unix timestamp
+          type: string
+      required:
+      - startTime
+      - endTime
+      - startRunePriceUSD
+      - endRunePriceUSD
+      type: object
+    EarningsHistoryItemPool:
+      description: pool earnings data during the time interval
+      properties:
+        assetLiquidityFees:
+          description: Int64(e8), liquidity fees collected in the pool's asset
+          type: string
+        earnings:
+          description: Int64(e8), total earnings in RUNE (totalLiquidityFees + rewards)
+          type: string
+        pool:
+          description: asset for the given pool
+          type: string
+        rewards:
+          description: 'Int64(e8), RUNE amount sent to (positive) or taken from (negative) the pool as
+
+            a result of balancing it''s share of system income each block
+
+            '
+          type: string
+        runeLiquidityFees:
+          description: Int64(e8), liquidity fees collected in RUNE
+          type: string
+        saverEarning:
+          description: 'Int64(e8), total saver reward collected by the pool, shown in pool''s ASSET
+
+            '
+          type: string
+        totalLiquidityFeesRune:
+          description: 'Int64(e8), total liquidity fees (assetFees + runeFees) collected, shown in RUNE
+
+            '
+          type: string
+      required:
+      - pool
+      - assetLiquidityFees
+      - runeLiquidityFees
+      - totalLiquidityFeesRune
+      - saverEarning
+      - rewards
+      - earnings
+      type: object
+    DepthHistoryItem:
+      properties:
+        assetDepth:
+          description: Int64(e8), the amount of Asset in the pool at the end of the interval
+          type: string
+        assetPrice:
+          description: Float, price of asset in rune. I.e. rune amount / asset amount
+          type: string
+        assetPriceUSD:
+          description: Float, the price of asset in USD (based on the deepest USD pool).
+          type: string
+        closePriceUSD:
+          description: Float, the closing price of asset in USD at the end of the interval.
+          type: string
+        endTime:
+          description: Int64, The end time of bucket in unix timestamp
+          type: string
+        highPriceUSD:
+          description: Float, the highest price of asset in USD during the interval.
+          type: string
+        liquidityUnits:
+          description: Int64, Liquidity Units in the pool at the end of the interval
+          type: string
+        lowPriceUSD:
+          description: Float, the lowest price of asset in USD during the interval.
+          type: string
+        luvi:
+          description: 'Float, The liquidity unit value index. Sqrt(assetDepth * runeDepth)/liquidity units
+
+            '
+          type: string
+        membersCount:
+          description: Int64, Number of liquidity members in the pool at the end of the interval
+          type: string
+        openPriceUSD:
+          description: Float, the opening price of asset in USD at the beginning of the interval.
+          type: string
+        runeDepth:
+          description: Int64(e8), the amount of Rune in the pool at the end of the interval
+          type: string
+        startTime:
+          description: Int64, The beginning time of bucket in unix timestamp
+          type: string
+        synthSupply:
+          description: Int64, Synth supply in the pool at the end of the interval
+          type: string
+        synthUnits:
+          description: Int64, Synth Units in the pool at the end of the interval
+          type: string
+        units:
+          description: 'Int64, Total Units (synthUnits + liquidityUnits) in the pool at the end of the interval
+
+            '
+          type: string
+      required:
+      - startTime
+      - endTime
+      - assetDepth
+      - runeDepth
+      - assetPrice
+      - assetPriceUSD
+      - liquidityUnits
+      - membersCount
+      - synthUnits
+      - synthSupply
+      - units
+      - luvi
+      type: object
+    AffiliateEarningItem:
+      properties:
+        affiliate:
+          description: Affiliate address or THORName
+          type: string
+        count:
+          description: 'Int64, The count of transactions for this affiliate during the time interval
+
+            '
+          type: string
+        earningsRUNE:
+          description: 'Int64(e8), The earnings (liquidity fees) for this affiliate in RUNE during the time interval
+
+            '
+          type: string
+        earningsUSD:
+          description: 'Int64(e2), The earnings (liquidity fees) for this affiliate in USD during the time interval
+
+            '
+          type: string
+      required:
+      - affiliate
+      - earningsUSD
+      - earningsRUNE
+      - count
+      type: object
     SwapHistory:
       properties:
         intervals:
@@ -1093,50 +1325,6 @@ components:
       required:
       - meta
       - intervals
-      type: object
-    RunePriceItem:
-      properties:
-        endTime:
-          description: Int64, The end time of bucket in unix timestamp
-          type: string
-        runePriceUSD:
-          description: 'Int64(e8), The price of Rune based on the USD pools at the the interval
-
-            '
-          type: string
-        startTime:
-          description: Int64, The beginning time of bucket in unix timestamp
-          type: string
-      required:
-      - startTime
-      - endTime
-      - runePriceUSD
-      type: object
-    ReserveItem:
-      properties:
-        endTime:
-          description: Int64, The end time of bucket in unix timestamp
-          type: string
-        gasFeeOutbound:
-          description: Int64(e8), fee made from outbound
-          type: string
-        gasReimbursement:
-          description: Int64(e8), RUNE paid to the pool for compensating the gas fees
-          type: string
-        networkFee:
-          description: 'Int64(e8), RUNE paid to the system on deposit, send messages
-
-            '
-          type: string
-        startTime:
-          description: Int64, The beginning time of bucket in unix timestamp
-          type: string
-      required:
-      - startTime
-      - endTime
-      - gasFeeOutbound
-      - gasReimbursement
-      - networkFee
       type: object
     SwapHistoryItem:
       properties:
@@ -1402,125 +1590,93 @@ components:
       - averageSlip
       - runePriceUSD
       type: object
-    LiquidityHistoryIntervals:
-      items:
-        $ref: '#/components/schemas/LiquidityHistoryItem'
-      type: array
-    AffiliateHistory:
+    LiquidityHistory:
       properties:
         intervals:
-          $ref: '#/components/schemas/AffiliateHistoryIntervals'
+          $ref: '#/components/schemas/LiquidityHistoryIntervals'
         meta:
-          $ref: '#/components/schemas/AffiliateHistoryMeta'
+          $ref: '#/components/schemas/LiquidityHistoryItem'
       required:
       - meta
       - intervals
-      type: object
-    RunePriceMeta:
-      properties:
-        endRunePriceUSD:
-          description: 'Int64(e8), The price of Rune based on the USD pools at the end of the interval
-
-            '
-          type: string
-        endTime:
-          description: Int64, The end time of bucket in unix timestamp
-          type: string
-        startRunePriceUSD:
-          description: 'Int64(e8), The price of Rune based on the USD pools at the start of the interval
-
-            '
-          type: string
-        startTime:
-          description: Int64, The beginning time of bucket in unix timestamp
-          type: string
-      required:
-      - startTime
-      - endTime
-      - startRunePriceUSD
-      - endRunePriceUSD
       type: object
     AffiliateStats:
       items:
         $ref: '#/components/schemas/AffiliateStatsItem'
       type: array
-    TVLHistory:
+    ItemThorname:
       properties:
-        intervals:
-          $ref: '#/components/schemas/TVLHistoryIntervals'
-        meta:
-          $ref: '#/components/schemas/TVLHistoryItem'
+        count:
+          description: 'Int64, The count of affiliates with the same thorname during the time interval
+
+            '
+          type: string
+        thorname:
+          description: thorname of the affiliate
+          type: string
+        volume:
+          description: 'Int64(e8), The volume of affiliates with the same thorname detonated in RUNE
+
+            '
+          type: string
+        volumeUSD:
+          description: 'Int64(e2), The volume of affiliates with the same thorname
+
+            denoted in USD price of the rune in each swap
+
+            '
+          type: string
       required:
-      - meta
-      - intervals
+      - thorname
+      - count
+      - volume
+      - volumeUSD
       type: object
-    ReserveMeta:
+    AffiliateHistoryMeta:
       properties:
+        count:
+          description: 'Int64, The count of affiliates during the time interval
+
+            '
+          type: string
         endTime:
           description: Int64, The end time of bucket in unix timestamp
-          type: string
-        gasFeeOutbound:
-          description: 'Int64(e8), fee made from outbound
-
-            '
-          type: string
-        gasReimbursement:
-          description: 'Int64(e8), RUNE paid to the pool for compensating the gas fees
-
-            '
-          type: string
-        networkFee:
-          description: 'Int64(e8), RUNE paid to the system on deposit, send messages
-
-            '
           type: string
         startTime:
           description: Int64, The beginning time of bucket in unix timestamp
           type: string
+        volume:
+          description: 'Int64(e8), The total earnings of the affiliates detonated in RUNE
+
+            '
+          type: string
+        volumeUSD:
+          description: 'Int64(e2), The total earnings of the affiliates
+
+            denoted in USD price
+
+            '
+          type: string
       required:
       - startTime
       - endTime
-      - gasFeeOutbound
-      - gasReimbursement
-      - networkFee
+      - count
+      - volume
+      - volumeUSD
       type: object
-    EarningsHistory:
+    RUNEPoolHistoryMeta:
       properties:
-        intervals:
-          $ref: '#/components/schemas/EarningsHistoryIntervals'
-        meta:
-          $ref: '#/components/schemas/EarningsHistoryItem'
-      required:
-      - meta
-      - intervals
-      type: object
-    SaversHistoryMeta:
-      properties:
-        endSaversCount:
-          description: Int64, Number of savers member in the savers vault at the end of the interval at time endTime
-          type: string
-        endSaversDepth:
-          description: 'Int64(e8), The depth in the savers vault at the end of the interval at time
-
-            endTime
-
-            '
+        endCount:
+          description: Int64, Number of RUNEPool member in the RUNEPool vault at the end of the interval at time endTime
           type: string
         endTime:
           description: Int64, The end time of bucket in unix timestamp
           type: string
         endUnits:
-          description: Int64, Savers Units in the savers vault at the end of the interval at time endTime
+          description: Int64,  Units in the RUNEPool vault at the end of the interval at time endTime
           type: string
-        startSaversCount:
-          description: 'Int64, Number of savers member in the savers vault at the start of the interval at time startTime
-
-            '
-          type: string
-        startSaversDepth:
-          description: 'Int64(e8), The depth in savers vault at the start of the interval at time
-
-            startTime
+        startCount:
+          description: 'Int64, Number of RUNEPool member in the RUNEPool vault at the start of the interval at time startTime
 
             '
           type: string
@@ -1528,31 +1684,42 @@ components:
           description: Int64, The beginning time of bucket in unix timestamp
           type: string
         startUnits:
-          description: 'Int64, Savers Units in the savers vault at the start of the interval at time startTime
+          description: 'Int64,  Units in the RUNEPool vault at the start of the interval at time startTime
 
             '
           type: string
       required:
       - startTime
       - endTime
-      - startSaversDepth
       - startUnits
-      - startSaversCount
-      - endSaversDepth
+      - startCount
       - endUnits
-      - endSaversCount
+      - endCount
       type: object
-    ReserveIntervals:
+    DepthHistory:
+      properties:
+        intervals:
+          $ref: '#/components/schemas/DepthHistoryIntervals'
+        meta:
+          $ref: '#/components/schemas/DepthHistoryMeta'
+      required:
+      - meta
+      - intervals
+      type: object
+    AffiliateEarning:
       items:
-        $ref: '#/components/schemas/ReserveItem'
+        $ref: '#/components/schemas/AffiliateEarningInterval'
       type: array
-    RUNEPoolHistoryItem:
+    TVLHistoryIntervals:
+      items:
+        $ref: '#/components/schemas/TVLHistoryItem'
+      type: array
+    AffiliateHistoryItem:
       properties:
         count:
-          description: Int64, Number of RUNEPool members in the pool at the end of the interval
-          type: string
-        depth:
-          description: Int64(e8), The depth in the RUNEPool vault at the end of the interval
+          description: 'Int64, The count of affiliates during the time interval
+
+            '
           type: string
         endTime:
           description: Int64, The end time of bucket in unix timestamp
@@ -1560,8 +1727,19 @@ components:
         startTime:
           description: Int64, The beginning time of bucket in unix timestamp
           type: string
-        units:
-          description: 'Int64, Units in the RUNEPool vault at the end of the interval
+        thornames:
+          items:
+            $ref: '#/components/schemas/ItemThorname'
+          type: array
+        volume:
+          description: 'Int64(e8), The total earnings of the affiliates detonated in RUNE
+
+            '
+          type: string
+        volumeUSD:
+          description: 'Int64(e2), The total earnings of the affiliates
+
+            denoted in USD price
 
             '
           type: string
@@ -1569,30 +1747,38 @@ components:
       - startTime
       - endTime
       - count
-      - units
-      type: object
-    AffiliateStatItem:
-      properties:
-        affiliate:
-          description: affiliate address
-          type: string
-        count:
-          description: 'Int64, The count of swaps for the affiliate during the stats interval
-
-            '
-          type: string
-        volumeUSD:
-          description: 'Int64(e2), The volume of swaps for the affiliate
-
-            denoted in USD price of the rune in each swap
-
-            '
-          type: string
-      required:
-      - affiliate
-      - count
+      - thornames
+      - volume
       - volumeUSD
       type: object
+    AffiliateHistoryIntervals:
+      items:
+        $ref: '#/components/schemas/AffiliateHistoryItem'
+      type: array
+    SaversHistory:
+      properties:
+        intervals:
+          $ref: '#/components/schemas/SaversHistoryIntervals'
+        meta:
+          $ref: '#/components/schemas/SaversHistoryMeta'
+      required:
+      - meta
+      - intervals
+      type: object
+    RunePriceHistory:
+      properties:
+        intervals:
+          $ref: '#/components/schemas/RunePriceIntervals'
+        meta:
+          $ref: '#/components/schemas/RunePriceMeta'
+      required:
+      - meta
+      - intervals
+      type: object
+    RUNEPoolHistoryIntervals:
+      items:
+        $ref: '#/components/schemas/RUNEPoolHistoryItem'
+      type: array
     LiquidityHistoryItem:
       properties:
         addAssetLiquidityVolume:
@@ -1673,209 +1859,79 @@ components:
       - net
       - runePriceUSD
       type: object
-    TVLHistoryItem:
+    LiquidityHistoryIntervals:
+      items:
+        $ref: '#/components/schemas/LiquidityHistoryItem'
+      type: array
+    ReserveHistory:
+      properties:
+        intervals:
+          $ref: '#/components/schemas/ReserveIntervals'
+        meta:
+          $ref: '#/components/schemas/ReserveMeta'
+      required:
+      - meta
+      - intervals
+      type: object
+    ReserveIntervals:
+      items:
+        $ref: '#/components/schemas/ReserveItem'
+      type: array
+    SaversHistoryItem:
       properties:
         endTime:
           description: Int64, The end time of bucket in unix timestamp
           type: string
-        poolsDepth:
-          items:
-            $ref: '#/components/schemas/DepthHistoryItemPool'
-          type: array
-        runePriceUSD:
-          description: 'Float, the price of Rune based on the deepest USD pool at the end of the interval.
+        saversCount:
+          description: Int64, Number of saver members in the pool at the end of the interval
+          type: string
+        saversDepth:
+          description: Int64(e8), The depth in the savers vault at the end of the interval
+          type: string
+        saversUnits:
+          description: 'Int64, Savers Units in the saver vault at the end of the interval
 
             '
           type: string
         startTime:
           description: Int64, The beginning time of bucket in unix timestamp
           type: string
-        totalValueBonded:
-          description: 'Int64(e8), the total amount of bonds (both active and standby) at the end of
-
-            the interval
-
-            '
+      required:
+      - startTime
+      - endTime
+      - saversDepth
+      - saversCount
+      - saversUnits
+      type: object
+    SaversHistoryIntervals:
+      items:
+        $ref: '#/components/schemas/SaversHistoryItem'
+      type: array
+    DepthHistoryItemPool:
+      properties:
+        pool:
+          description: asset for the given pool
           type: string
-        totalValueLocked:
-          description: 'Int64(e8), total value locked in the chain (in rune)
+        totalDepth:
+          description: 'Int64(e8) in rune, the total value in the pool (both assets and rune) at the end of the interval.
 
-            This equals `totalPooledValue + totalBondedValue`, as it combines the liquidity
-
-            pools and bonds of the nodes.
-
-            '
-          type: string
-        totalValuePooled:
-          description: 'Int64(e8) in rune, the total pooled value (both assets and rune) in all of the pools at
-
-            the end of the interval.
-
-            Note: this is twice the aggregate Rune depth of all pools.
+            Note: this is twice of the pool''s Rune depth. (as pools are symmetrically balance)
 
             '
           type: string
       required:
-      - startTime
-      - endTime
-      - totalValuePooled
-      - runePriceUSD
-      - poolsDepth
+      - pool
+      - totalDepth
       type: object
-    LiquidityHistory:
+    TVLHistory:
       properties:
         intervals:
-          $ref: '#/components/schemas/LiquidityHistoryIntervals'
+          $ref: '#/components/schemas/TVLHistoryIntervals'
         meta:
-          $ref: '#/components/schemas/LiquidityHistoryItem'
+          $ref: '#/components/schemas/TVLHistoryItem'
       required:
       - meta
       - intervals
-      type: object
-    TVLHistoryIntervals:
-      items:
-        $ref: '#/components/schemas/TVLHistoryItem'
-      type: array
-    RunePriceHistory:
-      properties:
-        intervals:
-          $ref: '#/components/schemas/RunePriceIntervals'
-        meta:
-          $ref: '#/components/schemas/RunePriceMeta'
-      required:
-      - meta
-      - intervals
-      type: object
-    ItemThorname:
-      properties:
-        count:
-          description: 'Int64, The count of affiliates with the same thorname during the time interval
-
-            '
-          type: string
-        thorname:
-          description: thorname of the affiliate
-          type: string
-        volume:
-          description: 'Int64(e8), The volume of affiliates with the same thorname detonated in RUNE
-
-            '
-          type: string
-        volumeUSD:
-          description: 'Int64(e2), The volume of affiliates with the same thorname
-
-            denoted in USD price of the rune in each swap
-
-            '
-          type: string
-      required:
-      - thorname
-      - count
-      - volume
-      - volumeUSD
-      type: object
-    AffiliateHistoryIntervals:
-      items:
-        $ref: '#/components/schemas/AffiliateHistoryItem'
-      type: array
-    DepthHistoryItem:
-      properties:
-        assetDepth:
-          description: Int64(e8), the amount of Asset in the pool at the end of the interval
-          type: string
-        assetPrice:
-          description: Float, price of asset in rune. I.e. rune amount / asset amount
-          type: string
-        assetPriceUSD:
-          description: Float, the price of asset in USD (based on the deepest USD pool).
-          type: string
-        closePriceUSD:
-          description: Float, the closing price of asset in USD at the end of the interval.
-          type: string
-        endTime:
-          description: Int64, The end time of bucket in unix timestamp
-          type: string
-        highPriceUSD:
-          description: Float, the highest price of asset in USD during the interval.
-          type: string
-        liquidityUnits:
-          description: Int64, Liquidity Units in the pool at the end of the interval
-          type: string
-        lowPriceUSD:
-          description: Float, the lowest price of asset in USD during the interval.
-          type: string
-        luvi:
-          description: 'Float, The liquidity unit value index. Sqrt(assetDepth * runeDepth)/liquidity units
-
-            '
-          type: string
-        membersCount:
-          description: Int64, Number of liquidity members in the pool at the end of the interval
-          type: string
-        openPriceUSD:
-          description: Float, the opening price of asset in USD at the beginning of the interval.
-          type: string
-        runeDepth:
-          description: Int64(e8), the amount of Rune in the pool at the end of the interval
-          type: string
-        startTime:
-          description: Int64, The beginning time of bucket in unix timestamp
-          type: string
-        synthSupply:
-          description: Int64, Synth supply in the pool at the end of the interval
-          type: string
-        synthUnits:
-          description: Int64, Synth Units in the pool at the end of the interval
-          type: string
-        units:
-          description: 'Int64, Total Units (synthUnits + liquidityUnits) in the pool at the end of the interval
-
-            '
-          type: string
-      required:
-      - startTime
-      - endTime
-      - assetDepth
-      - runeDepth
-      - assetPrice
-      - assetPriceUSD
-      - liquidityUnits
-      - membersCount
-      - synthUnits
-      - synthSupply
-      - units
-      - luvi
-      type: object
-    AffiliateStatsItem:
-      properties:
-        affiliates:
-          items:
-            $ref: '#/components/schemas/AffiliateStatItem'
-          type: array
-        count:
-          description: 'Int64, The count of unique swaps during the stats interval
-
-            '
-          type: string
-        endTime:
-          description: Int64, The end time of the stats interval in unix timestamp
-          type: string
-        startTime:
-          description: Int64, The beginning time of the stats interval in unix timestamp
-          type: string
-        totalVolumeUSD:
-          description: 'Int64(e2), The total volume of the affiliates
-
-            denoted in USD price
-
-            '
-          type: string
-      required:
-      - startTime
-      - endTime
-      - totalVolumeUSD
-      - count
-      - affiliates
       type: object
     DepthHistoryMeta:
       properties:
@@ -1955,85 +2011,216 @@ components:
       - endMemberCount
       - endSynthUnits
       type: object
-    DepthHistoryIntervals:
+    RunePriceIntervals:
       items:
-        $ref: '#/components/schemas/DepthHistoryItem'
+        $ref: '#/components/schemas/RunePriceItem'
       type: array
-    DepthHistoryItemPool:
+    RUNEPoolHistoryItem:
       properties:
-        pool:
-          description: asset for the given pool
+        count:
+          description: Int64, Number of RUNEPool members in the pool at the end of the interval
           type: string
-        totalDepth:
-          description: 'Int64(e8) in rune, the total value in the pool (both assets and rune) at the end of the interval.
-
-            Note: this is twice of the pool''s Rune depth. (as pools are symmetrically balance)
+        depth:
+          description: Int64(e8), The depth in the RUNEPool vault at the end of the interval
+          type: string
+        endTime:
+          description: Int64, The end time of bucket in unix timestamp
+          type: string
+        startTime:
+          description: Int64, The beginning time of bucket in unix timestamp
+          type: string
+        units:
+          description: 'Int64, Units in the RUNEPool vault at the end of the interval
 
             '
           type: string
       required:
-      - pool
-      - totalDepth
+      - startTime
+      - endTime
+      - count
+      - units
       type: object
-    EarningsHistoryItemPool:
-      description: pool earnings data during the time interval
+    SaversHistoryMeta:
       properties:
-        assetLiquidityFees:
-          description: Int64(e8), liquidity fees collected in the pool's asset
+        endSaversCount:
+          description: Int64, Number of savers member in the savers vault at the end of the interval at time endTime
           type: string
-        earnings:
-          description: Int64(e8), total earnings in RUNE (totalLiquidityFees + rewards)
-          type: string
-        pool:
-          description: asset for the given pool
-          type: string
-        rewards:
-          description: 'Int64(e8), RUNE amount sent to (positive) or taken from (negative) the pool as
+        endSaversDepth:
+          description: 'Int64(e8), The depth in the savers vault at the end of the interval at time
 
-            a result of balancing it''s share of system income each block
+            endTime
 
             '
           type: string
-        runeLiquidityFees:
-          description: Int64(e8), liquidity fees collected in RUNE
+        endTime:
+          description: Int64, The end time of bucket in unix timestamp
           type: string
-        saverEarning:
-          description: 'Int64(e8), total saver reward collected by the pool, shown in pool''s ASSET
+        endUnits:
+          description: Int64, Savers Units in the savers vault at the end of the interval at time endTime
+          type: string
+        startSaversCount:
+          description: 'Int64, Number of savers member in the savers vault at the start of the interval at time startTime
 
             '
           type: string
-        totalLiquidityFeesRune:
-          description: 'Int64(e8), total liquidity fees (assetFees + runeFees) collected, shown in RUNE
+        startSaversDepth:
+          description: 'Int64(e8), The depth in savers vault at the start of the interval at time
+
+            startTime
+
+            '
+          type: string
+        startTime:
+          description: Int64, The beginning time of bucket in unix timestamp
+          type: string
+        startUnits:
+          description: 'Int64, Savers Units in the savers vault at the start of the interval at time startTime
 
             '
           type: string
       required:
-      - pool
-      - assetLiquidityFees
-      - runeLiquidityFees
-      - totalLiquidityFeesRune
-      - saverEarning
-      - rewards
-      - earnings
+      - startTime
+      - endTime
+      - startSaversDepth
+      - startUnits
+      - startSaversCount
+      - endSaversDepth
+      - endUnits
+      - endSaversCount
       type: object
-    RUNEPoolHistoryIntervals:
+    EarningsHistoryIntervals:
       items:
-        $ref: '#/components/schemas/RUNEPoolHistoryItem'
+        $ref: '#/components/schemas/EarningsHistoryItem'
       type: array
-    SaversHistory:
+    ReserveMeta:
+      properties:
+        endTime:
+          description: Int64, The end time of bucket in unix timestamp
+          type: string
+        gasFeeOutbound:
+          description: 'Int64(e8), fee made from outbound
+
+            '
+          type: string
+        gasReimbursement:
+          description: 'Int64(e8), RUNE paid to the pool for compensating the gas fees
+
+            '
+          type: string
+        networkFee:
+          description: 'Int64(e8), RUNE paid to the system on deposit, send messages
+
+            '
+          type: string
+        startTime:
+          description: Int64, The beginning time of bucket in unix timestamp
+          type: string
+      required:
+      - startTime
+      - endTime
+      - gasFeeOutbound
+      - gasReimbursement
+      - networkFee
+      type: object
+    AffiliateStatItem:
+      properties:
+        affiliate:
+          description: affiliate address
+          type: string
+        count:
+          description: 'Int64, The count of swaps for the affiliate during the stats interval
+
+            '
+          type: string
+        volumeUSD:
+          description: 'Int64(e2), The volume of swaps for the affiliate
+
+            denoted in USD price of the rune in each swap
+
+            '
+          type: string
+      required:
+      - affiliate
+      - count
+      - volumeUSD
+      type: object
+    AffiliateStatsItem:
+      properties:
+        affiliates:
+          items:
+            $ref: '#/components/schemas/AffiliateStatItem'
+          type: array
+        count:
+          description: 'Int64, The count of unique swaps during the stats interval
+
+            '
+          type: string
+        endTime:
+          description: Int64, The end time of the stats interval in unix timestamp
+          type: string
+        startTime:
+          description: Int64, The beginning time of the stats interval in unix timestamp
+          type: string
+        totalVolumeUSD:
+          description: 'Int64(e2), The total volume of the affiliates
+
+            denoted in USD price
+
+            '
+          type: string
+      required:
+      - startTime
+      - endTime
+      - totalVolumeUSD
+      - count
+      - affiliates
+      type: object
+    AffiliateHistory:
       properties:
         intervals:
-          $ref: '#/components/schemas/SaversHistoryIntervals'
+          $ref: '#/components/schemas/AffiliateHistoryIntervals'
         meta:
-          $ref: '#/components/schemas/SaversHistoryMeta'
+          $ref: '#/components/schemas/AffiliateHistoryMeta'
       required:
       - meta
       - intervals
       type: object
-    SwapHistoryIntervals:
-      items:
-        $ref: '#/components/schemas/SwapHistoryItem'
-      type: array
+    AffiliateEarningInterval:
+      properties:
+        affiliates:
+          description: List of affiliate earnings for the time interval
+          items:
+            $ref: '#/components/schemas/AffiliateEarningItem'
+          type: array
+        count:
+          description: 'Int64, The total count of affiliate transactions during the time interval
+
+            '
+          type: string
+        endTime:
+          description: Int64, The end time of bucket in unix timestamp
+          type: string
+        startTime:
+          description: Int64, The beginning time of bucket in unix timestamp
+          type: string
+        totalEarningsRune:
+          description: 'Int64(e8), The total earnings (liquidity fees) of all affiliates in RUNE during the time interval
+
+            '
+          type: string
+        totalEarningsUSD:
+          description: 'Int64(e2), The total earnings (liquidity fees) of all affiliates in USD during the time interval
+
+            '
+          type: string
+      required:
+      - startTime
+      - endTime
+      - totalEarningsRune
+      - totalEarningsUSD
+      - count
+      - affiliates
+      type: object
     RUNEPoolHistory:
       properties:
         intervals:
@@ -2044,48 +2231,87 @@ components:
       - meta
       - intervals
       type: object
-    RUNEPoolHistoryMeta:
+    EarningsHistory:
       properties:
-        endCount:
-          description: Int64, Number of RUNEPool member in the RUNEPool vault at the end of the interval at time endTime
-          type: string
+        intervals:
+          $ref: '#/components/schemas/EarningsHistoryIntervals'
+        meta:
+          $ref: '#/components/schemas/EarningsHistoryItem'
+      required:
+      - meta
+      - intervals
+      type: object
+    TVLHistoryItem:
+      properties:
         endTime:
           description: Int64, The end time of bucket in unix timestamp
           type: string
-        endUnits:
-          description: Int64,  Units in the RUNEPool vault at the end of the interval at time endTime
-          type: string
-        startCount:
-          description: 'Int64, Number of RUNEPool member in the RUNEPool vault at the start of the interval at time startTime
+        poolsDepth:
+          items:
+            $ref: '#/components/schemas/DepthHistoryItemPool'
+          type: array
+        runePriceUSD:
+          description: 'Float, the price of Rune based on the deepest USD pool at the end of the interval.
 
             '
           type: string
         startTime:
           description: Int64, The beginning time of bucket in unix timestamp
           type: string
-        startUnits:
-          description: 'Int64,  Units in the RUNEPool vault at the start of the interval at time startTime
+        totalValueBonded:
+          description: 'Int64(e8), the total amount of bonds (both active and standby) at the end of
+
+            the interval
+
+            '
+          type: string
+        totalValueLocked:
+          description: 'Int64(e8), total value locked in the chain (in rune)
+
+            This equals `totalPooledValue + totalBondedValue`, as it combines the liquidity
+
+            pools and bonds of the nodes.
+
+            '
+          type: string
+        totalValuePooled:
+          description: 'Int64(e8) in rune, the total pooled value (both assets and rune) in all of the pools at
+
+            the end of the interval.
+
+            Note: this is twice the aggregate Rune depth of all pools.
 
             '
           type: string
       required:
       - startTime
       - endTime
-      - startUnits
-      - startCount
-      - endUnits
-      - endCount
+      - totalValuePooled
+      - runePriceUSD
+      - poolsDepth
       type: object
-    DepthHistory:
+    RunePriceItem:
       properties:
-        intervals:
-          $ref: '#/components/schemas/DepthHistoryIntervals'
-        meta:
-          $ref: '#/components/schemas/DepthHistoryMeta'
+        endTime:
+          description: Int64, The end time of bucket in unix timestamp
+          type: string
+        runePriceUSD:
+          description: 'Int64(e8), The price of Rune based on the USD pools at the the interval
+
+            '
+          type: string
+        startTime:
+          description: Int64, The beginning time of bucket in unix timestamp
+          type: string
       required:
-      - meta
-      - intervals
+      - startTime
+      - endTime
+      - runePriceUSD
       type: object
+    SwapHistoryIntervals:
+      items:
+        $ref: '#/components/schemas/SwapHistoryItem'
+      type: array
     EarningsHistoryItem:
       properties:
         avgNodeCount:
@@ -2140,103 +2366,19 @@ components:
       - runePriceUSD
       - pools
       type: object
-    ReserveHistory:
-      properties:
-        intervals:
-          $ref: '#/components/schemas/ReserveIntervals'
-        meta:
-          $ref: '#/components/schemas/ReserveMeta'
-      required:
-      - meta
-      - intervals
-      type: object
-    RunePriceIntervals:
-      items:
-        $ref: '#/components/schemas/RunePriceItem'
-      type: array
-    AffiliateEarningItem:
-      properties:
-        affiliate:
-          description: Affiliate address or THORName
-          type: string
-        count:
-          description: 'Int64, The count of transactions for this affiliate during the time interval
-
-            '
-          type: string
-        earningsRUNE:
-          description: 'Int64(e8), The earnings (liquidity fees) for this affiliate in RUNE during the time interval
-
-            '
-          type: string
-        earningsUSD:
-          description: 'Int64(e2), The earnings (liquidity fees) for this affiliate in USD during the time interval
-
-            '
-          type: string
-      required:
-      - affiliate
-      - earningsUSD
-      - earningsRUNE
-      - count
-      type: object
-    AffiliateEarningInterval:
-      properties:
-        affiliates:
-          description: List of affiliate earnings for the time interval
-          items:
-            $ref: '#/components/schemas/AffiliateEarningItem'
-          type: array
-        count:
-          description: 'Int64, The total count of affiliate transactions during the time interval
-
-            '
-          type: string
-        endTime:
-          description: Int64, The end time of bucket in unix timestamp
-          type: string
-        startTime:
-          description: Int64, The beginning time of bucket in unix timestamp
-          type: string
-        totalEarningsRune:
-          description: 'Int64(e8), The total earnings (liquidity fees) of all affiliates in RUNE during the time interval
-
-            '
-          type: string
-        totalEarningsUSD:
-          description: 'Int64(e2), The total earnings (liquidity fees) of all affiliates in USD during the time interval
-
-            '
-          type: string
-      required:
-      - startTime
-      - endTime
-      - totalEarningsRune
-      - totalEarningsUSD
-      - count
-      - affiliates
-      type: object
-    AffiliateEarning:
-      items:
-        $ref: '#/components/schemas/AffiliateEarningInterval'
-      type: array
-    SaversHistoryIntervals:
-      items:
-        $ref: '#/components/schemas/SaversHistoryItem'
-      type: array
-    SaversHistoryItem:
+    ReserveItem:
       properties:
         endTime:
           description: Int64, The end time of bucket in unix timestamp
           type: string
-        saversCount:
-          description: Int64, Number of saver members in the pool at the end of the interval
+        gasFeeOutbound:
+          description: Int64(e8), fee made from outbound
           type: string
-        saversDepth:
-          description: Int64(e8), The depth in the savers vault at the end of the interval
+        gasReimbursement:
+          description: Int64(e8), RUNE paid to the pool for compensating the gas fees
           type: string
-        saversUnits:
-          description: 'Int64, Savers Units in the saver vault at the end of the interval
+        networkFee:
+          description: 'Int64(e8), RUNE paid to the system on deposit, send messages
 
             '
           type: string
@@ -2246,153 +2388,11 @@ components:
       required:
       - startTime
       - endTime
-      - saversDepth
-      - saversCount
-      - saversUnits
+      - gasFeeOutbound
+      - gasReimbursement
+      - networkFee
       type: object
-    AffiliateHistoryItem:
-      properties:
-        count:
-          description: 'Int64, The count of affiliates during the time interval
-
-            '
-          type: string
-        endTime:
-          description: Int64, The end time of bucket in unix timestamp
-          type: string
-        startTime:
-          description: Int64, The beginning time of bucket in unix timestamp
-          type: string
-        thornames:
-          items:
-            $ref: '#/components/schemas/ItemThorname'
-          type: array
-        volume:
-          description: 'Int64(e8), The total earnings of the affiliates detonated in RUNE
-
-            '
-          type: string
-        volumeUSD:
-          description: 'Int64(e2), The total earnings of the affiliates
-
-            denoted in USD price
-
-            '
-          type: string
-      required:
-      - startTime
-      - endTime
-      - count
-      - thornames
-      - volume
-      - volumeUSD
-      type: object
-    EarningsHistoryIntervals:
+    DepthHistoryIntervals:
       items:
-        $ref: '#/components/schemas/EarningsHistoryItem'
+        $ref: '#/components/schemas/DepthHistoryItem'
       type: array
-    AffiliateHistoryMeta:
-      properties:
-        count:
-          description: 'Int64, The count of affiliates during the time interval
-
-            '
-          type: string
-        endTime:
-          description: Int64, The end time of bucket in unix timestamp
-          type: string
-        startTime:
-          description: Int64, The beginning time of bucket in unix timestamp
-          type: string
-        volume:
-          description: 'Int64(e8), The total earnings of the affiliates detonated in RUNE
-
-            '
-          type: string
-        volumeUSD:
-          description: 'Int64(e2), The total earnings of the affiliates
-
-            denoted in USD price
-
-            '
-          type: string
-      required:
-      - startTime
-      - endTime
-      - count
-      - volume
-      - volumeUSD
-      type: object
-  responses:
-    SwapHistoryResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/SwapHistory'
-      description: Swap count, volume, fee and slip history
-    AffiliateEarningResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/AffiliateEarning'
-      description: Affiliate earnings (liquidity fees) history
-    ReserveHistoryResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ReserveHistory'
-      description: Reserve
-    SaversHistoryResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/SaversHistory'
-      description: Depth and Units history of savers
-    LiquidityHistoryResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/LiquidityHistory'
-      description: Withdrawals and deposits history
-    DepthHistoryResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/DepthHistory'
-      description: Depth and price history
-    TVLHistoryResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/TVLHistory'
-      description: Total pool depths, total bonds, and total value locked history
-    RUNEPoolHistoryResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/RUNEPoolHistory'
-      description: Members and Units history of RUNEPool
-    EarningsHistoryResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/EarningsHistory'
-      description: earnings history
-    AffiliateHistoryResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/AffiliateHistory'
-      description: Affiliate fee count and earnings history
-    RunePriceHistoryResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/RunePriceHistory'
-      description: Returns rune price history in USD based on the time bucket given
-    AffiliateStatsResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/AffiliateStats'
-      description: Affiliate count and volume stats history

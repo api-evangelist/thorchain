@@ -152,20 +152,13 @@ components:
         luvi_growth_pct:
           type: string
           example: '0'
-    LiquidityProviderResponse:
-      $ref: '#/components/schemas/LiquidityProvider'
     LiquidityProvidersResponse:
       type: array
       items:
         $ref: '#/components/schemas/LiquidityProviderSummary'
+    LiquidityProviderResponse:
+      $ref: '#/components/schemas/LiquidityProvider'
   parameters:
-    address:
-      name: address
-      in: path
-      required: true
-      schema:
-        type: string
-        example: thor1zupk5lmc84r2dh738a9g3zscavannjy3nzplwt
     asset:
       name: asset
       in: path
@@ -173,6 +166,13 @@ components:
       schema:
         type: string
         example: BTC.BTC
+    address:
+      name: address
+      in: path
+      required: true
+      schema:
+        type: string
+        example: thor1zupk5lmc84r2dh738a9g3zscavannjy3nzplwt
     queryHeight:
       name: height
       in: query

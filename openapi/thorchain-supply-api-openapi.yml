@@ -63,16 +63,6 @@ paths:
       summary: Supply cmc
       x-summary-source: derived
 components:
-  parameters:
-    queryHeight:
-      name: height
-      in: query
-      description: optional block height, defaults to current tip
-      required: false
-      schema:
-        type: integer
-        format: int64
-        minimum: 0
   schemas:
     LockedSupply:
       type: object
@@ -100,3 +90,13 @@ components:
           format: int64
           description: total RUNE supply
           example: 50000000000
+  parameters:
+    queryHeight:
+      name: height
+      in: query
+      description: optional block height, defaults to current tip
+      required: false
+      schema:
+        type: integer
+        format: int64
+        minimum: 0

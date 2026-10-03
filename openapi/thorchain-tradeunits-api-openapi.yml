@@ -27,10 +27,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    TradeUnitsResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/TradeUnitResponse'
     TradeUnitResponse:
       type: object
       required:
@@ -48,6 +44,10 @@ components:
         depth:
           type: string
           description: total depth of trade asset
+    TradeUnitsResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/TradeUnitResponse'
   parameters:
     queryHeight:
       name: height

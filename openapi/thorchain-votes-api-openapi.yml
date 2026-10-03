@@ -44,6 +44,10 @@ paths:
       - Votes
 components:
   schemas:
+    Votes:
+      items:
+        $ref: '#/components/schemas/VoteValue'
+      type: array
     VoteValue:
       properties:
         value:
@@ -77,10 +81,6 @@ components:
       - key
       - date
       type: object
-    Votes:
-      items:
-        $ref: '#/components/schemas/VoteValue'
-      type: array
   responses:
     VotesResponse:
       content:

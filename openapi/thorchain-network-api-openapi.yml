@@ -250,7 +250,62 @@ paths:
       summary: Ban
       x-summary-source: derived
 components:
+  responses:
+    NetworkResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Network'
+      description: Returns an object containing Network data
   schemas:
+    BondMetrics:
+      properties:
+        averageActiveBond:
+          description: Int64(e8), Average bond of active nodes
+          type: string
+        averageStandbyBond:
+          description: Int64(e8), Average bond of standby nodes
+          type: string
+        bondHardCap:
+          description: Int64(e8), Highest effective bond for nodes
+          type: string
+        maximumActiveBond:
+          description: Int64(e8), Maxinum bond of active nodes
+          type: string
+        maximumStandbyBond:
+          description: Int64(e8), Maximum bond of standby nodes
+          type: string
+        medianActiveBond:
+          description: Int64(e8), Median bond of active nodes
+          type: string
+        medianStandbyBond:
+          description: Int64(e8), Median bond of standby nodes
+          type: string
+        minimumActiveBond:
+          description: Int64(e8), Minimum bond of active nodes
+          type: string
+        minimumStandbyBond:
+          description: Int64(e8), Minimum bond of standby nodes
+          type: string
+        totalActiveBond:
+          description: Int64(e8), Total bond of active nodes
+          type: string
+        totalStandbyBond:
+          description: Int64(e8), Total bond of standby nodes
+          type: string
+      required:
+      - totalActiveBond
+      - averageActiveBond
+      - medianActiveBond
+      - minimumActiveBond
+      - maximumActiveBond
+      - bondHardCap
+      - totalStandbyBond
+      - averageStandbyBond
+      - medianStandbyBond
+      - minimumStandbyBond
+      - maximumStandbyBond
+      type: object
     Network:
       properties:
         activeBonds:
@@ -352,54 +407,36 @@ components:
       - bondReward
       - poolReward
       type: object
-    BondMetrics:
-      properties:
-        averageActiveBond:
-          description: Int64(e8), Average bond of active nodes
-          type: string
-        averageStandbyBond:
-          description: Int64(e8), Average bond of standby nodes
-          type: string
-        bondHardCap:
-          description: Int64(e8), Highest effective bond for nodes
-          type: string
-        maximumActiveBond:
-          description: Int64(e8), Maxinum bond of active nodes
-          type: string
-        maximumStandbyBond:
-          description: Int64(e8), Maximum bond of standby nodes
-          type: string
-        medianActiveBond:
-          description: Int64(e8), Median bond of active nodes
-          type: string
-        medianStandbyBond:
-          description: Int64(e8), Median bond of standby nodes
-          type: string
-        minimumActiveBond:
-          description: Int64(e8), Minimum bond of active nodes
-          type: string
-        minimumStandbyBond:
-          description: Int64(e8), Minimum bond of standby nodes
-          type: string
-        totalActiveBond:
-          description: Int64(e8), Total bond of active nodes
-          type: string
-        totalStandbyBond:
-          description: Int64(e8), Total bond of standby nodes
-          type: string
-      required:
-      - totalActiveBond
-      - averageActiveBond
-      - medianActiveBond
-      - minimumActiveBond
-      - maximumActiveBond
-      - bondHardCap
-      - totalStandbyBond
-      - averageStandbyBond
-      - medianStandbyBond
-      - minimumStandbyBond
-      - maximumStandbyBond
+    OutboundFee:
       type: object
+      required:
+      - asset
+      - outbound_fee
+      properties:
+        asset:
+          type: string
+          example: ETH.ETH
+          description: the asset to display the outbound fee for
+        outbound_fee:
+          type: string
+          example: '300000'
+          description: the asset's outbound fee, in (1e8-format) units of the asset
+        fee_withheld_rune:
+          type: string
+          example: '30000000000000'
+          description: Total RUNE the network has withheld as fees to later cover gas costs for this asset's outbounds
+        fee_spent_rune:
+          type: string
+          example: '20000000000000'
+          description: Total RUNE the network has spent to reimburse gas costs for this asset's outbounds
+        surplus_rune:
+          type: string
+          example: '10000000000000'
+          description: amount of RUNE by which the fee_withheld_rune exceeds the fee_spent_rune
+        dynamic_multiplier_basis_points:
+          type: string
+          example: '15000'
+          description: dynamic multiplier basis points, based on the surplus_rune, affecting the size of the outbound_fee
     BanResponse:
       type: object
       properties:
@@ -414,42 +451,29 @@ components:
           items:
             type: string
             example: thor1f3s7q037eancht7sg0aj995dht25rwrnu4ats5
-    UpgradeProposalsResponse:
+    OutboundFeesResponse:
       type: array
       items:
-        $ref: '#/components/schemas/UpgradeProposal'
-    VersionResponse:
+        $ref: '#/components/schemas/OutboundFee'
+    LastBlock:
       type: object
       required:
-      - current
-      - next
-      - querier
+      - chain
+      - last_observed_in
+      - last_signed_out
+      - thorchain
       properties:
-        current:
+        chain:
           type: string
-          example: 0.17.0
-          description: current version
-        next:
-          type: string
-          example: 0.18.0
-          description: next version (minimum version for a node to become Active)
-        next_since_height:
+        last_observed_in:
           type: integer
           format: int64
-          example: 2000000
-          description: height at which the minimum joining version last changed
-        querier:
-          type: string
-          example: 0.16.0
-          description: querier version
-    UpgradeVotesResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/UpgradeVote'
-    LastBlockResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/LastBlock'
+        last_signed_out:
+          type: integer
+          format: int64
+        thorchain:
+          type: integer
+          format: int64
     InboundAddress:
       type: object
       required:
@@ -510,29 +534,6 @@ components:
           type: string
           example: '10000'
           description: Defines the minimum transaction size for the chain in base units (sats, wei, uatom). Transactions with asset amounts lower than the dust_threshold are ignored.
-    OutboundFeesResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/OutboundFee'
-    LastBlock:
-      type: object
-      required:
-      - chain
-      - last_observed_in
-      - last_signed_out
-      - thorchain
-      properties:
-        chain:
-          type: string
-        last_observed_in:
-          type: integer
-          format: int64
-        last_signed_out:
-          type: integer
-          format: int64
-        thorchain:
-          type: integer
-          format: int64
     NetworkResponse:
       type: object
       required:
@@ -626,81 +627,10 @@ components:
           type: boolean
           example: false
           description: indicates if all anchor chains are halted (true), or at least one anchor chain is available (false)
-    ConstantsResponse:
-      type: object
-      properties:
-        int_64_values:
-          type: object
-          additionalProperties:
-            type: string
-          example:
-            AsgardSize: 40
-        bool_values:
-          type: object
-          additionalProperties:
-            type: string
-          example:
-            StrictBondLiquidityRatio: true
-        string_values:
-          type: object
-          additionalProperties:
-            type: string
-          example:
-            DefaultPoolStatus: Staged
-    InboundAddressesResponse:
+    UpgradeVotesResponse:
       type: array
       items:
-        $ref: '#/components/schemas/InboundAddress'
-    UpgradeVote:
-      type: object
-      required:
-      - height
-      - node_address
-      - vote
-      properties:
-        node_address:
-          type: string
-          example: thor1f3s7q037eancht7sg0aj995dht25rwrnu4ats5
-          description: the node address of the voter
-        vote:
-          type: string
-          enum:
-          - approve
-          - reject
-          example: approve
-          description: the vote cast by the node
-    OutboundFee:
-      type: object
-      required:
-      - asset
-      - outbound_fee
-      properties:
-        asset:
-          type: string
-          example: ETH.ETH
-          description: the asset to display the outbound fee for
-        outbound_fee:
-          type: string
-          example: '300000'
-          description: the asset's outbound fee, in (1e8-format) units of the asset
-        fee_withheld_rune:
-          type: string
-          example: '30000000000000'
-          description: Total RUNE the network has withheld as fees to later cover gas costs for this asset's outbounds
-        fee_spent_rune:
-          type: string
-          example: '20000000000000'
-          description: Total RUNE the network has spent to reimburse gas costs for this asset's outbounds
-        surplus_rune:
-          type: string
-          example: '10000000000000'
-          description: amount of RUNE by which the fee_withheld_rune exceeds the fee_spent_rune
-        dynamic_multiplier_basis_points:
-          type: string
-          example: '15000'
-          description: dynamic multiplier basis points, based on the surplus_rune, affecting the size of the outbound_fee
-    UpgradeProposalResponse:
-      $ref: '#/components/schemas/UpgradeProposal'
+        $ref: '#/components/schemas/UpgradeVote'
     UpgradeProposal:
       type: object
       required:
@@ -746,28 +676,84 @@ components:
             type: string
             example: thor1f3s7q037eancht7sg0aj995dht25rwrnu4ats5
           description: the list of node addresses that have rejected the upgrade
-  responses:
-    NetworkResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Network'
-      description: Returns an object containing Network data
+    UpgradeProposalResponse:
+      $ref: '#/components/schemas/UpgradeProposal'
+    UpgradeVote:
+      type: object
+      required:
+      - height
+      - node_address
+      - vote
+      properties:
+        node_address:
+          type: string
+          example: thor1f3s7q037eancht7sg0aj995dht25rwrnu4ats5
+          description: the node address of the voter
+        vote:
+          type: string
+          enum:
+          - approve
+          - reject
+          example: approve
+          description: the vote cast by the node
+    LastBlockResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/LastBlock'
+    InboundAddressesResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/InboundAddress'
+    ConstantsResponse:
+      type: object
+      properties:
+        int_64_values:
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            AsgardSize: 40
+        bool_values:
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            StrictBondLiquidityRatio: true
+        string_values:
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            DefaultPoolStatus: Staged
+    VersionResponse:
+      type: object
+      required:
+      - current
+      - next
+      - querier
+      properties:
+        current:
+          type: string
+          example: 0.17.0
+          description: current version
+        next:
+          type: string
+          example: 0.18.0
+          description: next version (minimum version for a node to become Active)
+        next_since_height:
+          type: integer
+          format: int64
+          example: 2000000
+          description: height at which the minimum joining version last changed
+        querier:
+          type: string
+          example: 0.16.0
+          description: querier version
+    UpgradeProposalsResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/UpgradeProposal'
   parameters:
-    chain:
-      name: chain
-      in: path
-      required: true
-      schema:
-        type: string
-        example: BTC
-    asset:
-      name: asset
-      in: path
-      required: true
-      schema:
-        type: string
-        example: BTC.BTC
     name:
       name: name
       in: path
@@ -775,6 +761,27 @@ components:
       schema:
         type: string
         example: v3.137.0
+    asset:
+      name: asset
+      in: path
+      required: true
+      schema:
+        type: string
+        example: BTC.BTC
+    address:
+      name: address
+      in: path
+      required: true
+      schema:
+        type: string
+        example: thor1zupk5lmc84r2dh738a9g3zscavannjy3nzplwt
+    chain:
+      name: chain
+      in: path
+      required: true
+      schema:
+        type: string
+        example: BTC
     queryHeight:
       name: height
       in: query
@@ -784,13 +791,6 @@ components:
         type: integer
         format: int64
         minimum: 0
-    address:
-      name: address
-      in: path
-      required: true
-      schema:
-        type: string
-        example: thor1zupk5lmc84r2dh738a9g3zscavannjy3nzplwt
 x-refined-from:
 - thorchain-midgard-openapi.json
 - thorchain-thornode-openapi.yaml

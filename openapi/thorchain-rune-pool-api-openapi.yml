@@ -86,6 +86,48 @@ paths:
       - RUNE Pool
 components:
   schemas:
+    RUNEProvider:
+      type: object
+      required:
+      - rune_address
+      - units
+      - value
+      - pnl
+      - deposit_amount
+      - withdraw_amount
+      - last_deposit_height
+      - last_withdraw_height
+      properties:
+        rune_address:
+          type: string
+          example: THOR.RUNE
+        units:
+          type: string
+          example: '1234'
+        value:
+          type: string
+          example: '123456'
+        pnl:
+          type: string
+          example: '123456'
+        deposit_amount:
+          type: string
+          example: '6677'
+        withdraw_amount:
+          type: string
+          example: '5443'
+        last_deposit_height:
+          type: integer
+          format: int64
+          example: 82745
+        last_withdraw_height:
+          type: integer
+          format: int64
+          example: 82745
+    RUNEProvidersResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/RUNEProvider'
     POL:
       type: object
       required:
@@ -115,6 +157,8 @@ components:
           type: string
           example: '21999180112172346'
           description: current amount of rune deposited
+    RUNEProviderResponse:
+      $ref: '#/components/schemas/RUNEProvider'
     RUNEPoolResponse:
       type: object
       required:
@@ -186,50 +230,6 @@ components:
               type: string
               example: '123456'
               description: the current RUNE deposited by the reserve
-    RUNEProvider:
-      type: object
-      required:
-      - rune_address
-      - units
-      - value
-      - pnl
-      - deposit_amount
-      - withdraw_amount
-      - last_deposit_height
-      - last_withdraw_height
-      properties:
-        rune_address:
-          type: string
-          example: THOR.RUNE
-        units:
-          type: string
-          example: '1234'
-        value:
-          type: string
-          example: '123456'
-        pnl:
-          type: string
-          example: '123456'
-        deposit_amount:
-          type: string
-          example: '6677'
-        withdraw_amount:
-          type: string
-          example: '5443'
-        last_deposit_height:
-          type: integer
-          format: int64
-          example: 82745
-        last_withdraw_height:
-          type: integer
-          format: int64
-          example: 82745
-    RUNEProvidersResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/RUNEProvider'
-    RUNEProviderResponse:
-      $ref: '#/components/schemas/RUNEProvider'
     RUNEPoolDetails:
       description: List details of all the RUNEPools identified with the given addresses
       items:

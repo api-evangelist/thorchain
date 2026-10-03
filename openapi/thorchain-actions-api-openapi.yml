@@ -147,111 +147,21 @@ paths:
       - Actions
 components:
   schemas:
-    TcyMetadata:
+    FailedMetadata:
       properties:
+        code:
+          description: failed transaction code
+          type: string
         memo:
-          description: Transaction memo of tcy message.
+          description: failed transaction memo
+          type: string
+        reason:
+          description: failed transaction code
           type: string
       required:
       - memo
-      type: object
-    Transaction:
-      description: Transaction data
-      properties:
-        address:
-          description: Sender address
-          type: string
-        affiliate:
-          description: if transactions flaged as affiliate
-          type: boolean
-        coins:
-          $ref: '#/components/schemas/Coins'
-        height:
-          description: 'The thorchain height that the outbound transaction occurred.
-
-            '
-          type: string
-        txID:
-          description: 'Transaction id hash. Some transactions (such as outbound transactions made in the
-
-            native asset) may have a zero value.
-
-            '
-          type: string
-      required:
-      - txID
-      - address
-      - coins
-      type: object
-    RebondMetadata:
-      properties:
-        memo:
-          description: Transaction memo of bond event
-          type: string
-        newBondAddress:
-          description: new bond address
-          type: string
-        nodeAddress:
-          description: node address
-          type: string
-      required:
-      - memo
-      - nodeAddress
-      - newBondAddress
-      type: object
-    Coin:
-      description: Represents a digital currency amount
-      properties:
-        amount:
-          description: Int64(e8), asset Amount.
-          type: string
-        asset:
-          description: Asset in CHAIN.SYMBOL format
-          type: string
-      required:
-      - asset
-      - amount
-      type: object
-    Coins:
-      items:
-        $ref: '#/components/schemas/Coin'
-      type: array
-    WithdrawMetadata:
-      properties:
-        asymmetry:
-          description: 'Decimal (-1.0 <=> 1.0), indicates how asymmetrical the withdrawal was. 0 means
-
-            totally symmetrical
-
-            '
-          type: string
-        basisPoints:
-          description: 'Int64 (Basis points, 0-10000, where 10000=100%), percentage of total pool ownership
-
-            withdrawn
-
-            '
-          type: string
-        impermanentLossProtection:
-          description: Int64, additional Rune paid out because of impermanent loss protection
-          type: string
-        liquidityUnits:
-          description: 'Int64, amount of liquidity units removed from the member as result of the withdrawal
-
-            '
-          type: string
-        memo:
-          description: Transaction memo of the withdraw action
-          type: string
-        networkFees:
-          $ref: '#/components/schemas/NetworkFees'
-      required:
-      - liquidityUnits
-      - asymmetry
-      - basisPoints
-      - networkFees
-      - impermanentLossProtection
-      - memo
+      - reason
+      - code
       type: object
     SwapMetadata:
       properties:
@@ -304,82 +214,17 @@ components:
       - inPriceUSD
       - outPriceUSD
       type: object
-    Action:
-      description: action details among with related transactions
+    Coins:
+      items:
+        $ref: '#/components/schemas/Coin'
+      type: array
+    LimitSwapMetadata:
       properties:
-        date:
-          description: Int64, nano timestamp of the block at which the action was registered
-          type: string
-        height:
-          description: Int64, height of the block at which the action was registered
-          type: string
-        in:
-          description: Inbound transactions related to the action
-          items:
-            $ref: '#/components/schemas/Transaction'
-          type: array
-        metadata:
-          $ref: '#/components/schemas/Metadata'
-        out:
-          description: Outbound transactions related to the action
-          items:
-            $ref: '#/components/schemas/Transaction'
-          type: array
-        pools:
-          description: Pools involved in the action
-          items:
-            type: string
-          type: array
-        status:
-          description: 'Indicates if the action is completed or if related outbound transactions are still
-
-            pending, failed to be processed.
-
-            '
-          enum:
-          - success
-          - pending
-          - failed
-          type: string
-        type:
-          description: Type of action
-          enum:
-          - swap
-          - addLiquidity
-          - withdraw
-          - donate
-          - refund
-          - switch
-          - thorname
-          - send
-          - runePoolDeposit
-          - runePoolWithdraw
-          type: string
-      required:
-      - pools
-      - type
-      - status
-      - in
-      - out
-      - date
-      - height
-      - metadata
-      type: object
-    FailedMetadata:
-      properties:
-        code:
-          description: failed transaction code
-          type: string
         memo:
-          description: failed transaction memo
-          type: string
-        reason:
-          description: failed transaction code
+          description: Transaction memo of bond event
           type: string
       required:
       - memo
-      - reason
-      - code
       type: object
     SendMetadata:
       properties:
@@ -399,153 +244,6 @@ components:
       - memo
       - reason
       - code
-      type: object
-    BondMetadata:
-      properties:
-        fee:
-          description: node operator fee
-          type: string
-        memo:
-          description: Transaction memo of bond event
-          type: string
-        nodeAddress:
-          description: node address
-          type: string
-        provider:
-          description: bond provider address
-          type: string
-      required:
-      - memo
-      - nodeAddress
-      type: object
-    ContractMetadata:
-      properties:
-        attributes:
-          description: contract attributes emitted from its event
-          type: object
-        contractType:
-          description: contract type defined by cosmwasm
-          type: string
-        funds:
-          description: contract funds emitted from its event
-          type: string
-        msg:
-          description: contract massages emitted from its event
-          type: object
-      required:
-      - contractType
-      - attributes
-      type: object
-    RunePoolWithdrawMetadata:
-      properties:
-        affiliateAddress:
-          description: Transaction affiliate address
-          type: string
-        affiliateAmount:
-          description: Int64, Transaction affiliate amount in rune
-          type: string
-        affiliateBasisPoint:
-          description: Transaction affiliate basis point
-          type: string
-        basisPoints:
-          description: 'Int64 (Basis points, 0-10000, where 10000=100%), percentage of total ownership
-
-            withdrawn
-
-            '
-          type: string
-        units:
-          description: 'Int64, amount of units removed from the member as result of the withdrawal
-
-            '
-          type: string
-      required:
-      - units
-      - basisPoints
-      - affiliateAmount
-      - affiliateAddress
-      - affiliateBasisPoint
-      type: object
-    Metadata:
-      properties:
-        addLiquidity:
-          $ref: '#/components/schemas/AddLiquidityMetadata'
-        bond:
-          $ref: '#/components/schemas/BondMetadata'
-        contract:
-          $ref: '#/components/schemas/ContractMetadata'
-        failed:
-          $ref: '#/components/schemas/FailedMetadata'
-        limitSwap:
-          $ref: '#/components/schemas/LimitSwapMetadata'
-        rebond:
-          $ref: '#/components/schemas/RebondMetadata'
-        refund:
-          $ref: '#/components/schemas/RefundMetadata'
-        runePoolDeposit:
-          $ref: '#/components/schemas/RunePoolDepositMetadata'
-        runePoolWithdraw:
-          $ref: '#/components/schemas/RunePoolWithdrawMetadata'
-        send:
-          $ref: '#/components/schemas/SendMetadata'
-        swap:
-          $ref: '#/components/schemas/SwapMetadata'
-        tcy:
-          $ref: '#/components/schemas/TcyMetadata'
-        thorname:
-          $ref: '#/components/schemas/ThornameMetadata'
-        withdraw:
-          $ref: '#/components/schemas/WithdrawMetadata'
-      type: object
-    AddLiquidityMetadata:
-      properties:
-        affiliateAddress:
-          description: Affiliate fee address of the addLiquidity
-          type: string
-        affiliateFee:
-          description: Int64 (Basis points, 0-1000, where 1000=10%)
-          type: string
-        liquidityUnits:
-          description: 'Int64, amount of liquidity units assigned to the member as result of the liquidity
-
-            deposit
-
-            '
-          type: string
-        memo:
-          description: Transaction memo of the addLiquidity action
-          type: string
-      required:
-      - liquidityUnits
-      - memo
-      - affiliateAddress
-      - affiliateFee
-      type: object
-    NetworkFees:
-      description: 'List of network fees associated to an action. One network fee is charged for each
-
-        outbound transaction
-
-        '
-      items:
-        $ref: '#/components/schemas/Coin'
-      type: array
-    ActionMeta:
-      description: action query metadata
-      properties:
-        nextPageToken:
-          description: "Int64, The last action event_id that can be used for pagination. \nThis token is needed to be given for next page.\n"
-          type: string
-        prevPageToken:
-          description: 'Int64, The first action event_id that can be used for previous pagination.
-
-            This token is needed to be given for previous page.
-
-            '
-          type: string
-      required:
-      - nextPageToken
-      - prevPageToken
       type: object
     StreamingSwapMeta:
       description: Streaming Metadata associated with the action if it was streaming swap
@@ -601,10 +299,112 @@ components:
       - depositedCoin
       - outEstimation
       type: object
-    LimitSwapMetadata:
+    RebondMetadata:
       properties:
         memo:
           description: Transaction memo of bond event
+          type: string
+        newBondAddress:
+          description: new bond address
+          type: string
+        nodeAddress:
+          description: node address
+          type: string
+      required:
+      - memo
+      - nodeAddress
+      - newBondAddress
+      type: object
+    RunePoolDepositMetadata:
+      properties:
+        units:
+          description: "Int64, amount of units assigned to the member as result of the \ndeposit\n"
+          type: string
+      required:
+      - units
+      type: object
+    ActionMeta:
+      description: action query metadata
+      properties:
+        nextPageToken:
+          description: "Int64, The last action event_id that can be used for pagination. \nThis token is needed to be given for next page.\n"
+          type: string
+        prevPageToken:
+          description: 'Int64, The first action event_id that can be used for previous pagination.
+
+            This token is needed to be given for previous page.
+
+            '
+          type: string
+      required:
+      - nextPageToken
+      - prevPageToken
+      type: object
+    WithdrawMetadata:
+      properties:
+        asymmetry:
+          description: 'Decimal (-1.0 <=> 1.0), indicates how asymmetrical the withdrawal was. 0 means
+
+            totally symmetrical
+
+            '
+          type: string
+        basisPoints:
+          description: 'Int64 (Basis points, 0-10000, where 10000=100%), percentage of total pool ownership
+
+            withdrawn
+
+            '
+          type: string
+        impermanentLossProtection:
+          description: Int64, additional Rune paid out because of impermanent loss protection
+          type: string
+        liquidityUnits:
+          description: 'Int64, amount of liquidity units removed from the member as result of the withdrawal
+
+            '
+          type: string
+        memo:
+          description: Transaction memo of the withdraw action
+          type: string
+        networkFees:
+          $ref: '#/components/schemas/NetworkFees'
+      required:
+      - liquidityUnits
+      - asymmetry
+      - basisPoints
+      - networkFees
+      - impermanentLossProtection
+      - memo
+      type: object
+    AddLiquidityMetadata:
+      properties:
+        affiliateAddress:
+          description: Affiliate fee address of the addLiquidity
+          type: string
+        affiliateFee:
+          description: Int64 (Basis points, 0-1000, where 1000=10%)
+          type: string
+        liquidityUnits:
+          description: 'Int64, amount of liquidity units assigned to the member as result of the liquidity
+
+            deposit
+
+            '
+          type: string
+        memo:
+          description: Transaction memo of the addLiquidity action
+          type: string
+      required:
+      - liquidityUnits
+      - memo
+      - affiliateAddress
+      - affiliateFee
+      type: object
+    TcyMetadata:
+      properties:
+        memo:
+          description: Transaction memo of tcy message.
           type: string
       required:
       - memo
@@ -678,14 +478,214 @@ components:
       - registrationFee
       - txType
       type: object
-    RunePoolDepositMetadata:
+    RunePoolWithdrawMetadata:
       properties:
+        affiliateAddress:
+          description: Transaction affiliate address
+          type: string
+        affiliateAmount:
+          description: Int64, Transaction affiliate amount in rune
+          type: string
+        affiliateBasisPoint:
+          description: Transaction affiliate basis point
+          type: string
+        basisPoints:
+          description: 'Int64 (Basis points, 0-10000, where 10000=100%), percentage of total ownership
+
+            withdrawn
+
+            '
+          type: string
         units:
-          description: "Int64, amount of units assigned to the member as result of the \ndeposit\n"
+          description: 'Int64, amount of units removed from the member as result of the withdrawal
+
+            '
           type: string
       required:
       - units
+      - basisPoints
+      - affiliateAmount
+      - affiliateAddress
+      - affiliateBasisPoint
       type: object
+    Transaction:
+      description: Transaction data
+      properties:
+        address:
+          description: Sender address
+          type: string
+        affiliate:
+          description: if transactions flaged as affiliate
+          type: boolean
+        coins:
+          $ref: '#/components/schemas/Coins'
+        height:
+          description: 'The thorchain height that the outbound transaction occurred.
+
+            '
+          type: string
+        txID:
+          description: 'Transaction id hash. Some transactions (such as outbound transactions made in the
+
+            native asset) may have a zero value.
+
+            '
+          type: string
+      required:
+      - txID
+      - address
+      - coins
+      type: object
+    BondMetadata:
+      properties:
+        fee:
+          description: node operator fee
+          type: string
+        memo:
+          description: Transaction memo of bond event
+          type: string
+        nodeAddress:
+          description: node address
+          type: string
+        provider:
+          description: bond provider address
+          type: string
+      required:
+      - memo
+      - nodeAddress
+      type: object
+    Action:
+      description: action details among with related transactions
+      properties:
+        date:
+          description: Int64, nano timestamp of the block at which the action was registered
+          type: string
+        height:
+          description: Int64, height of the block at which the action was registered
+          type: string
+        in:
+          description: Inbound transactions related to the action
+          items:
+            $ref: '#/components/schemas/Transaction'
+          type: array
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+        out:
+          description: Outbound transactions related to the action
+          items:
+            $ref: '#/components/schemas/Transaction'
+          type: array
+        pools:
+          description: Pools involved in the action
+          items:
+            type: string
+          type: array
+        status:
+          description: 'Indicates if the action is completed or if related outbound transactions are still
+
+            pending, failed to be processed.
+
+            '
+          enum:
+          - success
+          - pending
+          - failed
+          type: string
+        type:
+          description: Type of action
+          enum:
+          - swap
+          - addLiquidity
+          - withdraw
+          - donate
+          - refund
+          - switch
+          - thorname
+          - send
+          - runePoolDeposit
+          - runePoolWithdraw
+          type: string
+      required:
+      - pools
+      - type
+      - status
+      - in
+      - out
+      - date
+      - height
+      - metadata
+      type: object
+    ContractMetadata:
+      properties:
+        attributes:
+          description: contract attributes emitted from its event
+          type: object
+        contractType:
+          description: contract type defined by cosmwasm
+          type: string
+        funds:
+          description: contract funds emitted from its event
+          type: string
+        msg:
+          description: contract massages emitted from its event
+          type: object
+      required:
+      - contractType
+      - attributes
+      type: object
+    Metadata:
+      properties:
+        addLiquidity:
+          $ref: '#/components/schemas/AddLiquidityMetadata'
+        bond:
+          $ref: '#/components/schemas/BondMetadata'
+        contract:
+          $ref: '#/components/schemas/ContractMetadata'
+        failed:
+          $ref: '#/components/schemas/FailedMetadata'
+        limitSwap:
+          $ref: '#/components/schemas/LimitSwapMetadata'
+        rebond:
+          $ref: '#/components/schemas/RebondMetadata'
+        refund:
+          $ref: '#/components/schemas/RefundMetadata'
+        runePoolDeposit:
+          $ref: '#/components/schemas/RunePoolDepositMetadata'
+        runePoolWithdraw:
+          $ref: '#/components/schemas/RunePoolWithdrawMetadata'
+        send:
+          $ref: '#/components/schemas/SendMetadata'
+        swap:
+          $ref: '#/components/schemas/SwapMetadata'
+        tcy:
+          $ref: '#/components/schemas/TcyMetadata'
+        thorname:
+          $ref: '#/components/schemas/ThornameMetadata'
+        withdraw:
+          $ref: '#/components/schemas/WithdrawMetadata'
+      type: object
+    Coin:
+      description: Represents a digital currency amount
+      properties:
+        amount:
+          description: Int64(e8), asset Amount.
+          type: string
+        asset:
+          description: Asset in CHAIN.SYMBOL format
+          type: string
+      required:
+      - asset
+      - amount
+      type: object
+    NetworkFees:
+      description: 'List of network fees associated to an action. One network fee is charged for each
+
+        outbound transaction
+
+        '
+      items:
+        $ref: '#/components/schemas/Coin'
+      type: array
   responses:
     ActionsResponse:
       content:

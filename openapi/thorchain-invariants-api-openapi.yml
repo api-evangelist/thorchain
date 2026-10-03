@@ -45,6 +45,13 @@ paths:
       x-summary-source: derived
 components:
   parameters:
+    invariant:
+      name: invariant
+      in: path
+      required: true
+      schema:
+        type: string
+        example: asgard
     queryHeight:
       name: height
       in: query
@@ -54,13 +61,6 @@ components:
         type: integer
         format: int64
         minimum: 0
-    invariant:
-      name: invariant
-      in: path
-      required: true
-      schema:
-        type: string
-        example: asgard
   schemas:
     InvariantsResponse:
       type: object

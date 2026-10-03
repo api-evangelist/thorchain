@@ -98,32 +98,14 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    KeysignResponse:
+    TssMetric:
       type: object
-      required:
-      - keysign
-      - signature
       properties:
-        keysign:
-          type: object
-          title: KeysignInfo
-          required:
-          - tx_array
-          properties:
-            height:
-              type: integer
-              format: int64
-              description: the block(s) in which a tx out item is scheduled to be signed and moved from the scheduled outbound queue to the outbound queue
-            tx_array:
-              type: array
-              items:
-                $ref: '#/components/schemas/TxOutItem'
-        signature:
+        address:
           type: string
-    KeygenMetricsResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/KeygenMetric'
+        tss_time:
+          type: integer
+          format: int64
     KeygenMetric:
       type: object
       required:
@@ -141,6 +123,22 @@ components:
                 type: string
               tss_time:
                 type: string
+    Coin:
+      type: object
+      required:
+      - asset
+      - amount
+      properties:
+        asset:
+          type: string
+          example: BTC.BTC
+        amount:
+          type: string
+          example: '100000'
+        decimals:
+          type: integer
+          format: int64
+          example: 6
     TxOutItem:
       type: object
       required:
@@ -202,6 +200,43 @@ components:
           type: string
           description: clout spent in RUNE for the outbound
           example: '1234'
+    MetricsResponse:
+      type: object
+      properties:
+        keygen:
+          $ref: '#/components/schemas/KeygenMetricsResponse'
+        keysign:
+          type: object
+          title: KeysignMetrics
+          properties:
+            tx_id:
+              type: string
+            node_tss_times:
+              type: array
+              items:
+                $ref: '#/components/schemas/TssMetric'
+    KeysignResponse:
+      type: object
+      required:
+      - keysign
+      - signature
+      properties:
+        keysign:
+          type: object
+          title: KeysignInfo
+          required:
+          - tx_array
+          properties:
+            height:
+              type: integer
+              format: int64
+              description: the block(s) in which a tx out item is scheduled to be signed and moved from the scheduled outbound queue to the outbound queue
+            tx_array:
+              type: array
+              items:
+                $ref: '#/components/schemas/TxOutItem'
+        signature:
+          type: string
     KeygenResponse:
       type: object
       required:
@@ -235,45 +270,10 @@ components:
                       description: pubkeys of the keygen block member nodes
         signature:
           type: string
-    Coin:
-      type: object
-      required:
-      - asset
-      - amount
-      properties:
-        asset:
-          type: string
-          example: BTC.BTC
-        amount:
-          type: string
-          example: '100000'
-        decimals:
-          type: integer
-          format: int64
-          example: 6
-    TssMetric:
-      type: object
-      properties:
-        address:
-          type: string
-        tss_time:
-          type: integer
-          format: int64
-    MetricsResponse:
-      type: object
-      properties:
-        keygen:
-          $ref: '#/components/schemas/KeygenMetricsResponse'
-        keysign:
-          type: object
-          title: KeysignMetrics
-          properties:
-            tx_id:
-              type: string
-            node_tss_times:
-              type: array
-              items:
-                $ref: '#/components/schemas/TssMetric'
+    KeygenMetricsResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/KeygenMetric'
   parameters:
     pathHeight:
       name: height

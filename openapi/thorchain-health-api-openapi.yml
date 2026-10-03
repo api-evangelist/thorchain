@@ -60,18 +60,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    GenesisInf:
-      properties:
-        hash:
-          description: Genesis Block hash
-          type: string
-        height:
-          description: Genesis Block height
-          type: integer
-      required:
-      - height
-      - hash
-      type: object
     Health:
       properties:
         database:
@@ -101,6 +89,18 @@ components:
       - lastFetched
       - lastCommitted
       - lastAggregated
+      type: object
+    GenesisInf:
+      properties:
+        hash:
+          description: Genesis Block hash
+          type: string
+        height:
+          description: Genesis Block height
+          type: integer
+      required:
+      - height
+      - hash
       type: object
     HeightTS:
       properties:

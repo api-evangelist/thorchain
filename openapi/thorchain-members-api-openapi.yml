@@ -31,13 +31,6 @@ paths:
       tags:
       - Members
 components:
-  schemas:
-    Members:
-      items:
-        description: Member address
-        example: tbnb1fj2lqj8dvr5pumfchc7ntlfqd2v6zdxqwjewf5
-        type: string
-      type: array
   responses:
     MembersResponse:
       content:
@@ -45,3 +38,10 @@ components:
           schema:
             $ref: '#/components/schemas/Members'
       description: array of all the members
+  schemas:
+    Members:
+      items:
+        description: Member address
+        example: tbnb1fj2lqj8dvr5pumfchc7ntlfqd2v6zdxqwjewf5
+        type: string
+      type: array

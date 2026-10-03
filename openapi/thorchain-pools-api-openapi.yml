@@ -124,13 +124,6 @@ paths:
       summary: Dpools
       x-summary-source: derived
 components:
-  responses:
-    PoolsResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PoolDetails'
-      description: Array of pool details
   schemas:
     PoolDetail:
       properties:
@@ -278,8 +271,6 @@ components:
       items:
         $ref: '#/components/schemas/PoolDetail'
       type: array
-    DerivedPoolResponse:
-      $ref: '#/components/schemas/DerivedPool'
     Pool:
       type: object
       required:
@@ -426,14 +417,23 @@ components:
           type: string
           example: '123456'
           description: the depth of the derived virtual pool relative to L1 pool (in basis points)
-    PoolsResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/Pool'
+    DerivedPoolResponse:
+      $ref: '#/components/schemas/DerivedPool'
     DerivedPoolsResponse:
       type: array
       items:
         $ref: '#/components/schemas/DerivedPool'
+    PoolsResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/Pool'
+  responses:
+    PoolsResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PoolDetails'
+      description: Array of pool details
   parameters:
     asset:
       name: asset

@@ -114,6 +114,31 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    YggdrasilVaultsResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/YggdrasilVault'
+    VaultAddress:
+      type: object
+      required:
+      - chain
+      - address
+      properties:
+        chain:
+          type: string
+          example: BTC
+        address:
+          type: string
+          example: bc1qd45uzetakjvdy5ynjjyp4nlnj89am88e4e5jeq
+    VaultRouter:
+      type: object
+      properties:
+        chain:
+          type: string
+          example: ETH
+        router:
+          type: string
+          example: '0x3624525075b88B24ecc29CE226b0CEc1fFcB6976'
     Vault:
       type: object
       required:
@@ -181,6 +206,62 @@ components:
           type: array
           items:
             type: string
+    Coin:
+      type: object
+      required:
+      - asset
+      - amount
+      properties:
+        asset:
+          type: string
+          example: BTC.BTC
+        amount:
+          type: string
+          example: '100000'
+        decimals:
+          type: integer
+          format: int64
+          example: 6
+    VaultResponse:
+      $ref: '#/components/schemas/Vault'
+    VaultInfo:
+      type: object
+      required:
+      - pub_key
+      - routers
+      properties:
+        pub_key:
+          type: string
+          example: thorpub1addwnpepq068dr0x7ue973drmq4eqmzhcq3650n7nx5fhgn9gl207luxp6vaklu52tc
+        pub_key_eddsa:
+          type: string
+          example: thorpub1addwnpepq068dr0x7ue973drmq4eqmzhcq3650n7nx5fhgn9gl207luxp6vaklu52tc
+        pub_key_frost:
+          type: string
+          example: thorpub1zcjduepq068dr0x7ue973drmq4eqmzhcq3650n7nx5fhgn9gl207luxp6vaklu52tc
+        routers:
+          type: array
+          items:
+            $ref: '#/components/schemas/VaultRouter'
+        membership:
+          type: array
+          description: the list of node public keys which are members of the vault
+          items:
+            type: string
+    VaultSolvencyAsset:
+      type: object
+      required:
+      - asset
+      - amount
+      properties:
+        asset:
+          type: string
+          example: BTC.BTC
+          description: Asset identifier
+        amount:
+          type: string
+          example: '1000000000'
+          description: Solvency amount for the asset. Positive values indicate over-solvency, negative values indicate under-solvency.
     KeysignPartyResponse:
       type: object
       required:
@@ -223,10 +304,6 @@ components:
         active_signer_count:
           type: integer
           format: int64
-    YggdrasilVaultsResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/YggdrasilVault'
     VaultPubkeysResponse:
       type: object
       required:
@@ -246,63 +323,10 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/VaultInfo'
-    VaultResponse:
-      $ref: '#/components/schemas/Vault'
-    Coin:
-      type: object
-      required:
-      - asset
-      - amount
-      properties:
-        asset:
-          type: string
-          example: BTC.BTC
-        amount:
-          type: string
-          example: '100000'
-        decimals:
-          type: integer
-          format: int64
-          example: 6
     VaultsResponse:
       type: array
       items:
         $ref: '#/components/schemas/Vault'
-    VaultSolvencyResponse:
-      type: object
-      required:
-      - assets
-      properties:
-        assets:
-          type: array
-          items:
-            $ref: '#/components/schemas/VaultSolvencyAsset'
-    VaultSolvencyAsset:
-      type: object
-      required:
-      - asset
-      - amount
-      properties:
-        asset:
-          type: string
-          example: BTC.BTC
-          description: Asset identifier
-        amount:
-          type: string
-          example: '1000000000'
-          description: Solvency amount for the asset. Positive values indicate over-solvency, negative values indicate under-solvency.
-    VaultAddress:
-      type: object
-      required:
-      - chain
-      - address
-      properties:
-        chain:
-          type: string
-          example: BTC
-        address:
-          type: string
-          example: bc1qd45uzetakjvdy5ynjjyp4nlnj89am88e4e5jeq
     YggdrasilVault:
       type: object
       required:
@@ -368,53 +392,20 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/VaultAddress'
-    VaultInfo:
+    VaultSolvencyResponse:
       type: object
       required:
-      - pub_key
-      - routers
+      - assets
       properties:
-        pub_key:
-          type: string
-          example: thorpub1addwnpepq068dr0x7ue973drmq4eqmzhcq3650n7nx5fhgn9gl207luxp6vaklu52tc
-        pub_key_eddsa:
-          type: string
-          example: thorpub1addwnpepq068dr0x7ue973drmq4eqmzhcq3650n7nx5fhgn9gl207luxp6vaklu52tc
-        pub_key_frost:
-          type: string
-          example: thorpub1zcjduepq068dr0x7ue973drmq4eqmzhcq3650n7nx5fhgn9gl207luxp6vaklu52tc
-        routers:
+        assets:
           type: array
           items:
-            $ref: '#/components/schemas/VaultRouter'
-        membership:
-          type: array
-          description: the list of node public keys which are members of the vault
-          items:
-            type: string
-    VaultRouter:
-      type: object
-      properties:
-        chain:
-          type: string
-          example: ETH
-        router:
-          type: string
-          example: '0x3624525075b88B24ecc29CE226b0CEc1fFcB6976'
+            $ref: '#/components/schemas/VaultSolvencyAsset'
   parameters:
     querySigningHeight:
       name: signing_height
       in: query
       description: optional signing height, defaults to current tip
-      required: false
-      schema:
-        type: integer
-        format: int64
-        minimum: 0
-    queryHeight:
-      name: height
-      in: query
-      description: optional block height, defaults to current tip
       required: false
       schema:
         type: integer
@@ -427,3 +418,12 @@ components:
       schema:
         type: string
         example: thorpub1addwnpepq068dr0x7ue973drmq4eqmzhcq3650n7nx5fhgn9gl207luxp6vaklu52tc
+    queryHeight:
+      name: height
+      in: query
+      description: optional block height, defaults to current tip
+      required: false
+      schema:
+        type: integer
+        format: int64
+        minimum: 0

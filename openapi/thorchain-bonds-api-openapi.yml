@@ -33,13 +33,6 @@ paths:
       tags:
       - Bonds
 components:
-  responses:
-    BonderDetailsResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/BonderDetails'
-      description: object containing bonder data for a specific member
   schemas:
     BonderDetails:
       properties:
@@ -79,3 +72,10 @@ components:
       - bond
       - status
       type: object
+  responses:
+    BonderDetailsResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BonderDetails'
+      description: object containing bonder data for a specific member

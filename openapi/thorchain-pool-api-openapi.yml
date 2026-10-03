@@ -91,19 +91,6 @@ paths:
       tags:
       - Pool
 components:
-  responses:
-    PoolStatsResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PoolStatsDetail'
-      description: Stats for one pool.
-    PoolResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PoolDetail'
-      description: Object containing details for one pool
   schemas:
     PoolDetail:
       properties:
@@ -416,3 +403,16 @@ components:
       - withdrawCount
       - uniqueMemberCount
       type: object
+  responses:
+    PoolStatsResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PoolStatsDetail'
+      description: Stats for one pool.
+    PoolResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PoolDetail'
+      description: Object containing details for one pool
