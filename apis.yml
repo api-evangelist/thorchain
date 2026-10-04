@@ -54,6 +54,8 @@ tags:
 - Decentralized Exchange
 - Cosmos
 - Web3 Infrastructure
+- Web3
+- Cryptocurrency
 tags_raw:
 - Company
 - Crypto Web3
@@ -64,6 +66,8 @@ tags_raw:
 - Decentralized Exchange
 - Cosmos
 - Web3 Infrastructure
+- Web3
+- Cryptocurrency
 apis:
 - aid: thorchain:thorchain-actions-api
   name: THORChain Actions API
