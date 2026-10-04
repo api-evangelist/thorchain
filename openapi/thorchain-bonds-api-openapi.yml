@@ -33,26 +33,14 @@ paths:
       tags:
       - Bonds
 components:
+  responses:
+    BonderDetailsResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BonderDetails'
+      description: object containing bonder data for a specific member
   schemas:
-    BonderDetails:
-      properties:
-        address:
-          description: Bonder address
-          example: thor1
-          type: string
-        nodes:
-          items:
-            $ref: '#/components/schemas/BonderNode'
-          type: array
-        totalBonded:
-          description: Int64(e8), total amount of RUNE bonded from the bonder
-          example: '1000000000'
-          type: string
-      required:
-      - address
-      - totalBonded
-      - nodes
-      type: object
     BonderNode:
       properties:
         address:
@@ -72,10 +60,22 @@ components:
       - bond
       - status
       type: object
-  responses:
-    BonderDetailsResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/BonderDetails'
-      description: object containing bonder data for a specific member
+    BonderDetails:
+      properties:
+        address:
+          description: Bonder address
+          example: thor1
+          type: string
+        nodes:
+          items:
+            $ref: '#/components/schemas/BonderNode'
+          type: array
+        totalBonded:
+          description: Int64(e8), total amount of RUNE bonded from the bonder
+          example: '1000000000'
+          type: string
+      required:
+      - address
+      - totalBonded
+      - nodes
+      type: object

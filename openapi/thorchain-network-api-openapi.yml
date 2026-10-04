@@ -250,62 +250,7 @@ paths:
       summary: Ban
       x-summary-source: derived
 components:
-  responses:
-    NetworkResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Network'
-      description: Returns an object containing Network data
   schemas:
-    BondMetrics:
-      properties:
-        averageActiveBond:
-          description: Int64(e8), Average bond of active nodes
-          type: string
-        averageStandbyBond:
-          description: Int64(e8), Average bond of standby nodes
-          type: string
-        bondHardCap:
-          description: Int64(e8), Highest effective bond for nodes
-          type: string
-        maximumActiveBond:
-          description: Int64(e8), Maxinum bond of active nodes
-          type: string
-        maximumStandbyBond:
-          description: Int64(e8), Maximum bond of standby nodes
-          type: string
-        medianActiveBond:
-          description: Int64(e8), Median bond of active nodes
-          type: string
-        medianStandbyBond:
-          description: Int64(e8), Median bond of standby nodes
-          type: string
-        minimumActiveBond:
-          description: Int64(e8), Minimum bond of active nodes
-          type: string
-        minimumStandbyBond:
-          description: Int64(e8), Minimum bond of standby nodes
-          type: string
-        totalActiveBond:
-          description: Int64(e8), Total bond of active nodes
-          type: string
-        totalStandbyBond:
-          description: Int64(e8), Total bond of standby nodes
-          type: string
-      required:
-      - totalActiveBond
-      - averageActiveBond
-      - medianActiveBond
-      - minimumActiveBond
-      - maximumActiveBond
-      - bondHardCap
-      - totalStandbyBond
-      - averageStandbyBond
-      - medianStandbyBond
-      - minimumStandbyBond
-      - maximumStandbyBond
-      type: object
     Network:
       properties:
         activeBonds:
@@ -407,6 +352,54 @@ components:
       - bondReward
       - poolReward
       type: object
+    BondMetrics:
+      properties:
+        averageActiveBond:
+          description: Int64(e8), Average bond of active nodes
+          type: string
+        averageStandbyBond:
+          description: Int64(e8), Average bond of standby nodes
+          type: string
+        bondHardCap:
+          description: Int64(e8), Highest effective bond for nodes
+          type: string
+        maximumActiveBond:
+          description: Int64(e8), Maxinum bond of active nodes
+          type: string
+        maximumStandbyBond:
+          description: Int64(e8), Maximum bond of standby nodes
+          type: string
+        medianActiveBond:
+          description: Int64(e8), Median bond of active nodes
+          type: string
+        medianStandbyBond:
+          description: Int64(e8), Median bond of standby nodes
+          type: string
+        minimumActiveBond:
+          description: Int64(e8), Minimum bond of active nodes
+          type: string
+        minimumStandbyBond:
+          description: Int64(e8), Minimum bond of standby nodes
+          type: string
+        totalActiveBond:
+          description: Int64(e8), Total bond of active nodes
+          type: string
+        totalStandbyBond:
+          description: Int64(e8), Total bond of standby nodes
+          type: string
+      required:
+      - totalActiveBond
+      - averageActiveBond
+      - medianActiveBond
+      - minimumActiveBond
+      - maximumActiveBond
+      - bondHardCap
+      - totalStandbyBond
+      - averageStandbyBond
+      - medianStandbyBond
+      - minimumStandbyBond
+      - maximumStandbyBond
+      type: object
     OutboundFee:
       type: object
       required:
@@ -437,24 +430,37 @@ components:
           type: string
           example: '15000'
           description: dynamic multiplier basis points, based on the surplus_rune, affecting the size of the outbound_fee
-    BanResponse:
-      type: object
-      properties:
-        node_address:
-          type: string
-          example: thor1f3s7q037eancht7sg0aj995dht25rwrnu4ats5
-        block_height:
-          type: integer
-          format: int64
-        signers:
-          type: array
-          items:
-            type: string
-            example: thor1f3s7q037eancht7sg0aj995dht25rwrnu4ats5
     OutboundFeesResponse:
       type: array
       items:
         $ref: '#/components/schemas/OutboundFee'
+    UpgradeProposalResponse:
+      $ref: '#/components/schemas/UpgradeProposal'
+    ConstantsResponse:
+      type: object
+      properties:
+        int_64_values:
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            AsgardSize: 40
+        bool_values:
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            StrictBondLiquidityRatio: true
+        string_values:
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            DefaultPoolStatus: Staged
+    InboundAddressesResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/InboundAddress'
     LastBlock:
       type: object
       required:
@@ -474,6 +480,65 @@ components:
         thorchain:
           type: integer
           format: int64
+    BanResponse:
+      type: object
+      properties:
+        node_address:
+          type: string
+          example: thor1f3s7q037eancht7sg0aj995dht25rwrnu4ats5
+        block_height:
+          type: integer
+          format: int64
+        signers:
+          type: array
+          items:
+            type: string
+            example: thor1f3s7q037eancht7sg0aj995dht25rwrnu4ats5
+    UpgradeProposal:
+      type: object
+      required:
+      - name
+      - height
+      - info
+      properties:
+        name:
+          type: string
+          example: scheduled upgrade 1
+          description: the name of the upgrade
+        height:
+          type: integer
+          format: int64
+          example: 1234
+          description: the block height at which the upgrade will occur
+        info:
+          type: string
+          example: '{"binaries":{"linux/amd64":"https://link.to.binary.amd64","linux/arm64":"https://link.to.binary.arm64"}}'
+          description: the description of the upgrade, typically json with URLs to binaries for use with automation tools
+        approved:
+          type: boolean
+          example: true
+          description: whether the upgrade has been approved by the active validators
+        approved_percent:
+          type: string
+          example: '0.8'
+          description: the percentage of active validators that have approved the upgrade
+        validators_to_quorum:
+          type: integer
+          format: int64
+          example: 20
+          description: the amount of additional active validators required to reach quorum for the upgrade
+        approvers:
+          type: array
+          items:
+            type: string
+            example: thor1f3s7q037eancht7sg0aj995dht25rwrnu4ats5
+          description: the list of node addresses that have approved the upgrade
+        rejecters:
+          type: array
+          items:
+            type: string
+            example: thor1f3s7q037eancht7sg0aj995dht25rwrnu4ats5
+          description: the list of node addresses that have rejected the upgrade
     InboundAddress:
       type: object
       required:
@@ -534,6 +599,52 @@ components:
           type: string
           example: '10000'
           description: Defines the minimum transaction size for the chain in base units (sats, wei, uatom). Transactions with asset amounts lower than the dust_threshold are ignored.
+    UpgradeProposalsResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/UpgradeProposal'
+    UpgradeVote:
+      type: object
+      required:
+      - height
+      - node_address
+      - vote
+      properties:
+        node_address:
+          type: string
+          example: thor1f3s7q037eancht7sg0aj995dht25rwrnu4ats5
+          description: the node address of the voter
+        vote:
+          type: string
+          enum:
+          - approve
+          - reject
+          example: approve
+          description: the vote cast by the node
+    VersionResponse:
+      type: object
+      required:
+      - current
+      - next
+      - querier
+      properties:
+        current:
+          type: string
+          example: 0.17.0
+          description: current version
+        next:
+          type: string
+          example: 0.18.0
+          description: next version (minimum version for a node to become Active)
+        next_since_height:
+          type: integer
+          format: int64
+          example: 2000000
+          description: height at which the minimum joining version last changed
+        querier:
+          type: string
+          example: 0.16.0
+          description: querier version
     NetworkResponse:
       type: object
       required:
@@ -627,132 +738,21 @@ components:
           type: boolean
           example: false
           description: indicates if all anchor chains are halted (true), or at least one anchor chain is available (false)
-    UpgradeVotesResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/UpgradeVote'
-    UpgradeProposal:
-      type: object
-      required:
-      - name
-      - height
-      - info
-      properties:
-        name:
-          type: string
-          example: scheduled upgrade 1
-          description: the name of the upgrade
-        height:
-          type: integer
-          format: int64
-          example: 1234
-          description: the block height at which the upgrade will occur
-        info:
-          type: string
-          example: '{"binaries":{"linux/amd64":"https://link.to.binary.amd64","linux/arm64":"https://link.to.binary.arm64"}}'
-          description: the description of the upgrade, typically json with URLs to binaries for use with automation tools
-        approved:
-          type: boolean
-          example: true
-          description: whether the upgrade has been approved by the active validators
-        approved_percent:
-          type: string
-          example: '0.8'
-          description: the percentage of active validators that have approved the upgrade
-        validators_to_quorum:
-          type: integer
-          format: int64
-          example: 20
-          description: the amount of additional active validators required to reach quorum for the upgrade
-        approvers:
-          type: array
-          items:
-            type: string
-            example: thor1f3s7q037eancht7sg0aj995dht25rwrnu4ats5
-          description: the list of node addresses that have approved the upgrade
-        rejecters:
-          type: array
-          items:
-            type: string
-            example: thor1f3s7q037eancht7sg0aj995dht25rwrnu4ats5
-          description: the list of node addresses that have rejected the upgrade
-    UpgradeProposalResponse:
-      $ref: '#/components/schemas/UpgradeProposal'
-    UpgradeVote:
-      type: object
-      required:
-      - height
-      - node_address
-      - vote
-      properties:
-        node_address:
-          type: string
-          example: thor1f3s7q037eancht7sg0aj995dht25rwrnu4ats5
-          description: the node address of the voter
-        vote:
-          type: string
-          enum:
-          - approve
-          - reject
-          example: approve
-          description: the vote cast by the node
     LastBlockResponse:
       type: array
       items:
         $ref: '#/components/schemas/LastBlock'
-    InboundAddressesResponse:
+    UpgradeVotesResponse:
       type: array
       items:
-        $ref: '#/components/schemas/InboundAddress'
-    ConstantsResponse:
-      type: object
-      properties:
-        int_64_values:
-          type: object
-          additionalProperties:
-            type: string
-          example:
-            AsgardSize: 40
-        bool_values:
-          type: object
-          additionalProperties:
-            type: string
-          example:
-            StrictBondLiquidityRatio: true
-        string_values:
-          type: object
-          additionalProperties:
-            type: string
-          example:
-            DefaultPoolStatus: Staged
-    VersionResponse:
-      type: object
-      required:
-      - current
-      - next
-      - querier
-      properties:
-        current:
-          type: string
-          example: 0.17.0
-          description: current version
-        next:
-          type: string
-          example: 0.18.0
-          description: next version (minimum version for a node to become Active)
-        next_since_height:
-          type: integer
-          format: int64
-          example: 2000000
-          description: height at which the minimum joining version last changed
-        querier:
-          type: string
-          example: 0.16.0
-          description: querier version
-    UpgradeProposalsResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/UpgradeProposal'
+        $ref: '#/components/schemas/UpgradeVote'
+  responses:
+    NetworkResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Network'
+      description: Returns an object containing Network data
   parameters:
     name:
       name: name
@@ -761,6 +761,13 @@ components:
       schema:
         type: string
         example: v3.137.0
+    chain:
+      name: chain
+      in: path
+      required: true
+      schema:
+        type: string
+        example: BTC
     asset:
       name: asset
       in: path
@@ -775,13 +782,6 @@ components:
       schema:
         type: string
         example: thor1zupk5lmc84r2dh738a9g3zscavannjy3nzplwt
-    chain:
-      name: chain
-      in: path
-      required: true
-      schema:
-        type: string
-        example: BTC
     queryHeight:
       name: height
       in: query

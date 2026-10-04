@@ -40,6 +40,22 @@ paths:
       - Holders
 components:
   schemas:
+    Coins:
+      items:
+        $ref: '#/components/schemas/Coin'
+      type: array
+    Holder:
+      properties:
+        address:
+          description: address of the holder
+          example: thor102y0m3uptg0vvudeyh00r2fnz70wq7d8y7mu2g
+          type: string
+        coins:
+          $ref: '#/components/schemas/Coins'
+      required:
+      - address
+      - coins
+      type: object
     Holders:
       items:
         $ref: '#/components/schemas/Holder'
@@ -57,22 +73,6 @@ components:
       - asset
       - amount
       type: object
-    Holder:
-      properties:
-        address:
-          description: address of the holder
-          example: thor102y0m3uptg0vvudeyh00r2fnz70wq7d8y7mu2g
-          type: string
-        coins:
-          $ref: '#/components/schemas/Coins'
-      required:
-      - address
-      - coins
-      type: object
-    Coins:
-      items:
-        $ref: '#/components/schemas/Coin'
-      type: array
   responses:
     HolderResponse:
       content:

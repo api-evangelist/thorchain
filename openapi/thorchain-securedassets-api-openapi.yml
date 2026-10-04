@@ -26,6 +26,16 @@ paths:
       summary: Secured assets
       x-summary-source: derived
 components:
+  parameters:
+    queryHeight:
+      name: height
+      in: query
+      description: optional block height, defaults to current tip
+      required: false
+      schema:
+        type: integer
+        format: int64
+        minimum: 0
   schemas:
     SecuredAssetsResponse:
       type: array
@@ -48,13 +58,3 @@ components:
         depth:
           type: string
           description: total deposits of the asset
-  parameters:
-    queryHeight:
-      name: height
-      in: query
-      description: optional block height, defaults to current tip
-      required: false
-      schema:
-        type: integer
-        format: int64
-        minimum: 0

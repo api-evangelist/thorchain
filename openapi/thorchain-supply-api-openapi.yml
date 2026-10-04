@@ -64,14 +64,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    LockedSupply:
-      type: object
-      properties:
-        reserve:
-          type: integer
-          format: int64
-          description: RUNE locked in the reserve module
-          example: 10000000000
     SupplyResponse:
       type: object
       required:
@@ -90,6 +82,14 @@ components:
           format: int64
           description: total RUNE supply
           example: 50000000000
+    LockedSupply:
+      type: object
+      properties:
+        reserve:
+          type: integer
+          format: int64
+          description: RUNE locked in the reserve module
+          example: 10000000000
   parameters:
     queryHeight:
       name: height

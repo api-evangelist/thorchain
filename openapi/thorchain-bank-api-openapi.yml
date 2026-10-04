@@ -27,23 +27,6 @@ paths:
       summary: Balances
       x-summary-source: derived
 components:
-  schemas:
-    Amount:
-      type: object
-      required:
-      - denom
-      - amount
-      properties:
-        denom:
-          type: string
-        amount:
-          type: string
-    BalancesResponse:
-      properties:
-        result:
-          type: array
-          items:
-            $ref: '#/components/schemas/Amount'
   parameters:
     address:
       name: address
@@ -61,3 +44,20 @@ components:
         type: integer
         format: int64
         minimum: 0
+  schemas:
+    Amount:
+      type: object
+      required:
+      - denom
+      - amount
+      properties:
+        denom:
+          type: string
+        amount:
+          type: string
+    BalancesResponse:
+      properties:
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/Amount'

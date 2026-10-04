@@ -33,6 +33,17 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    ThornameResponse:
+      $ref: '#/components/schemas/Thorname'
+    ThornameAlias:
+      type: object
+      properties:
+        chain:
+          type: string
+          example: BTC
+        address:
+          type: string
+          example: bc1qn9esxuw8ca7ts8l6w66kdh800s09msvutydc46
     Thorname:
       type: object
       required:
@@ -64,17 +75,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ThornameAlias'
-    ThornameResponse:
-      $ref: '#/components/schemas/Thorname'
-    ThornameAlias:
-      type: object
-      properties:
-        chain:
-          type: string
-          example: BTC
-        address:
-          type: string
-          example: bc1qn9esxuw8ca7ts8l6w66kdh800s09msvutydc46
   parameters:
     queryHeight:
       name: height

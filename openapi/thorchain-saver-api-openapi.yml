@@ -36,16 +36,6 @@ paths:
       - Saver
 components:
   schemas:
-    SaverDetails:
-      properties:
-        pools:
-          description: List details of all the savers identified with the given address
-          items:
-            $ref: '#/components/schemas/SaverPool'
-          type: array
-      required:
-      - pools
-      type: object
     SaverPool:
       properties:
         assetAdded:
@@ -85,6 +75,16 @@ components:
       - assetWithdrawn
       - dateFirstAdded
       - dateLastAdded
+      type: object
+    SaverDetails:
+      properties:
+        pools:
+          description: List details of all the savers identified with the given address
+          items:
+            $ref: '#/components/schemas/SaverPool'
+          type: array
+      required:
+      - pools
       type: object
   responses:
     SaverDetailsResponse:

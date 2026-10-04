@@ -124,41 +124,6 @@ components:
           type: integer
           format: int64
           example: 82745
-    RUNEProvidersResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/RUNEProvider'
-    POL:
-      type: object
-      required:
-      - rune_deposited
-      - rune_withdrawn
-      - value
-      - pnl
-      - current_deposit
-      properties:
-        rune_deposited:
-          type: string
-          example: '857134475040'
-          description: total amount of RUNE deposited into the pools
-        rune_withdrawn:
-          type: string
-          example: '0'
-          description: total amount of RUNE withdrawn from the pools
-        value:
-          type: string
-          example: '21999180112172346'
-          description: total value of protocol's LP position in RUNE value
-        pnl:
-          type: string
-          example: '21999180112172346'
-          description: profit and loss of protocol owned liquidity
-        current_deposit:
-          type: string
-          example: '21999180112172346'
-          description: current amount of rune deposited
-    RUNEProviderResponse:
-      $ref: '#/components/schemas/RUNEProvider'
     RUNEPoolResponse:
       type: object
       required:
@@ -230,11 +195,41 @@ components:
               type: string
               example: '123456'
               description: the current RUNE deposited by the reserve
-    RUNEPoolDetails:
-      description: List details of all the RUNEPools identified with the given addresses
-      items:
-        $ref: '#/components/schemas/RUNEPoolProvider'
+    POL:
+      type: object
+      required:
+      - rune_deposited
+      - rune_withdrawn
+      - value
+      - pnl
+      - current_deposit
+      properties:
+        rune_deposited:
+          type: string
+          example: '857134475040'
+          description: total amount of RUNE deposited into the pools
+        rune_withdrawn:
+          type: string
+          example: '0'
+          description: total amount of RUNE withdrawn from the pools
+        value:
+          type: string
+          example: '21999180112172346'
+          description: total value of protocol's LP position in RUNE value
+        pnl:
+          type: string
+          example: '21999180112172346'
+          description: profit and loss of protocol owned liquidity
+        current_deposit:
+          type: string
+          example: '21999180112172346'
+          description: current amount of rune deposited
+    RUNEProviderResponse:
+      $ref: '#/components/schemas/RUNEProvider'
+    RUNEProvidersResponse:
       type: array
+      items:
+        $ref: '#/components/schemas/RUNEProvider'
     RUNEPoolProvider:
       properties:
         dateFirstAdded:
@@ -267,6 +262,11 @@ components:
       - dateFirstAdded
       - dateLastAdded
       type: object
+    RUNEPoolDetails:
+      description: List details of all the RUNEPools identified with the given addresses
+      items:
+        $ref: '#/components/schemas/RUNEPoolProvider'
+      type: array
   parameters:
     address:
       name: address

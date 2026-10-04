@@ -44,23 +44,6 @@ paths:
       summary: Invariants
       x-summary-source: derived
 components:
-  parameters:
-    invariant:
-      name: invariant
-      in: path
-      required: true
-      schema:
-        type: string
-        example: asgard
-    queryHeight:
-      name: height
-      in: query
-      description: optional block height, defaults to current tip
-      required: false
-      schema:
-        type: integer
-        format: int64
-        minimum: 0
   schemas:
     InvariantsResponse:
       type: object
@@ -92,3 +75,20 @@ components:
           - 'insolvent: 200000rune'
           - 'oversolvent: 1btc/btc'
           description: Informative message about the invariant result.
+  parameters:
+    invariant:
+      name: invariant
+      in: path
+      required: true
+      schema:
+        type: string
+        example: asgard
+    queryHeight:
+      name: height
+      in: query
+      description: optional block height, defaults to current tip
+      required: false
+      schema:
+        type: integer
+        format: int64
+        minimum: 0

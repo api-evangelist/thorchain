@@ -46,30 +46,6 @@ paths:
       summary: Savers
       x-summary-source: derived
 components:
-  parameters:
-    asset:
-      name: asset
-      in: path
-      required: true
-      schema:
-        type: string
-        example: BTC.BTC
-    address:
-      name: address
-      in: path
-      required: true
-      schema:
-        type: string
-        example: thor1zupk5lmc84r2dh738a9g3zscavannjy3nzplwt
-    queryHeight:
-      name: height
-      in: query
-      description: optional block height, defaults to current tip
-      required: false
-      schema:
-        type: integer
-        format: int64
-        minimum: 0
   schemas:
     SaverResponse:
       $ref: '#/components/schemas/Saver'
@@ -113,3 +89,27 @@ components:
         growth_pct:
           type: string
           example: '0.02'
+  parameters:
+    asset:
+      name: asset
+      in: path
+      required: true
+      schema:
+        type: string
+        example: BTC.BTC
+    address:
+      name: address
+      in: path
+      required: true
+      schema:
+        type: string
+        example: thor1zupk5lmc84r2dh738a9g3zscavannjy3nzplwt
+    queryHeight:
+      name: height
+      in: query
+      description: optional block height, defaults to current tip
+      required: false
+      schema:
+        type: integer
+        format: int64
+        minimum: 0

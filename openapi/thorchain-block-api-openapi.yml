@@ -27,6 +27,52 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    BlockTx:
+      type: object
+      required:
+      - hash
+      - tx
+      - result
+      properties:
+        hash:
+          type: string
+          example: 223BF64D4A01074DC523A80E76B9BBC786C791FB0A1893AC5B14866356FCFD6C
+        tx:
+          type: object
+          additionalProperties: true
+        result:
+          type: object
+          properties:
+            code:
+              type: integer
+              format: int64
+              example: 0
+            data:
+              type: string
+              example: ''
+            log:
+              type: string
+              example: not enough gas
+            info:
+              type: string
+              example: ''
+            gas_wanted:
+              type: string
+              example: '100'
+            gas_used:
+              type: string
+              example: '100'
+            events:
+              type:
+              - array
+              - 'null'
+              items:
+                type: object
+                additionalProperties:
+                  type: string
+            codespace:
+              type: string
+              example: ibc
     BlockResponse:
       type: object
       required:
@@ -172,52 +218,6 @@ components:
           - 'null'
           items:
             $ref: '#/components/schemas/BlockTx'
-    BlockTx:
-      type: object
-      required:
-      - hash
-      - tx
-      - result
-      properties:
-        hash:
-          type: string
-          example: 223BF64D4A01074DC523A80E76B9BBC786C791FB0A1893AC5B14866356FCFD6C
-        tx:
-          type: object
-          additionalProperties: true
-        result:
-          type: object
-          properties:
-            code:
-              type: integer
-              format: int64
-              example: 0
-            data:
-              type: string
-              example: ''
-            log:
-              type: string
-              example: not enough gas
-            info:
-              type: string
-              example: ''
-            gas_wanted:
-              type: string
-              example: '100'
-            gas_used:
-              type: string
-              example: '100'
-            events:
-              type:
-              - array
-              - 'null'
-              items:
-                type: object
-                additionalProperties:
-                  type: string
-            codespace:
-              type: string
-              example: ibc
   parameters:
     queryHeight:
       name: height

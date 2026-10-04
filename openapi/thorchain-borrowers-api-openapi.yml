@@ -29,13 +29,6 @@ paths:
       tags:
       - Borrowers
 components:
-  schemas:
-    Borrowers:
-      items:
-        description: Borrower address
-        example: tbnb1fj2lqj8dvr5pumfchc7ntlfqd2v6zdxqwjewf5
-        type: string
-      type: array
   responses:
     BorrowersResponse:
       content:
@@ -43,3 +36,10 @@ components:
           schema:
             $ref: '#/components/schemas/Borrowers'
       description: array of all the borrowers
+  schemas:
+    Borrowers:
+      items:
+        description: Borrower address
+        example: tbnb1fj2lqj8dvr5pumfchc7ntlfqd2v6zdxqwjewf5
+        type: string
+      type: array

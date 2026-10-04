@@ -59,6 +59,13 @@ paths:
       summary: Ping
       x-summary-source: derived
 components:
+  responses:
+    HealthResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Health'
+      description: Returns health status for Midgard
   schemas:
     Health:
       properties:
@@ -90,18 +97,6 @@ components:
       - lastCommitted
       - lastAggregated
       type: object
-    GenesisInf:
-      properties:
-        hash:
-          description: Genesis Block hash
-          type: string
-        height:
-          description: Genesis Block height
-          type: integer
-      required:
-      - height
-      - hash
-      type: object
     HeightTS:
       properties:
         height:
@@ -114,13 +109,18 @@ components:
       - height
       - timestamp
       type: object
-  responses:
-    HealthResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Health'
-      description: Returns health status for Midgard
+    GenesisInf:
+      properties:
+        hash:
+          description: Genesis Block hash
+          type: string
+        height:
+          description: Genesis Block height
+          type: integer
+      required:
+      - height
+      - hash
+      type: object
 x-refined-from:
 - thorchain-midgard-openapi.json
 - thorchain-thornode-openapi.yaml

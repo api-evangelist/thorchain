@@ -45,6 +45,13 @@ paths:
       x-summary-source: derived
 components:
   parameters:
+    asset:
+      name: asset
+      in: path
+      required: true
+      schema:
+        type: string
+        example: BTC.BTC
     queryHeight:
       name: height
       in: query
@@ -54,13 +61,6 @@ components:
         type: integer
         format: int64
         minimum: 0
-    asset:
-      name: asset
-      in: path
-      required: true
-      schema:
-        type: string
-        example: BTC.BTC
   schemas:
     PoolSlipResponse:
       type: array

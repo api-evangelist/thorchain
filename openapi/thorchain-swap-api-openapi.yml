@@ -99,22 +99,19 @@ components:
           type: integer
           format: int32
           description: the index of the swap in the batch
-    Coin:
+    SwapDetailsResponse:
       type: object
-      required:
-      - asset
-      - amount
       properties:
-        asset:
+        swap:
+          $ref: '#/components/schemas/MsgSwap'
+        status:
           type: string
-          example: BTC.BTC
-        amount:
+          description: Current status of the swap
+          example: queued
+        queue_type:
           type: string
-          example: '100000'
-        decimals:
-          type: integer
-          format: int64
-          example: 6
+          description: Type of queue the swap is in
+          example: advanced
     Tx:
       type: object
       required:
@@ -191,19 +188,22 @@ components:
           items:
             type: string
           description: reasons for failed swaps
-    SwapDetailsResponse:
+    Coin:
       type: object
+      required:
+      - asset
+      - amount
       properties:
-        swap:
-          $ref: '#/components/schemas/MsgSwap'
-        status:
+        asset:
           type: string
-          description: Current status of the swap
-          example: queued
-        queue_type:
+          example: BTC.BTC
+        amount:
           type: string
-          description: Type of queue the swap is in
-          example: advanced
+          example: '100000'
+        decimals:
+          type: integer
+          format: int64
+          example: 6
   parameters:
     queryHeight:
       name: height

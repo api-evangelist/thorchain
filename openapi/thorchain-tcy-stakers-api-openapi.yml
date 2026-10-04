@@ -45,8 +45,10 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    TCYStakerResponse:
-      $ref: '#/components/schemas/TCYStaker'
+    TCYStakersResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/TCYStakerSummary'
     TCYStaker:
       type: object
       required:
@@ -58,10 +60,6 @@ components:
         amount:
           type: string
           example: '0'
-    TCYStakersResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/TCYStakerSummary'
     TCYStakerSummary:
       type: object
       required:
@@ -70,6 +68,8 @@ components:
         amount:
           type: string
           example: '0'
+    TCYStakerResponse:
+      $ref: '#/components/schemas/TCYStaker'
   parameters:
     address:
       name: address

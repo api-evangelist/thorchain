@@ -102,6 +102,30 @@ paths:
       summary: Mimir node
       x-summary-source: derived
 components:
+  schemas:
+    MimirNodesResponse:
+      type: object
+      properties:
+        mimirs:
+          type: array
+          items:
+            type: object
+            title: MimirVote
+            properties:
+              key:
+                type: string
+              value:
+                type: integer
+                format: int64
+              signer:
+                type: string
+    MimirResponse:
+      type: object
+      additionalProperties:
+        type: string
+      example:
+        NODEOPERATORFEE: 2000
+        NUMBEROFNEWNODESPERCHURN: 2
   parameters:
     address:
       name: address
@@ -119,27 +143,3 @@ components:
         type: integer
         format: int64
         minimum: 0
-  schemas:
-    MimirResponse:
-      type: object
-      additionalProperties:
-        type: string
-      example:
-        NODEOPERATORFEE: 2000
-        NUMBEROFNEWNODESPERCHURN: 2
-    MimirNodesResponse:
-      type: object
-      properties:
-        mimirs:
-          type: array
-          items:
-            type: object
-            title: MimirVote
-            properties:
-              key:
-                type: string
-              value:
-                type: integer
-                format: int64
-              signer:
-                type: string

@@ -99,7 +99,162 @@ paths:
       summary: Tx status
       x-summary-source: derived
 components:
+  parameters:
+    hash:
+      name: hash
+      in: path
+      required: true
+      schema:
+        type: string
+        example: CF524818D42B63D25BBA0CCC4909F127CAA645C0F9CD07324F2824CC151A64C7
+    queryHeight:
+      name: height
+      in: query
+      description: optional block height, defaults to current tip
+      required: false
+      schema:
+        type: integer
+        format: int64
+        minimum: 0
   schemas:
+    TxSignersResponse:
+      type: object
+      required:
+      - tx
+      - txs
+      - actions
+      - out_txs
+      properties:
+        tx_id:
+          type: string
+          example: CF524818D42B63D25BBA0CCC4909F127CAA645C0F9CD07324F2824CC151A64C7
+        tx:
+          $ref: '#/components/schemas/ObservedTx'
+        txs:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedTx'
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/TxOutItem'
+        out_txs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tx'
+        consensus_height:
+          type: integer
+          format: int64
+          example: 7581321
+          description: the thorchain height at which the inbound reached consensus
+        finalised_height:
+          type: integer
+          format: int64
+          example: 7581334
+          description: the thorchain height at which the outbound was finalised
+        updated_vault:
+          type: boolean
+          example: false
+        reverted:
+          type: boolean
+          example: false
+        outbound_height:
+          type: integer
+          format: int64
+          example: 1234
+          description: the thorchain height for which the outbound was scheduled
+    TssMetric:
+      type: object
+      properties:
+        address:
+          type: string
+        tss_time:
+          type: integer
+          format: int64
+    Tx:
+      type: object
+      required:
+      - coins
+      - gas
+      properties:
+        id:
+          type: string
+          example: CF524818D42B63D25BBA0CCC4909F127CAA645C0F9CD07324F2824CC151A64C7
+        chain:
+          type: string
+          example: BTC
+        from_address:
+          type: string
+          example: bcrt1q0s4mg25tu6termrk8egltfyme4q7sg3h8kkydt
+        to_address:
+          type: string
+          example: bcrt1qf3s7q037eancht7sg0aj995dht25rwrnqsf45e
+        coins:
+          type: array
+          items:
+            $ref: '#/components/schemas/Coin'
+        gas:
+          type: array
+          items:
+            $ref: '#/components/schemas/Coin'
+        memo:
+          type: string
+          example: ADD:BTC.BTC:thor1zupk5lmc84r2dh738a9g3zscavannjy3nzplwt
+    ObservedTx:
+      type: object
+      required:
+      - tx
+      properties:
+        tx:
+          $ref: '#/components/schemas/Tx'
+        observed_pub_key:
+          type: string
+          example: thorpub1addwnpepq27ck6u44zl8qqdnmzjjc8rg72amrxrsp42p9vd7kt6marhy6ww76z8shwe
+        observed_pub_key_eddsa:
+          type: string
+          example: thorpub1addwnpepq27ck6u44zl8qqdnmzjjc8rg72amrxrsp42p9vd7kt6marhy6ww76z8shwe
+        external_observed_height:
+          type: integer
+          format: int64
+          example: 7581334
+          description: the block height on the external source chain when the transaction was observed, not provided if chain is THOR
+        external_confirmation_delay_height:
+          type: integer
+          format: int64
+          example: 7581334
+          description: the block height on the external source chain when confirmation counting will be complete, not provided if chain is THOR
+        aggregator:
+          type: string
+          description: the outbound aggregator to use, will also match a suffix
+          example: '0x69800327b38A4CeF30367Dec3f64c2f2386f3848'
+        aggregator_target:
+          type: string
+          description: the aggregator target asset provided to transferOutAndCall
+          example: '0x0a44986b70527154e9F4290eC14e5f0D1C861822'
+        aggregator_target_limit:
+          type: string
+          description: the aggregator target asset limit provided to transferOutAndCall
+          example: '0x0a44986b70527154e9F4290eC14e5f0D1C861822'
+        signers:
+          type: array
+          items:
+            type: string
+            example: thor1f3s7q037eancht7sg0aj995dht25rwrnu4ats5
+        keysign_ms:
+          type: integer
+          format: int64
+          example: 10000
+        out_hashes:
+          type: array
+          items:
+            type: string
+            example: E17A0906E015F0C343691C18E475C8CB5F3F6C63F5BCDE0F3A341909763CC92B
+        status:
+          type: string
+          enum:
+          - done
+          - incomplete
+          example: done
     TxStagesResponse:
       type: object
       required:
@@ -254,61 +409,6 @@ components:
               type: boolean
               example: false
               description: returns true if an external transaction has been signed and broadcast (and observed in its mempool)
-    ObservedTx:
-      type: object
-      required:
-      - tx
-      properties:
-        tx:
-          $ref: '#/components/schemas/Tx'
-        observed_pub_key:
-          type: string
-          example: thorpub1addwnpepq27ck6u44zl8qqdnmzjjc8rg72amrxrsp42p9vd7kt6marhy6ww76z8shwe
-        observed_pub_key_eddsa:
-          type: string
-          example: thorpub1addwnpepq27ck6u44zl8qqdnmzjjc8rg72amrxrsp42p9vd7kt6marhy6ww76z8shwe
-        external_observed_height:
-          type: integer
-          format: int64
-          example: 7581334
-          description: the block height on the external source chain when the transaction was observed, not provided if chain is THOR
-        external_confirmation_delay_height:
-          type: integer
-          format: int64
-          example: 7581334
-          description: the block height on the external source chain when confirmation counting will be complete, not provided if chain is THOR
-        aggregator:
-          type: string
-          description: the outbound aggregator to use, will also match a suffix
-          example: '0x69800327b38A4CeF30367Dec3f64c2f2386f3848'
-        aggregator_target:
-          type: string
-          description: the aggregator target asset provided to transferOutAndCall
-          example: '0x0a44986b70527154e9F4290eC14e5f0D1C861822'
-        aggregator_target_limit:
-          type: string
-          description: the aggregator target asset limit provided to transferOutAndCall
-          example: '0x0a44986b70527154e9F4290eC14e5f0D1C861822'
-        signers:
-          type: array
-          items:
-            type: string
-            example: thor1f3s7q037eancht7sg0aj995dht25rwrnu4ats5
-        keysign_ms:
-          type: integer
-          format: int64
-          example: 10000
-        out_hashes:
-          type: array
-          items:
-            type: string
-            example: E17A0906E015F0C343691C18E475C8CB5F3F6C63F5BCDE0F3A341909763CC92B
-        status:
-          type: string
-          enum:
-          - done
-          - incomplete
-          example: done
     TxStatusResponse:
       type: object
       required:
@@ -345,133 +445,6 @@ components:
             $ref: '#/components/schemas/Tx'
         stages:
           $ref: '#/components/schemas/TxStagesResponse'
-    TssKeysignMetric:
-      type: object
-      required:
-      - node_tss_times
-      properties:
-        tx_id:
-          type: string
-        node_tss_times:
-          type: array
-          items:
-            $ref: '#/components/schemas/TssMetric'
-    TssMetric:
-      type: object
-      properties:
-        address:
-          type: string
-        tss_time:
-          type: integer
-          format: int64
-    TxDetailsResponse:
-      type: object
-      required:
-      - tx
-      - txs
-      - actions
-      - out_txs
-      properties:
-        tx_id:
-          type: string
-          example: CF524818D42B63D25BBA0CCC4909F127CAA645C0F9CD07324F2824CC151A64C7
-        tx:
-          $ref: '#/components/schemas/ObservedTx'
-        txs:
-          type: array
-          items:
-            $ref: '#/components/schemas/ObservedTx'
-        actions:
-          type: array
-          items:
-            $ref: '#/components/schemas/TxOutItem'
-        out_txs:
-          type: array
-          items:
-            $ref: '#/components/schemas/Tx'
-        consensus_height:
-          type: integer
-          format: int64
-          example: 7581321
-          description: the thorchain height at which the inbound reached consensus
-        finalised_height:
-          type: integer
-          format: int64
-          example: 7581334
-          description: the thorchain height at which the outbound was finalised
-        updated_vault:
-          type: boolean
-          example: false
-        reverted:
-          type: boolean
-          example: false
-        outbound_height:
-          type: integer
-          format: int64
-          example: 1234
-          description: the thorchain height for which the outbound was scheduled
-    Coin:
-      type: object
-      required:
-      - asset
-      - amount
-      properties:
-        asset:
-          type: string
-          example: BTC.BTC
-        amount:
-          type: string
-          example: '100000'
-        decimals:
-          type: integer
-          format: int64
-          example: 6
-    TxSignersResponse:
-      type: object
-      required:
-      - tx
-      - txs
-      - actions
-      - out_txs
-      properties:
-        tx_id:
-          type: string
-          example: CF524818D42B63D25BBA0CCC4909F127CAA645C0F9CD07324F2824CC151A64C7
-        tx:
-          $ref: '#/components/schemas/ObservedTx'
-        txs:
-          type: array
-          items:
-            $ref: '#/components/schemas/ObservedTx'
-        actions:
-          type: array
-          items:
-            $ref: '#/components/schemas/TxOutItem'
-        out_txs:
-          type: array
-          items:
-            $ref: '#/components/schemas/Tx'
-        consensus_height:
-          type: integer
-          format: int64
-          example: 7581321
-          description: the thorchain height at which the inbound reached consensus
-        finalised_height:
-          type: integer
-          format: int64
-          example: 7581334
-          description: the thorchain height at which the outbound was finalised
-        updated_vault:
-          type: boolean
-          example: false
-        reverted:
-          type: boolean
-          example: false
-        outbound_height:
-          type: integer
-          format: int64
-          example: 1234
-          description: the thorchain height for which the outbound was scheduled
     TxResponse:
       type: object
       properties:
@@ -494,35 +467,6 @@ components:
           description: the thorchain height for which the outbound was scheduled
         keysign_metric:
           $ref: '#/components/schemas/TssKeysignMetric'
-    Tx:
-      type: object
-      required:
-      - coins
-      - gas
-      properties:
-        id:
-          type: string
-          example: CF524818D42B63D25BBA0CCC4909F127CAA645C0F9CD07324F2824CC151A64C7
-        chain:
-          type: string
-          example: BTC
-        from_address:
-          type: string
-          example: bcrt1q0s4mg25tu6termrk8egltfyme4q7sg3h8kkydt
-        to_address:
-          type: string
-          example: bcrt1qf3s7q037eancht7sg0aj995dht25rwrnqsf45e
-        coins:
-          type: array
-          items:
-            $ref: '#/components/schemas/Coin'
-        gas:
-          type: array
-          items:
-            $ref: '#/components/schemas/Coin'
-        memo:
-          type: string
-          example: ADD:BTC.BTC:thor1zupk5lmc84r2dh738a9g3zscavannjy3nzplwt
     TxOutItem:
       type: object
       required:
@@ -584,20 +528,76 @@ components:
           type: string
           description: clout spent in RUNE for the outbound
           example: '1234'
-  parameters:
-    hash:
-      name: hash
-      in: path
-      required: true
-      schema:
-        type: string
-        example: CF524818D42B63D25BBA0CCC4909F127CAA645C0F9CD07324F2824CC151A64C7
-    queryHeight:
-      name: height
-      in: query
-      description: optional block height, defaults to current tip
-      required: false
-      schema:
-        type: integer
-        format: int64
-        minimum: 0
+    TssKeysignMetric:
+      type: object
+      required:
+      - node_tss_times
+      properties:
+        tx_id:
+          type: string
+        node_tss_times:
+          type: array
+          items:
+            $ref: '#/components/schemas/TssMetric'
+    Coin:
+      type: object
+      required:
+      - asset
+      - amount
+      properties:
+        asset:
+          type: string
+          example: BTC.BTC
+        amount:
+          type: string
+          example: '100000'
+        decimals:
+          type: integer
+          format: int64
+          example: 6
+    TxDetailsResponse:
+      type: object
+      required:
+      - tx
+      - txs
+      - actions
+      - out_txs
+      properties:
+        tx_id:
+          type: string
+          example: CF524818D42B63D25BBA0CCC4909F127CAA645C0F9CD07324F2824CC151A64C7
+        tx:
+          $ref: '#/components/schemas/ObservedTx'
+        txs:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedTx'
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/TxOutItem'
+        out_txs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tx'
+        consensus_height:
+          type: integer
+          format: int64
+          example: 7581321
+          description: the thorchain height at which the inbound reached consensus
+        finalised_height:
+          type: integer
+          format: int64
+          example: 7581334
+          description: the thorchain height at which the outbound was finalised
+        updated_vault:
+          type: boolean
+          example: false
+        reverted:
+          type: boolean
+          example: false
+        outbound_height:
+          type: integer
+          format: int64
+          example: 1234
+          description: the thorchain height for which the outbound was scheduled

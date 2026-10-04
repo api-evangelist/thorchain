@@ -26,24 +26,7 @@ paths:
       summary: Codes
       x-summary-source: derived
 components:
-  parameters:
-    queryHeight:
-      name: height
-      in: query
-      description: optional block height, defaults to current tip
-      required: false
-      schema:
-        type: integer
-        format: int64
-        minimum: 0
   schemas:
-    CodesResponse:
-      type: object
-      properties:
-        codes:
-          type: array
-          items:
-            $ref: '#/components/schemas/Code'
     Code:
       type: object
       properties:
@@ -58,3 +41,20 @@ components:
         origin:
           type: string
           example: https://gitlab.com/thorchain/rujira/-/tree/main/contracts/rujira-merge
+    CodesResponse:
+      type: object
+      properties:
+        codes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Code'
+  parameters:
+    queryHeight:
+      name: height
+      in: query
+      description: optional block height, defaults to current tip
+      required: false
+      schema:
+        type: integer
+        format: int64
+        minimum: 0

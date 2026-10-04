@@ -46,52 +46,31 @@ paths:
       summary: Liquidity providers
       x-summary-source: derived
 components:
+  parameters:
+    asset:
+      name: asset
+      in: path
+      required: true
+      schema:
+        type: string
+        example: BTC.BTC
+    address:
+      name: address
+      in: path
+      required: true
+      schema:
+        type: string
+        example: thor1zupk5lmc84r2dh738a9g3zscavannjy3nzplwt
+    queryHeight:
+      name: height
+      in: query
+      description: optional block height, defaults to current tip
+      required: false
+      schema:
+        type: integer
+        format: int64
+        minimum: 0
   schemas:
-    LiquidityProviderSummary:
-      type: object
-      required:
-      - asset
-      - units
-      - pending_rune
-      - pending_asset
-      - rune_deposit_value
-      - asset_deposit_value
-      properties:
-        asset:
-          type: string
-          example: BTC.BTC
-        rune_address:
-          type: string
-          example: thor1xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-        asset_address:
-          type: string
-          example: bc1qn9esxuw8ca7ts8l6w66kdh800s09msvutydc46
-        last_add_height:
-          type: integer
-          format: int64
-          example: 82745
-        last_withdraw_height:
-          type: integer
-          format: int64
-          example: 82745
-        units:
-          type: string
-          example: '0'
-        pending_rune:
-          type: string
-          example: '0'
-        pending_asset:
-          type: string
-          example: '242000000'
-        pending_tx_id:
-          type: string
-          example: C4C876802xxxxxxxxxxBC408829878446A37011EBBA0C5CAA3DD64A548879CB228
-        rune_deposit_value:
-          type: string
-          example: '0'
-        asset_deposit_value:
-          type: string
-          example: '0'
     LiquidityProvider:
       type: object
       required:
@@ -158,27 +137,48 @@ components:
         $ref: '#/components/schemas/LiquidityProviderSummary'
     LiquidityProviderResponse:
       $ref: '#/components/schemas/LiquidityProvider'
-  parameters:
-    asset:
-      name: asset
-      in: path
-      required: true
-      schema:
-        type: string
-        example: BTC.BTC
-    address:
-      name: address
-      in: path
-      required: true
-      schema:
-        type: string
-        example: thor1zupk5lmc84r2dh738a9g3zscavannjy3nzplwt
-    queryHeight:
-      name: height
-      in: query
-      description: optional block height, defaults to current tip
-      required: false
-      schema:
-        type: integer
-        format: int64
-        minimum: 0
+    LiquidityProviderSummary:
+      type: object
+      required:
+      - asset
+      - units
+      - pending_rune
+      - pending_asset
+      - rune_deposit_value
+      - asset_deposit_value
+      properties:
+        asset:
+          type: string
+          example: BTC.BTC
+        rune_address:
+          type: string
+          example: thor1xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+        asset_address:
+          type: string
+          example: bc1qn9esxuw8ca7ts8l6w66kdh800s09msvutydc46
+        last_add_height:
+          type: integer
+          format: int64
+          example: 82745
+        last_withdraw_height:
+          type: integer
+          format: int64
+          example: 82745
+        units:
+          type: string
+          example: '0'
+        pending_rune:
+          type: string
+          example: '0'
+        pending_asset:
+          type: string
+          example: '242000000'
+        pending_tx_id:
+          type: string
+          example: C4C876802xxxxxxxxxxBC408829878446A37011EBBA0C5CAA3DD64A548879CB228
+        rune_deposit_value:
+          type: string
+          example: '0'
+        asset_deposit_value:
+          type: string
+          example: '0'

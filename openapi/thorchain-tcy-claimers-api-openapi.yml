@@ -62,15 +62,18 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    TCYProtocolOwnedResponse:
+    TCYClaimerSummary:
       type: object
+      required:
+      - amount
+      - asset
       properties:
         amount:
           type: string
-          example: '3096016855586000'
-          description: protocol-owned TCY in 1e8 base units (claim module tcy balance minus the sum of outstanding tcy_claimer entitlements)
-      required:
-      - amount
+          example: '0'
+        asset:
+          type: string
+          example: BTC.BTC
     TCYClaimer:
       type: object
       required:
@@ -86,24 +89,21 @@ components:
         asset:
           type: string
           example: BTC.BTC
+    TCYProtocolOwnedResponse:
+      type: object
+      properties:
+        amount:
+          type: string
+          example: '3096016855586000'
+          description: protocol-owned TCY in 1e8 base units (claim module tcy balance minus the sum of outstanding tcy_claimer entitlements)
+      required:
+      - amount
+    TCYClaimerResponse:
+      $ref: '#/components/schemas/TCYClaimer'
     TCYClaimersResponse:
       type: array
       items:
         $ref: '#/components/schemas/TCYClaimerSummary'
-    TCYClaimerResponse:
-      $ref: '#/components/schemas/TCYClaimer'
-    TCYClaimerSummary:
-      type: object
-      required:
-      - amount
-      - asset
-      properties:
-        amount:
-          type: string
-          example: '0'
-        asset:
-          type: string
-          example: BTC.BTC
   parameters:
     address:
       name: address

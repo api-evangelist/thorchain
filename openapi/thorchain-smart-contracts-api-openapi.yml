@@ -46,40 +46,23 @@ paths:
       summary: Contract info
       x-summary-source: derived
 components:
-  parameters:
-    contract:
-      name: contract
-      in: query
-      required: false
-      description: optional contract type prefix to filter results
-      schema:
-        type: string
-        example: rujira-fin
-    version:
-      name: version
-      in: query
-      required: false
-      description: optional contract version prefix to filter results
-      schema:
-        type: string
-        example: 2.0.0
-    address:
-      name: address
-      in: path
-      required: true
-      schema:
-        type: string
-        example: thor1zupk5lmc84r2dh738a9g3zscavannjy3nzplwt
-    queryHeight:
-      name: height
-      in: query
-      description: optional block height, defaults to current tip
-      required: false
-      schema:
-        type: integer
-        format: int64
-        minimum: 0
   schemas:
+    ContractInfosResponse:
+      type: object
+      required:
+      - infos
+      properties:
+        infos:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContractInfo'
+    ContractInfoResponse:
+      type: object
+      required:
+      - info
+      properties:
+        info:
+          $ref: '#/components/schemas/ContractInfo'
     ContractInfo:
       type: object
       required:
@@ -96,19 +79,36 @@ components:
         version:
           type: string
           example: 2.0.0
-    ContractInfoResponse:
-      type: object
-      required:
-      - info
-      properties:
-        info:
-          $ref: '#/components/schemas/ContractInfo'
-    ContractInfosResponse:
-      type: object
-      required:
-      - infos
-      properties:
-        infos:
-          type: array
-          items:
-            $ref: '#/components/schemas/ContractInfo'
+  parameters:
+    contract:
+      name: contract
+      in: query
+      required: false
+      description: optional contract type prefix to filter results
+      schema:
+        type: string
+        example: rujira-fin
+    address:
+      name: address
+      in: path
+      required: true
+      schema:
+        type: string
+        example: thor1zupk5lmc84r2dh738a9g3zscavannjy3nzplwt
+    queryHeight:
+      name: height
+      in: query
+      description: optional block height, defaults to current tip
+      required: false
+      schema:
+        type: integer
+        format: int64
+        minimum: 0
+    version:
+      name: version
+      in: query
+      required: false
+      description: optional contract version prefix to filter results
+      schema:
+        type: string
+        example: 2.0.0
