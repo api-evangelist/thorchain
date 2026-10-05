@@ -1,0 +1,12 @@
+{
+ "url": "https://gateway.liquify.com/chain/thorchain_api/thorchain/doc/openapi.yaml",
+ "requested_url": "https://gateway.liquify.com/chain/thorchain_api/thorchain/doc/openapi.yaml",
+ "status": 200,
+ "content_type": "text/yaml",
+ "bytes": 163483,
+ "sha256": "1aa26dcc6f6fe6846f0858180481116a430b8afd3610749b14a23a2561345905",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "equivalent",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the provider's current document describes the same operations (Jaccard 0.979), but the bytes differ, so the archive is an earlier or reformatted copy."
+}

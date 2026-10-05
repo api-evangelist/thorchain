@@ -1,0 +1,12 @@
+{
+ "url": "https://gateway.liquify.com/chain/thorchain_midgard/v2/swagger.json",
+ "requested_url": "https://gateway.liquify.com/chain/thorchain_midgard/v2/swagger.json",
+ "status": 200,
+ "content_type": "application/json",
+ "bytes": 156800,
+ "sha256": "7cf3e8916042edc89932a99376258417a497e8703cfb284c65660d880206cae0",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the archived file is byte-identical to what the provider serves."
+}
