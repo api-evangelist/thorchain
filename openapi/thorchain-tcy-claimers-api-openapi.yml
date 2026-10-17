@@ -74,6 +74,21 @@ components:
         asset:
           type: string
           example: BTC.BTC
+    TCYClaimersResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/TCYClaimerSummary'
+    TCYProtocolOwnedResponse:
+      type: object
+      properties:
+        amount:
+          type: string
+          example: '3096016855586000'
+          description: protocol-owned TCY in 1e8 base units (claim module tcy balance minus the sum of outstanding tcy_claimer entitlements)
+      required:
+      - amount
+    TCYClaimerResponse:
+      $ref: '#/components/schemas/TCYClaimer'
     TCYClaimer:
       type: object
       required:
@@ -89,29 +104,7 @@ components:
         asset:
           type: string
           example: BTC.BTC
-    TCYProtocolOwnedResponse:
-      type: object
-      properties:
-        amount:
-          type: string
-          example: '3096016855586000'
-          description: protocol-owned TCY in 1e8 base units (claim module tcy balance minus the sum of outstanding tcy_claimer entitlements)
-      required:
-      - amount
-    TCYClaimerResponse:
-      $ref: '#/components/schemas/TCYClaimer'
-    TCYClaimersResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/TCYClaimerSummary'
   parameters:
-    address:
-      name: address
-      in: path
-      required: true
-      schema:
-        type: string
-        example: thor1zupk5lmc84r2dh738a9g3zscavannjy3nzplwt
     queryHeight:
       name: height
       in: query
@@ -121,3 +114,10 @@ components:
         type: integer
         format: int64
         minimum: 0
+    address:
+      name: address
+      in: path
+      required: true
+      schema:
+        type: string
+        example: thor1zupk5lmc84r2dh738a9g3zscavannjy3nzplwt

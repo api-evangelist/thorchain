@@ -84,6 +84,16 @@ paths:
       summary: Quotelimit
       x-summary-source: derived
 components:
+  parameters:
+    queryHeight:
+      name: height
+      in: query
+      description: optional block height, defaults to current tip
+      required: false
+      schema:
+        type: integer
+        format: int64
+        minimum: 0
   schemas:
     QuoteLimitResponse:
       type: object
@@ -204,13 +214,3 @@ components:
           type: integer
           format: int64
           description: total basis points in fees relative to amount out
-  parameters:
-    queryHeight:
-      name: height
-      in: query
-      description: optional block height, defaults to current tip
-      required: false
-      schema:
-        type: integer
-        format: int64
-        minimum: 0

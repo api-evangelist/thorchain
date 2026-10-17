@@ -32,9 +32,17 @@ paths:
       summary: Thorname
       x-summary-source: derived
 components:
+  parameters:
+    queryHeight:
+      name: height
+      in: query
+      description: optional block height, defaults to current tip
+      required: false
+      schema:
+        type: integer
+        format: int64
+        minimum: 0
   schemas:
-    ThornameResponse:
-      $ref: '#/components/schemas/Thorname'
     ThornameAlias:
       type: object
       properties:
@@ -75,13 +83,5 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ThornameAlias'
-  parameters:
-    queryHeight:
-      name: height
-      in: query
-      description: optional block height, defaults to current tip
-      required: false
-      schema:
-        type: integer
-        format: int64
-        minimum: 0
+    ThornameResponse:
+      $ref: '#/components/schemas/Thorname'

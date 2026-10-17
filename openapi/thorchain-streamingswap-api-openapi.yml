@@ -45,13 +45,6 @@ paths:
       x-summary-source: derived
 components:
   parameters:
-    hash:
-      name: hash
-      in: path
-      required: true
-      schema:
-        type: string
-        example: CF524818D42B63D25BBA0CCC4909F127CAA645C0F9CD07324F2824CC151A64C7
     queryHeight:
       name: height
       in: query
@@ -61,13 +54,14 @@ components:
         type: integer
         format: int64
         minimum: 0
+    hash:
+      name: hash
+      in: path
+      required: true
+      schema:
+        type: string
+        example: CF524818D42B63D25BBA0CCC4909F127CAA645C0F9CD07324F2824CC151A64C7
   schemas:
-    StreamingSwapResponse:
-      $ref: '#/components/schemas/StreamingSwap'
-    StreamingSwapsResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/StreamingSwap'
     StreamingSwap:
       type: object
       required:
@@ -139,3 +133,9 @@ components:
           description: the list of reasons that sub-swaps have failed
           items:
             type: string
+    StreamingSwapsResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/StreamingSwap'
+    StreamingSwapResponse:
+      $ref: '#/components/schemas/StreamingSwap'

@@ -39,11 +39,14 @@ paths:
       tags:
       - Holders
 components:
+  responses:
+    HolderResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Holders'
+      description: object containing balance details for a given address
   schemas:
-    Coins:
-      items:
-        $ref: '#/components/schemas/Coin'
-      type: array
     Holder:
       properties:
         address:
@@ -56,9 +59,9 @@ components:
       - address
       - coins
       type: object
-    Holders:
+    Coins:
       items:
-        $ref: '#/components/schemas/Holder'
+        $ref: '#/components/schemas/Coin'
       type: array
     Coin:
       description: Represents a digital currency amount
@@ -73,10 +76,7 @@ components:
       - asset
       - amount
       type: object
-  responses:
-    HolderResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Holders'
-      description: object containing balance details for a given address
+    Holders:
+      items:
+        $ref: '#/components/schemas/Holder'
+      type: array

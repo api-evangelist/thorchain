@@ -44,7 +44,26 @@ paths:
       summary: Tcy stakers
       x-summary-source: derived
 components:
+  parameters:
+    queryHeight:
+      name: height
+      in: query
+      description: optional block height, defaults to current tip
+      required: false
+      schema:
+        type: integer
+        format: int64
+        minimum: 0
+    address:
+      name: address
+      in: path
+      required: true
+      schema:
+        type: string
+        example: thor1zupk5lmc84r2dh738a9g3zscavannjy3nzplwt
   schemas:
+    TCYStakerResponse:
+      $ref: '#/components/schemas/TCYStaker'
     TCYStakersResponse:
       type: array
       items:
@@ -68,22 +87,3 @@ components:
         amount:
           type: string
           example: '0'
-    TCYStakerResponse:
-      $ref: '#/components/schemas/TCYStaker'
-  parameters:
-    address:
-      name: address
-      in: path
-      required: true
-      schema:
-        type: string
-        example: thor1zupk5lmc84r2dh738a9g3zscavannjy3nzplwt
-    queryHeight:
-      name: height
-      in: query
-      description: optional block height, defaults to current tip
-      required: false
-      schema:
-        type: integer
-        format: int64
-        minimum: 0

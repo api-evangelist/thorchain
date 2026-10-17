@@ -27,7 +27,32 @@ paths:
       summary: Account
       x-summary-source: derived
 components:
+  parameters:
+    address:
+      name: address
+      in: path
+      required: true
+      schema:
+        type: string
+        example: thor1zupk5lmc84r2dh738a9g3zscavannjy3nzplwt
+    queryHeight:
+      name: height
+      in: query
+      description: optional block height, defaults to current tip
+      required: false
+      schema:
+        type: integer
+        format: int64
+        minimum: 0
   schemas:
+    AccountResponse:
+      type: object
+      properties:
+        result:
+          type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Account'
     Account:
       type: object
       properties:
@@ -48,28 +73,3 @@ components:
           type: integer
           format: int64
           example: 1234
-    AccountResponse:
-      type: object
-      properties:
-        result:
-          type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Account'
-  parameters:
-    queryHeight:
-      name: height
-      in: query
-      description: optional block height, defaults to current tip
-      required: false
-      schema:
-        type: integer
-        format: int64
-        minimum: 0
-    address:
-      name: address
-      in: path
-      required: true
-      schema:
-        type: string
-        example: thor1zupk5lmc84r2dh738a9g3zscavannjy3nzplwt

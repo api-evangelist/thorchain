@@ -22,10 +22,6 @@ paths:
       - Churns
 components:
   schemas:
-    Churns:
-      items:
-        $ref: '#/components/schemas/ChurnItem'
-      type: array
     ChurnItem:
       properties:
         date:
@@ -40,6 +36,10 @@ components:
       - height
       - date
       type: object
+    Churns:
+      items:
+        $ref: '#/components/schemas/ChurnItem'
+      type: array
   responses:
     ChurnsResponse:
       content:

@@ -67,6 +67,30 @@ components:
             $ref: '#/components/schemas/Health'
       description: Returns health status for Midgard
   schemas:
+    GenesisInf:
+      properties:
+        hash:
+          description: Genesis Block hash
+          type: string
+        height:
+          description: Genesis Block height
+          type: integer
+      required:
+      - height
+      - hash
+      type: object
+    HeightTS:
+      properties:
+        height:
+          description: Block height
+          type: integer
+        timestamp:
+          description: Block timestamp (seconds since epoch)
+          type: integer
+      required:
+      - height
+      - timestamp
+      type: object
     Health:
       properties:
         database:
@@ -96,30 +120,6 @@ components:
       - lastFetched
       - lastCommitted
       - lastAggregated
-      type: object
-    HeightTS:
-      properties:
-        height:
-          description: Block height
-          type: integer
-        timestamp:
-          description: Block timestamp (seconds since epoch)
-          type: integer
-      required:
-      - height
-      - timestamp
-      type: object
-    GenesisInf:
-      properties:
-        hash:
-          description: Genesis Block hash
-          type: string
-        height:
-          description: Genesis Block height
-          type: integer
-      required:
-      - height
-      - hash
       type: object
 x-refined-from:
 - thorchain-midgard-openapi.json

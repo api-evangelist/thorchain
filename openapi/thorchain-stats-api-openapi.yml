@@ -21,13 +21,6 @@ paths:
       tags:
       - Stats
 components:
-  responses:
-    StatsResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/StatsData'
-      description: object containing global THORChain data
   schemas:
     StatsData:
       properties:
@@ -111,3 +104,10 @@ components:
       - addLiquidityCount
       - withdrawCount
       type: object
+  responses:
+    StatsResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StatsData'
+      description: object containing global THORChain data

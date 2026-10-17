@@ -50,6 +50,13 @@ paths:
       tags:
       - Tcy
 components:
+  responses:
+    TCYDistributionResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TCYDistribution'
+      description: object containing TCY distribution data for a specific address
   schemas:
     TCYDistributionItem:
       properties:
@@ -89,10 +96,3 @@ components:
       - address
       - distributions
       type: object
-  responses:
-    TCYDistributionResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/TCYDistribution'
-      description: object containing TCY distribution data for a specific address

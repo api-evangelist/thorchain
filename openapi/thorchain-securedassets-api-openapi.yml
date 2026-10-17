@@ -37,10 +37,6 @@ components:
         format: int64
         minimum: 0
   schemas:
-    SecuredAssetsResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/SecuredAssetResponse'
     SecuredAssetResponse:
       type: object
       required:
@@ -58,3 +54,7 @@ components:
         depth:
           type: string
           description: total deposits of the asset
+    SecuredAssetsResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/SecuredAssetResponse'

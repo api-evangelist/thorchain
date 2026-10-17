@@ -45,16 +45,6 @@ paths:
       - Member
 components:
   schemas:
-    MemberDetails:
-      properties:
-        pools:
-          description: List details of all the liquidity providers identified with the given address
-          items:
-            $ref: '#/components/schemas/MemberPool'
-          type: array
-      required:
-      - pools
-      type: object
     MemberPool:
       properties:
         assetAdded:
@@ -118,6 +108,16 @@ components:
       - assetWithdrawn
       - dateFirstAdded
       - dateLastAdded
+      type: object
+    MemberDetails:
+      properties:
+        pools:
+          description: List details of all the liquidity providers identified with the given address
+          items:
+            $ref: '#/components/schemas/MemberPool'
+          type: array
+      required:
+      - pools
       type: object
   responses:
     MemberDetailsResponse:
