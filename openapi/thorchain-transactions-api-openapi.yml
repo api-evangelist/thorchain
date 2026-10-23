@@ -601,3 +601,9 @@ components:
       schema:
         type: string
         example: CF524818D42B63D25BBA0CCC4909F127CAA645C0F9CD07324F2824CC151A64C7
+x-provenance:
+  method: harvested
+  publisher: THORChain
+  source: https://gateway.liquify.com/chain/thorchain_api/thorchain/doc/openapi.yaml
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)

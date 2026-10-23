@@ -100,3 +100,9 @@ components:
           format: int64
           description: total RUNE supply
           example: 50000000000
+x-provenance:
+  method: harvested
+  publisher: THORChain
+  source: https://gateway.liquify.com/chain/thorchain_api/thorchain/doc/openapi.yaml
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)

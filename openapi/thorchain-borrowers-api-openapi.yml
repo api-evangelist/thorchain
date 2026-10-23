@@ -43,3 +43,9 @@ components:
         example: tbnb1fj2lqj8dvr5pumfchc7ntlfqd2v6zdxqwjewf5
         type: string
       type: array
+x-provenance:
+  method: harvested
+  publisher: THORChain
+  source: https://gateway.liquify.com/chain/thorchain_midgard/v2/swagger.json
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
